@@ -1,0 +1,21 @@
+<md-toolbar md-scroll-shrink>
+    <div class="logged-in-container">
+        <div class="logged-in-user" ng-click="LoggedInUserToggle = !LoggedInUserToggle;">
+            {{UserService.User.FullName()}}
+            <span class="brand-second-color" ng-class="{ false:'icon-down-dir', true: 'icon-up-dir' }[LoggedInUserToggle]"></span>
+        </div>
+
+        <div class="logged-in-compound-container">
+            <span>{{UserService.User.Compound.Name}}</span>
+            <img src="{{UserService.User.Compound.Image}}" alt="{{UserService.User.Compound.ShortName}}"/>
+        </div>
+
+        <md-button class="mobile-menu-button icon-menu md-accent md-fab" md-no-ink ng-click="::TriggerMobileMenu()"></md-button>
+    </div>
+</md-toolbar>
+
+<div class="logged-in-user-settings" ng-show="LoggedInUserToggle">
+    <ul>
+        <li>Logga ut</li>
+    </ul>
+</div>

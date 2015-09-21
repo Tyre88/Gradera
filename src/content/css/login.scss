@@ -1,0 +1,24 @@
+.login-container
+{
+	padding-top: calc(50% - 150px);
+
+	.login-data
+	{
+		max-width: 300px;
+		margin: 0 auto;
+		height: 300px;
+		padding: 75px 15px 15px 15px;
+		border: 1px solid #795548;
+		border-radius: 10px;
+
+		.md-button
+		{
+			width: 100%;
+		}
+
+		.register
+		{
+			margin-top: 15px;
+		}
+	}
+}

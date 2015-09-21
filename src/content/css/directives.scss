@@ -1,0 +1,38 @@
+gk-grading-category
+{
+	md-toolbar
+	{
+		p
+		{
+			text-align: center;
+		}
+	}
+
+	figure
+	{
+		.grading-category-img
+		{
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		a
+		{
+			display: block;
+			width: 100%;
+			text-align: center;
+		}
+	}
+
+	.grading-category-white-yellow
+	{
+		background-color: rgba(255, 252, 7, 0.4);
+	}
+
+	.grading-category-yellow
+	{
+		background-color: rgba(255, 252, 7, 0.6);
+	}
+}

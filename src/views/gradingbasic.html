@@ -1,0 +1,45 @@
+<md-tabs md-selected="TabIndex" class="md-primary">
+    <md-tab ng-repeat="tab in Tabs"
+            ng-disabled="tab.Disabled"
+            label="{{tab.Name}}">
+        <div class="grading-tab-content tab{{$index%4}}">
+            <md-toolbar>
+                <h2 ng-bind="::tab.PartBelt.Name"></h2>
+            </md-toolbar>
+
+            <gk-grading-category ng-model="::tab.PartBelt.Rei" belt-color="1">
+                <p><b>Rei</b> (hälsning)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="::tab.PartBelt.Ukemi" belt-color="1">
+                <p><b>Ukemi</b> (fallteknik)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="::tab.PartBelt.KumiKata" belt-color="1">
+                <p><b>Kumi kata</b> (greppteknik)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="::tab.PartBelt.NageWaza" belt-color="1">
+                <p><b>Nage waza</b> (kastteknik)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="::tab.PartBelt.OsaeKomiWaza" belt-color="1">
+                <p><b>Osae komi waza</b> (fasthållningsteknik)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="tab.PartBelt.RandoriWaza" belt-color="1">
+                <p><b>Randori waza</b></p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="tab.PartBelt.Other" belt-color="1">
+                <p><b>Du bör även kunna..</b></p>
+            </gk-grading-category>
+
+            <div class="grading-divider"></div>
+
+            <md-toolbar>
+                <h2 ng-bind="::tab.WholeBelt.Name"></h2>
+            </md-toolbar>
+        </div>
+    </md-tab>
+</md-tabs>

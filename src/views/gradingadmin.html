@@ -1,0 +1,74 @@
+<md-tabs md-selected="TabIndex" class="md-primary">
+    <md-tab ng-repeat="tab in Tabs"
+            ng-disabled="tab.Disabled"
+            label="{{tab.Name}}">
+        <div class="grading-tab-content tab{{$index%4}}">
+            <h2 ng-bind="::tab.PartBelt.Name"></h2>
+
+            <gk-grading-category ng-model="::tab.PartBelt.Rei" admin-mode="true" belt-color="::tab.PartBelt.BeltColor">
+                <p><b>Rei</b> (hälsning)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="::tab.PartBelt.Ukemi" admin-mode="true" belt-color="::tab.PartBelt.BeltColor">
+                <p><b>Ukemi</b> (fallteknik)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="::tab.PartBelt.KumiKata" admin-mode="true" belt-color="::tab.PartBelt.BeltColor">
+                <p><b>Kumi kata</b> (greppteknik)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="::tab.PartBelt.NageWaza" admin-mode="true" belt-color="::tab.PartBelt.BeltColor">
+                <p><b>Nage waza</b> (kastteknik)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="::tab.PartBelt.OsaeKomiWaza" admin-mode="true" belt-color="::tab.PartBelt.BeltColor">
+                <p><b>Osae komi waza</b> (fasthållningsteknik)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="tab.PartBelt.RandoriWaza" admin-mode="true" belt-color="::tab.PartBelt.BeltColor">
+                <p><b>Randori waza</b></p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="tab.PartBelt.Other" admin-mode="true" belt-color="::tab.PartBelt.BeltColor">
+                <p><b>Du bör även kunna..</b></p>
+            </gk-grading-category>
+
+
+            <h2 ng-bind="::tab.WholeBelt.Name"></h2>
+
+            <gk-grading-category ng-model="::tab.WholeBelt.Rei" admin-mode="true" belt-color="::tab.WholeBelt.BeltColor">
+                <p><b>Rei</b> (hälsning)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="::tab.WholeBelt.Ukemi" admin-mode="true" belt-color="::tab.WholeBelt.BeltColor">
+                <p><b>Ukemi</b> (fallteknik)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="::tab.WholeBelt.KumiKata" admin-mode="true" belt-color="::tab.WholeBelt.BeltColor">
+                <p><b>Kumi kata</b> (greppteknik)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="::tab.WholeBelt.NageWaza" admin-mode="true" belt-color="::tab.WholeBelt.BeltColor">
+                <p><b>Nage waza</b> (kastteknik)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="::tab.WholeBelt.OsaeKomiWaza" admin-mode="true" belt-color="::tab.WholeBelt.BeltColor">
+                <p><b>Osae komi waza</b> (fasthållningsteknik)</p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="tab.WholeBelt.RandoriWaza" admin-mode="true" belt-color="::tab.WholeBelt.BeltColor">
+                <p><b>Randori waza</b></p>
+            </gk-grading-category>
+
+            <gk-grading-category ng-model="tab.WholeBelt.Other" admin-mode="true" belt-color="::tab.WholeBelt.BeltColor">
+                <p><b>Du bör även kunna..</b></p>
+            </gk-grading-category>
+        </div>
+    </md-tab>
+</md-tabs>
+
+<div style="position: fixed; right: 25px; top: 75px; width: 300px; height: 800px;" class="md-whiteframe-z1">
+
+    <span data-drag="true" jqyoui-draggable>So you think you can drag</span>
+
+</div>

@@ -1,0 +1,135 @@
+[{
+  "Name": "5 Kyu",
+  "PartBelt":
+  {
+    "Name": "Vitt bälte med gul markering",
+    "BeltColor": 1,
+    "Rei": [],
+    "Ukemi": [],
+    "KumiKata": [],
+    "NageWaza": [],
+    "OsaeKomiWaza": [],
+    "RandoriWaza": [],
+    "Other": []
+  },
+  "WholeBelt":
+  {
+    "Name": "Gult bälte",
+    "BeltColor": 2,
+    "Rei": [],
+    "Ukemi": [],
+    "KumiKata": [],
+    "NageWaza": [],
+    "OsaeKomiWaza": [],
+    "RandoriWaza": [],
+    "Other": []
+  }
+},
+{
+    "Name": "4 Kyu",
+    "PartBelt":
+    {
+    "Name": "Gult bälte med orange markering",
+    "BeltColor": 3,
+    "Rei": [],
+    "Ukemi": [],
+    "KumiKata": [],
+    "NageWaza": [],
+    "OsaeKomiWaza": [],
+    "RandoriWaza": [],
+    "Other": []
+    },
+    "WholeBelt":
+    {
+    "Name": "Orange bälte",
+    "BeltColor": 4,
+    "Rei": [],
+    "Ukemi": [],
+    "KumiKata": [],
+    "NageWaza": [],
+    "OsaeKomiWaza": [],
+    "RandoriWaza": [],
+    "Other": []
+    }
+},
+{
+    "Name": "3 Kyu",
+    "PartBelt":
+    {
+    "Name": "Orange bälte med grön markering",
+    "BeltColor": 5,
+    "Rei": [],
+    "Ukemi": [],
+    "KumiKata": [],
+    "NageWaza": [],
+    "OsaeKomiWaza": [],
+    "RandoriWaza": [],
+    "Other": []
+    },
+    "WholeBelt":
+    {
+    "Name": "Grönt bälte",
+    "BeltColor": 6,
+    "Rei": [],
+    "Ukemi": [],
+    "KumiKata": [],
+    "NageWaza": [],
+    "OsaeKomiWaza": [],
+    "RandoriWaza": [],
+    "Other": []
+    }
+},
+{
+    "Name": "2 Kyu",
+    "PartBelt":
+    {
+    "Name": "Grönt bälte med blå markering",
+    "BeltColor": 7,
+    "Rei": [],
+    "Ukemi": [],
+    "KumiKata": [],
+    "NageWaza": [],
+    "OsaeKomiWaza": [],
+    "RandoriWaza": [],
+    "Other": []
+    },
+    "WholeBelt":
+    {
+    "Name": "Blått bälte",
+    "BeltColor": 8,
+    "Rei": [],
+    "Ukemi": [],
+    "KumiKata": [],
+    "NageWaza": [],
+    "OsaeKomiWaza": [],
+    "RandoriWaza": [],
+    "Other": []
+    }
+},
+{
+    "Name": "1 Kyu",
+    "PartBelt":
+    {
+    "Name": "Blått bälte med brun markering",
+    "BeltColor": 9,
+    "Rei": [],
+    "Ukemi": [],
+    "KumiKata": [],
+    "NageWaza": [],
+    "OsaeKomiWaza": [],
+    "RandoriWaza": [],
+    "Other": []
+    },
+    "WholeBelt":
+    {
+    "Name": "Brunt bälte",
+    "BeltColor": 10,
+    "Rei": [],
+    "Ukemi": [],
+    "KumiKata": [],
+    "NageWaza": [],
+    "OsaeKomiWaza": [],
+    "RandoriWaza": [],
+    "Other": []
+    }
+}]

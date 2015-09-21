@@ -1,0 +1,14 @@
+dist
+info
+node_modules
+hooks
+refs
+objects
+.idea
+bower_components
+Web.config
+Web.Debug.config
+Web.Release.config
+bin
+obj
+Properties/PublishProfiles

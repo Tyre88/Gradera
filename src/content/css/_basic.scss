@@ -1,0 +1,38 @@
+.homebasic
+{
+	h1
+	{
+		text-align: center;
+	}
+}
+
+.grading-tab-content
+{
+	padding: 15px 0;
+
+	h2
+	{
+		text-align: center;
+		background-color: #795548;
+		color: rgba(255, 255, 255, 0.870588);
+		height: 50px;
+		line-height: 50px;
+	}
+
+	ul
+	{
+		list-style: none;
+
+		li,
+		a
+		{
+			text-decoration: none;
+			color: black;
+
+			&[href=""]:hover
+			{
+				cursor: default;
+			}
+		}
+	}
+}

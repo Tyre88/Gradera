@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3a6a537d030949c3828de3332d043783" Name="Diagram1">
+        <EntityTypeShape EntityType="Vicdude_graderaModel.Club" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Vicdude_graderaModel.Combination" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Vicdude_graderaModel.Combination_Technique" Width="1.5" PointX="8" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Vicdude_graderaModel.GradingTabs" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Vicdude_graderaModel.Image" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Vicdude_graderaModel.Movie" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Vicdude_graderaModel.Search" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Vicdude_graderaModel.TECHNICS" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="Vicdude_graderaModel.Type" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Vicdude_graderaModel.Wordlist" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="Vicdude_graderaModel.Club__Tabs" ManuallyRouted="false" />
+        <AssociationConnector Association="Vicdude_graderaModel.Combination__Combination_Technique" ManuallyRouted="false" />
+        <AssociationConnector Association="Vicdude_graderaModel.Tec__Img" ManuallyRouted="false" />
+        <AssociationConnector Association="Vicdude_graderaModel.Tec__Movie" ManuallyRouted="false" />
+        <AssociationConnector Association="Vicdude_graderaModel.Type____Tec" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Vicdude_graderaModel.Accessright" Width="1.5" PointX="10.375" PointY="1" />
+        <EntityTypeShape EntityType="Vicdude_graderaModel.Account" Width="1.5" PointX="10.375" PointY="4" />
+        <EntityTypeShape EntityType="Vicdude_graderaModel.AccountAccess" Width="1.5" PointX="12.625" PointY="0.875" />
+        <AssociationConnector Association="Vicdude_graderaModel.Accessright__AccountAccess" />
+        <AssociationConnector Association="Vicdude_graderaModel.Account__AccountAccess" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
