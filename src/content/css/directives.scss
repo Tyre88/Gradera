@@ -1,5 +1,61 @@
 gk-grading-category
 {
+  md-grid-list
+  {
+    min-height: 50px;
+  }
+
+  ul
+  {
+    &[dnd-list],
+    &[dnd-list] md-grid-tile
+    {
+      position: relative;
+    }
+
+    &[dnd-list]
+    {
+      min-height: 42px;
+      padding-left: 0;
+    }
+
+    &[dnd-list] li,
+    &[dnd-list] span
+    {
+      min-height: 42px;
+      padding-left: 0;
+      line-height: 42px;
+      &:hover
+      {
+        cursor: move;
+        background-color: #ddd;
+      }
+    }
+
+    &[dnd-list] .dndDraggingSource
+    {
+      display: none;
+    }
+
+    &[dnd-list] .dndPlaceholder
+    {
+      display: block;
+      background-color: #ddd;
+      min-height: 42px;
+    }
+
+    &[dnd-list] md-grid-tile
+    {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-top-right-radius: 4px;
+      border-top-left-radius: 4px;
+      display: block;
+      padding: 10px 15px;
+      margin-bottom: -1px;
+    }
+  }
+
 	md-toolbar
 	{
 		p

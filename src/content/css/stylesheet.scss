@@ -8,6 +8,11 @@
 	flex-wrap: wrap;
 }
 
+md-tabs
+{
+  height: 80vh;
+}
+
 /* SECOND BRANDING COLOR */
 .brand-second-color
 {
@@ -101,4 +106,3 @@ footer
 /* IMPORTS */
 @import 'logged-in';
 @import 'basic';
-@import 'directives';

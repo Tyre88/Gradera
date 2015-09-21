@@ -7,7 +7,7 @@ var require =
             "angular-animate":"dependencies/angular-animate/angular-animate.min",
             "angular-aria":"dependencies/angular-aria/angular-aria.min",
             "angular-material":"dependencies/angular-material/angular-material",
-            "angular-dragdrop": "dependencies/angular-plugins/angular-dragdrop",
+            "angular-dragdrop": "dependencies/angular-drag-and-drop/angular-drag-and-drop",
             "ui-router": "dependencies/angular-ui-router/release/angular-ui-router.min",
             "app": "app",
             "domready": "dependencies/require/domready",
@@ -20,7 +20,7 @@ var require =
         {
             "app":
             {
-                deps: ["ui-router", "ui-bootstrap", "angular-material", "angular-route"]
+                deps: ["ui-router", "ui-bootstrap", "angular-material", "angular-route", "angular-dragdrop"]
             },
 
             "angular-material":

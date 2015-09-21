@@ -1,4 +1,4 @@
-<div ng-show="::ngModel.length || adminMode">
+<div ng-show="::ngModel.length && !adminMode">
     <md-grid-list md-cols="5" md-row-height="4:3">
         <md-grid-tile md-colspan="5">
             <md-toolbar>
@@ -8,7 +8,6 @@
     </md-grid-list>
     <md-grid-list md-cols="4" md-gutter="1em" md-row-height="4:3">
         <md-grid-tile ng-repeat="item in ngModel" md-colspan-gt-md="1" md-colspan-md="2" md-colspan-sm="4" md-rowspan-md="2" md-rowspan-sm="2" ng-class="GetClass()">
-            <a class="icon-trash" ng-click="DeleteItem(item)" ng-if="adminMode"></a>
             <div ng-if="item.Image">
                 <img src="{{::item.Image}}" alt="{{::item.Name}}" ng-click="Navigate(item)" class="grading-category-img"/>
                 <md-tooltip>
@@ -18,4 +17,22 @@
             <a ng-if="!item.Image" class="icon-right-dir brand-second-color-before" href="{{::item.URL}}">{{::item.Name}}</a>
         </md-grid-tile>
     </md-grid-list>
+</div>
+
+<div ng-if="::adminMode">
+    <md-toolbar>
+        <ng-transclude></ng-transclude>
+    </md-toolbar>
+    <ul ng-class="GetClass()" dnd-list="ngModel">
+        <li ng-repeat="item in ngModel" dnd-draggable="item" dnd-moved="ngModel.splice($index, 1)" dnd-effect-allowed="move">
+            <a class="icon-trash" ng-click="DeleteItem(item)"></a>
+            <div ng-if="::item.Image">
+                <img src="{{::item.Image}}" alt="{{::item.Name}}" ng-click="Navigate(item)" class="grading-category-img"/>
+                <md-tooltip>
+                    {{::item.Name}}
+                </md-tooltip>
+            </div>
+            <span ng-if="!item.Image">{{::item.Name}}</span>
+        </li>
+    </ul>
 </div>
