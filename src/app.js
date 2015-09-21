@@ -88,6 +88,7 @@ define(
 					{
 						$compileProvider.debugInfoEnabled(false);
 						$httpProvider.useApplyAsync(true);
+						$httpProvider.defaults.withCredentials = true;
 
 						$mdThemingProvider.theme('default')
 							.primaryPalette('brown')
@@ -96,9 +97,6 @@ define(
 				])
 				.run(function(api) {
 					api.init("efaafef0-398f-470d-8770-263781a0e762");
-				})
-				.config(function($httpProvider) {
-					$httpProvider.defaults.withCredentials = true;
 				});
 		}
     });

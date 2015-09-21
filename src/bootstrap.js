@@ -12,7 +12,6 @@ require(
     {
         require(["domready!"], function(document)
                 {
-                    debugger;
                     return angular.bootstrap(document, ["graderaklubb"]);
                 });
     });
