@@ -32,6 +32,14 @@ gk-grading-category
       }
     }
 
+    &[dnd-list] li > a
+    {
+      &:hover
+      {
+        cursor: pointer;
+      }
+    }
+
     &[dnd-list] .dndDraggingSource
     {
       display: none;

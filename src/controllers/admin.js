@@ -10,15 +10,17 @@ require(
 		{
 			$scope.Tabs = [];
 			$scope.TabIndex = 1;
+			$scope.Techniques = [];
 
 			gradingService.GetTabData(1).success(function(data)
 			{
 				$scope.Tabs = JSON.parse(data);
 			});
 
-			$scope.TestDrag = {
-				Name: "TEST"
-			};
+			gradingService.GetAllTechniques().success(function(data)
+			{
+				$scope.Techniques = data;
+			});
 		}]);
 	}
 );

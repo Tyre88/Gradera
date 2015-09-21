@@ -51,5 +51,30 @@ namespace Gradera_Klubb.Controllers
 
             return response;
         }
+
+        [HttpGet]
+        public HttpResponseMessage GetAllTechniques()
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+
+            var techniques = db.TECHNICS.ToList();
+
+            List<TecModel> tecModels = new List<TecModel>();
+
+            foreach (var item in techniques)
+            {
+                tecModels.Add(new TecModel()
+                {
+                    Id = item.id,
+                    Belt = item.belt,
+                    Description = item.desc,
+                    Name = item.name
+                });
+            }
+
+            response.Content = new ObjectContent<List<TecModel>>(tecModels, new JsonMediaTypeFormatter());
+
+            return response;
+        }
     }
 }

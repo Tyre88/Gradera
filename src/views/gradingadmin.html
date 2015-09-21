@@ -69,8 +69,15 @@
     </md-tab>
 </md-tabs>
 
-<div style="position: fixed; right: 25px; top: 75px; width: 300px; height: 800px;" class="md-whiteframe-z1">
+<div class="md-whiteframe-z1" id="tecContainer">
 
+    <md-input-container>
+        <label>Sök</label>
+        <input ng-model="Search">
+    </md-input-container>
 
+    <p ng-repeat="tec in Techniques | filter:Search" dnd-draggable="tec" dnd-effect-allowed="move">
+        {{::tec.Name}}
+    </p>
 
 </div>

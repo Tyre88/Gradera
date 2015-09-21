@@ -34,6 +34,11 @@ require(
 								return "grading-category-yellow";
 						}
 					};
+
+					scope.$watch('ngModel', function() {
+						if(scope.ngModel === undefined)
+							scope.ngModel = [];
+					});
 				}
 			};
 		}]);

@@ -10,6 +10,11 @@ require(
 			{
 				return $http.get(String.format("http://gradera-klubb.local/api/basic/GetGradingTabs/{0}", clubId));
 			};
+
+			this.GetAllTechniques = function()
+			{
+				return $http.get(String.format("http://gradera-klubb.local/api/basic/GetAllTechniques"));
+			}
 		}]);
 	}
 );

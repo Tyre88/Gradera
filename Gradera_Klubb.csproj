@@ -208,6 +208,7 @@
     <Compile Include="Models\TECHNICS.cs">
       <DependentUpon>GraderaDataSet.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TecModel.cs" />
     <Compile Include="Models\Type.cs">
       <DependentUpon>GraderaDataSet.tt</DependentUpon>
     </Compile>
