@@ -28,6 +28,12 @@ define(
 							url: "admin/competition/:id",
 							templateUrl: "views/gradingadmin.html",
 							controller: "gradingadmin"
+						})
+						.state('handleusers',
+						{
+							url: "admin/handleusers",
+							templateUrl: "views/handleusers.html",
+							controller: "handleusers"
 						});
 				}
 			]

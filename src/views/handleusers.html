@@ -1,0 +1,6 @@
+<md-list ng-cloak>
+    <md-list-item ng-repeat="user in Users" ng-click="EditUser(user.Id, $event)">
+        <img alt="{{ user.FirstName }}" ng-src="{{ user.Image }}" class="md-avatar" />
+        <p>{{ user.FullName }}</p>
+    </md-list-item>
+</md-list>

@@ -8,7 +8,7 @@ module.exports = function (grunt)
 	grunt.registerTask("server",
 	[
 	  "build",
-	  "open:chrome",
+	  //"open:chrome",
 	  "connect",
 	  "watch"
 	]);

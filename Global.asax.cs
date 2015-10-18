@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,6 +22,8 @@ namespace Gradera_Klubb
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            AccountSessionCache.Instance.MapAllSessions();
         }
     }
 }

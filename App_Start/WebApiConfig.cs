@@ -10,15 +10,21 @@ namespace Gradera_Klubb
         public static void Register(HttpConfiguration config)
         {
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                name: "LoginApi",
+                routeTemplate: "api/Authenticate/Login/{userName}/{password}",
+                defaults: new
+                {
+                    controller = "Authenticate",
+                    action = "Login",
+                    userName = RouteParameter.Optional,
+                    password = RouteParameter.Optional
+                }
             );
 
             config.Routes.MapHttpRoute(
-                name: "GetAllTechniques",
-                routeTemplate: "api/{controller}/GetAllTechniques",
-                defaults: new { action = "GetAllTechniques" }
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { id = RouteParameter.Optional }
             );
 
             // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.

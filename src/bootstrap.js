@@ -6,7 +6,8 @@ require(
 		"./controllers/admin.js",
 		"./controllers/home.js",
 		"./controllers/basic.js",
-		"./directives/login.js"
+		"./directives/login.js",
+        "./controllers/handleusers.js"
     ],
     function()
     {

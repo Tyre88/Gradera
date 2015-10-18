@@ -6,8 +6,8 @@
         </div>
 
         <div class="logged-in-compound-container">
-            <span>{{UserService.User.Compound.Name}}</span>
-            <img src="{{UserService.User.Compound.Image}}" alt="{{UserService.User.Compound.ShortName}}"/>
+            <span class="compound-name">{{UserService.User.Compound.Name}}</span>
+            <img class="compound-image" src="{{UserService.User.Compound.Image}}" alt="{{UserService.User.Compound.ShortName}}"/>
         </div>
 
         <md-button class="mobile-menu-button icon-menu md-accent md-fab" md-no-ink ng-click="::TriggerMobileMenu()"></md-button>

@@ -1,4 +1,4 @@
-<md-tabs md-selected="TabIndex" class="md-primary">
+<md-tabs md-selected="TabIndex" class="md-primary" ng-init="TabIndex = 0">
     <md-tab ng-repeat="tab in Tabs"
             ng-disabled="tab.Disabled"
             label="{{tab.Name}}">
@@ -73,7 +73,7 @@
 
     <md-input-container>
         <label>Sök</label>
-        <input ng-model="Search">
+        <input ng-model="Search.Name">
     </md-input-container>
 
     <p ng-repeat="tec in Techniques | filter:Search" dnd-draggable="tec" dnd-effect-allowed="move">

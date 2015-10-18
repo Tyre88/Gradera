@@ -37,27 +37,35 @@ define(
 					else
 						$state.go("home");
 
-					if($scope.UserService.User.AccessLevel == 1)
+					$scope.AdminLinks = [
+						{
+							Sref: "settingsadmin",
+							Text: "Inställningar"
+						},
+						{
+							Sref: "gradingadmin",
+							Text: "Graderingsbestämmelser"
+						},
+						{
+							Sref: "competitionsadmin",
+							Text: "Tävlingar"
+						},
+						{
+							Sref: "handleusers",
+							Text: "Hantera medlemar"
+						}
+					];
+
+					$scope.HasSomeWriteAccess = function(accessRights)
 					{
-						$scope.AdminLinks = [
-							{
-								Sref: "settingsadmin",
-								Text: "Inställningar"
-							},
-							{
-								Sref: "gradingadmin",
-								Text: "Graderingsbestämmelser"
-							},
-							{
-								Sref: "competitionsadmin",
-								Text: "Tävlingar"
-							},
-							{
-								Sref: "",
-								Text: "Hantera medlemar"
-							}
-						];
-					}
+						for(var i = 0; i < accessRights.length; i++)
+						{
+							if(accessRights[i].AccessTypeRight >= 20)
+								return true;
+						}
+
+						return false;
+					};
 				}])
 				.factory('api', function($http) {
 					var config = { headers: {
@@ -95,8 +103,19 @@ define(
 							.accentPalette('orange');
 					}
 				])
-				.run(function(api) {
-					api.init("efaafef0-398f-470d-8770-263781a0e762");
-				});
+				.run(["api", "user-service", function(api, userService) {
+
+					if(typeof(Storage) !== "undefined") {
+						var user = window.sessionStorage.getItem('gk-user');
+						if(user != undefined) {
+							userService.User.Initialize(JSON.parse(user));
+							api.init(userService.User.Token);
+						}
+						else
+							api.init("");
+					} else {
+						api.init("");
+					}
+				}]);
 		}
     });
