@@ -34,6 +34,12 @@ define(
 							url: "admin/handleusers",
 							templateUrl: "views/handleusers.html",
 							controller: "handleusers"
+						})
+						.state('edituser',
+						{
+							url: "admin/edituser/:userId",
+							templateUrl: "views/admin/edituser.html",
+							controller: "edituser"
 						});
 				}
 			]

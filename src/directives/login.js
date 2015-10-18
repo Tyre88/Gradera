@@ -7,7 +7,7 @@ require(
 	],
 	function(app)
 	{
-		app.directive('gkLogin', ["login-service", "user-service", "api", function(loginService, userService, api)
+		app.directive('gkLogin', ["login-service", "user-service", "api", "$state", function(loginService, userService, api, $state)
 		{
 			return {
 				restrict: "E",
@@ -19,6 +19,7 @@ require(
 						loginService.Login(scope.UserService.User.UserName, scope.UserService.User.Password).success(function(response) {
 							userService.User.InitializeLogin(response);
 							api.init(userService.User.Token);
+							$state.go ('homebasic');
 						});
 					};
 				}

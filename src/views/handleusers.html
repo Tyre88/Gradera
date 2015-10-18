@@ -1,4 +1,9 @@
+<span class="md-button" ng-click="EditUser(0, $event);"><i class="fa fa-plus-circle"></i> Lägg till användare</span>
 <md-list ng-cloak>
+    <md-subheader class="md-no-sticky">
+        Användare
+    </md-subheader>
+
     <md-list-item ng-repeat="user in Users" ng-click="EditUser(user.Id, $event)">
         <img alt="{{ user.FirstName }}" ng-src="{{ user.Image }}" class="md-avatar" />
         <p>{{ user.FullName }}</p>

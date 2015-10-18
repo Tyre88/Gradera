@@ -15,7 +15,8 @@ define(
 		catch(err)
 		{
 			return angular.module('graderaklubb', ['ng', 'ngRoute', 'ui.router', 'ui.bootstrap', 'ngMaterial', 'dndLists'])
-				.controller('index', ["$scope", "$state", "user-service", "$mdSidenav", function($scope, $state, userService, $mdSidenav)
+				.controller('index', ["$rootScope", "$scope", "$state", "user-service", "$mdSidenav",
+					function($rootScope, $scope, $state, userService, $mdSidenav)
 				{
 					$scope.UserService = userService;
 					$scope.AdminLinks = [];
@@ -56,11 +57,22 @@ define(
 						}
 					];
 
-					$scope.HasSomeWriteAccess = function(accessRights)
+					$rootScope.HasSomeWriteAccess = function(accessRights)
 					{
 						for(var i = 0; i < accessRights.length; i++)
 						{
 							if(accessRights[i].AccessTypeRight >= 20)
+								return true;
+						}
+
+						return false;
+					};
+
+					$rootScope.HasAccess = function(accessRights, accessType, accessTypeRight)
+					{
+						for(var i = 0; i < accessRights.length; i++)
+						{
+							if(accessRights[i].AccessTypeRight >= accessTypeRight && accessRights[i].AccessType == accessType)
 								return true;
 						}
 

@@ -20,13 +20,15 @@ namespace Gradera_Klubb.Models
         public string Email { get; set; }
         public string Token { get; set; }
         public CompoundModel Compound { get; set; }
-        public List<AccessrightRightModel> AccessRights { get; set; }
+        public List<AccessrightModel> AccessRights { get; set; }
+        public List<AccessrightRightModel> AccessRightsRight { get; set; }
         public string FullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
 
         public UserModel()
         {
             Compound = new CompoundModel();
-            AccessRights = new List<AccessrightRightModel>();
+            AccessRightsRight = new List<AccessrightRightModel>();
+            AccessRights = new List<AccessrightModel>();
         }
 
         public static UserModel MapUserModel(Account account, bool deepLoad)
@@ -52,20 +54,35 @@ namespace Gradera_Klubb.Models
 
                 if (deepLoad)
                 {
-                    userModel.Token = AccountBLL.GetUserSession(account.ID);
-
-                    foreach (var item in account.AccountAccess)
+                    Parallel.Invoke(() =>
                     {
-                        foreach (var right in item.Accessright.Accessright_Right)
+                        userModel.Token = AccountBLL.GetUserSession(account.ID);
+                    }, () =>
+                    {
+                        foreach (var item in account.AccountAccess)
                         {
-                            userModel.AccessRights.Add(new AccessrightRightModel()
+                            foreach (var right in item.Accessright.Accessright_Right)
                             {
-                                AccessType = (AccessType)right.AccessType,
-                                AccessTypeRight = (AccessTypeRight)right.AccessTypeRight,
-                                Id = right.Id
+                                userModel.AccessRightsRight.Add(new AccessrightRightModel()
+                                {
+                                    AccessType = (AccessType)right.AccessType,
+                                    AccessTypeRight = (AccessTypeRight)right.AccessTypeRight,
+                                    Id = right.Id
+                                });
+                            }
+                        }
+                    }, () =>
+                    {
+                        foreach (var item in account.AccountAccess)
+                        {
+                            userModel.AccessRights.Add(new AccessrightModel()
+                            {
+                                Id = item.Accessright.ID,
+                                Name = item.Accessright.Name,
+                                Description = item.Accessright.Description 
                             });
                         }
-                    }
+                    });
                 }
 
                 return userModel;

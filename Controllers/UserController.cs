@@ -13,7 +13,6 @@ using System.Web.Http;
 
 namespace Gradera_Klubb.Controllers
 {
-    [AuthorizeFilter]
     public class UserController : ApiController
     {
         [AuthorizeFilter(AccessType = Core.Enums.AccessType.Account, AccessTypeRight = Core.Enums.AccessTypeRight.Read)]
@@ -27,6 +26,14 @@ namespace Gradera_Klubb.Controllers
 
             response.Content = new ObjectContent<List<UserModel>>(users, new JsonMediaTypeFormatter());
 
+            return response;
+        }
+
+        [AuthorizeFilter(AccessType = Core.Enums.AccessType.Account, AccessTypeRight = Core.Enums.AccessTypeRight.Read)]
+        public HttpResponseMessage GetUser(int id)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            response.Content = new ObjectContent<UserModel>(UserModel.MapUserModel(AccountBLL.GetUser(id), true), new JsonMediaTypeFormatter());
             return response;
         }
     }

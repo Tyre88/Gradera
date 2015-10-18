@@ -1,0 +1,12 @@
+.edit-user-container
+{
+  display: flex;
+  flex-wrap: wrap;
+
+  > *
+  {
+    width: calc(50% - 30px);
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

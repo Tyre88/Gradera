@@ -6,23 +6,52 @@ require(
 	{
 		app.service('user-service', function($http)
 		{
+			this.UserModel = function(compound, user)
+			{
+				if(user == undefined)
+				{
+					return {
+						Id: 0,
+						FirstName: "",
+						LastName: "",
+						UserName: "",
+						Password: "",
+						Email: "",
+						AccessRights: [],
+						Compound: compound
+					};
+				}
+
+				return {
+					Id: user.Id,
+					FirstName: user.FirstName,
+					LastName: user.LastName,
+					UserName: user.UserName,
+					Password: "",
+					Email: user.Email,
+					AccessRights: user.AccessRights,
+					Compound: compound
+				};
+			};
+
 			this.User =
 			{
-				Id: 1,
+				Id: 0,
 				IsLoggedIn: false,
-				FirstName: "Victor",
-				LastName: "Öhrström",
-				UserName: "victor",
+				FirstName: "",
+				LastName: "",
+				UserName: "",
 				Password: "",
-				Email: "victor@webbdudes.se",
+				Email: "",
 				AccessRights: [],
+				AccessRightsRight: [],
 				Token: "",
 				Compound:
 				{
-					Id: 1,
-					Name: "Wemmenhögs budoförening",
-					ShortName: "WBF",
-					Image: "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/t5.0-1/71155_279044720003_4250628_n.jpg"
+					Id: 0,
+					Name: "",
+					ShortName: "",
+					Image: ""
 				},
 				FullName: function()
 				{
@@ -36,6 +65,7 @@ require(
 					this.UserName = user.UserName;
 					this.Email = user.Email;
 					this.AccessRights = user.AccessRights;
+					this.AccessRightsRight = user.AccessRightsRight;
 					this.Token = user.Token;
 					this.Compound = user.Compound;
 				},
@@ -52,9 +82,9 @@ require(
 					this.Compound.ShortName = account.Compound.ShortName;
 					this.Compound.Image = account.Compound.Image;
 
-					for(var i = 0; i < account.AccessRights.length; i++)
+					for(var i = 0; i < account.AccessRightsRight.length; i++)
 					{
-						this.AccessRights.push(account.AccessRights[i]);
+						this.AccessRightsRight.push(account.AccessRightsRight[i]);
 					}
 
 					if(typeof(Storage) !== "undefined") {
@@ -67,6 +97,10 @@ require(
 
 			this.GetAllUsers = function() {
 				return $http.get('/api/User/GetAllUsers');
+			};
+
+			this.GetUser = function(userId) {
+				return $http.get('/api/User/GetUser/' + userId);
 			};
 		});
 	}

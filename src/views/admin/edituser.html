@@ -1,0 +1,25 @@
+<md-subheader class="md-no-sticky">
+    Redigera: {{User.FirstName}} {{User.LastName}}
+</md-subheader>
+
+<div class="edit-user-container">
+    <md-input-container md-no-float>
+        <input type="text" ng-model="User.FirstName" placeholder="Förnamn" />
+    </md-input-container>
+
+    <md-input-container md-no-float>
+        <input type="text" ng-model="User.LastName" placeholder="Efternamn" />
+    </md-input-container>
+
+    <md-input-container md-no-float>
+        <input type="text" ng-model="User.UserName" placeholder="Användarnamn" />
+    </md-input-container>
+
+    <md-input-container md-no-float>
+        <input type="text" ng-model="User.Email" placeholder="E-post" />
+    </md-input-container>
+
+    <md-input-container md-no-float>
+        <input type="password" ng-model="User.Password" placeholder="Lösenord" />
+    </md-input-container>
+</div>
