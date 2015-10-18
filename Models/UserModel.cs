@@ -19,6 +19,7 @@ namespace Gradera_Klubb.Models
         public string Image { get; set; }
         public string Email { get; set; }
         public string Token { get; set; }
+        public string Password { get; set; }
         public CompoundModel Compound { get; set; }
         public List<AccessrightModel> AccessRights { get; set; }
         public List<AccessrightRightModel> AccessRightsRight { get; set; }
@@ -89,6 +90,20 @@ namespace Gradera_Klubb.Models
             }
 
             return null;
+        }
+
+        internal static Account ConvertToAccount(UserModel user)
+        {
+            return new Account()
+            {
+                ID = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Password = user.Password,
+                UserName = user.Username,
+                Image = user.Image,
+                ClubId = user.Compound.Id
+            };
         }
 
         public static List<UserModel> MapUserModels(List<Account> accounts)

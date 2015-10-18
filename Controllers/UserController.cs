@@ -1,5 +1,6 @@
 ﻿using Core.BLL;
 using Core.DAL;
+using Core.Enums;
 using Gradera_Klubb.Filters;
 using Gradera_Klubb.Models;
 using System;
@@ -15,7 +16,7 @@ namespace Gradera_Klubb.Controllers
 {
     public class UserController : ApiController
     {
-        [AuthorizeFilter(AccessType = Core.Enums.AccessType.Account, AccessTypeRight = Core.Enums.AccessTypeRight.Read)]
+        [AuthorizeFilter(AccessType = AccessType.Account, AccessTypeRight = AccessTypeRight.Read)]
         public HttpResponseMessage GetAllUsers()
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
@@ -29,11 +30,21 @@ namespace Gradera_Klubb.Controllers
             return response;
         }
 
-        [AuthorizeFilter(AccessType = Core.Enums.AccessType.Account, AccessTypeRight = Core.Enums.AccessTypeRight.Read)]
+        [AuthorizeFilter(AccessType = AccessType.Account, AccessTypeRight = AccessTypeRight.Read)]
         public HttpResponseMessage GetUser(int id)
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Content = new ObjectContent<UserModel>(UserModel.MapUserModel(AccountBLL.GetUser(id), true), new JsonMediaTypeFormatter());
+            return response;
+        }
+
+        [AuthorizeFilter(AccessType = AccessType.Account, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage SaveUser(UserModel user)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            Account acc = UserModel.ConvertToAccount(user);
+            Account account = AccountBLL.SaveAccount(acc);
+            response.Content = new ObjectContent<UserModel>(UserModel.MapUserModel(account, true), new JsonMediaTypeFormatter());
             return response;
         }
     }
