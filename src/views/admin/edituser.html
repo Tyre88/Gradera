@@ -2,6 +2,10 @@
     Redigera: {{User.FirstName}} {{User.LastName}}
 </md-subheader>
 
+<div class="edit-user-image" fit-image="150">
+    <img ng-src="{{User.Image}}" />
+</div>
+
 <div class="edit-user-container">
     <md-input-container md-no-float>
         <input type="text" ng-model="User.FirstName" placeholder="Förnamn" />

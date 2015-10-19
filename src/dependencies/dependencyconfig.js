@@ -14,13 +14,14 @@ var require =
             "ui-bootstrap": "dependencies/ui-bootstrap-tpls-0.11.0.min",
             "jquery": "dependencies/jquery/jquery.min",
             "jquery-ui": "dependencies/jquery/jquery-ui",
-			"extensions": "dependencies/extensions"
+			"extensions": "dependencies/extensions",
+            "webbdudes-image-helper": "dependencies/webbdudes/webbdudes-image-helper"
         },
         shim:
         {
             "app":
             {
-                deps: ["ui-router", "ui-bootstrap", "angular-material", "angular-route", "angular-dragdrop"]
+                deps: ["ui-router", "ui-bootstrap", "angular-material", "angular-route", "angular-dragdrop", "webbdudes-image-helper"]
             },
 
             "angular-material":
