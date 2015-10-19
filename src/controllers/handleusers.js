@@ -19,27 +19,61 @@ require(
             });
         }]);
 
-        app.controller('edituser', ["$scope", "$stateParams", "user-service", "accessrights-service",
-            function($scope, $stateParams, userService, accessrightsService) {
+        app.controller('edituser', ["$scope", "$stateParams", "user-service", "accessrights-service", "$state",
+        function($scope, $stateParams, userService, accessrightsService, $state) {
             $scope.UserId = $stateParams.userId;
             $scope.User = {};
             $scope.AccessRights = [];
 
+            $scope.Save = function() {
+
+                $scope.User.AccountAccess = [];
+
+                for(var i = 0; i < $scope.AccessRights.length; i++)
+                {
+                    if($scope.AccessRights[i].Checked == true) {
+                        $scope.User.AccountAccess.push({
+                            AccessId: $scope.AccessRights[i].Id,
+                            AccountId: $scope.User.Id
+                        });
+                    }
+                }
+
+                userService.SaveUser($scope.User).success(function(response) {
+                    $state.go ('handleusers');
+                });
+            };
+
+            $scope.Back = function() {
+                $state.go("handleusers");
+            };
+
+            $scope.MapAccessRights = function()
+            {
+                for(var i = 0; i < $scope.User.AccessRights.length; i++)
+                {
+                    var right = $scope.AccessRights.GetItemByValue("Id", $scope.User.AccessRights[i].Id);
+                    if(right != null)
+                        right.Checked = true;
+                }
+            };
 
             accessrightsService.GetAccessRights().success(function(response) {
                 $scope.AccessRights = response;
-            });
 
-            if($scope.UserId > 0)
-            {
-                userService.GetUser($scope.UserId).success(function(response) {
-                    $scope.User = response;
-                });
-            }
-            else
-            {
-                $scope.User = new userService.UserModel(userService.User.Compound);
-            }
+                if($scope.UserId > 0)
+                {
+                    userService.GetUser($scope.UserId).success(function(response) {
+                        $scope.User = new userService.UserModel(userService.User.Compound, response);
+
+                        $scope.MapAccessRights();
+                    });
+                }
+                else
+                {
+                    $scope.User = new userService.UserModel(userService.User.Compound);
+                }
+            });
         }]);
     }
 );

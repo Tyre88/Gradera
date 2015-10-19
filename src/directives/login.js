@@ -26,7 +26,7 @@ require(
 			};
 		}]);
 
-		app.directive('gkLoggedIn', ["login-service", "$mdSidenav", function(loginService, $mdSidenav)
+		app.directive('gkLoggedIn', ["login-service", "user-service", "$mdSidenav", function(loginService, userService, $mdSidenav)
 		{
 			return {
 				restrict: "E",
@@ -40,9 +40,11 @@ require(
 						$mdSidenav('leftNav').toggle();
 					};
 
-					scope.LogOut = function()
+					scope.Logout = function()
 					{
-						loginService.LogOut();
+						loginService.LogOut().success(function(response) {
+							userService.User.Logout();
+						});
 					};
 				}
 			};

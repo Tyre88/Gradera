@@ -16,9 +16,10 @@ require(
 						LastName: "",
 						UserName: "",
 						Password: "",
-						Email: "",
+						Image: "",
 						AccessRights: [],
-						Compound: compound
+						Compound: compound,
+						UserInformation: {}
 					};
 				}
 
@@ -26,11 +27,19 @@ require(
 					Id: user.Id,
 					FirstName: user.FirstName,
 					LastName: user.LastName,
-					UserName: user.UserName,
+					UserName: user.Username,
+					Image: user.Image,
 					Password: "",
-					Email: user.Email,
 					AccessRights: user.AccessRights,
-					Compound: compound
+					Compound: compound,
+					UserInformation: {
+						Email: user.UserInformation.Email,
+						City: user.UserInformation.City,
+						Occupation: user.UserInformation.Occupation,
+						Phone: user.UserInformation.Phone,
+						Street: user.UserInformation.Street,
+						Zip: user.UserInformation.Zip
+					}
 				};
 			};
 
@@ -92,6 +101,28 @@ require(
 					} else {
 						// Sorry! No Web Storage support..
 					}
+				},
+				Logout: function() {
+					this.Id = 0;
+					this.IsLoggedIn = false;
+					this.FirstName = "";
+					this.LastName = "";
+					this.UserName = "";
+					this.Email = "";
+					this.Token = "";
+					this.Compound.Id = "";
+					this.Compound.Name = "";
+					this.Compound.ShortName = "";
+					this.Compound.Image = "";
+					this.Password = "";
+
+					this.AccessRightsRight = [];
+
+					if(typeof(Storage) !== "undefined") {
+						window.sessionStorage.removeItem('gk-user');
+					} else {
+						// Sorry! No Web Storage support..
+					}
 				}
 			};
 
@@ -101,6 +132,10 @@ require(
 
 			this.GetUser = function(userId) {
 				return $http.get('/api/User/GetUser/' + userId);
+			};
+
+			this.SaveUser = function(user) {
+				return $http.post('/api/User/SaveUser', user);
 			};
 		});
 	}

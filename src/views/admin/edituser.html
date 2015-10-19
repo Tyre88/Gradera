@@ -16,10 +16,46 @@
     </md-input-container>
 
     <md-input-container md-no-float>
-        <input type="text" ng-model="User.Email" placeholder="E-post" />
+        <input type="text" ng-model="User.UserInformation.Email" placeholder="E-post" />
     </md-input-container>
 
     <md-input-container md-no-float>
         <input type="password" ng-model="User.Password" placeholder="Lösenord" />
     </md-input-container>
+
+    <md-input-container md-no-float>
+        <input type="text" ng-model="User.UserInformation.Phone" placeholder="Telefonnummer" />
+    </md-input-container>
+
+    <md-input-container md-no-float>
+        <input type="text" ng-model="User.UserInformation.Street" placeholder="Adress" />
+    </md-input-container>
+
+    <md-input-container md-no-float>
+        <input type="text" ng-model="User.UserInformation.Zip" placeholder="Postnummer" />
+    </md-input-container>
+
+    <md-input-container md-no-float>
+        <input type="text" ng-model="User.UserInformation.City" placeholder="Stad" />
+    </md-input-container>
+
+    <md-input-container md-no-float>
+        <input type="text" ng-model="User.UserInformation.Occupation" placeholder="Arbete" />
+    </md-input-container>
+</div>
+
+<md-subheader class="md-no-sticky">
+    Rättigheter
+</md-subheader>
+
+<div class="edit-user-accessrights">
+    <md-checkbox ng-repeat="accessright in AccessRights" ng-model="accessright.Checked" aria-label="{{accessright.Name}}">
+        {{accessright.Name}}
+        <md-tooltip>{{accessright.Description}}</md-tooltip>
+    </md-checkbox>
+</div>
+
+<div>
+    <md-button class="md-raised md-primary" ng-click="Save();">Spara</md-button>
+    <md-button class="md-raised md-warn" ng-click="Back();">Avbryt</md-button>
 </div>

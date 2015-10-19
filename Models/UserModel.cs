@@ -17,10 +17,12 @@ namespace Gradera_Klubb.Models
         public string LastName { get; set; }
         public string Username { get; set; }
         public string Image { get; set; }
-        public string Email { get; set; }
         public string Token { get; set; }
         public string Password { get; set; }
+        public int ClubId { get; set; }
+        public UserInformationModel UserInformation { get; set; }
         public CompoundModel Compound { get; set; }
+        public List<AccountAccessModel> AccountAccess { get; set; }
         public List<AccessrightModel> AccessRights { get; set; }
         public List<AccessrightRightModel> AccessRightsRight { get; set; }
         public string FullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
@@ -30,6 +32,7 @@ namespace Gradera_Klubb.Models
             Compound = new CompoundModel();
             AccessRightsRight = new List<AccessrightRightModel>();
             AccessRights = new List<AccessrightModel>();
+            UserInformation = new UserInformationModel();
         }
 
         public static UserModel MapUserModel(Account account, bool deepLoad)
@@ -42,7 +45,8 @@ namespace Gradera_Klubb.Models
                     FirstName = account.FirstName,
                     LastName = account.LastName,
                     Username = account.UserName,
-                    Image = account.Image
+                    Image = account.Image,
+                    ClubId = account.ClubId
                 };
 
                 userModel.Compound = new CompoundModel()
@@ -80,9 +84,27 @@ namespace Gradera_Klubb.Models
                             {
                                 Id = item.Accessright.ID,
                                 Name = item.Accessright.Name,
-                                Description = item.Accessright.Description 
+                                Description = item.Accessright.Description
                             });
                         }
+                    }, () =>
+                    {
+                        Account_Information information = AccountBLL.GetAccountSettings(userModel.Id);
+                        if(information != null)
+                        {
+                            userModel.UserInformation = new UserInformationModel()
+                            {
+                                Email = information.Email,
+                                City = information.City,
+                                Occupation = information.Occupation,
+                                Phone = information.Phone,
+                                Street = information.Street,
+                                Zip = information.Zip
+                            };
+                        }
+                    }, () =>
+                    {
+                        userModel.AccountAccess = AccountAccessModel.MapAccountAccesses(AccountBLL.GetAccountAccesses(userModel.Id));
                     });
                 }
 
@@ -94,7 +116,7 @@ namespace Gradera_Klubb.Models
 
         internal static Account ConvertToAccount(UserModel user)
         {
-            return new Account()
+            Account acc = new Account()
             {
                 ID = user.Id,
                 FirstName = user.FirstName,
@@ -104,6 +126,28 @@ namespace Gradera_Klubb.Models
                 Image = user.Image,
                 ClubId = user.Compound.Id
             };
+
+            acc.Account_Information.Add(new Account_Information()
+            {
+                Email = user.UserInformation.Email,
+                City = user.UserInformation.City,
+                Occupation = user.UserInformation.Occupation,
+                Phone = user.UserInformation.Phone,
+                Street = user.UserInformation.Street,
+                Zip = user.UserInformation.Zip
+            });
+
+            foreach (var access in user.AccountAccess)
+            {
+                acc.AccountAccess.Add(new AccountAccess()
+                {
+                    ID = access.Id,
+                    AccessID = access.AccessId,
+                    AccountID = user.Id
+                });
+            }
+
+            return acc;
         }
 
         public static List<UserModel> MapUserModels(List<Account> accounts)

@@ -12,9 +12,9 @@ require(
 				return $http.post('/api/Authenticate/Login?userName=' + userName + "&password=" + password);
 			};
 
-			this.LogOut = function(token)
+			this.LogOut = function()
 			{
-
+				return $http.post('/api/Authenticate/Logout');
 			};
 		})
 	}

@@ -38,13 +38,15 @@ namespace Gradera_Klubb.Controllers
             return response;
         }
 
+        [HttpPost]
+        [HttpOptions]
         [AuthorizeFilter(AccessType = AccessType.Account, AccessTypeRight = AccessTypeRight.Write)]
         public HttpResponseMessage SaveUser(UserModel user)
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             Account acc = UserModel.ConvertToAccount(user);
             Account account = AccountBLL.SaveAccount(acc);
-            response.Content = new ObjectContent<UserModel>(UserModel.MapUserModel(account, true), new JsonMediaTypeFormatter());
+            //response.Content = new ObjectContent<Account>(account, new JsonMediaTypeFormatter());
             return response;
         }
     }

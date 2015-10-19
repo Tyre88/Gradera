@@ -88,7 +88,7 @@ define(
 
 					function init(token)
 					{
-						config.headers.AuthenticateToken = token || "Not authorized";
+						config.headers.AuthenticateToken = token || "";
 
 						$http.defaults.headers.common.AuthenticateToken = config.headers.AuthenticateToken;
 						$http.defaults.headers.common.Accept = config.headers.Accept;
