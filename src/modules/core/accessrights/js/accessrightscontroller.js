@@ -1,4 +1,6 @@
 'use-strict';
+
+LoadCss("modules/core/accessrights/css/accessrights.css");
 require(
     [
         "app"
@@ -13,6 +15,9 @@ require(
         function listaccessrightsController(accessrightsService, $state) {
             var vm = this;
             vm.Accessrights = [];
+            vm.AccessTypes = [];
+            vm.AccessTypeRights = [];
+
             vm.GetAccessRights = GetAccessRights;
             vm.EditAccessright = EditAccessright;
 
@@ -41,10 +46,12 @@ require(
 
             vm.GetAccessright = GetAccessright;
             vm.SaveAccessright = SaveAccessright;
+            vm.GetAccessTypes = GetAccessTypes;
+            vm.GetAccessTypeRights = GetAccessTypeRights;
             vm.Back = Back;
 
             function GetAccessright(id) {
-                accessrightsService.GetAccessright(id).success(getAccessrightCallback);
+                accessrightsService.GetAccessRight(id).success(getAccessrightCallback);
 
                 function getAccessrightCallback(response) {
                     vm.Accessright = response;
@@ -58,6 +65,28 @@ require(
             function Back() {
                 $state.go("listaccessrights");
             }
+
+            function GetAccessTypes() {
+                accessrightsService.GetAccessTypes().success(getAccessTypesCallback);
+
+                function getAccessTypesCallback(response) {
+                    vm.AccessTypes = response;
+                }
+            }
+
+            function GetAccessTypeRights() {
+                accessrightsService.GetAccessTypeRights().success(getAccessTypeRigtsCallback);
+
+                function getAccessTypeRigtsCallback(response) {
+                    vm.AccessTypeRights = response;
+                }
+            }
+
+            vm.GetAccessTypes();
+            vm.GetAccessTypeRights();
+
+            if(~~vm.AccessrightId > 0)
+                vm.GetAccessright(~~vm.AccessrightId);
         }
     }
 );

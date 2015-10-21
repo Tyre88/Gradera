@@ -1,0 +1,20 @@
+.access-types
+{
+  md-checkbox,
+  md-select
+  {
+    display: inline-block;
+    min-width: 150px;
+  }
+}
+
+.accessright-information
+{
+  display: flex;
+  flex-direction: column;
+
+  *
+  {
+    width: 50%;
+  }
+}

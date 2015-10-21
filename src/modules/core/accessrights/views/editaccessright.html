@@ -1,7 +1,24 @@
 <md-subheader class="md-no-sticky">
     Redigera: {{vm.Accessright.Name}}
 </md-subheader>
+<div class="accessright-information">
+    <md-input-container md-no-float>
+        <input type="text" ng-model="vm.Accessright.Name" placeholder="Namn" />
+    </md-input-container>
 
+    <md-input-container md-no-float>
+        <input type="text" ng-model="vm.Accessright.Description" placeholder="Beskrivning" />
+    </md-input-container>
+</div>
+
+<div ng-repeat="accessType in vm.AccessTypes" class="access-types">
+    <md-checkbox ng-model="accessType.Checked" aria-label="{{accessType.Name}}">{{accessType.Name}}</md-checkbox>
+    <md-select ng-model="accessType.SelectedRightId">
+        <md-option ng-repeat="accessTypeRight in vm.AccessTypeRights" value="{{accessTypeRight.Id}}">
+            {{accessTypeRight.Name}}
+        </md-option>
+    </md-select>
+</div>
 
 <div>
     <md-button class="md-raised md-primary" ng-click="vm.SaveAccessright();">Spara</md-button>
