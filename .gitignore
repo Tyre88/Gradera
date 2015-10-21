@@ -12,3 +12,5 @@ Web.Release.config
 bin
 obj
 Properties/PublishProfiles
+*.csproj
+*.user

@@ -1,0 +1,22 @@
+{
+  "name": "Gradera_Klubb",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Tyre88/Gradera",
+  "authors": [
+    "Tyre88 <victor@webbdudes.se>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/dependencies/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "~0.11.0",
+    "angular-route": "~1.4.6",
+    "angular-ui-router": "~0.2.15"
+  }
+}
