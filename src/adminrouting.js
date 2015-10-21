@@ -47,6 +47,13 @@ define(
 							templateUrl: "modules/core/accessrights/views/listaccessrights.html",
 							controller: "listaccessrights",
 							controllerAs: "vm"
+						})
+						.state('editaccessright',
+						{
+							url: "admin/editaccessright/:id",
+							templateUrl: "modules/core/accessrights/views/editaccessright.html",
+							controller: "editaccessright",
+							controllerAs: "vm"
 						});
 				}
 			]
