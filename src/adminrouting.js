@@ -40,6 +40,13 @@ define(
 							url: "admin/edituser/:userId",
 							templateUrl: "modules/core/users/views/edituser.html",
 							controller: "edituser"
+						})
+						.state('listaccessrights',
+						{
+							url: "admin/listaccessrights",
+							templateUrl: "modules/core/accessrights/views/listaccessrights.html",
+							controller: "listaccessrights",
+							controllerAs: "vm"
 						});
 				}
 			]

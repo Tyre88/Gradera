@@ -54,6 +54,10 @@ define(
 						{
 							Sref: "listusers",
 							Text: "Hantera medlemar"
+						},
+						{
+							Sref: "listaccessrights",
+							Text: "Hantera användargrupper"
 						}
 					];
 

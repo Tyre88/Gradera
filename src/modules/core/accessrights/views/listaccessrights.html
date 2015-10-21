@@ -1,0 +1,11 @@
+<span class="md-button md-raised" ng-click="vm.EditAccessright(0, $event);"><i class="fa fa-plus-circle"></i> Lägg till användargrupp</span>
+<md-list ng-cloak>
+    <md-subheader class="md-no-sticky">
+        Användargrupper
+    </md-subheader>
+
+    <md-list-item ng-repeat="accessright in vm.Accessrights" ng-click="vm.EditAccessright(accessright.Id, $event)">
+        <p>{{accessright.Name}}</p>
+        <p>{{accessright.Description}}</p>
+    </md-list-item>
+</md-list>

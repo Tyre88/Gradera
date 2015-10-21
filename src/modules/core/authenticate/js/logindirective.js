@@ -11,7 +11,7 @@ require(
 		{
 			return {
 				restrict: "E",
-				templateUrl: "modules/core/authenticate/views/login.hml",
+				templateUrl: "modules/core/authenticate/views/login.html",
 				link: function(scope)
 				{
 					scope.Login = function()
