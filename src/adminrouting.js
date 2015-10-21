@@ -29,11 +29,11 @@ define(
 							templateUrl: "views/gradingadmin.html",
 							controller: "gradingadmin"
 						})
-						.state('handleusers',
+						.state('listusers',
 						{
-							url: "admin/handleusers",
-							templateUrl: "modules/core/users/views/handleusers.html",
-							controller: "handleusers"
+							url: "admin/listusers",
+							templateUrl: "modules/core/users/views/listusers.html",
+							controller: "listusers"
 						})
 						.state('edituser',
 						{

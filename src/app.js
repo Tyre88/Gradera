@@ -52,7 +52,7 @@ define(
 							Text: "Tävlingar"
 						},
 						{
-							Sref: "handleusers",
+							Sref: "listusers",
 							Text: "Hantera medlemar"
 						}
 					];

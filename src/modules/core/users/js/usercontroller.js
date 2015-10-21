@@ -6,7 +6,7 @@ require(
     ],
     function(app)
     {
-        app.controller('handleusers', ["$scope", "user-service", "$state", function($scope, userService, $state) {
+        app.controller('listusers', ["$scope", "user-service", "$state", function($scope, userService, $state) {
             $scope.Users = [];
 
             $scope.EditUser = function(userId, event)
@@ -40,12 +40,12 @@ require(
                 }
 
                 userService.SaveUser($scope.User).success(function(response) {
-                    $state.go ('handleusers');
+                    $state.go ('listusers');
                 });
             };
 
             $scope.Back = function() {
-                $state.go("handleusers");
+                $state.go("listusers");
             };
 
             $scope.MapAccessRights = function()
