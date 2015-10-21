@@ -35,7 +35,7 @@ namespace Gradera_Klubb.Models
             UserInformation = new UserInformationModel();
         }
 
-        public static UserModel MapUserModel(Account account, bool deepLoad)
+        public static UserModel MapUserModel(Account account, bool deepLoad, bool loadUserInformation = false)
         {
             if(account != null)
             {
@@ -107,6 +107,22 @@ namespace Gradera_Klubb.Models
                         userModel.AccountAccess = AccountAccessModel.MapAccountAccesses(AccountBLL.GetAccountAccesses(userModel.Id));
                     });
                 }
+                else if(loadUserInformation)
+                {
+                    Account_Information information = AccountBLL.GetAccountSettings(userModel.Id);
+                    if (information != null)
+                    {
+                        userModel.UserInformation = new UserInformationModel()
+                        {
+                            Email = information.Email,
+                            City = information.City,
+                            Occupation = information.Occupation,
+                            Phone = information.Phone,
+                            Street = information.Street,
+                            Zip = information.Zip
+                        };
+                    }
+                }
 
                 return userModel;
             }
@@ -152,10 +168,15 @@ namespace Gradera_Klubb.Models
 
         public static List<UserModel> MapUserModels(List<Account> accounts)
         {
+            return MapUserModels(accounts, false, false);
+        }
+
+        public static List<UserModel> MapUserModels(List<Account> accounts, bool deepLoad, bool loadInformation)
+        {
             ConcurrentBag<UserModel> userModels = new ConcurrentBag<UserModel>();
             Parallel.ForEach(accounts, account =>
             {
-                userModels.Add(MapUserModel(account, false));
+                userModels.Add(MapUserModel(account, deepLoad, loadInformation));
             });
             return userModels.ToList().OrderBy(u => u.Id).ToList();
         }

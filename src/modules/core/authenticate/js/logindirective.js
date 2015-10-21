@@ -3,7 +3,7 @@ LoadCss("content/css/login.css");
 require(
 	[
 		"app",
-		"services/login-service.js"
+		"modules/core/authenticate/js/login-service.js"
 	],
 	function(app)
 	{
@@ -11,7 +11,7 @@ require(
 		{
 			return {
 				restrict: "E",
-				templateUrl: "directives/views/login.html",
+				templateUrl: "modules/core/authenticate/views/login.hml",
 				link: function(scope)
 				{
 					scope.Login = function()
@@ -30,7 +30,7 @@ require(
 		{
 			return {
 				restrict: "E",
-				templateUrl: "directives/views/logged-in.html",
+				templateUrl: "modules/core/authenticate/views/logged-in.html",
 				link: function(scope)
 				{
 					scope.LoggedInUserToggle = false;

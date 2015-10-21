@@ -23,7 +23,7 @@ namespace Gradera_Klubb.Controllers
 
             UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
             List<Account> accounts = AccountBLL.GetAllUsers(loggedInUser.AccountSession.ClubId);
-            List<UserModel> users = UserModel.MapUserModels(accounts);
+            List<UserModel> users = UserModel.MapUserModels(accounts, false, true);
 
             response.Content = new ObjectContent<List<UserModel>>(users, new JsonMediaTypeFormatter());
 

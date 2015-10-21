@@ -7,5 +7,7 @@
     <md-list-item ng-repeat="user in Users" ng-click="EditUser(user.Id, $event)">
         <img alt="{{ user.FirstName }}" ng-src="{{ user.Image }}" class="md-avatar" />
         <p>{{ user.FullName }}</p>
+        <p>{{user.UserInformation.Email}}</p>
+        <p>{{user.UserInformation.City}}</p>
     </md-list-item>
 </md-list>

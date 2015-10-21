@@ -4,7 +4,7 @@ define(
     [
         "ui-router",
         "ui-bootstrap",
-		"services/user-service.js"
+		"modules/core/users/js/user-service.js"
     ],
     function()
     {

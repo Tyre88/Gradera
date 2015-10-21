@@ -2,7 +2,7 @@ LoadCss("content/css/handleusers.css");
 require(
     [
         "app",
-        "services/accessrights-service.js"
+        "modules/core/accessrights/js/accessrights-service.js"
     ],
     function(app)
     {

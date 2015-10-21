@@ -32,13 +32,13 @@ define(
 						.state('handleusers',
 						{
 							url: "admin/handleusers",
-							templateUrl: "views/handleusers.html",
+							templateUrl: "modules/core/users/views/handleusers.html",
 							controller: "handleusers"
 						})
 						.state('edituser',
 						{
 							url: "admin/edituser/:userId",
-							templateUrl: "views/admin/edituser.html",
+							templateUrl: "modules/core/users/views/edituser.html",
 							controller: "edituser"
 						});
 				}
