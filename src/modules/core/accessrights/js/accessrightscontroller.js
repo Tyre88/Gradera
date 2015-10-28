@@ -43,6 +43,8 @@ require(
             var vm = this;
             vm.AccessrightId = $stateParams.id;
             vm.Accessright = {};
+            vm.AccessTypes = [];
+            vm.AccessTypeRights = [];
 
             vm.GetAccessright = GetAccessright;
             vm.SaveAccessright = SaveAccessright;
@@ -55,11 +57,30 @@ require(
 
                 function getAccessrightCallback(response) {
                     vm.Accessright = response;
+
+                    for(var i = 0; i < vm.Accessright.Accessright_Rights.length; i++)
+                    {
+                        var accessType = vm.AccessTypes.GetItemByValue("Id", vm.Accessright.Accessright_Rights[i].AccessType);
+                        accessType.Checked = true;
+                        accessType.SelectedRightId = vm.Accessright.Accessright_Rights[i].AccessTypeRight;
+                    }
                 }
             }
 
             function SaveAccessright() {
+                vm.Accessright.Accessright_Rights = [];
+                for(var i = 0; i < vm.AccessTypes.length; i++)
+                {
+                    if(vm.AccessTypes[i].Checked == true)
+                    {
+                        vm.Accessright.Accessright_Rights.push({
+                            AccessType: vm.AccessTypes[i].Id,
+                            AccessTypeRight: vm.AccessTypes[i].SelectedRightId
+                        });
+                    }
+                }
 
+                console.log(vm.Accessright);
             }
 
             function Back() {

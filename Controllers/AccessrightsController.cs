@@ -35,7 +35,7 @@ namespace Gradera_Klubb.Controllers
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
-            AccessrightModel accessRight = AccessrightModel.MapAccessright(AccessrightBLL.GetAccessright(id, loggedInUser.AccountSession.ClubId));
+            AccessrightModel accessRight = AccessrightModel.MapAccessright(AccessrightBLL.GetAccessright(id, loggedInUser.AccountSession.ClubId), true);
 
             response.Content = new ObjectContent<AccessrightModel>(accessRight, new JsonMediaTypeFormatter());
 
