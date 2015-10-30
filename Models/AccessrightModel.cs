@@ -64,5 +64,26 @@ namespace Gradera_Klubb.Models
 
             return model;
         }
+
+        public static Accessright MapModelToAccessright(AccessrightModel model)
+        {
+            Accessright accessright = new Accessright()
+            {
+                ID = model.Id,
+                Description = model.Description,
+                Name = model.Name,
+                Accessright_Right = new List<Accessright_Right>()
+            };
+
+            model.Accessright_Rights.ForEach(a => accessright.Accessright_Right.Add(new Accessright_Right()
+            {
+                Id = a.Id,
+                AccessType = (int)a.AccessType,
+                AccessTypeRight = (int)a.AccessTypeRight,
+                AccessrightId = model.Id
+            }));
+
+            return accessright;
+        }
     }
 }

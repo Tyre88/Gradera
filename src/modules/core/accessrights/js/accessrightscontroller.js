@@ -81,6 +81,9 @@ require(
                 }
 
                 console.log(vm.Accessright);
+                accessrightsService.SaveAccessright(vm.Accessright).then(function() {
+                    vm.Back();
+                });
             }
 
             function Back() {

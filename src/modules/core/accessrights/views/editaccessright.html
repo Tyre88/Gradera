@@ -13,7 +13,7 @@
 
 <div ng-repeat="accessType in vm.AccessTypes" class="access-types">
     <md-checkbox ng-model="accessType.Checked" aria-label="{{accessType.Name}}">{{accessType.Name}}</md-checkbox>
-    <md-select ng-model="accessType.SelectedRightId">
+    <md-select ng-model="accessType.SelectedRightId" aria-label="{{accessType.Name}}">
         <md-option ng-repeat="accessTypeRight in vm.AccessTypeRights" value="{{accessTypeRight.Id}}">
             {{accessTypeRight.Name}}
         </md-option>

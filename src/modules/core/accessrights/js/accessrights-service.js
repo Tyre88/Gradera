@@ -20,6 +20,10 @@ require(
             this.GetAccessTypeRights = function() {
                 return $http.get('/api/Accessrights/GetAccessTypeRights');
             };
+
+            this.SaveAccessright = function(accessright) {
+                return $http.post('/api/Accessrights/SaveAccessright', accessright);
+            };
         });
     }
 );

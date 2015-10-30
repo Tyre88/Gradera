@@ -1,4 +1,5 @@
 ﻿using Core.BLL;
+using Core.DAL;
 using Core.Entities;
 using Core.Enums;
 using Core.Helpers;
@@ -81,6 +82,18 @@ namespace Gradera_Klubb.Controllers
 
             response.Content = new ObjectContent<List<EnumKeyValueEntity>>(accessTypes, new JsonMediaTypeFormatter());
 
+            return response;
+        }
+
+        [HttpPost, HttpOptions]
+        [AuthorizeFilter(AccessType = AccessType.Core, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage SaveAccessright(AccessrightModel accessright)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            Accessright ar = AccessrightModel.MapModelToAccessright(accessright);
+            ar.ClubId = loggedInUser.AccountSession.ClubId;
+            AccessrightBLL.SaveAccessright(ar);
             return response;
         }
 
