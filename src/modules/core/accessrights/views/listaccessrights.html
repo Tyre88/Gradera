@@ -6,6 +6,6 @@
 
     <md-list-item ng-repeat="accessright in vm.Accessrights" ng-click="vm.EditAccessright(accessright.Id, $event)">
         <p>{{accessright.Name}}</p>
-        <p>{{accessright.Description}}</p>
+        <p class="hide-sm hide-md">{{accessright.Description}}</p>
     </md-list-item>
 </md-list>
