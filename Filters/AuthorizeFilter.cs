@@ -1,6 +1,6 @@
-﻿using Core.BLL;
-using Core.Entities;
-using Core.Enums;
+﻿using Gradera.Core.BLL;
+using Gradera.Core.Entities;
+using Gradera.Core.Enums;
 using Gradera_Klubb.Models;
 using System;
 using System.Collections.Generic;

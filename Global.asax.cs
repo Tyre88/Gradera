@@ -1,4 +1,4 @@
-﻿using Core.BLL;
+﻿using Gradera.Core.BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
