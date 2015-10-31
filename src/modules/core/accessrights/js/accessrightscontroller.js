@@ -10,7 +10,7 @@ require(
         app.controller('editaccessright', editaccessrightController);
 
         listaccessrightsController.$inject = ["accessrights-service", "$state"];
-        editaccessrightController.$inject = ["accessrights-service", "$stateParams", "$state"];
+        editaccessrightController.$inject = ["accessrights-service", "$stateParams", "$state", "$q"];
 
         function listaccessrightsController(accessrightsService, $state) {
             var vm = this;
@@ -39,7 +39,7 @@ require(
             vm.GetAccessRights();
         }
 
-        function editaccessrightController(accessrightsService, $stateParams, $state) {
+        function editaccessrightController(accessrightsService, $stateParams, $state, $q) {
             var vm = this;
             vm.AccessrightId = $stateParams.id;
             vm.Accessright = {};
@@ -106,11 +106,10 @@ require(
                 }
             }
 
-            vm.GetAccessTypes();
-            vm.GetAccessTypeRights();
-
-            if(~~vm.AccessrightId > 0)
-                vm.GetAccessright(~~vm.AccessrightId);
+            $q.all([vm.GetAccessTypes(), vm.GetAccessTypeRights()]).then(function() {
+                if(~~vm.AccessrightId > 0)
+                    vm.GetAccessright(~~vm.AccessrightId);
+            });
         }
     }
 );

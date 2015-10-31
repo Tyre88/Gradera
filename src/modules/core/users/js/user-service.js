@@ -6,7 +6,7 @@ require(
 	{
 		app.service('user-service', function($http)
 		{
-			this.UserModel = function(compound, user)
+			this.UserModel = function(club, user)
 			{
 				if(user == undefined)
 				{
@@ -18,7 +18,7 @@ require(
 						Password: "",
 						Image: "",
 						AccessRights: [],
-						Compound: compound,
+						Club: club,
 						UserInformation: {}
 					};
 				}
@@ -31,7 +31,7 @@ require(
 					Image: user.Image,
 					Password: "",
 					AccessRights: user.AccessRights,
-					Compound: compound,
+					Club: club,
 					UserInformation: {
 						Email: user.UserInformation.Email,
 						City: user.UserInformation.City,
@@ -55,7 +55,7 @@ require(
 				AccessRights: [],
 				AccessRightsRight: [],
 				Token: "",
-				Compound:
+				Club:
 				{
 					Id: 0,
 					Name: "",
@@ -76,7 +76,7 @@ require(
 					this.AccessRights = user.AccessRights;
 					this.AccessRightsRight = user.AccessRightsRight;
 					this.Token = user.Token;
-					this.Compound = user.Compound;
+					this.Club = user.Club;
 				},
 				InitializeLogin: function(account) {
 					this.Id = account.Id;
@@ -86,10 +86,10 @@ require(
 					this.UserName = account.Username;
 					this.Email = account.Email;
 					this.Token = account.Token;
-					this.Compound.Id = account.Compound.Id;
-					this.Compound.Name = account.Compound.Name;
-					this.Compound.ShortName = account.Compound.ShortName;
-					this.Compound.Image = account.Compound.Image;
+					this.Club.Id = account.Club.Id;
+					this.Club.Name = account.Club.Name;
+					this.Club.ShortName = account.Club.ShortName;
+					this.Club.Image = account.Club.Image;
 
 					for(var i = 0; i < account.AccessRightsRight.length; i++)
 					{
@@ -110,10 +110,10 @@ require(
 					this.UserName = "";
 					this.Email = "";
 					this.Token = "";
-					this.Compound.Id = "";
-					this.Compound.Name = "";
-					this.Compound.ShortName = "";
-					this.Compound.Image = "";
+					this.Club.Id = "";
+					this.Club.Name = "";
+					this.Club.ShortName = "";
+					this.Club.Image = "";
 					this.Password = "";
 
 					this.AccessRightsRight = [];

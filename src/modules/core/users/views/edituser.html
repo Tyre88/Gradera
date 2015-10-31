@@ -2,11 +2,11 @@
     Redigera: {{User.FirstName}} {{User.LastName}}
 </md-subheader>
 
-<div class="edit-user-image" fit-image="150">
+<div class="edit-image" fit-image="150">
     <img ng-src="{{User.Image}}" />
 </div>
 
-<div class="edit-user-container">
+<div class="edit-container">
     <md-input-container md-no-float>
         <input type="text" ng-model="User.FirstName" placeholder="Förnamn" />
     </md-input-container>
@@ -52,7 +52,7 @@
     Rättigheter
 </md-subheader>
 
-<div class="edit-user-accessrights">
+<div class="edit-accessrights">
     <md-checkbox ng-repeat="accessright in AccessRights" ng-model="accessright.Checked" aria-label="{{accessright.Name}}">
         {{accessright.Name}}
         <md-tooltip>{{accessright.Description}}</md-tooltip>

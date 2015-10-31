@@ -40,24 +40,22 @@ define(
 
 					$scope.AdminLinks = [
 						{
-							Sref: "settingsadmin",
-							Text: "Inställningar"
-						},
-						{
-							Sref: "gradingadmin",
-							Text: "Graderingsbestämmelser"
-						},
-						{
-							Sref: "competitionsadmin",
-							Text: "Tävlingar"
-						},
-						{
 							Sref: "listusers",
-							Text: "Hantera medlemar"
+							Text: "Hantera medlemar",
+							AccessType: 2,
+							AccessTypeRight: 20
 						},
 						{
 							Sref: "listaccessrights",
-							Text: "Hantera användargrupper"
+							Text: "Hantera användargrupper",
+							AccessType: 1,
+							AccessTypeRight: 20
+						},
+						{
+							Sref: "clubsettings",
+							Text: "Klubb inställningar",
+							AccessType: 4,
+							AccessTypeRight: 20
 						}
 					];
 

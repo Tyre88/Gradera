@@ -34,12 +34,12 @@ $height: 60px;
 			> span
 			{
 				position: absolute;
-				top: 0;
+				top: 20px;
 				right: 0;
 			}
 		}
 
-		&.logged-in-compound-container
+		&.logged-in-club-container
 		{
 			width: 960px;
 			margin: 0 0 0 25%;
@@ -47,14 +47,14 @@ $height: 60px;
 		}
 	}
 
-  .compound-name
+  .club-name
   {
 	height: 100%;
 	display: inline-block;
 	position: absolute;
   }
 
-  .compound-image
+  .club-image
   {
 	position: absolute;
 	right: 0;
@@ -74,7 +74,7 @@ $height: 60px;
 		{
 			width: 25%;
 
-			&.logged-in-compound-container
+			&.logged-in-club-container
 			{
 				width: 75%;
 				margin: 0;
@@ -130,6 +130,7 @@ $height: 60px;
 			&:hover
 			{
 				background-color: #CECECE;
+			  	cursor: pointer;
 			}
 		}
 	}

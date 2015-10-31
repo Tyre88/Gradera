@@ -1,0 +1,23 @@
+<md-subheader class="md-no-sticky">
+    Redigerar klubben: {{vm.Club.Name}}
+</md-subheader>
+
+<div class="edit-image" fit-image="150">
+    <img ng-src="{{vm.Club.Image}}" />
+</div>
+
+<div class="edit-container">
+
+    <md-input-container md-no-float>
+        <input type="text" ng-model="vm.Club.Name" placeholder="Namn" />
+    </md-input-container>
+
+    <md-input-container md-no-float>
+        <input type="text" ng-model="vm.Club.ShortName" placeholder="Namnförkortning" />
+    </md-input-container>
+
+</div>
+
+<div>
+    <md-button class="md-raised md-primary" ng-click="vm.Save();">Spara</md-button>
+</div>

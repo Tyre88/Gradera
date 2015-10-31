@@ -2,12 +2,12 @@
     <div class="logged-in-container">
         <div class="logged-in-user" ng-click="LoggedInUserToggle = !LoggedInUserToggle;">
             {{UserService.User.FullName()}}
-            <span class="brand-second-color" ng-class="{ false:'icon-down-dir', true: 'icon-up-dir' }[LoggedInUserToggle]"></span>
+            <span class="brand-second-color fa" ng-class="{ false:'fa-sort-desc', true: 'fa-sort-asc' }[LoggedInUserToggle]"></span>
         </div>
 
-        <div class="logged-in-compound-container">
-            <span class="compound-name">{{UserService.User.Compound.Name}}</span>
-            <img class="compound-image hide-sm hide-md" src="{{UserService.User.Compound.Image}}" alt="{{UserService.User.Compound.ShortName}}"/>
+        <div class="logged-in-club-container">
+            <span class="club-name">{{UserService.User.Club.Name}}</span>
+            <img class="club-image hide-sm hide-md" src="{{UserService.User.Club.Image}}" alt="{{UserService.User.Club.ShortName}}"/>
         </div>
 
         <md-button class="mobile-menu-button icon-menu md-accent md-fab" md-no-ink ng-click="::TriggerMobileMenu()"></md-button>

@@ -21,7 +21,7 @@ namespace Gradera_Klubb.Models
         public string Password { get; set; }
         public int ClubId { get; set; }
         public UserInformationModel UserInformation { get; set; }
-        public CompoundModel Compound { get; set; }
+        public ClubModel Club { get; set; }
         public List<AccountAccessModel> AccountAccess { get; set; }
         public List<AccessrightModel> AccessRights { get; set; }
         public List<AccessrightRightModel> AccessRightsRight { get; set; }
@@ -29,7 +29,7 @@ namespace Gradera_Klubb.Models
 
         public UserModel()
         {
-            Compound = new CompoundModel();
+            Club = new ClubModel();
             AccessRightsRight = new List<AccessrightRightModel>();
             AccessRights = new List<AccessrightModel>();
             UserInformation = new UserInformationModel();
@@ -49,7 +49,7 @@ namespace Gradera_Klubb.Models
                     ClubId = account.ClubId
                 };
 
-                userModel.Compound = new CompoundModel()
+                userModel.Club = new ClubModel()
                 {
                     Id = account.ClubId,
                     Name = account.Club.Name,
@@ -140,7 +140,7 @@ namespace Gradera_Klubb.Models
                 Password = user.Password,
                 UserName = user.Username,
                 Image = user.Image,
-                ClubId = user.Compound.Id
+                ClubId = user.Club.Id
             };
 
             acc.Account_Information.Add(new Account_Information()

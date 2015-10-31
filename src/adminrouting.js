@@ -54,6 +54,13 @@ define(
 							templateUrl: "modules/core/accessrights/views/editaccessright.html",
 							controller: "editaccessright",
 							controllerAs: "vm"
+						})
+						.state('clubsettings',
+						{
+							url: "admin/clubsettings",
+							templateUrl: "modules/core/club/views/clubsettings.html",
+							controller: "clubsettings",
+							controllerAs: "vm"
 						});
 				}
 			]

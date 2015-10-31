@@ -1,4 +1,3 @@
-LoadCss("content/css/handleusers.css");
 require(
     [
         "app",
@@ -64,14 +63,14 @@ require(
                 if($scope.UserId > 0)
                 {
                     userService.GetUser($scope.UserId).success(function(response) {
-                        $scope.User = new userService.UserModel(userService.User.Compound, response);
+                        $scope.User = new userService.UserModel(userService.User.Club, response);
 
                         $scope.MapAccessRights();
                     });
                 }
                 else
                 {
-                    $scope.User = new userService.UserModel(userService.User.Compound);
+                    $scope.User = new userService.UserModel(userService.User.Club);
                 }
             });
         }]);
