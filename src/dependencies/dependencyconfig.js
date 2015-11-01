@@ -15,14 +15,13 @@ var require =
             "jquery": "dependencies/jquery/jquery.min",
             "jquery-ui": "dependencies/jquery/jquery-ui",
 			"extensions": "dependencies/extensions",
-            "webbdudes-image-helper": "dependencies/webbdudes/webbdudes-image-helper",
-            "moment": "dependencies/moment/min/moment.min"
+            "webbdudes-image-helper": "dependencies/webbdudes/webbdudes-image-helper"
         },
         shim:
         {
             "app":
             {
-                deps: ["ui-router", "ui-bootstrap", "angular-material", "angular-route", "angular-dragdrop", "webbdudes-image-helper", "moment"]
+                deps: ["ui-router", "ui-bootstrap", "angular-material", "angular-route", "angular-dragdrop", "webbdudes-image-helper"]
             },
 
             "angular-material":
