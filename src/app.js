@@ -56,6 +56,12 @@ define(
 							Text: "Klubb inställningar",
 							AccessType: 4,
 							AccessTypeRight: 20
+						},
+						{
+							Sref: "competitionadminlist",
+							Text: "Hantera tävlingar",
+							AccessType: 5,
+							AccessTypeRight: 20
 						}
 					];
 

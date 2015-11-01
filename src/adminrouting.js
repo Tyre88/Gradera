@@ -61,6 +61,20 @@ define(
 							templateUrl: "modules/core/club/views/clubsettings.html",
 							controller: "clubsettings",
 							controllerAs: "vm"
+						})
+						.state('competitionadminlist',
+						{
+							url: "admin/competitions",
+							templateUrl: "modules/competition/admin/views/listcompetitions.html",
+							controller: "competitionadminlist",
+							controllerAs: "vm"
+						})
+						.state('editcompetition',
+						{
+							url: "admin/editcompetition/:id",
+							templateUrl: "modules/competition/admin/views/editcompetition.html",
+							controller: "editcompetition",
+							controllerAs: "vm"
 						});
 				}
 			]

@@ -1,0 +1,32 @@
+<md-subheader class="md-no-sticky">
+    Redigera: {{vm.Competition.Name}}
+</md-subheader>
+<div class="edit-container">
+    <md-input-container md-no-float>
+        <input type="text" ng-model="vm.Competition.Name" placeholder="Namn" />
+    </md-input-container>
+
+    <md-input-container md-no-float>
+        <input type="text" ng-model="vm.Competition.Description" placeholder="Beskrivning" />
+    </md-input-container>
+
+    <md-input-container md-no-float>
+        <input type="text" ng-model="vm.Competition.Location" placeholder="Plats" />
+    </md-input-container>
+
+    <md-datepicker ng-model="vm.Competition.StartDate" md-placeholder="StartDatum"></md-datepicker>
+
+    <md-datepicker ng-model="vm.Competition.EndDate" md-placeholder="Slutdatum"></md-datepicker>
+
+    <md-datepicker ng-model="vm.Competition.EndSignupDate" md-placeholder="Sista anmälningsdagen"></md-datepicker>
+</div>
+
+<md-checkbox ng-model="vm.Competition.IsExternal" aria-label="{{vm.Competition.Name}}">
+    Extern tävling
+    <md-tooltip>Tävlingen är extern och man kan anmäla sig utanför klubben.</md-tooltip>
+</md-checkbox>
+
+<div>
+    <md-button class="md-raised md-primary" ng-click="vm.SaveCompetition();">Spara</md-button>
+    <md-button class="md-raised md-warn" ng-click="vm.Back();">Avbryt</md-button>
+</div>

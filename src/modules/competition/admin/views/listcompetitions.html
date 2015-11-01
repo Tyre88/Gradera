@@ -1,0 +1,17 @@
+<span class="md-button md-raised" ng-click="vm.EditCompetition(0, $event);"><i class="fa fa-plus-circle"></i> Lägg till tävling</span>
+<md-list ng-cloak>
+    <md-subheader class="md-no-sticky">
+        Tävlingar
+    </md-subheader>
+
+    <md-list-item ng-repeat="competition in vm.Competitions" ng-click="vm.EditCompetition(competition.Id, $event)">
+        <p>{{competition.Name}}</p>
+        <p class="hide-sm hide-md">{{competition.StartDate | date:'yyyy-MM-dd HH:mm'}} - {{competition.EndDate | date:'yyyy-MM-dd HH:mm'}}</p>
+        <p class="hide-sm hide-md">{{competition.Location}}</p>
+        <i class="fa fa-file-excel-o md-secondary md-hue-3" ng-click="vm.ExportCompetition(competition)">
+            <md-tooltip>
+                Exportera tävling till excel för import i judo shiai
+            </md-tooltip>
+        </i>
+    </md-list-item>
+</md-list>
