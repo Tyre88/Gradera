@@ -4,6 +4,8 @@
 
 'use-strict';
 
+LoadCss("modules/competition/admin/css/competition.css");
+
 require(
     [
         "app",
@@ -49,6 +51,7 @@ require(
 
             vm.GetCompetition = GetCompetition;
             vm.Back = Back;
+            vm.AddCategory = AddCategory;
 
             function GetCompetition() {
                 competitionAdminService.GetCompetition(vm.CompetitionId).success(getCompetitionCallback);
@@ -63,6 +66,11 @@ require(
 
             function Back() {
                 $state.go('competitionadminlist');
+            }
+
+            function AddCategory() {
+                vm.Competition.Categories.push({ Id: -1, Name: vm.NewCategoryName });
+                vm.NewCategoryName = "";
             }
 
             if(~~vm.CompetitionId > 0)

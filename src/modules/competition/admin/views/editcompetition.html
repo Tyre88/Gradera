@@ -26,6 +26,21 @@
     <md-tooltip>Tävlingen är extern och man kan anmäla sig utanför klubben.</md-tooltip>
 </md-checkbox>
 
+<md-list ng-cloak>
+    <md-subheader class="md-no-sticky">
+        Kategorier
+    </md-subheader>
+
+    <md-input-container md-no-float class="new-competition-category">
+        <input type="text" ng-model="vm.NewCategoryName" placeholder="Ny kategori namn" />
+    </md-input-container>
+    <span class="md-button md-raised" ng-click="vm.AddCategory();"><i class="fa fa-plus-circle"></i> Lägg till kategori</span>
+
+    <md-list-item ng-repeat="category in vm.Competition.Categories">
+        <p>{{category.Name}}</p>
+    </md-list-item>
+</md-list>
+
 <div>
     <md-button class="md-raised md-primary" ng-click="vm.SaveCompetition();">Spara</md-button>
     <md-button class="md-raised md-warn" ng-click="vm.Back();">Avbryt</md-button>
