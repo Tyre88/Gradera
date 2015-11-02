@@ -34,6 +34,20 @@ define(
 							url: "competition/:id",
 							templateUrl: "views/gradingbasic.html",
 							controller: "gradingbasic"
+						})
+						.state('competitionlist',
+						{
+							url: "competitions",
+							templateUrl: "modules/competition/views/listcompetitions.html",
+							controller: "competitionlist",
+							controllerAs: "vm"
+						})
+						.state('showcompetition',
+						{
+							url: "competition/:id",
+							templateUrl: "modules/competition/views/showcompetition.html",
+							controller: "showcompetition",
+							controllerAs: "vm"
 						});
                 }
 			]

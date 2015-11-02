@@ -18,7 +18,7 @@
                         <li class="nav-header">{{UserService.User.Club.Name}}</li>
                         <li><a ui-sref="homebasic" ng-click="SetActiveNav($event)">Hem</a></li>
                         <li><a ui-sref="gradingbasic" ng-click="SetActiveNav($event)">Graderingsbestämmelser</a></li>
-                        <li><a ui-sref="competitionsbasic" ng-click="SetActiveNav($event)">Tävlingar</a></li>
+                        <li><a ui-sref="competitionlist" ng-click="SetActiveNav($event)">Tävlingar</a></li>
                         <div ng-if="$root.HasSomeWriteAccess(UserService.User.AccessRightsRight);">
                             <hr />
                             <li class="nav-header">Klubb administration</li>

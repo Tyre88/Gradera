@@ -9,16 +9,17 @@ LoadCss("modules/competition/admin/css/competition.css");
 require(
     [
         "app",
-        "modules/competition/admin/js/competition-service.js"
+        "modules/competition/admin/js/competition-service.js",
+        "modules/competition/js/competition-service.js"
     ],
     function (app) {
         app.controller('competitionadminlist', competitionadminlistController);
         app.controller('editcompetition', editcompetitionController);
 
-        competitionadminlistController.$inject = ["$state", "competition-admin-service"];
-        editcompetitionController.$inject = ["$state", "$stateParams", "competition-admin-service"];
+        competitionadminlistController.$inject = ["$state", "competition-service"];
+        editcompetitionController.$inject = ["$state", "$stateParams", "competition-admin-service", "competition-service"];
 
-        function competitionadminlistController($state, competitionAdminService) {
+        function competitionadminlistController($state, competitionService) {
             var vm = this;
             vm.Competitions = [];
             vm.GetCompetitions = GetCompetitions;
@@ -26,7 +27,7 @@ require(
             vm.ExportCompetition = ExportCompetition;
 
             function GetCompetitions() {
-                competitionAdminService.GetCompetitions().success(getCompetitionsCallback);
+                competitionService.GetCompetitions().success(getCompetitionsCallback);
 
                 function getCompetitionsCallback(response) {
                     vm.Competitions = response;
@@ -44,17 +45,18 @@ require(
             vm.GetCompetitions();
         }
 
-        function editcompetitionController($state, $stateParams, competitionAdminService) {
+        function editcompetitionController($state, $stateParams, competitionAdminService, competitionService) {
             var vm = this;
             vm.CompetitionId = $stateParams.id;
             vm.Competition = {};
 
             vm.GetCompetition = GetCompetition;
             vm.Back = Back;
+            vm.SaveCompetition = SaveCompetition;
             vm.AddCategory = AddCategory;
 
             function GetCompetition() {
-                competitionAdminService.GetCompetition(vm.CompetitionId).success(getCompetitionCallback);
+                competitionService.GetCompetition(vm.CompetitionId).success(getCompetitionCallback);
 
                 function getCompetitionCallback(response) {
                     vm.Competition = response;
@@ -66,6 +68,10 @@ require(
 
             function Back() {
                 $state.go('competitionadminlist');
+            }
+
+            function SaveCompetition() {
+
             }
 
             function AddCategory() {

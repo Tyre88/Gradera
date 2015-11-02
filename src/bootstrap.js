@@ -11,7 +11,8 @@ require(
         "modules/core/users/js/usercontroller.js",
         "modules/core/accessrights/js/accessrightscontroller.js",
         "modules/core/club/js/clubcontroller.js",
-        "modules/competition/admin/js/competitioncontroller.js"
+        "modules/competition/admin/js/competitioncontroller.js",
+        "modules/competition/js/competitioncontroller.js"
     ],
     function()
     {
