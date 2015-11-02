@@ -65,22 +65,23 @@ define(
 						}
 					];
 
-					$rootScope.HasSomeWriteAccess = function(accessRights)
+					$rootScope.HasSomeWriteAccess = function()
 					{
-						for(var i = 0; i < accessRights.length; i++)
+						for(var i = 0; i < $scope.UserService.User.AccessRightsRight.length; i++)
 						{
-							if(accessRights[i].AccessTypeRight >= 20)
+							if($scope.UserService.User.AccessRightsRight[i].AccessTypeRight >= 20)
 								return true;
 						}
 
 						return false;
 					};
 
-					$rootScope.HasAccess = function(accessRights, accessType, accessTypeRight)
+					$rootScope.HasAccess = function(accessType, accessTypeRight)
 					{
-						for(var i = 0; i < accessRights.length; i++)
+						for(var i = 0; i < $scope.UserService.User.AccessRightsRight.length; i++)
 						{
-							if(accessRights[i].AccessTypeRight >= accessTypeRight && accessRights[i].AccessType == accessType)
+							if($scope.UserService.User.AccessRightsRight[i].AccessTypeRight >= accessTypeRight
+								&& $scope.UserService.User.AccessRightsRight[i].AccessType == accessType)
 								return true;
 						}
 

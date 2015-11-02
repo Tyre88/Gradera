@@ -18,11 +18,11 @@
                         <li class="nav-header">{{UserService.User.Club.Name}}</li>
                         <li><a ui-sref="homebasic" ng-click="SetActiveNav($event)">Hem</a></li>
                         <li><a ui-sref="gradingbasic" ng-click="SetActiveNav($event)">Graderingsbestämmelser</a></li>
-                        <li><a ui-sref="competitionlist" ng-click="SetActiveNav($event)">Tävlingar</a></li>
-                        <div ng-if="$root.HasSomeWriteAccess(UserService.User.AccessRightsRight);">
+                        <li ng-show="$root.HasAccess(5, 10)"><a ui-sref="competitionlist" ng-click="SetActiveNav($event)">Tävlingar</a></li>
+                        <div ng-if="$root.HasSomeWriteAccess();">
                             <hr />
                             <li class="nav-header">Klubb administration</li>
-                            <li ng-repeat="link in AdminLinks" ng-show="$root.HasAccess(UserService.User.AccessRightsRight, link.AccessType, link.AccessTypeRight)">
+                            <li ng-repeat="link in AdminLinks" ng-show="$root.HasAccess(link.AccessType, link.AccessTypeRight)">
                                 <a ui-sref="{{link.Sref}}" ng-click="SetActiveNav($event)">{{link.Text}}</a>
                             </li>
                         </div>
