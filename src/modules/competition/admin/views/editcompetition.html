@@ -36,10 +36,13 @@
     <md-input-container md-no-float class="new-competition-category">
         <input type="text" ng-model="vm.NewCategoryName" placeholder="Ny kategori namn" />
     </md-input-container>
-    <span class="md-button md-raised" ng-click="vm.AddCategory();"><i class="fa fa-plus-circle"></i> Lägg till kategori</span>
+    <button ng-disabled="vm.CompetitionId <= 0" class="md-button md-raised" ng-click="vm.AddCategory();"><i class="fa fa-plus-circle"></i> Lägg till kategori</button>
 
     <md-list-item ng-repeat="category in vm.Competition.Categories">
-        <p>{{category.Name}}</p>
+        <p>
+            <i class="fa fa-trash" ng-click="vm.DeleteCategory(category);"></i>
+            {{category.Name}}
+        </p>
     </md-list-item>
 </md-list>
 

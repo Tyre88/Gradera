@@ -17,5 +17,9 @@ require(
             this.GetCompetition = function(competitionId) {
                 return $http.get('/api/competition/GetCompetition/' + competitionId);
             };
+
+            this.SubscribeToCompetition = function(competitionId, categoryId){
+                return $http.post('/api/competition/SubscribeToCompetition?' + $.param({competitionId: competitionId, categoryId: categoryId}));
+            };
         });
     });

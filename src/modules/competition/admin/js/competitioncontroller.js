@@ -54,6 +54,7 @@ require(
             vm.Back = Back;
             vm.SaveCompetition = SaveCompetition;
             vm.AddCategory = AddCategory;
+            vm.DeleteCategory = DeleteCategory;
 
             function GetCompetition() {
                 competitionService.GetCompetition(vm.CompetitionId).success(getCompetitionCallback);
@@ -72,12 +73,28 @@ require(
             }
 
             function SaveCompetition() {
+                competitionAdminService.SaveCompetition(vm.Competition).success(saveCompetitionCallback);
 
+                function saveCompetitionCallback() {
+                    vm.Back();
+                }
             }
 
             function AddCategory() {
-                vm.Competition.Categories.push({ Id: -1, Name: vm.NewCategoryName });
-                vm.NewCategoryName = "";
+                competitionAdminService.AddCategory(vm.CompetitionId, vm.NewCategoryName).success(addCategoryCallback);
+
+                function addCategoryCallback(response) {
+                    vm.Competition.Categories.push({ Id: response.Id, Name: response.Name });
+                    vm.NewCategoryName = "";
+                }
+            }
+
+            function DeleteCategory(category) {
+                competitionAdminService.DeleteCategory(category.Id).success(deleteCategoryCallback);
+
+                function deleteCategoryCallback() {
+                    vm.Competition.Categories.splice(vm.Competition.Categories.indexOf(category), 1);
+                }
             }
 
             if(~~vm.CompetitionId > 0)

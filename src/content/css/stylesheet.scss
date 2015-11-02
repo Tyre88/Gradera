@@ -3,6 +3,14 @@
 	flex-wrap: wrap;
 }
 
+[ng-click]
+{
+  &:hover
+  {
+	cursor: pointer;
+  }
+}
+
 md-tabs
 {
   height: 80vh;

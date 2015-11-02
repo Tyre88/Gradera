@@ -7,14 +7,15 @@
 require(
     [
         "app",
-        "modules/competition/js/competition-service.js"
+        "modules/competition/js/competition-service.js",
+        "modules/core/users/js/user-service.js"
     ],
     function (app) {
         app.controller('competitionlist', competitionlistController);
         app.controller('showcompetition', showcompetitionController);
 
         competitionlistController.$inject = ["competition-service", "$state"];
-        showcompetitionController.$inject = ["competition-service", "$state", "$stateParams"];
+        showcompetitionController.$inject = ["competition-service", "$state", "$stateParams", "user-service"];
 
         function competitionlistController(competitionService, $state) {
             var vm = this;
@@ -38,7 +39,7 @@ require(
             vm.GetCompetitions();
         }
 
-        function showcompetitionController(competitionService, $state, $stateParams) {
+        function showcompetitionController(competitionService, $state, $stateParams, userService) {
             var vm = this;
 
             vm.Competition = {};
@@ -67,7 +68,13 @@ require(
             }
 
             function Signup() {
+                competitionService.SubscribeToCompetition(vm.CompetitionId, vm.SelectedCategory).success(signupCallback);
 
+                function signupCallback(response) {
+                    vm.Competition.Compeditors.push({Id: -1, FirstName: userService.User.FirstName, LastName: userService.User.LastName, Category: {
+                        Name: vm.Competition.Categories.GetItemByValue("Id", vm.SelectedCategory).Name
+                    }})
+                }
             }
 
             function IsActive() {

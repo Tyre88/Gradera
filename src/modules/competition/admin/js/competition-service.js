@@ -10,6 +10,16 @@ require(
     ],
     function (app) {
         app.service('competition-admin-service', function($http) {
+            this.AddCategory = function(competitionId, categoryName) {
+                return $http.post('/api/competition/AddCategory?' + $.param({competitionId: competitionId, categoryName: categoryName}));
+            };
 
+            this.DeleteCategory = function(id) {
+                return $http.post('/api/competition/DeleteCategory?' + $.param({id: id}));
+            };
+
+            this.SaveCompetition = function(competition) {
+                return $http.post('/api/competition/SaveCompetition', competition);
+            };
         });
     });

@@ -21,11 +21,17 @@ namespace Gradera_Klubb
                 }
             );
 
-            //config.Routes.MapHttpRoute(
-            //    name: "SaveAccessright",
-            //    routeTemplate: "api/Accessrights/SaveAccessright/{accessright}",
-            //    defaults: new { controller = "Accessrights", action = "SaveAccessright", accessright = RouteParameter.Optional }
-            //);
+            config.Routes.MapHttpRoute(
+                name: "CompetitionAddCategory",
+                routeTemplate: "api/Competition/AddCategory/{competitionId}/{categoryName}",
+                defaults: new
+                {
+                    controller = "Competition",
+                    action = "AddCategory",
+                    competitionId = RouteParameter.Optional,
+                    categoryName = RouteParameter.Optional
+                }
+            );
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
