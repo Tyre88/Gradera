@@ -1,4 +1,4 @@
-LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/css/fontello.css", "content/css/jquery-ui.css"]);
+LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/css/jquery-ui.css"]);
 
 define(
     [

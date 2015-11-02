@@ -62,6 +62,7 @@ require(
                     vm.Competition = response;
                     vm.Competition.StartDate = new Date(vm.Competition.StartDate);
                     vm.Competition.EndDate = new Date(vm.Competition.EndDate);
+                    vm.Competition.StartSignupDate = new Date(vm.Competition.StartSignupDate);
                     vm.Competition.EndSignupDate = new Date(vm.Competition.EndSignupDate);
                 }
             }

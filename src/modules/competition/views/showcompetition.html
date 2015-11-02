@@ -1,1 +1,56 @@
-TEST
+<md-subheader class="md-no-sticky">
+    Visar tävling: {{vm.Competition.Name}}
+</md-subheader>
+
+<div class="info-container">
+    <div>
+        <span>Namn:</span> {{vm.Competition.Name}}
+    </div>
+    <div>
+        <span><i class="fa fa-map-marker"></i> Plats:</span> {{vm.Competition.Location}}
+    </div>
+    <div>
+        <span><i class="fa fa-calendar"></i> Start tid:</span> {{vm.Competition.StartDate | date:'yyyy-MM-dd HH:mm'}}
+    </div>
+    <div>
+        <span><i class="fa fa-calendar"></i> Slut tid:</span> {{vm.Competition.EndDate | date:'yyyy-MM-dd HH:mm'}}
+    </div>
+</div>
+<div class="divider"></div>
+
+<md-subheader class="md-no-sticky">
+    Anmäl dig
+</md-subheader>
+
+<div class="competition-signup">
+    <div class="info-container">
+        <md-input-container>
+            <label>Kategori</label>
+            <md-select ng-model="vm.SelectedCategory">
+                <md-option ng-repeat="category in vm.Competition.Categories" value="{{category.Id}}">
+                    {{category.Name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <md-button ng-disabled="!vm.IsActive()" class="md-raised md-primary" ng-click="vm.Signup();">Anmäl mig</md-button>
+</div>
+
+<div class="divider"></div>
+
+<div class="competition-compeditors">
+    <md-list ng-cloak>
+        <md-subheader class="md-no-sticky">
+            Anmälda deltagare
+        </md-subheader>
+
+        <md-list-item ng-repeat="compeditor in vm.Competition.Compeditors | orderBy:compeditor.Category.Name">
+            <p>{{compeditor.FirstName}} {{compeditor.LastName}}</p>
+            <p>{{compeditor.Category.Name}}</p>
+        </md-list-item>
+    </md-list>
+</div>
+
+<div>
+    <md-button class="md-raised md-warn" ng-click="vm.Back();">Tillbaka</md-button>
+</div>
