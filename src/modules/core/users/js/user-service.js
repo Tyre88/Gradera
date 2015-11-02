@@ -38,7 +38,9 @@ require(
 						Occupation: user.UserInformation.Occupation,
 						Phone: user.UserInformation.Phone,
 						Street: user.UserInformation.Street,
-						Zip: user.UserInformation.Zip
+						Zip: user.UserInformation.Zip,
+						Grade: user.UserInformation.Grade,
+						Birthday: new Date(user.UserInformation.Birthday)
 					}
 				};
 			};

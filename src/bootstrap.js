@@ -7,6 +7,7 @@ require(
 		"./controllers/home.js",
 		"./controllers/basic.js",
 		"./modules/core/authenticate/js/logindirective.js",
+        "modules/core/common/enums.js",
         "modules/core/users/js/usercontroller.js",
         "modules/core/accessrights/js/accessrightscontroller.js",
         "modules/core/club/js/clubcontroller.js",

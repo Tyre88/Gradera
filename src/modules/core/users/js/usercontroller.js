@@ -18,11 +18,12 @@ require(
             });
         }]);
 
-        app.controller('edituser', ["$scope", "$stateParams", "user-service", "accessrights-service", "$state",
-        function($scope, $stateParams, userService, accessrightsService, $state) {
+        app.controller('edituser', ["$scope", "$stateParams", "user-service", "accessrights-service", "$state", "gradeEnum",
+        function($scope, $stateParams, userService, accessrightsService, $state, gradeEnum) {
             $scope.UserId = $stateParams.userId;
             $scope.User = {};
             $scope.AccessRights = [];
+            $scope.Grades = gradeEnum.grades;
 
             $scope.Save = function() {
 

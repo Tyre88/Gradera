@@ -46,6 +46,19 @@
     <md-input-container md-no-float>
         <input type="text" ng-model="User.UserInformation.Occupation" placeholder="Arbete" />
     </md-input-container>
+
+    <md-input-container>
+        <label>Grad</label>
+        <md-select ng-model="User.UserInformation.Grade">
+            <md-option ng-repeat="grade in Grades" value="{{grade.Id}}">
+                {{grade.Name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-datepicker ng-model="User.UserInformation.Birthday" md-placeholder="Födelsedag">
+        <md-tooltip>Födelsedag</md-tooltip>
+    </md-datepicker>
 </div>
 
 <md-subheader class="md-no-sticky">
