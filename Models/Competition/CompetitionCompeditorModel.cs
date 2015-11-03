@@ -19,6 +19,6 @@ namespace Gradera_Klubb.Models.Competition
         public Gender Gender { get; set; }
         public string ClubName { get; set; }
         public string Weight { get; set; }
-
+        public string Image { get; set; }
     }
 }

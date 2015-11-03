@@ -82,7 +82,8 @@ namespace Gradera_Klubb.Models.Competition
                     UserId = acc.ID,
                     ClubName = acc.Club.Name,
                     Gender = (Gender)acc.Gender,
-                    Weight = acc.Account_Information.FirstOrDefault().Weight
+                    Weight = acc.Account_Information.FirstOrDefault().Weight,
+                    Image = acc.Image
                 });
             }
 

@@ -45,6 +45,7 @@
         </md-subheader>
 
         <md-list-item ng-repeat="compeditor in vm.Competition.Compeditors | orderBy:compeditor.Category.Name">
+            <img class="md-avatar" src="{{compeditor.Image}}" fallback-src="content/images/No_Image_Available.png" />
             <p>{{compeditor.FirstName}} {{compeditor.LastName}}</p>
             <p>{{compeditor.Category.Name}}</p>
         </md-list-item>
