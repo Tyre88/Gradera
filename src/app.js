@@ -33,10 +33,8 @@ define(
 						$mdSidenav('leftNav').toggle();
 					};
 
-					if(userService.User.IsLoggedIn)
-						$state.go ('homebasic');
-					else
-						$state.go("home");
+					if(!userService.User.IsLoggedIn)
+						$state.go ('login');
 
 					$scope.AdminLinks = [
 						{
@@ -124,7 +122,7 @@ define(
 							.accentPalette('orange');
 					}
 				])
-				.run(["api", "user-service", function(api, userService) {
+				.run(["$rootScope", "api", "user-service", function($rootScope, api, userService) {
 
 					if(typeof(Storage) !== "undefined") {
 						var user = window.sessionStorage.getItem('gk-user');

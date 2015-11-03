@@ -3,6 +3,7 @@ require(
         "app",
         "./routing.js",
 		"./adminrouting.js",
+        "./externalrouting.js",
 		"./controllers/admin.js",
 		"./controllers/home.js",
 		"./controllers/basic.js",

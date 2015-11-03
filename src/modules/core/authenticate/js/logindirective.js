@@ -19,14 +19,14 @@ require(
 						loginService.Login(scope.UserService.User.UserName, scope.UserService.User.Password).success(function(response) {
 							userService.User.InitializeLogin(response);
 							api.init(userService.User.Token);
-							$state.go ('homebasic');
+							$state.go ('home');
 						});
 					};
 				}
 			};
 		}]);
 
-		app.directive('gkLoggedIn', ["login-service", "user-service", "$mdSidenav", function(loginService, userService, $mdSidenav)
+		app.directive('gkLoggedIn', ["login-service", "user-service", "$mdSidenav", "$state", function(loginService, userService, $mdSidenav, $state)
 		{
 			return {
 				restrict: "E",
@@ -44,6 +44,7 @@ require(
 					{
 						loginService.LogOut().success(function(response) {
 							userService.User.Logout();
+							$state.go ('login');
 						});
 					};
 				}
