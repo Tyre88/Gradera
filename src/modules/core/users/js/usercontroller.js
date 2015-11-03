@@ -5,12 +5,28 @@ require(
     ],
     function(app)
     {
-        app.controller('listusers', ["$scope", "user-service", "$state", function($scope, userService, $state) {
+        app.controller('listusers', ["$scope", "user-service", "$state", "$mdDialog", function($scope, userService, $state, $mdDialog) {
             $scope.Users = [];
 
             $scope.EditUser = function(userId, event)
             {
                 $state.go("edituser", {userId : userId});
+            };
+
+            $scope.DeleteUser = function(user) {
+
+                var confirm = $mdDialog.confirm()
+                    .title('Ta bort användare?')
+                    .content('Är du säker på att du vill ta bort ' + user.FirstName + ' ' + user.LastName + '?')
+                    .ariaLabel('Ta bort användare?')
+                    .ok('Ja')
+                    .cancel('Nej');
+
+                $mdDialog.show(confirm).then(function() {
+                    userService.DeleteUser(user.Id).success(function(response) {
+                        $scope.Users.splice($scope.Users.indexOf(user), 1);
+                    });
+                });
             };
 
             userService.GetAllUsers().success(function(response) {

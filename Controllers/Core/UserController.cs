@@ -49,5 +49,15 @@ namespace Gradera_Klubb.Controllers
             //response.Content = new ObjectContent<Account>(account, new JsonMediaTypeFormatter());
             return response;
         }
+
+        [HttpPost, HttpOptions]
+        [AuthorizeFilter(AccessType = AccessType.Account, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage DeleteUser(int id)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            AccountBLL.DeleteUser(id, loggedInUser.AccountSession.ClubId);
+            return response;
+        }
     }
 }

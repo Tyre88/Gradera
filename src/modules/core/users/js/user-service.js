@@ -146,6 +146,10 @@ require(
 			this.SaveUser = function(user) {
 				return $http.post('/api/User/SaveUser', user);
 			};
+
+			this.DeleteUser = function(id) {
+				return $http.post('/api/User/DeleteUser?' + $.param({id: id}));
+			};
 		});
 	}
 );
