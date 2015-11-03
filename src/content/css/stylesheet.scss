@@ -121,6 +121,11 @@ md-sidenav
   -moz-border-radius: 50%;
   border-radius: 50%;
   overflow: hidden;
+
+  &.dragover
+  {
+	border-color: #40b900;
+  }
 }
 
 .edit-accessrights

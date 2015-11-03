@@ -15,15 +15,15 @@ var require =
             "jquery": "dependencies/jquery/jquery.min",
             "jquery-ui": "dependencies/jquery/jquery-ui",
 			"extensions": "dependencies/extensions",
-            "webbdudes-image-helper": "dependencies/webbdudes/webbdudes-image-helper"
+            "webbdudes-image-helper": "dependencies/webbdudes/webbdudes-image-helper",
+            "ng-file-upload": "dependencies/ng-file-upload/ng-file-upload.min"
         },
         shim:
         {
             "app":
             {
-                deps: ["ui-router", "ui-bootstrap", "angular-material", "angular-route", "angular-dragdrop", "webbdudes-image-helper"]
+                deps: ["ui-router", "ui-bootstrap", "angular-material", "angular-route", "angular-dragdrop", "webbdudes-image-helper", "ng-file-upload"]
             },
-
             "angular-material":
             {
                 deps: ["angular-animate", "angular-aria"]

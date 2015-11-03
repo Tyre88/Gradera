@@ -14,7 +14,7 @@ define(
 		}
 		catch(err)
 		{
-			return angular.module('graderaklubb', ['ng', 'ngRoute', 'ui.router', 'ui.bootstrap', 'ngMaterial', 'dndLists', 'webbdudes-image-helper'])
+			return angular.module('graderaklubb', ['ng', 'ngRoute', 'ui.router', 'ui.bootstrap', 'ngMaterial', 'dndLists', 'webbdudes-image-helper', 'ngFileUpload'])
 				.controller('index', ["$rootScope", "$scope", "$state", "user-service", "$mdSidenav",
 					function($rootScope, $scope, $state, userService, $mdSidenav)
 				{

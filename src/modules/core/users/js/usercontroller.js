@@ -18,8 +18,8 @@ require(
             });
         }]);
 
-        app.controller('edituser', ["$scope", "$stateParams", "user-service", "accessrights-service", "$state", "gradeEnum",
-        function($scope, $stateParams, userService, accessrightsService, $state, gradeEnum) {
+        app.controller('edituser', ["$scope", "$stateParams", "user-service", "accessrights-service", "$state", "gradeEnum", "Upload",
+        function($scope, $stateParams, userService, accessrightsService, $state, gradeEnum, Upload) {
             $scope.UserId = $stateParams.userId;
             $scope.User = {};
             $scope.AccessRights = [];
@@ -56,6 +56,20 @@ require(
                     if(right != null)
                         right.Checked = true;
                 }
+            };
+
+            $scope.UploadImage = function(file) {
+                Upload.upload({
+                    url: "/api/file/UploadFile",
+                    data: {file: file}
+                }).then(function(response) {
+                    $scope.User.Image = "/Uploads/" + response.data;
+                }, function(err) {
+                    console.error(err);
+                }, function(evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + progressPercentage + '% ');
+                });
             };
 
             accessrightsService.GetAccessRights().success(function(response) {

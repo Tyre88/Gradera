@@ -83,6 +83,7 @@ require(
 					this.Token = user.Token;
 					this.Club = user.Club;
 					this.Weight = user.Weight;
+					this.Image = user.Image;
 				},
 				InitializeLogin: function(account) {
 					this.Id = account.Id;
@@ -92,6 +93,7 @@ require(
 					this.UserName = account.Username;
 					this.Email = account.Email;
 					this.Token = account.Token;
+					this.Image = account.Image;
 					this.Club.Id = account.Club.Id;
 					this.Club.Name = account.Club.Name;
 					this.Club.ShortName = account.Club.ShortName;
@@ -121,6 +123,7 @@ require(
 					this.Club.ShortName = "";
 					this.Club.Image = "";
 					this.Password = "";
+					this.Image = "";
 
 					this.AccessRightsRight = [];
 

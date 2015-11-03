@@ -71,9 +71,11 @@ require(
                 competitionService.SubscribeToCompetition(vm.CompetitionId, vm.SelectedCategory).success(signupCallback);
 
                 function signupCallback(response) {
-                    vm.Competition.Compeditors.push({Id: -1, FirstName: userService.User.FirstName, LastName: userService.User.LastName, Category: {
+                    vm.Competition.Compeditors.push({Id: -1, FirstName: userService.User.FirstName, LastName: userService.User.LastName,
+                        Category: {
                         Name: vm.Competition.Categories.GetItemByValue("Id", vm.SelectedCategory).Name
-                    }})
+                    },
+                    Image: userService.User.Image});
                 }
             }
 

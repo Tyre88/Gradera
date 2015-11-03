@@ -2,7 +2,8 @@
     Redigera: {{User.FirstName}} {{User.LastName}}
 </md-subheader>
 
-<div class="edit-image" fit-image="150">
+<div class="edit-image drop-box" fit-image="150" ngf-drop="UploadImage($files)" ngf-drag-over-class="'dragover'" ngf-multiple="false"
+     ngf-pattern="'image/*'">
     <img src="{{User.Image}}" fallback-src="content/images/No_Image_Available.png" />
 </div>
 
