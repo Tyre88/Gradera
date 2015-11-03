@@ -15,8 +15,8 @@ define(
 		catch(err)
 		{
 			return angular.module('graderaklubb', ['ng', 'ngRoute', 'ui.router', 'ui.bootstrap', 'ngMaterial', 'dndLists', 'webbdudes-image-helper', 'ngFileUpload'])
-				.controller('index', ["$rootScope", "$scope", "$state", "user-service", "$mdSidenav",
-					function($rootScope, $scope, $state, userService, $mdSidenav)
+				.controller('index', ["$rootScope", "$scope", "$state", "user-service", "$mdSidenav", "Upload",
+					function($rootScope, $scope, $state, userService, $mdSidenav, Upload)
 				{
 					$scope.UserService = userService;
 					$scope.AdminLinks = [];
@@ -86,6 +86,18 @@ define(
 						}
 
 						return false;
+					};
+
+					$rootScope.UploadImage = function(file, successCallback) {
+						Upload.upload({
+							url: "/api/file/UploadFile",
+							data: {file: file}
+						}).then(successCallback, function(err) {
+							console.error(err);
+						}, function(evt) {
+							var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+							console.log('progress: ' + progressPercentage + '% ');
+						});
 					};
 				}])
 				.factory('api', function($http) {

@@ -2,7 +2,7 @@
     Redigera: {{User.FirstName}} {{User.LastName}}
 </md-subheader>
 
-<div class="edit-image drop-box" fit-image="150" ngf-drop="UploadImage($files)" ngf-drag-over-class="'dragover'" ngf-multiple="false"
+<div class="edit-image drop-box" fit-image="150" ngf-drop="$root.UploadImage($files, OnUploadSuccess)" ngf-drag-over-class="'dragover'" ngf-multiple="false"
      ngf-pattern="'image/*'">
     <img src="{{User.Image}}" fallback-src="content/images/No_Image_Available.png" />
 </div>
@@ -57,6 +57,18 @@
         <md-select ng-model="User.UserInformation.Grade">
             <md-option ng-repeat="grade in Grades" value="{{grade.Id}}">
                 {{grade.Name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-input-container>
+        <label>Kön</label>
+        <md-select ng-model="User.Gender">
+            <md-option value="0">
+                Man
+            </md-option>
+            <md-option value="1">
+                Kvinna
             </md-option>
         </md-select>
     </md-input-container>

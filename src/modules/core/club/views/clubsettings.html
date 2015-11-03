@@ -2,8 +2,9 @@
     Redigerar klubben: {{vm.Club.Name}}
 </md-subheader>
 
-<div class="edit-image" fit-image="150">
-    <img ng-src="{{vm.Club.Image}}" />
+<div class="edit-image" fit-image="150" ngf-drop="$root.UploadImage($files, vm.OnUploadSuccess)" ngf-drag-over-class="'dragover'" ngf-multiple="false"
+     ngf-pattern="'image/*'">
+    <img src="{{vm.Club.Image}}" fallback-src="content/images/No_Image_Available.png" />
 </div>
 
 <div class="edit-container">

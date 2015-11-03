@@ -108,6 +108,10 @@ md-sidenav
 	width: calc(50% - 30px);
 	padding-left: 15px;
 	padding-right: 15px;
+
+	@media all and (max-width: 960px) {
+	  width: 100%;
+	}
   }
 }
 
@@ -142,6 +146,10 @@ md-sidenav
   {
 	margin: 15px;
 	width: calc(50% - 30px);
+
+	@media all and (max-width: 960px) {
+	  width: 100%;
+	}
   }
 }
 

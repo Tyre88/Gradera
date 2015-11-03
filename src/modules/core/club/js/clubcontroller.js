@@ -20,6 +20,7 @@ require(
 
             vm.GetClub = GetClub;
             vm.Save = Save;
+            vm.OnUploadSuccess = OnUploadSuccess;
 
             function GetClub() {
                 clubService.GetClub().success(getClubCallback);
@@ -40,6 +41,10 @@ require(
                             .hideDelay(3000)
                     );
                 }
+            }
+
+            function OnUploadSuccess(response) {
+                vm.Club.Image = "/Uploads/" + response.data;
             }
 
             vm.GetClub();

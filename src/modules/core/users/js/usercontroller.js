@@ -58,18 +58,8 @@ require(
                 }
             };
 
-            $scope.UploadImage = function(file) {
-                Upload.upload({
-                    url: "/api/file/UploadFile",
-                    data: {file: file}
-                }).then(function(response) {
-                    $scope.User.Image = "/Uploads/" + response.data;
-                }, function(err) {
-                    console.error(err);
-                }, function(evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log('progress: ' + progressPercentage + '% ');
-                });
+            $scope.OnUploadSuccess = function(response) {
+                $scope.User.Image = "/Uploads/" + response.data;
             };
 
             accessrightsService.GetAccessRights().success(function(response) {
