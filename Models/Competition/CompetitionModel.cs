@@ -30,20 +30,24 @@ namespace Gradera_Klubb.Models.Competition
 
         public static CompetitionModel MapCompetition(Gradera.Competition.DAL.Competition competition)
         {
-            CompetitionModel model = new CompetitionModel()
+            CompetitionModel model = new CompetitionModel();
+            if (competition != null)
             {
-                Id = competition.Id,
-                ClubId = competition.ClubId,
-                Description = competition.Description,
-                EndDate = competition.EndDate,
-                EndSignupDate = competition.EndSignupDate,
-                StartSignupDate = competition.StartSignupDate,
-                IsDeleted = competition.IsDeleted,
-                IsExternal = competition.IsExternal,
-                Location = competition.Location,
-                Name = competition.Name,
-                StartDate = competition.StartDate
-            };
+                model = new CompetitionModel()
+                {
+                    Id = competition.Id,
+                    ClubId = competition.ClubId,
+                    Description = competition.Description,
+                    EndDate = competition.EndDate,
+                    EndSignupDate = competition.EndSignupDate,
+                    StartSignupDate = competition.StartSignupDate,
+                    IsDeleted = competition.IsDeleted,
+                    IsExternal = competition.IsExternal,
+                    Location = competition.Location,
+                    Name = competition.Name,
+                    StartDate = competition.StartDate
+                };
+            }
 
             return model;
         }

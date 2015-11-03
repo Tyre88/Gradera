@@ -1,14 +1,17 @@
 ﻿using Gradera.Competition.BLL;
 using Gradera.Core.Enums;
+using Gradera.Core.Helpers;
 using Gradera_Klubb.Filters;
 using Gradera_Klubb.Models;
 using Gradera_Klubb.Models.Competition;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
 
@@ -35,6 +38,16 @@ namespace Gradera_Klubb.Controllers.Competition
             UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
             CompetitionModel competition = CompetitionModel.MapCompetitionDeep(CompetitionBLL.GetCompetitionDeep(id));
             response.Content = new ObjectContent<CompetitionModel>(competition, new JsonMediaTypeFormatter());
+            return response;
+        }
+
+        [HttpGet]
+        public HttpResponseMessage ExportCompeditorsToExcel(int id)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            CompetitionModel competition = CompetitionModel.MapCompetitionDeep(CompetitionBLL.GetCompetitionDeep(id));
+            DataTable dt = ExcelHelper.CreateDataTable<CompetitionCompeditorModel>(competition.Compeditors);
+            response.Content = new ObjectContent<string>(ExcelHelper.CreateExcelDocument(dt, "compeditors", true), new JsonMediaTypeFormatter());
             return response;
         }
 

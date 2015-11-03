@@ -21,6 +21,8 @@ define(
 					$scope.UserService = userService;
 					$scope.AdminLinks = [];
 
+					$rootScope.UserService = userService;
+
 					$scope.SetActiveNav = function(element)
 					{
 						$("md-sidenav").find('.active').each(function()

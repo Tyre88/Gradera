@@ -16,7 +16,7 @@ require(
                 function($stateProvider, $urlRouterProvider) {
                     $stateProvider.state('showexternalcompetition',
                         {
-                            url: "/external/show/competition/:clubShortName/:competitionId",
+                            url: "/external/show/competition/:clubShortName/:competitionName",
                             templateUrl: "modules/competition/external/views/showcompetition.html",
                             controller: "showexternalcompetition",
                             controllerAs: "vm"

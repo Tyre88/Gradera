@@ -6,16 +6,30 @@
 
 require(
     [
-        "app"
+        "app",
+        "modules/competition/external/js/competition-service.js"
     ],
     function (app) {
         app.controller('showexternalcompetition', showexternalcompetitionController);
 
-        showexternalcompetitionController.$inject = ["$stateParams"];
+        showexternalcompetitionController.$inject = ["$stateParams", "competition-external-service"];
 
-        function showexternalcompetitionController($stateParams) {
+        function showexternalcompetitionController($stateParams, competitionExternalService) {
             var vm = this;
-            vm.CompetitionId = $stateParams.competitionId;
+            vm.Competition = {};
+            vm.CompetitionName = $stateParams.competitionName;
             vm.ClubShortName = $stateParams.clubShortName;
+
+            vm.GetCompetition = GetCompetition;
+
+            function GetCompetition() {
+                competitionExternalService.GetCompetition(vm.ClubShortName, vm.CompetitionName).success(getCompetitionCallback);
+
+                function getCompetitionCallback(response) {
+                    vm.Competition = response;
+                }
+            }
+
+            vm.GetCompetition();
         }
     });

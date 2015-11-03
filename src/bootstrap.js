@@ -13,7 +13,8 @@ require(
         "modules/core/accessrights/js/accessrightscontroller.js",
         "modules/core/club/js/clubcontroller.js",
         "modules/competition/admin/js/competitioncontroller.js",
-        "modules/competition/js/competitioncontroller.js"
+        "modules/competition/js/competitioncontroller.js",
+        "modules/competition/external/js/competitioncontroller.js"
     ],
     function()
     {

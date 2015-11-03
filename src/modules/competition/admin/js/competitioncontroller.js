@@ -16,10 +16,10 @@ require(
         app.controller('competitionadminlist', competitionadminlistController);
         app.controller('editcompetition', editcompetitionController);
 
-        competitionadminlistController.$inject = ["$state", "competition-service"];
+        competitionadminlistController.$inject = ["$state", "competition-service", "competition-admin-service"];
         editcompetitionController.$inject = ["$state", "$stateParams", "competition-admin-service", "competition-service"];
 
-        function competitionadminlistController($state, competitionService) {
+        function competitionadminlistController($state, competitionService, competitionAdminService) {
             var vm = this;
             vm.Competitions = [];
             vm.GetCompetitions = GetCompetitions;
@@ -39,7 +39,15 @@ require(
             }
 
             function ExportCompetition(competition) {
+                competitionAdminService.ExportCompetition(competition.Id).success(exportCompetitionCallback);
 
+                function exportCompetitionCallback(response) {
+                    var newLink = angular.element("<a href='/Downloads/Competition/" + response + "' id='" + response + "'></a>");
+                    newLink.appendTo("body");
+                    newLink[0].click();
+                    newLink[0].remove();
+                    //http://gradera-klubb.local/Downloads/Competition/883a906f-16ad-4775-95ff-dd6f77509c2f.xlsx
+                }
             }
 
             vm.GetCompetitions();

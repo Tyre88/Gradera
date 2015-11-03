@@ -21,5 +21,9 @@ require(
             this.SaveCompetition = function(competition) {
                 return $http.post('/api/competition/SaveCompetition', competition);
             };
+
+            this.ExportCompetition = function(competitionId) {
+                return $http.get('/api/competition/ExportCompeditorsToExcel?' + $.param({id: competitionId}));
+            };
         });
     });

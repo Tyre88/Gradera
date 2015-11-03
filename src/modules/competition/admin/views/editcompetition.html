@@ -23,10 +23,14 @@
     <md-datepicker ng-model="vm.Competition.EndSignupDate" md-placeholder="Sista anmälningsdagen"></md-datepicker>
 </div>
 
-<md-checkbox ng-model="vm.Competition.IsExternal" aria-label="{{vm.Competition.Name}}">
-    Extern tävling
-    <md-tooltip>Tävlingen är extern och man kan anmäla sig utanför klubben.</md-tooltip>
-</md-checkbox>
+<div class="edit-container">
+    <md-checkbox ng-model="vm.Competition.IsExternal" aria-label="{{vm.Competition.Name}}">
+        Extern tävling
+        <md-tooltip>Tävlingen är extern och man kan anmäla sig utanför klubben.</md-tooltip>
+    </md-checkbox>
+
+    <span ng-show="vm.Competition.IsExternal">Länk: http://gradera-klubb.local/dist/#/external/show/competition/{{$root.UserService.User.Club.ShortName}}/{{vm.Competition.Name}}</span>
+</div>
 
 <md-list ng-cloak>
     <md-subheader class="md-no-sticky">
