@@ -1,17 +1,20 @@
+<span class="md-button md-raised" ng-click="EditUser(0, $event);"><i class="fa fa-plus-circle"></i> Lägg till användare</span>
 <md-list ng-cloak>
+
     <md-input-container md-no-float>
-        <input type="text" ng-model="vm.Filter" placeholder="Filter" />
+        <input type="text" ng-model="Filter" placeholder="Filter" />
     </md-input-container>
 
     <md-subheader class="md-no-sticky">
         Användare
     </md-subheader>
 
-    <md-list-item ng-repeat="user in vm.Users | filter:vm.Filter" ng-click="vm.ShowUser(user.Id, $event)">
+    <md-list-item ng-repeat="user in Users | filter:Filter" ng-click="EditUser(user.Id, $event)">
         <img alt="{{ user.FirstName }}" src="{{ user.Image }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
         <p>{{ user.FullName }}</p>
         <p class="hide-sm hide-md">{{user.UserInformation.Email}}</p>
         <p class="hide-sm hide-md">{{user.UserInformation.City}}</p>
         <p class="hide-sm hide-md">{{user.UserInformation.Occupation}}</p>
+        <p ng-if="$root.HasAccess(2, 40);" ng-click="DeleteUser(user)" class="fa fa-trash md-secondary md-hue-3"></p>
     </md-list-item>
 </md-list>

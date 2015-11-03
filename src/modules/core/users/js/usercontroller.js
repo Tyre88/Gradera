@@ -1,99 +1,67 @@
+/**
+ * Created by Victor on 2015-11-03.
+ */
+
+'use-strict';
+
 require(
     [
         "app",
-        "modules/core/accessrights/js/accessrights-service.js"
+        "modules/core/common/enums.js"
     ],
-    function(app)
-    {
-        app.controller('listusers', ["$scope", "user-service", "$state", "$mdDialog", function($scope, userService, $state, $mdDialog) {
-            $scope.Users = [];
+    function (app) {
+        app.controller('userlist', userlistController);
+        app.controller('showuser', showuserController);
 
-            $scope.EditUser = function(userId, event)
-            {
-                $state.go("edituser", {userId : userId});
-            };
+        userlistController.$inject = ["$state", "user-service"];
+        showuserController.$inject = ["$state", "$stateParams", "user-service", "gradeEnum"];
 
-            $scope.DeleteUser = function(user) {
+        function userlistController($state, userService) {
+            var vm = this;
+            vm.Users = [];
 
-                var confirm = $mdDialog.confirm()
-                    .title('Ta bort användare?')
-                    .content('Är du säker på att du vill ta bort ' + user.FirstName + ' ' + user.LastName + '?')
-                    .ariaLabel('Ta bort användare?')
-                    .ok('Ja')
-                    .cancel('Nej');
+            vm.GetUsers = GetUsers;
+            vm.ShowUser = ShowUser;
 
-                $mdDialog.show(confirm).then(function() {
-                    userService.DeleteUser(user.Id).success(function(response) {
-                        $scope.Users.splice($scope.Users.indexOf(user), 1);
-                    });
-                });
-            };
+            function GetUsers() {
+                userService.GetAllUsers().success(getUsersCallback);
 
-            userService.GetAllUsers().success(function(response) {
-               $scope.Users = response;
-            });
-        }]);
-
-        app.controller('edituser', ["$scope", "$stateParams", "user-service", "accessrights-service", "$state", "gradeEnum",
-        function($scope, $stateParams, userService, accessrightsService, $state, gradeEnum) {
-            $scope.UserId = $stateParams.userId;
-            $scope.User = {};
-            $scope.AccessRights = [];
-            $scope.Grades = gradeEnum.grades;
-
-            $scope.Save = function() {
-
-                $scope.User.AccountAccess = [];
-
-                for(var i = 0; i < $scope.AccessRights.length; i++)
-                {
-                    if($scope.AccessRights[i].Checked == true) {
-                        $scope.User.AccountAccess.push({
-                            AccessId: $scope.AccessRights[i].Id,
-                            AccountId: $scope.User.Id
-                        });
-                    }
+                function getUsersCallback(response) {
+                    vm.Users = response;
                 }
+            }
 
-                userService.SaveUser($scope.User).success(function(response) {
-                    $state.go ('listusers');
-                });
-            };
+            function ShowUser(userId) {
+                $state.go('showuser', {userId: userId})
+            }
 
-            $scope.Back = function() {
-                $state.go("listusers");
-            };
+            vm.GetUsers();
+        }
 
-            $scope.MapAccessRights = function()
-            {
-                for(var i = 0; i < $scope.User.AccessRights.length; i++)
-                {
-                    var right = $scope.AccessRights.GetItemByValue("Id", $scope.User.AccessRights[i].Id);
-                    if(right != null)
-                        right.Checked = true;
+        function showuserController($state, $stateParams, userService, gradeEnum) {
+            var vm = this;
+            vm.UserId = ~~$stateParams.userId;
+            vm.User = {};
+
+            vm.GetUser = GetUser;
+            vm.GetGrade = GetGrade;
+
+            function GetUser() {
+                userService.GetUser(vm.UserId).success(getUserCallback);
+
+                function getUserCallback(response) {
+                    vm.User = new userService.UserModel(userService.User.Club, response);
                 }
-            };
+            }
 
-            $scope.OnUploadSuccess = function(response) {
-                $scope.User.Image = "/Uploads/" + response.data;
-            };
-
-            accessrightsService.GetAccessRights().success(function(response) {
-                $scope.AccessRights = response;
-
-                if($scope.UserId > 0)
+            function GetGrade() {
+                if(vm.User.UserInformation != undefined)
                 {
-                    userService.GetUser($scope.UserId).success(function(response) {
-                        $scope.User = new userService.UserModel(userService.User.Club, response);
+                    return gradeEnum.grades.GetItemByValue("Id", vm.User.UserInformation.Grade).Name;
+                }
+            }
 
-                        $scope.MapAccessRights();
-                    });
-                }
-                else
-                {
-                    $scope.User = new userService.UserModel(userService.User.Club);
-                }
-            });
-        }]);
-    }
-);
+            if(vm.UserId > 0)
+                vm.GetUser();
+        }
+    });

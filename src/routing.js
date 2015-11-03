@@ -48,6 +48,20 @@ define(
 							templateUrl: "modules/competition/views/showcompetition.html",
 							controller: "showcompetition",
 							controllerAs: "vm"
+						})
+						.state('userlist',
+						{
+							url: "/users",
+							templateUrl: "modules/core/users/views/listusers.html",
+							controller: "userlist",
+							controllerAs: "vm"
+						})
+						.state('showuser',
+						{
+							url: "/user/:userId",
+							templateUrl: "modules/core/users/views/showuser.html",
+							controller: "showuser",
+							controllerAs: "vm"
 						});
                 }
 			]

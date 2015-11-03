@@ -7,8 +7,7 @@
 require(
     [
         "app",
-        "modules/competition/js/competition-service.js",
-        "modules/core/users/js/user-service.js"
+        "modules/competition/js/competition-service.js"
     ],
     function (app) {
         app.controller('competitionlist', competitionlistController);

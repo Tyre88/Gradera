@@ -32,13 +32,13 @@ define(
 						.state('listusers',
 						{
 							url: "/admin/listusers",
-							templateUrl: "modules/core/users/views/listusers.html",
+							templateUrl: "modules/core/users/admin/views/listusers.html",
 							controller: "listusers"
 						})
 						.state('edituser',
 						{
 							url: "/admin/edituser/:userId",
-							templateUrl: "modules/core/users/views/edituser.html",
+							templateUrl: "modules/core/users/admin/views/edituser.html",
 							controller: "edituser"
 						})
 						.state('listaccessrights',
