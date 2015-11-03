@@ -51,7 +51,7 @@ namespace Gradera_Klubb.Filters
 
             if (!CheckAccessRights(session.AccountId))
             {
-                actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                actionContext.Response = new HttpResponseMessage(HttpStatusCode.Forbidden);
                 return;
             }
 

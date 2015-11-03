@@ -23,6 +23,12 @@ define(
 							template: "",
 							controller: "logoutController"
 						})
+						.state('noaccess',
+						{
+							url: "/noaccess",
+							template: "<p>Access denied!</p>",
+							controller: "noaccessController"
+						})
 						.state('home',
 						{
 							url: "/",

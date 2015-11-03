@@ -99,6 +99,13 @@ define(
 							console.log('progress: ' + progressPercentage + '% ');
 						});
 					};
+
+					$rootScope.previousState;
+					$rootScope.currentState;
+					$rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
+						$rootScope.previousState = from.name;
+						$rootScope.currentState = to.name;
+					});
 				}])
 				.controller('logoutController', ["$scope", "user-service", "$state", "$mdDialog", function($scope, userService, $state, $mdDialog) {
 					var confirm = $mdDialog.confirm()
@@ -110,6 +117,20 @@ define(
 					$mdDialog.show(confirm).then(function() {
 						userService.User.Logout();
 						$state.go('login');
+					});
+				}])
+				.controller('noaccessController', ["$rootScope", "$state", "$mdDialog", function($rootScope, $state, $mdDialog) {
+					var confirm = $mdDialog.confirm()
+						.title('Ej tillgång')
+						.clickOutsideToClose(false)
+						.content('Du har inte rättigheter att utföra det du försökte.')
+						.ariaLabel('Ej tillgång')
+						.ok('Tillbaka')
+						.cancel('Hem');
+					$mdDialog.show(confirm).then(function() {
+						$state.go($rootScope.previousState);
+					}, function() {
+						$state.go('home');
 					});
 				}])
 				.factory('authHttpResponseInterceptor', ['$q', function($q){
@@ -128,6 +149,11 @@ define(
 							{
 								console.error('Unauthorized....');
 								location.href = "#/logout";
+							}
+							else if(rejection.status == 403)
+							{
+								console.error('Forbidden....');
+								location.href = "#/noaccess";
 							}
 
 							return $q.reject(rejection);
