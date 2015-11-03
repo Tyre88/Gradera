@@ -34,8 +34,8 @@ require(
             });
         }]);
 
-        app.controller('edituser', ["$scope", "$stateParams", "user-service", "accessrights-service", "$state", "gradeEnum", "Upload",
-        function($scope, $stateParams, userService, accessrightsService, $state, gradeEnum, Upload) {
+        app.controller('edituser', ["$scope", "$stateParams", "user-service", "accessrights-service", "$state", "gradeEnum",
+        function($scope, $stateParams, userService, accessrightsService, $state, gradeEnum) {
             $scope.UserId = $stateParams.userId;
             $scope.User = {};
             $scope.AccessRights = [];

@@ -17,6 +17,12 @@ define(
                             templateUrl: "views/home.html",
                             controller: "home"
                         })
+						.state('logout',
+						{
+							url: "/logout",
+							template: "",
+							controller: "logoutController"
+						})
 						.state('home',
 						{
 							url: "/",

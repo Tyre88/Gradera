@@ -100,6 +100,40 @@ define(
 						});
 					};
 				}])
+				.controller('logoutController', ["$scope", "user-service", "$state", "$mdDialog", function($scope, userService, $state, $mdDialog) {
+					var confirm = $mdDialog.confirm()
+						.title('Utloggad')
+						.clickOutsideToClose(false)
+						.content('Du har blivit utloggad, vänligen logga in igen.')
+						.ariaLabel('Utloggad')
+						.ok('Ok');
+					$mdDialog.show(confirm).then(function() {
+						userService.User.Logout();
+						$state.go('login');
+					});
+				}])
+				.factory('authHttpResponseInterceptor', ['$q', function($q){
+					return {
+						request: function(request)
+						{
+							return request;
+						},
+						response: function(response) {
+							return response || $q.when(response);
+						},
+						responseError: function(rejection) {
+							console.log(String.format("Response Error {0}", rejection.status), rejection);
+
+							if(rejection.status == 401)
+							{
+								console.error('Unauthorized....');
+								location.href = "#/logout";
+							}
+
+							return $q.reject(rejection);
+						}
+					}
+				}])
 				.factory('api', function($http) {
 					var config = { headers: {
 						'AuthenticateToken': "",
@@ -130,6 +164,7 @@ define(
 						$compileProvider.debugInfoEnabled(false);
 						$httpProvider.useApplyAsync(true);
 						$httpProvider.defaults.withCredentials = true;
+						$httpProvider.interceptors.push('authHttpResponseInterceptor');
 
 						$mdThemingProvider.theme('default')
 							.primaryPalette('brown')

@@ -37,6 +37,12 @@ namespace Gradera_Klubb.Filters
 
             //Get UserId
             AccountSessionEntity session = AccountSessionCache.Instance.GetAccount(token);
+            if(session == null)
+            {
+                actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                return;
+            }
+
             UserPrincipal principal = new UserPrincipal(new GenericIdentity(session.Token), new[] { string.Empty })
             {
                 AccountSession = session
