@@ -42,11 +42,13 @@ namespace Gradera_Klubb.Controllers.Competition
         }
 
         [HttpGet]
+        [AuthorizeFilter(AccessType = AccessType.Competition, AccessTypeRight = AccessTypeRight.Write)]
         public HttpResponseMessage ExportCompeditorsToExcel(int id)
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             CompetitionModel competition = CompetitionModel.MapCompetitionDeep(CompetitionBLL.GetCompetitionDeep(id));
-            DataTable dt = ExcelHelper.CreateDataTable<CompetitionCompeditorModel>(competition.Compeditors);
+            DataTable dt = ExcelHelper.CreateDataTable<CompetitionCompeditorExcelModel>
+                (CompetitionCompeditorExcelModel.MapCompetitionCompeditors(competition.Compeditors));
             response.Content = new ObjectContent<string>(ExcelHelper.CreateExcelDocument(dt, "compeditors", true), new JsonMediaTypeFormatter());
             return response;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gradera.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -77,7 +78,11 @@ namespace Gradera_Klubb.Models.Competition
                         Name = c.Competition_Category.Name
                     },
                     BirthYear = acc.Account_Information.FirstOrDefault().Birthday.Year,
-                    Grade = acc.Account_Information.FirstOrDefault().Grade
+                    Grade = acc.Account_Information.FirstOrDefault().Grade,
+                    UserId = acc.ID,
+                    ClubName = acc.Club.Name,
+                    Gender = (Gender)acc.Gender,
+                    Weight = acc.Account_Information.FirstOrDefault().Weight
                 });
             }
 
@@ -110,7 +115,10 @@ namespace Gradera_Klubb.Models.Competition
                         Name = c.Competition_Category.Name
                     },
                     BirthYear = c.BirthYear,
-                    Grade = c.Grade
+                    Grade = c.Grade,
+                    ClubName = c.Competition_External_Competitor_Contact_Person.Club,
+                    Gender = (Gender)c.Gender,
+                    Weight = c.Weight
                 }));
             }
 

@@ -16,5 +16,6 @@ namespace Gradera_Klubb.Models
         public string Occupation { get; set; }
         public Grade Grade { get; set; }
         public DateTime Birthday { get; set; }
+        public string Weight { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace Gradera_Klubb.Models
         public string Token { get; set; }
         public string Password { get; set; }
         public int ClubId { get; set; }
+        public Gender Gender { get; set; }
         public UserInformationModel UserInformation { get; set; }
         public ClubModel Club { get; set; }
         public List<AccountAccessModel> AccountAccess { get; set; }
@@ -46,7 +47,8 @@ namespace Gradera_Klubb.Models
                     LastName = account.LastName,
                     Username = account.UserName,
                     Image = account.Image,
-                    ClubId = account.ClubId
+                    ClubId = account.ClubId,
+                    Gender = (Gender)account.Gender
                 };
 
                 userModel.Club = new ClubModel()
@@ -101,7 +103,8 @@ namespace Gradera_Klubb.Models
                                 Street = information.Street,
                                 Zip = information.Zip,
                                 Birthday = information.Birthday,
-                                Grade = (Grade)information.Grade
+                                Grade = (Grade)information.Grade,
+                                Weight = information.Weight
                             };
                         }
                     }, () =>
@@ -123,7 +126,8 @@ namespace Gradera_Klubb.Models
                             Street = information.Street,
                             Zip = information.Zip,
                             Birthday = information.Birthday,
-                            Grade = (Grade)information.Grade
+                            Grade = (Grade)information.Grade,
+                            Weight = information.Weight
                         };
                     }
                 }
@@ -144,7 +148,8 @@ namespace Gradera_Klubb.Models
                 Password = user.Password,
                 UserName = user.Username,
                 Image = user.Image,
-                ClubId = user.Club.Id
+                ClubId = user.Club.Id,
+                Gender = (int)user.Gender
             };
 
             acc.Account_Information.Add(new Account_Information()
@@ -156,7 +161,8 @@ namespace Gradera_Klubb.Models
                 Street = user.UserInformation.Street,
                 Zip = user.UserInformation.Zip,
                 Grade = (int)user.UserInformation.Grade,
-                Birthday = user.UserInformation.Birthday
+                Birthday = user.UserInformation.Birthday,
+                Weight = user.UserInformation.Weight
             });
 
             foreach (var access in user.AccountAccess)

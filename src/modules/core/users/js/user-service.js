@@ -19,7 +19,8 @@ require(
 						Image: "",
 						AccessRights: [],
 						Club: club,
-						UserInformation: {}
+						UserInformation: {},
+						Gender: 0
 					};
 				}
 
@@ -32,6 +33,7 @@ require(
 					Password: "",
 					AccessRights: user.AccessRights,
 					Club: club,
+					Gender: user.Gender,
 					UserInformation: {
 						Email: user.UserInformation.Email,
 						City: user.UserInformation.City,
@@ -40,7 +42,8 @@ require(
 						Street: user.UserInformation.Street,
 						Zip: user.UserInformation.Zip,
 						Grade: user.UserInformation.Grade,
-						Birthday: new Date(user.UserInformation.Birthday)
+						Birthday: new Date(user.UserInformation.Birthday),
+						Weight: user.UserInformation.Weight
 					}
 				};
 			};
@@ -79,6 +82,7 @@ require(
 					this.AccessRightsRight = user.AccessRightsRight;
 					this.Token = user.Token;
 					this.Club = user.Club;
+					this.Weight = user.Weight;
 				},
 				InitializeLogin: function(account) {
 					this.Id = account.Id;
