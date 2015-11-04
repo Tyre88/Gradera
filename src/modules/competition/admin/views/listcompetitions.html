@@ -8,10 +8,18 @@
         <p>{{competition.Name}}</p>
         <p class="hide-sm hide-md">{{competition.StartDate | date:'yyyy-MM-dd HH:mm'}} - {{competition.EndDate | date:'yyyy-MM-dd HH:mm'}}</p>
         <p class="hide-sm hide-md">{{competition.Location}}</p>
-        <i class="fa fa-file-excel-o md-secondary md-hue-3" ng-click="vm.ExportCompetition(competition)">
-            <md-tooltip>
-                Exportera tävling till excel för import i judo shiai
-            </md-tooltip>
-        </i>
+        <div class="more-icons md-secondary">
+            <i class="fa fa-file-excel-o md-hue-3" ng-click="vm.ExportCompetition(competition); $event.stopPropagation();">
+                <md-tooltip>
+                    Exportera tävling till excel för import i judo shiai
+                </md-tooltip>
+            </i>
+
+            <i ng-if="$root.HasAccess(5, 40);" ng-click="vm.DeleteCompetition(competition); $event.stopPropagation();" class="fa fa-trash md-hue-3">
+                <md-tooltip>
+                    Ta bort tävling
+                </md-tooltip>
+            </i>
+        </div>
     </md-list-item>
 </md-list>

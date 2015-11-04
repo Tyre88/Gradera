@@ -16,15 +16,17 @@ require(
         app.controller('competitionadminlist', competitionadminlistController);
         app.controller('editcompetition', editcompetitionController);
 
-        competitionadminlistController.$inject = ["$state", "competition-service", "competition-admin-service"];
+        competitionadminlistController.$inject = ["$state", "competition-service", "competition-admin-service", "$mdDialog"];
         editcompetitionController.$inject = ["$state", "$stateParams", "competition-admin-service", "competition-service"];
 
-        function competitionadminlistController($state, competitionService, competitionAdminService) {
+        function competitionadminlistController($state, competitionService, competitionAdminService, $mdDialog) {
             var vm = this;
             vm.Competitions = [];
+
             vm.GetCompetitions = GetCompetitions;
             vm.EditCompetition = EditCompetition;
             vm.ExportCompetition = ExportCompetition;
+            vm.DeleteCompetition = DeleteCompetition;
 
             function GetCompetitions() {
                 competitionService.GetCompetitions().success(getCompetitionsCallback);
@@ -48,6 +50,21 @@ require(
                     newLink[0].remove();
                     //http://gradera-klubb.local/Downloads/Competition/883a906f-16ad-4775-95ff-dd6f77509c2f.xlsx
                 }
+            }
+
+            function DeleteCompetition(competition) {
+                var confirm = $mdDialog.confirm()
+                    .title('Ta bort tävling?')
+                    .content('Är du säker på att du vill ta bort ' + competition.Name + '?')
+                    .ariaLabel('Ta bort tävling?')
+                    .ok('Ja')
+                    .cancel('Nej');
+
+                $mdDialog.show(confirm).then(function() {
+                    competitionAdminService.DeleteCompetition(competition.Id).success(function() {
+                        vm.Competitions.splice(vm.Competitions.indexOf(competition), 1);
+                    });
+                });
             }
 
             vm.GetCompetitions();

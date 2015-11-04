@@ -101,5 +101,15 @@ namespace Gradera_Klubb.Controllers.Competition
             CompetitionBLL.SubscribeInternalCompeditor(competitionId, categoryId, loggedInUser.AccountSession.AccountId);
             return response;
         }
+
+        [HttpPost, HttpOptions]
+        [AuthorizeFilter(AccessType = AccessType.Competition, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage DeleteCompetition(int id)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            CompetitionBLL.DeleteCompetition(id, loggedInUser.AccountSession.ClubId);
+            return response;
+        }
     }
 }

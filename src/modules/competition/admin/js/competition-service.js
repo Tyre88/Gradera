@@ -25,5 +25,9 @@ require(
             this.ExportCompetition = function(competitionId) {
                 return $http.get('/api/competition/ExportCompeditorsToExcel?' + $.param({id: competitionId}));
             };
+
+            this.DeleteCompetition = function(competitionId) {
+                return $http.post('/api/competition/DeleteCompetition?' + $.param({id: competitionId}));
+            };
         });
     });
