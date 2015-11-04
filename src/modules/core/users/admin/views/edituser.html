@@ -3,7 +3,7 @@
 </md-subheader>
 
 <div class="edit-image drop-box" fit-image="150" ngf-drop="$root.UploadImage($files, OnUploadSuccess)" ngf-drag-over-class="'dragover'" ngf-multiple="false"
-     ngf-pattern="'image/*'" ngf-capture="'camera'">
+     ngf-pattern="'image/*'" ngf-capture="'camera'" ngf-select="$root.UploadImage($files, OnUploadSuccess)">
     <img src="{{User.Image}}" fallback-src="content/images/No_Image_Available.png" />
 </div>
 

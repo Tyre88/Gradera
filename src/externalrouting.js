@@ -6,22 +6,30 @@
 
 require(
     [
-        "app"
+        "appexternal"
     ],
-    function (app) {
-        app.config(
+    function (appexternal) {
+        appexternal.config(
             [
                 "$stateProvider",
                 "$urlRouterProvider",
                 function($stateProvider, $urlRouterProvider) {
-                    $stateProvider.state('showexternalcompetition',
+                    $stateProvider
+                        .state('home',
                         {
-                            url: "/external/show/competition/:clubShortName/:competitionName",
+                            url: "/",
+                            template: "TEST",
+                            controller: "home",
+                            controllerAs: "vm"
+                        })
+                        .state('showexternalcompetition',
+                        {
+                            url: "/show/competition/:clubShortName/:competitionName",
                             templateUrl: "modules/competition/external/views/showcompetition.html",
                             controller: "showexternalcompetition",
                             controllerAs: "vm"
                         });
                 }
             ]
-        )
+        );
     });

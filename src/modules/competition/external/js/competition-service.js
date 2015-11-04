@@ -6,10 +6,10 @@
 
 require(
     [
-        "app"
+        "appexternal"
     ],
-    function (app) {
-        app.service('competition-external-service', function($http) {
+    function (appexternal) {
+        appexternal.service('competition-external-service', function($http) {
             this.GetCompetition = function(clubShortName, competitionName) {
                 return $http.get('/api/ExternalCompetition/GetCompetition?' + $.param({clubShortName: clubShortName, competitionName: competitionName}));
             };

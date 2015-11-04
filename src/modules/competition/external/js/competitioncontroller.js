@@ -6,11 +6,11 @@
 
 require(
     [
-        "app",
+        "appexternal",
         "modules/competition/external/js/competition-service.js"
     ],
-    function (app) {
-        app.controller('showexternalcompetition', showexternalcompetitionController);
+    function (appexternal) {
+        appexternal.controller('showexternalcompetition', showexternalcompetitionController);
 
         showexternalcompetitionController.$inject = ["$stateParams", "competition-external-service"];
 
