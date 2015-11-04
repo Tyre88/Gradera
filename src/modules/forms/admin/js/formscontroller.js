@@ -79,6 +79,7 @@ require(
             vm.GetForm = GetForm;
             vm.AddFormField = AddFormField;
             vm.AddFormFieldOption = AddFormFieldOption;
+            vm.SubmitForm = SubmitForm;
 
             function GetForm() {
                 formsAdminService.GetForm(vm.FormId).success(getFormCallback);
@@ -111,6 +112,10 @@ require(
                     Name: "",
                     GroupName: ""
                 };
+            }
+
+            function SubmitForm() {
+                console.log("Form!", vm.PreviewForm.FormFields);
             }
 
             if(vm.FormId > 0)

@@ -89,6 +89,6 @@
     <form name="{{vm.PreviewForm.Name}}" novalidate>
         <formly-form model="vm.model" fields="vm.PreviewForm.FormFields" options="vm.options" form="vm.form">
         </formly-form>
-        <md-button type="submit" class="md-raised md-primary" ng-disabled="vm.form.$invalid">Skicka</md-button>
+        <md-button type="submit" class="md-raised md-primary" ng-disabled="vm.form.$invalid" ng-click="vm.SubmitForm()">Skicka</md-button>
     </form>
 </div>
