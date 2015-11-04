@@ -2,7 +2,6 @@ var require =
     {
         paths:
         {
-            "angular": "dependencies/angular/angular.min",
             "angular-route": "dependencies/angular-route/angular-route.min",
             "angular-animate":"dependencies/angular-animate/angular-animate.min",
             "angular-aria":"dependencies/angular-aria/angular-aria.min",
@@ -17,7 +16,9 @@ var require =
             "jquery-ui": "dependencies/jquery/jquery-ui",
 			"extensions": "dependencies/extensions",
             "webbdudes-image-helper": "dependencies/webbdudes/webbdudes-image-helper",
-            "ng-file-upload": "dependencies/ng-file-upload/ng-file-upload.min"
+            "ng-file-upload": "dependencies/ng-file-upload/ng-file-upload.min",
+            "angular-formly": "dependencies/angular-formly/dist/formly",
+            "api-check": "dependencies/api-check/dist/api-check.min"
         },
         shim:
         {
@@ -32,6 +33,10 @@ var require =
             "angular-material":
             {
                 deps: ["angular-animate", "angular-aria"]
+            },
+            "angular-formly":
+            {
+                deps: ["api-check"]
             }
         },
         deps:

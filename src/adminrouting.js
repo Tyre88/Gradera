@@ -82,6 +82,13 @@ define(
 							templateUrl: "modules/forms/admin/views/listforms.html",
 							controller: "formsadminlist",
 							controllerAs: "vm"
+						})
+						.state('formsadminedit',
+						{
+							url: "/admin/forms/edit/:formId",
+							templateUrl: "modules/forms/admin/views/editform.html",
+							controller: "formsadminedit",
+							controllerAs: "vm"
 						});
 				}
 			]

@@ -19,5 +19,9 @@ require(
             this.DeleteForm = function(formId) {
                 return $http.post('/api/formsadmin/deleteform?' + $.param({id: formId}));
             };
+
+            this.GetForm = function(formId) {
+                return $http.get('/api/formsadmin/getform?' + $.param({id: formId}));
+            };
         }
     });

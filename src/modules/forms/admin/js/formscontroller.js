@@ -7,12 +7,15 @@
 require(
     [
         "app",
-        "modules/forms/admin/js/forms-service.js"
+        "modules/forms/admin/js/forms-service.js",
+        "modules/forms/js/forms-service.js"
     ],
     function (app) {
         app.controller('formsadminlist', formsadminlistController);
+        app.controller('formsadminedit', formsadmineditController);
 
         formsadminlistController.$inject = ["$state", "forms-admin-service", "$mdDialog"];
+        formsadmineditController.$inject = ["$state", "$stateParams", "forms-admin-service", "form"];
 
         function formsadminlistController($state, formsAdminService, $mdDialog) {
             var vm = this;
@@ -31,7 +34,7 @@ require(
             }
 
             function EditForm(formId) {
-
+                $state.go('formsadminedit', {formId: formId});
             }
 
             function DeleteForm(form) {
@@ -50,5 +53,25 @@ require(
             }
 
             vm.GetForms();
+        }
+
+        function formsadmineditController($state, $stateParams, formsAdminService, form) {
+            var vm = this;
+            vm.FormId = ~~$stateParams.formId;
+            vm.Form = angular.copy(form.Form);
+
+            vm.GetForm = GetForm;
+
+            function GetForm() {
+                formsAdminService.GetForm(vm.FormId).success(getFormCallback);
+
+                function getFormCallback(response) {
+                    vm.Form.Initialize(response);
+                    console.log(vm.Form);
+                }
+            }
+
+            if(vm.FormId > 0)
+                vm.GetForm();
         }
     });
