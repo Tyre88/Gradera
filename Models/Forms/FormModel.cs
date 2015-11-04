@@ -24,7 +24,7 @@ namespace Gradera_Klubb.Models.Forms
             FormFields = new List<FormFieldModel>();
         }
 
-        public static FormModel MapFormModel(Form form)
+        public static FormModel MapFormModel(Form form, bool deepLoad = false)
         {
             FormModel model = new FormModel()
             {
@@ -39,7 +39,8 @@ namespace Gradera_Klubb.Models.Forms
                 StartDate = form.StartDate
             };
 
-            form.FormFields.ToList().ForEach(f => model.FormFields.Add(FormFieldModel.MapFormFieldModel(f)));
+            if(deepLoad)
+                form.FormFields.ToList().ForEach(f => model.FormFields.Add(FormFieldModel.MapFormFieldModel(f)));
 
             return model;
         }

@@ -26,5 +26,15 @@ namespace Gradera_Klubb.Controllers.Forms
             response.Content = new ObjectContent<List<FormModel>>(forms, new JsonMediaTypeFormatter());
             return response;
         }
+
+        [HttpPost, HttpOptions]
+        [AuthorizeFilter(AccessType = AccessType.Forms, AccessTypeRight = AccessTypeRight.Admin)]
+        public HttpResponseMessage DeleteForm(int id)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            FormsAdminBLL.DeleteForm(id, loggedInUser.AccountSession.ClubId);
+            return response;
+        }
     }
 }

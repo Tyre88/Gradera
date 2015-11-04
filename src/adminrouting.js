@@ -75,6 +75,13 @@ define(
 							templateUrl: "modules/competition/admin/views/editcompetition.html",
 							controller: "editcompetition",
 							controllerAs: "vm"
+						})
+						.state('formsadminlist',
+						{
+							url: "/admin/forms",
+							templateUrl: "modules/forms/admin/views/listforms.html",
+							controller: "formsadminlist",
+							controllerAs: "vm"
 						});
 				}
 			]

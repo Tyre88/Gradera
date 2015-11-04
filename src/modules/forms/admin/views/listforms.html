@@ -1,0 +1,18 @@
+<span class="md-button md-raised" ng-click="vm.EditForm(0);"><i class="fa fa-plus-circle"></i> Lägg till formulär</span>
+<md-list ng-cloak>
+    <md-subheader class="md-no-sticky">
+        Formulär
+    </md-subheader>
+
+    <md-list-item ng-repeat="form in vm.Forms" ng-click="vm.EditForm(form.Id)">
+        <p>{{form.Name}}</p>
+        <p class="hide-sm hide-md">{{form.StartDate | date:'yyyy-MM-dd HH:mm'}} - {{form.EndDate | date:'yyyy-MM-dd HH:mm'}}</p>
+        <div class="more-icons md-secondary">
+            <i ng-if="$root.HasAccess(6, 40);" ng-click="vm.DeleteForm(form); $event.stopPropagation();" class="fa fa-trash md-hue-3">
+                <md-tooltip>
+                    Ta bort formulär
+                </md-tooltip>
+            </i>
+        </div>
+    </md-list-item>
+</md-list>

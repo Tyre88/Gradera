@@ -62,6 +62,12 @@ define(
 							Text: "Hantera tävlingar",
 							AccessType: 5,
 							AccessTypeRight: 20
+						},
+						{
+							Sref: "formsadminlist",
+							Text: "Hantera formulär",
+							AccessType: 6,
+							AccessTypeRight: 20
 						}
 					];
 
