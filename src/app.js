@@ -15,7 +15,7 @@ define(
 		catch(err)
 		{
 			return angular.module('graderaklubb', ['ng', 'ngRoute', 'ui.router', 'ui.bootstrap', 'ngMaterial',
-				'dndLists', 'webbdudes-image-helper', 'ngFileUpload'])
+				'dndLists', 'webbdudes-image-helper', 'ngFileUpload', 'formly'])
 				.controller('index', ["$rootScope", "$scope", "$state", "user-service", "$mdSidenav", "Upload",
 					function($rootScope, $scope, $state, userService, $mdSidenav, Upload)
 				{
@@ -204,7 +204,7 @@ define(
 							.accentPalette('orange');
 					}
 				])
-				.run(["$rootScope", "api", "user-service", function($rootScope, api, userService) {
+				.run(["$rootScope", "api", "user-service", "formlyConfig", function($rootScope, api, userService, formlyConfig) {
 
 					if(typeof(Storage) !== "undefined") {
 						var user = window.sessionStorage.getItem('gk-user');
@@ -217,6 +217,34 @@ define(
 					} else {
 						api.init("");
 					}
+
+					formlyConfig.setType({
+						name: 'select',
+						//template: "<pre>{{this.options.templateOptions.options | json}}</pre>"
+						template: '<md-input-container><label>{{model[options.templateOptions.label]}}</label><md-select ng-model="model[options.key]"><md-option ng-repeat="option in this.options.templateOptions.options" value="{{option.value}}">{{option.name}}</md-option></md-select></md-input-container>'
+					});
+
+					formlyConfig.setType({
+						name: 'input',
+						template: '<input ng-model="model[options.key]">'
+					});
+
+					formlyConfig.setType({
+						name: 'checkbox',
+						template: '<md-checkbox ng-model="model[options.key]">{{to.label}}</md-checkbox>'
+					});
+
+					formlyConfig.setWrapper({
+						name: 'mdLabel',
+						types: ['input'],
+						template: '<label>{{to.label}}</label><formly-transclude></formly-transclude>'
+					});
+
+					formlyConfig.setWrapper({
+						name: 'mdInputContainer',
+						types: ['input'],
+						template: '<md-input-container><formly-transclude></formly-transclude></md-input-container>'
+					});
 				}]);
 		}
     });

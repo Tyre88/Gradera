@@ -17,14 +17,13 @@ var require =
 			"extensions": "dependencies/extensions",
             "webbdudes-image-helper": "dependencies/webbdudes/webbdudes-image-helper",
             "ng-file-upload": "dependencies/ng-file-upload/ng-file-upload.min",
-            "angular-formly": "dependencies/angular-formly/dist/formly",
-            "api-check": "dependencies/api-check/dist/api-check.min"
+            "angular-formly": "dependencies/angular-formly/dist/formly"
         },
         shim:
         {
             "app":
             {
-                deps: ["ui-router", "ui-bootstrap", "angular-material", "angular-route", "angular-dragdrop", "webbdudes-image-helper", "ng-file-upload"]
+                deps: ["ui-router", "ui-bootstrap", "angular-material", "angular-route", "angular-dragdrop", "webbdudes-image-helper", "ng-file-upload", "angular-formly"]
             },
             "appexternal":
             {
@@ -33,10 +32,6 @@ var require =
             "angular-material":
             {
                 deps: ["angular-animate", "angular-aria"]
-            },
-            "angular-formly":
-            {
-                deps: ["api-check"]
             }
         },
         deps:

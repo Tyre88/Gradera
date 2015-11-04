@@ -1,1 +1,94 @@
-EDIT FORM
+<md-subheader class="md-no-sticky">
+    Redigera: {{vm.Form.Name}}
+</md-subheader>
+<div class="edit-container">
+    <md-input-container md-no-float>
+        <input type="text" ng-model="vm.Form.Name" placeholder="Formulär namn" />
+    </md-input-container>
+
+    <div></div>
+
+    <md-datepicker ng-model="vm.Form.StartDate" md-placeholder="Startdatum">
+        <md-tooltip>Startdatum</md-tooltip>
+    </md-datepicker>
+
+    <md-datepicker ng-model="vm.Form.EndDate" md-placeholder="Slutdatum">
+        <md-tooltip>Slutdatum</md-tooltip>
+    </md-datepicker>
+
+    <md-checkbox ng-model="vm.Form.IsExternal" aria-label="Externt formulär?">
+        Externt formulär?
+    </md-checkbox>
+</div>
+
+<div class="divider"></div>
+
+<md-subheader class="md-no-sticky">
+    Lägg till fält:
+</md-subheader>
+
+<div class="edit-container">
+    <md-input-container md-no-float>
+        <input type="text" ng-model="vm.NewField.Label" placeholder="Namn" />
+    </md-input-container>
+
+    <md-checkbox ng-model="vm.NewField.IsRequired" aria-label="Nödvändigt?">
+        Nödvändigt?
+    </md-checkbox>
+
+    <md-input-container>
+        <label>Bredd</label>
+        <md-select ng-model="vm.NewField.ClassName">
+            <md-option value="form-field-hundred">
+                100%
+            </md-option>
+            <md-option value="form-field-fifty">
+                50%
+            </md-option>
+            <md-option value="form-field-twentyfife">
+                25%
+            </md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-input-container>
+        <label>Typ</label>
+        <md-select ng-model="vm.NewField.Type">
+            <md-option value="input">
+                Input
+            </md-option>
+            <md-option value="checkbox">
+                Checkbox
+            </md-option>
+            <md-option value="select">
+                Select
+            </md-option>
+        </md-select>
+    </md-input-container>
+</div>
+
+<md-button class="md-raised md-primary" ng-click="vm.AddFormField();">Lägg till</md-button>
+
+<div ng-show="vm.ShowSelectOptions" class="divider"></div>
+
+<div ng-show="vm.ShowSelectOptions" class="edit-container">
+    <md-input-container md-no-float>
+        <input type="text" ng-model="vm.NewFormFieldOption.Name" placeholder="Namn" />
+    </md-input-container>
+</div>
+
+<md-button ng-show="vm.ShowSelectOptions" class="md-raised md-primary" ng-click="vm.AddFormFieldOption();">Lägg till</md-button>
+
+<div class="divider"></div>
+
+<md-subheader class="md-no-sticky">
+    Förhandsgranskning av formulär:
+</md-subheader>
+
+<div class="form-preview">
+    <form name="{{vm.PreviewForm.Name}}" novalidate>
+        <formly-form model="vm.model" fields="vm.PreviewForm.FormFields" options="vm.options" form="vm.form">
+        </formly-form>
+        <md-button type="submit" class="md-raised md-primary" ng-disabled="vm.form.$invalid">Skicka</md-button>
+    </form>
+</div>

@@ -4,6 +4,8 @@
 
 'use-strict';
 
+LoadCss(["modules/forms/admin/css/form-admin.css", "modules/forms/css/form.css"]);
+
 require(
     [
         "app",
@@ -15,7 +17,7 @@ require(
         app.controller('formsadminedit', formsadmineditController);
 
         formsadminlistController.$inject = ["$state", "forms-admin-service", "$mdDialog"];
-        formsadmineditController.$inject = ["$state", "$stateParams", "forms-admin-service", "form"];
+        formsadmineditController.$inject = ["$scope", "$state", "$stateParams", "forms-admin-service", "form"];
 
         function formsadminlistController($state, formsAdminService, $mdDialog) {
             var vm = this;
@@ -55,23 +57,74 @@ require(
             vm.GetForms();
         }
 
-        function formsadmineditController($state, $stateParams, formsAdminService, form) {
+        function formsadmineditController($scope, $state, $stateParams, formsAdminService, form) {
             var vm = this;
             vm.FormId = ~~$stateParams.formId;
-            vm.Form = angular.copy(form.Form);
+            vm.Form = {};
+            vm.PreviewForm = angular.copy(form.Form);
+            vm.NewField = {
+                ClassName: "form-field-hundred",
+                Type: "input",
+                Options: []
+            };
+            vm.ShowSelectOptions = false;
+            vm.NewFormFieldOption = {
+                Name: "",
+                GroupName: ""
+            };
+
+            vm.model = {};
+            vm.options = {};
 
             vm.GetForm = GetForm;
+            vm.AddFormField = AddFormField;
+            vm.AddFormFieldOption = AddFormFieldOption;
 
             function GetForm() {
                 formsAdminService.GetForm(vm.FormId).success(getFormCallback);
 
                 function getFormCallback(response) {
-                    vm.Form.Initialize(response);
-                    console.log(vm.Form);
+                    vm.Form = response;
+                    vm.Form.StartDate = new Date(vm.Form.StartDate);
+                    vm.Form.EndDate = new Date(vm.Form.EndDate);
+
+                    vm.PreviewForm.Initialize(vm.Form);
                 }
+            }
+
+            function AddFormField() {
+                vm.NewField.Id = "tempId-" + vm.Form.FormFields.length;
+                vm.Form.FormFields.push(vm.NewField);
+                vm.PreviewForm.Initialize(vm.Form);
+
+                vm.NewField = {
+                    ClassName: "form-field-hundred",
+                    Type: "input",
+                    Options: []
+                };
+            }
+
+            function AddFormFieldOption() {
+                vm.NewFormFieldOption.Id = "tempId-" + vm.NewField.Options.length;
+                vm.NewField.Options.push(vm.NewFormFieldOption);
+                vm.NewFormFieldOption = {
+                    Name: "",
+                    GroupName: ""
+                };
             }
 
             if(vm.FormId > 0)
                 vm.GetForm();
+
+            $scope.$watch('vm.NewField.Type', function(newVal, oldVal) {
+                if(newVal == "select")
+                {
+                    vm.ShowSelectOptions = true;
+                }
+                else
+                {
+                    vm.ShowSelectOptions = false;
+                }
+            })
         }
     });

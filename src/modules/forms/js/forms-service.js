@@ -35,16 +35,35 @@ require(
                     this.Name = formModel.Name;
 
                     if (formModel.FormFields != undefined && formModel.FormFields.length > 0) {
+                        this.FormFields = [];
+
                         for (var i = 0; i < formModel.FormFields.length; i++) {
                             var field = angular.copy(this.FormField);
-                            field.Initialize(formModel.FormFields[i]);
+                            field.className = formModel.FormFields[i].ClassName;
+                            field.type = formModel.FormFields[i].Type;
+                            field.key = formModel.FormFields[i].Id;
+                            field.templateOptions.label = formModel.FormFields[i].Label;
+                            field.templateOptions.required = formModel.FormFields[i].IsRequired;
+
+                            if(formModel.FormFields[i].Options != undefined && formModel.FormFields[i].Options.length > 0)
+                            {
+                                field.templateOptions.options = [];
+
+                                for(var o = 0; o < formModel.FormFields[i].Options.length; o++)
+                                {
+                                    var option = angular.copy(this.FormFieldOption);
+                                    option.name = formModel.FormFields[i].Options[o].Name;
+                                    option.group = formModel.FormFields[i].Options[o].GroupName;
+                                    option.value = formModel.FormFields[i].Options[o].Id;
+                                    field.templateOptions.options.push(option);
+                                }
+                            }
+
                             this.FormFields.push(field);
                         }
                     }
                 },
                 FormField: {
-                    Id: 0,
-                    FormId: 0,
                     className: "",
                     type: "input",
                     key: 0,
@@ -52,38 +71,12 @@ require(
                         label: "",
                         required: false,
                         options: []
-                    },
-                    Initialize: function (formField) {
-                        this.Id = formField.Id;
-                        this.FormId = formField.FormId;
-                        this.className = formField.ClassName;
-                        this.type = formField.Type;
-                        this.templateOptions.label = formField.Label;
-                        this.templateOptions.required = formField.IsRequired;
-                        this.key = formField.Id;
-
-                        if (formField.Options != undefined && formField.Options.length > 0) {
-                            for (var i = 0; i < formField.Options.length; i++) {
-                                var option = angular.copy(this.FormFieldOption);
-                                option.Initialize(formField.Options[i]);
-                                this.templateOptions.options.push(option);
-                            }
-                        }
                     }
                 },
                 FormFieldOption: {
-                    Id: 0,
-                    FormFieldId: 0,
                     name: "",
                     group: "",
-                    value: 0,
-                    Initialize: function(formFieldOption) {
-                        this.Id = formFieldOption.Id;
-                        this.FormFieldId = formFieldOption.FormFieldId;
-                        this.name = formFieldOption.Name;
-                        this.group = formFieldOption.GroupName;
-                        this.value = formFieldOption.Id;
-                    }
+                    value: 0
                 }
             };
         }
