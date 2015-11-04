@@ -47,5 +47,14 @@ namespace Gradera_Klubb.Controllers.Forms
                 new JsonMediaTypeFormatter());
             return response;
         }
+
+        [HttpPost, HttpOptions]
+        [AuthorizeFilter(AccessType = AccessType.Forms, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage SaveForm(FormModel form)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+
+            return response;
+        }
     }
 }

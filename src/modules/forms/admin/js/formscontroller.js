@@ -80,6 +80,8 @@ require(
             vm.AddFormField = AddFormField;
             vm.AddFormFieldOption = AddFormFieldOption;
             vm.SubmitForm = SubmitForm;
+            vm.SaveForm = SaveForm;
+            vm.Back = Back;
 
             function GetForm() {
                 formsAdminService.GetForm(vm.FormId).success(getFormCallback);
@@ -116,6 +118,18 @@ require(
 
             function SubmitForm() {
                 console.log("Form!", vm.PreviewForm.FormFields);
+            }
+
+            function SaveForm() {
+                formsAdminService.SaveForm(vm.Form).success(saveFormcallback);
+
+                function saveFormcallback() {
+                    vm.Back()
+                }
+            }
+
+            function Back() {
+                $state.go('formsadminlist');
             }
 
             if(vm.FormId > 0)

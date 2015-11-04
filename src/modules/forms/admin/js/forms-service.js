@@ -23,5 +23,9 @@ require(
             this.GetForm = function(formId) {
                 return $http.get('/api/formsadmin/getform?' + $.param({id: formId}));
             };
+
+            this.SaveForm = function(form) {
+                return $http.post('/api/formsadmin/saveform', form);
+            }
         }
     });
