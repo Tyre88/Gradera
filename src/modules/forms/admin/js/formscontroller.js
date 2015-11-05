@@ -17,7 +17,7 @@ require(
         app.controller('formsadminedit', formsadmineditController);
 
         formsadminlistController.$inject = ["$state", "forms-admin-service", "$mdDialog"];
-        formsadmineditController.$inject = ["$scope", "$state", "$stateParams", "forms-admin-service", "form"];
+        formsadmineditController.$inject = ["$scope", "$state", "$stateParams", "forms-admin-service", "form", "$mdDialog"];
 
         function formsadminlistController($state, formsAdminService, $mdDialog) {
             var vm = this;
@@ -57,7 +57,7 @@ require(
             vm.GetForms();
         }
 
-        function formsadmineditController($scope, $state, $stateParams, formsAdminService, form) {
+        function formsadmineditController($scope, $state, $stateParams, formsAdminService, form, $mdDialog) {
             var vm = this;
             vm.FormId = ~~$stateParams.formId;
             vm.Form = {};
@@ -83,6 +83,8 @@ require(
             vm.SaveForm = SaveForm;
             vm.Back = Back;
             vm.DeleteOption = DeleteOption;
+            vm.ShowPreviewForm = ShowPreviewForm;
+            vm.ClosePreview = ClosePreview;
 
             function GetForm() {
                 formsAdminService.GetForm(vm.FormId).success(getFormCallback);
@@ -138,6 +140,20 @@ require(
 
             function DeleteOption(option) {
                 vm.NewField.Options.splice(vm.NewField.Options.indexOf(option), 1);
+            }
+
+            function ShowPreviewForm() {
+                $mdDialog.show({
+                    controller: "formsadminedit",
+                    controllerAs: "vm",
+                    templateUrl: 'modules/forms/admin/views/previewform.html',
+                    parent: angular.element(document.body),
+                    clickOutsideToClose:true
+                });
+            }
+
+            function ClosePreview() {
+                $mdDialog.hide();
             }
 
             if(vm.FormId > 0)
