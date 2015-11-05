@@ -45,6 +45,47 @@ namespace Gradera_Klubb.Models.Forms
             return model;
         }
 
+        public static Form MapModelToForm(FormModel model)
+        {
+            Form form = new Form()
+            {
+                ClubId = model.ClubId,
+                CreatedByUserId = model.CreatedByUserId,
+                CreatedDate = model.CreatedDate,
+                EndDate = model.EndDate,
+                Id = model.Id,
+                IsDeleted = model.IsDeleted,
+                IsExternal = model.IsExternal,
+                Name = model.Name,
+                StartDate = model.StartDate
+            };
+
+            foreach (var item in model.FormFields)
+            {
+                FormFields field = new Gradera.Forms.DAL.FormFields()
+                {
+                    ClassName = item.ClassName,
+                    FormId = form.Id,
+                    Id = item.Id,
+                    IsRequired = item.IsRequired,
+                    Label = item.Label,
+                    Type = item.Type
+                };
+
+                item.Options.ForEach(o => field.FormFieldsOptions.Add(new FormFieldsOptions()
+                {
+                    FormFieldId = field.Id,
+                    GroupName = o.GroupName,
+                    Id = o.Id,
+                    Name = o.Name
+                }));
+
+                form.FormFields.Add(field);
+            }
+
+            return form;
+        }
+
         public static List<FormModel> MapFormModels(List<Form> forms)
         {
             List<FormModel> models = new List<FormModel>();

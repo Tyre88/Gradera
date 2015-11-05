@@ -82,6 +82,7 @@ require(
             vm.SubmitForm = SubmitForm;
             vm.SaveForm = SaveForm;
             vm.Back = Back;
+            vm.DeleteOption = DeleteOption;
 
             function GetForm() {
                 formsAdminService.GetForm(vm.FormId).success(getFormCallback);
@@ -96,6 +97,9 @@ require(
             }
 
             function AddFormField() {
+                if(vm.Form.FormFields == undefined)
+                    vm.Form.FormFields = [];
+
                 vm.NewField.Id = "tempId-" + vm.Form.FormFields.length;
                 vm.Form.FormFields.push(vm.NewField);
                 vm.PreviewForm.Initialize(vm.Form);
@@ -130,6 +134,10 @@ require(
 
             function Back() {
                 $state.go('formsadminlist');
+            }
+
+            function DeleteOption(option) {
+                vm.NewField.Options.splice(vm.NewField.Options.indexOf(option), 1);
             }
 
             if(vm.FormId > 0)

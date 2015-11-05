@@ -53,7 +53,16 @@ namespace Gradera_Klubb.Controllers.Forms
         public HttpResponseMessage SaveForm(FormModel form)
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            form.ClubId = loggedInUser.AccountSession.ClubId;
+            if (form.Id <= 0)
+            {
+                form.CreatedByUserId = loggedInUser.AccountSession.AccountId;
+                form.CreatedDate = DateTime.Now;
+            }
 
+            Gradera.Forms.DAL.Form f = FormModel.MapModelToForm(form);
+            FormsAdminBLL.SaveForm(f);
             return response;
         }
     }

@@ -71,10 +71,30 @@
 
 <div ng-show="vm.ShowSelectOptions" class="divider"></div>
 
+<md-subheader class="md-no-sticky" ng-show="vm.ShowSelectOptions">
+    Lägg till val:
+</md-subheader>
+
 <div ng-show="vm.ShowSelectOptions" class="edit-container">
     <md-input-container md-no-float>
         <input type="text" ng-model="vm.NewFormFieldOption.Name" placeholder="Namn" />
     </md-input-container>
+
+    <div>
+        <md-subheader class="md-no-sticky">
+            Tillagda val:
+        </md-subheader>
+        <md-list>
+            <md-list-item ng-repeat="option in vm.NewField.Options">
+                <p>{{option.Name}}</p>
+                <i ng-click="vm.DeleteOption(option);" class="fa fa-trash md-hue-3 md-secondary">
+                    <md-tooltip>
+                        Ta bort val
+                    </md-tooltip>
+                </i>
+            </md-list-item>
+        </md-list>
+    </div>
 </div>
 
 <md-button ng-show="vm.ShowSelectOptions" class="md-raised md-primary" ng-click="vm.AddFormFieldOption();">Lägg till</md-button>
