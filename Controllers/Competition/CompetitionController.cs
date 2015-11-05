@@ -111,5 +111,17 @@ namespace Gradera_Klubb.Controllers.Competition
             CompetitionBLL.DeleteCompetition(id, loggedInUser.AccountSession.ClubId);
             return response;
         }
+
+        [HttpGet]
+        [AuthorizeFilter(AccessType = AccessType.Competition, AccessTypeRight = AccessTypeRight.Read)]
+        public HttpResponseMessage GetUpcommingCompetitions(int count)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            List<CompetitionModel> competitions = CompetitionModel.MapCompetitions(
+                CompetitionBLL.GetUpcommingCompetitions(loggedInUser.AccountSession.ClubId, count));
+            response.Content = new ObjectContent<List<CompetitionModel>>(competitions, new JsonMediaTypeFormatter());
+            return response;
+        }
     }
 }

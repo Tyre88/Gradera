@@ -32,8 +32,9 @@ define(
 						.state('home',
 						{
 							url: "/",
-							templateUrl: "views/homebasic.html",
-							controller: "homebasic"
+							templateUrl: "modules/home/views/home.html",
+							controller: "home",
+							controllerAs: "vm"
 						})
 						.state('competitionlist',
 						{

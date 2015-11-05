@@ -1,0 +1,34 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools">
+        Välkommen till {{UserService.User.Club.Name}}
+    </h1>
+</md-toolbar>
+
+<div class="home">
+    <div class="club-information">
+        <p>Hej och välkomna till Wemmenhögs budoförenings hemsida, där vi samlat information om Judo.</p>
+
+        <p>Träningen bedrivs i Skurups sparbanks arena på nära 400 kvm tatamis, dvs en 40 mm tjock matta, skonsam för kroppen.</p>
+
+        <p>Våra kvalificerade och välrenomerade tränare bedriver en träning av högsta klass oavsett inriktning, här kan du ung som gammal, nybörjare som erfaren känna dig väl omhändertagen och få dina behov tillgodosedda.</p>
+    </div>
+
+    <div class="home-widgets">
+        <div class="widget blue" ng-if="$root.HasAccess(6, 10)">
+            <div class="header blue">Obesvarade formulär</div>
+            <div class="widget-content">
+                <ul>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+        <div class="widget green" ng-if="$root.HasAccess(5, 10)">
+            <div class="header green">Kommande tävlingar</div>
+            <div class="widget-content">
+                <ul>
+                    <li ng-repeat="competition in vm.UpcommingCompetitions" ng-click="vm.GoToCompetition(competition.Id);">{{competition.Name}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
