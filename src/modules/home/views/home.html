@@ -14,15 +14,15 @@
     </div>
 
     <div class="home-widgets">
-        <div class="widget blue" ng-if="$root.HasAccess(6, 10)">
+        <div class="widget blue" ng-if="$root.HasAccess(6, 10) && vm.UnansweredForms.length">
             <div class="header blue">Obesvarade formulär</div>
             <div class="widget-content">
                 <ul>
-                    <li></li>
+                    <li ng-repeat="form in vm.UnansweredForms" ng-click="vm.GoToUnansweredForm(form.Id)">{{form.Name}}</li>
                 </ul>
             </div>
         </div>
-        <div class="widget green" ng-if="$root.HasAccess(5, 10)">
+        <div class="widget green" ng-if="$root.HasAccess(5, 10) && vm.UpcommingCompetitions.length">
             <div class="header green">Kommande tävlingar</div>
             <div class="widget-content">
                 <ul>

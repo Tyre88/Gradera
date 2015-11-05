@@ -10,6 +10,9 @@ require(
     ],
     function (app) {
         app.service('form', form);
+        app.service('form-service', formService);
+
+        formService.$inject = ["$http"];
 
         function form() {
             this.Form = {
@@ -78,6 +81,12 @@ require(
                     group: "",
                     value: 0
                 }
+            };
+        }
+
+        function formService($http) {
+            this.GetUnansweredForms = function(count) {
+                return $http.get('/api/forms/GetUnansweredForms?' + $.param({count: count}));
             };
         }
     });
