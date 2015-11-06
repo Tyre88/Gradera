@@ -22,8 +22,8 @@
                 </ul>
             </div>
         </div>
-        <div class="widget green" ng-if="$root.HasAccess(5, 10) && vm.UpcommingCompetitions.length">
-            <div class="header green">Kommande tävlingar</div>
+        <div class="widget pink" ng-if="$root.HasAccess(5, 10) && vm.UpcommingCompetitions.length">
+            <div class="header pink">Kommande tävlingar</div>
             <div class="widget-content">
                 <ul>
                     <li ng-repeat="competition in vm.UpcommingCompetitions" ng-click="vm.GoToCompetition(competition.Id);">{{competition.Name}}</li>

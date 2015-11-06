@@ -52,6 +52,41 @@
       background-color: #E3F2FD;
     }
 
+    &.pink
+    {
+      background-color: #FCE4EC;
+    }
+
+    &.purple
+    {
+      background-color: #F3E5F5;
+    }
+
+    &.red
+    {
+      background-color: #FFEBEE;
+    }
+
+    &.indigo
+    {
+      background-color: #E8EAF6;
+    }
+
+    &.lime
+    {
+      background-color: #F9FBE7;
+    }
+
+    &.orange
+    {
+      background-color: #FFF3E0;
+    }
+
+    &.brown
+    {
+      background-color: #EFEBE9;
+    }
+
     .header
     {
       height: 25px;
@@ -63,12 +98,47 @@
 
       &.green
       {
-        background-color: #A5D6A7;
+        background-color: #69F0AE;
       }
 
       &.blue
       {
-        background-color: #90CAF9;
+        background-color: #448AFF;
+      }
+
+      &.pink
+      {
+        background-color: #FF4081;
+      }
+
+      &.purple
+      {
+        background-color: #E040FB;
+      }
+
+      &.red
+      {
+        background-color: #FF5252;
+      }
+
+      &.indigo
+      {
+        background-color: #536DFE;
+      }
+
+      &.lime
+      {
+        background-color: #EEFF41;
+      }
+
+      &.orange
+      {
+        background-color: #FFAB40;
+      }
+
+      &.brown
+      {
+        background-color: #BCAAA4;
       }
     }
 
