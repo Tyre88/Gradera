@@ -50,7 +50,7 @@ require(
             }
 
             function GoToUnansweredForm(formId) {
-
+                $state.go('showform', {formId: formId});
             }
 
             if($rootScope.HasAccess(5, 10))

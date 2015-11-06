@@ -8,6 +8,12 @@
         <p>{{form.Name}}</p>
         <p class="hide-sm hide-md">{{form.StartDate | date:'yyyy-MM-dd HH:mm'}} - {{form.EndDate | date:'yyyy-MM-dd HH:mm'}}</p>
         <div class="more-icons md-secondary">
+            <i ng-if="$root.HasAccess(6, 20);" ng-click="vm.FormAnswers(form.Id); $event.stopPropagation();" class="fa fa-tachometer md-hue-3">
+                <md-tooltip>
+                    Visa formulär svar
+                </md-tooltip>
+            </i>
+
             <i ng-if="$root.HasAccess(6, 40);" ng-click="vm.DeleteForm(form); $event.stopPropagation();" class="fa fa-trash md-hue-3">
                 <md-tooltip>
                     Ta bort formulär

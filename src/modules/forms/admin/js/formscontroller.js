@@ -26,6 +26,7 @@ require(
             vm.GetForms = GetForms;
             vm.EditForm = EditForm;
             vm.DeleteForm = DeleteForm;
+            vm.FormAnswers = FormAnswers;
 
             function GetForms() {
                 formsAdminService.GetForms().success(getFormsCallback);
@@ -52,6 +53,10 @@ require(
                         vm.Forms.splice(vm.Forms.indexOf(form), 1);
                     });
                 });
+            }
+
+            function FormAnswers(formId) {
+
             }
 
             vm.GetForms();

@@ -88,5 +88,13 @@ require(
             this.GetUnansweredForms = function(count) {
                 return $http.get('/api/forms/GetUnansweredForms?' + $.param({count: count}));
             };
+
+            this.GetForm = function(formId) {
+                return $http.get('/api/forms/GetForm?' + $.param({formId: formId}));
+            };
+
+            this.SubmitForm = function(formFields) {
+                return $http.post('/api/forms/SubmitForm', formFields);
+            }
         }
     });

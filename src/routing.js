@@ -63,6 +63,12 @@ define(
 							templateUrl: "modules/core/users/views/showuser.html",
 							controller: "showuser",
 							controllerAs: "vm"
+						})
+						.state('showform',{
+							url: "/form/:formId",
+							templateUrl: "modules/forms/views/showform.html",
+							controller: "showform",
+							controllerAs: "vm"
 						});
                 }
 			]
