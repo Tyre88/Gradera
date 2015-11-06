@@ -15,9 +15,11 @@ require(
     function (app) {
         app.controller('formsadminlist', formsadminlistController);
         app.controller('formsadminedit', formsadmineditController);
+        app.controller('formanswers', formanswersController);
 
         formsadminlistController.$inject = ["$state", "forms-admin-service", "$mdDialog"];
         formsadmineditController.$inject = ["$scope", "$state", "$stateParams", "forms-admin-service", "form", "$mdDialog"];
+        formanswersController.$inject = ["$state", "$stateParams", "forms-admin-service"];
 
         function formsadminlistController($state, formsAdminService, $mdDialog) {
             var vm = this;
@@ -56,7 +58,7 @@ require(
             }
 
             function FormAnswers(formId) {
-
+                $state.go('formanswers', {formId: formId});
             }
 
             vm.GetForms();
@@ -174,5 +176,20 @@ require(
                     vm.ShowSelectOptions = false;
                 }
             })
+        }
+
+        function formanswersController($state, $stateParams, formsAdminService) {
+            var vm = this;
+            vm.FormId = ~~$stateParams.formId;
+            vm.UserAnswers = [];
+
+            vm.GetUserAnswers = GetUserAnswers;
+
+            function GetUserAnswers() {
+
+            }
+
+            if(vm.FormId > 0)
+                vm.GetUserAnswers();
         }
     });

@@ -69,6 +69,13 @@ define(
 							templateUrl: "modules/forms/views/showform.html",
 							controller: "showform",
 							controllerAs: "vm"
+						})
+						.state('formanswers',
+						{
+							url: "/form/answers/:formId",
+							templateUrl: "modules/forms/admin/views/formanswers.html",
+							controller: "formanswers",
+							controllerAs: "vm"
 						});
                 }
 			]

@@ -12,9 +12,9 @@ require(
     function (app) {
         app.controller('showform', showformController);
 
-        showformController.$inject = ["$stateParams", "form", "form-service"];
+        showformController.$inject = ["$rootScope", "$state", "$stateParams", "form", "form-service", "$mdDialog"];
 
-        function showformController($stateParams, form, formService) {
+        function showformController($rootScope, $state, $stateParams, form, formService, $mdDialog) {
             var vm = this;
             vm.FormId = ~~$stateParams.formId;
             vm.Form = angular.copy(form.Form);
@@ -31,15 +31,27 @@ require(
             }
 
             function SubmitForm() {
+                console.log(vm.Form);
                 var formFields = [];
                 for(var i = 0; i < vm.Form.FormFields.length; i++)
                 {
-                    formFields.push({Value: vm.Form.FormFields[i].formControl.$modelValue, FormId: vm.FormId});
+                    formFields.push({Value: vm.Form.FormFields[i].formControl.$modelValue, FormId: vm.FormId, FormFieldId: vm.Form.FormFields[i].key});
                 }
                 formService.SubmitForm(formFields).success(submitFormCallback);
 
-                function submitFormCallback(response) {
+                function submitFormCallback() {
+                    var confirm = $mdDialog.confirm()
+                        .title('Tack!')
+                        .content('Tack för att du svarade på formuläret!')
+                        .ariaLabel('Tack!')
+                        .ok('Ok')
+                        .cancel('Avbryt');
 
+                    $mdDialog.show(confirm).then(function() {
+                        $state.go($rootScope.previousState);
+                    }, function() {
+                        $state.go($rootScope.previousState);
+                    });
                 }
             }
 
