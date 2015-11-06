@@ -2,9 +2,17 @@
 {
   display: flex;
 
+  @media all and(max-width: 960px) {
+    flex-direction: column;
+  }
+
   .club-information
   {
     width: 65%;
+
+    @media all and(max-width: 960px) {
+      width: 100%;
+    }
   }
 }
 
@@ -15,6 +23,11 @@
   display: flex;
   flex-direction: column;
 
+  @media all and(max-width: 960px) {
+    width: 100%;
+    margin: 15px 5px 5px 5px;
+  }
+
   .widget
   {
     width: calc(100% - 20px);
@@ -23,6 +36,11 @@
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+
+    @media all and(max-width: 960px) {
+      width: calc(100% - 10px);
+      margin: 10px 0;
+    }
 
     &.green
     {
