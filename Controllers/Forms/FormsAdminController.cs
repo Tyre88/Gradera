@@ -78,5 +78,15 @@ namespace Gradera_Klubb.Controllers.Forms
                 new JsonMediaTypeFormatter());
             return response;
         }
+
+        [HttpDelete, HttpOptions]
+        [AuthorizeFilter(AccessType = AccessType.Forms, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage DeleteFormFieldItem(int formFieldId)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            FormsAdminBLL.DeleteFormFieldItem(formFieldId, loggedInUser.AccountSession.ClubId);
+            return response;
+        }
     }
 }

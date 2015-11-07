@@ -100,17 +100,28 @@
 <md-button ng-show="vm.ShowSelectOptions" class="md-raised md-primary" ng-click="vm.AddFormFieldOption();">Lägg till</md-button>
 <div class="divider"></div>
 
-<!--<md-subheader class="md-no-sticky">
-    Förhandsgranskning av formulär:
+<md-subheader class="md-no-sticky">
+    Fält:
 </md-subheader>
 
-<div class="form-preview">
-    <form name="{{vm.PreviewForm.Name}}" novalidate>
-        <formly-form model="vm.model" fields="vm.PreviewForm.FormFields" options="vm.options" form="vm.form">
-        </formly-form>
-        <md-button type="submit" class="md-raised md-primary" ng-disabled="vm.form.$invalid" ng-click="vm.SubmitForm()">Skicka</md-button>
-    </form>
-</div>-->
+<div class="edit-container">
+    <md-list>
+        <md-list-item ng-repeat="item in vm.Form.FormFields">
+            <p>{{item.Label}}</p>
+            <p>{{item.Type}}</p>
+            <p>{{item.IsRequired ? 'Obligatorisk' : 'Ej obligatorisk'}}</p>
+            <div class="more-icons md-secondary">
+                <i ng-click="vm.DeleteFormFieldItem(item); $event.stopPropagation();" class="fa fa-trash md-hue-3">
+                    <md-tooltip>
+                        Ta bort fält
+                    </md-tooltip>
+                </i>
+            </div>
+        </md-list-item>
+    </md-list>
+</div>
+
+<div class="divider"></div>
 
 <md-button class="md-raised md-primary" ng-click="vm.SaveForm();">Spara</md-button>
 <md-button class="md-raised md-warn" ng-click="vm.Back();">Avbryt</md-button>

@@ -92,6 +92,7 @@ require(
             vm.DeleteOption = DeleteOption;
             vm.ShowPreviewForm = ShowPreviewForm;
             vm.ClosePreview = ClosePreview;
+            vm.DeleteFormFieldItem = DeleteFormFieldItem;
 
             function GetForm() {
                 formsAdminService.GetForm(vm.FormId).success(getFormCallback);
@@ -161,6 +162,14 @@ require(
 
             function ClosePreview() {
                 $mdDialog.hide();
+            }
+
+            function DeleteFormFieldItem(item) {
+                if(item.Id > 0) {
+                    formsAdminService.DeleteFormFieldItem(item.Id);
+                }
+
+                vm.Form.FormFields.splice(vm.Form.FormFields.indexOf(item), 1);
             }
 
             if(vm.FormId > 0)
