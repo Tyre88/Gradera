@@ -186,7 +186,11 @@ require(
             vm.GetUserAnswers = GetUserAnswers;
 
             function GetUserAnswers() {
+                formsAdminService.GetUserAnswers(vm.FormId).success(getUserAnswersCallback);
 
+                function getUserAnswersCallback(response) {
+                    vm.UserAnswers = response;
+                }
             }
 
             if(vm.FormId > 0)

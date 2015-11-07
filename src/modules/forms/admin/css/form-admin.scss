@@ -7,3 +7,17 @@
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
+
+.md-list-item-text
+{
+  p,
+  h4
+  {
+    line-height: 16px;
+  }
+
+  p
+  {
+    color: #b9b9b9;
+  }
+}

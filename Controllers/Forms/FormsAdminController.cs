@@ -3,6 +3,7 @@ using Gradera.Forms.BLL;
 using Gradera_Klubb.Filters;
 using Gradera_Klubb.Models;
 using Gradera_Klubb.Models.Forms;
+using Gradera_Klubb.Models.Forms.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,6 +64,18 @@ namespace Gradera_Klubb.Controllers.Forms
 
             Gradera.Forms.DAL.Form f = FormModel.MapModelToForm(form);
             FormsAdminBLL.SaveForm(f);
+            return response;
+        }
+
+        [HttpGet]
+        [AuthorizeFilter(AccessType = AccessType.Forms, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage GetUserSubmits(int formId)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            response.Content = new ObjectContent<List<UserFormSubmit>>(UserFormSubmit.MapUserFormSubmits(
+                FormsAdminBLL.GetUserSubmits(formId, loggedInUser.AccountSession.ClubId), true),
+                new JsonMediaTypeFormatter());
             return response;
         }
     }

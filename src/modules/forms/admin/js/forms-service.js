@@ -26,6 +26,10 @@ require(
 
             this.SaveForm = function(form) {
                 return $http.post('/api/formsadmin/saveform', form);
-            }
+            };
+
+            this.GetUserAnswers = function(formId) {
+                return $http.get('/api/formsadmin/GetUserSubmits?' + $.param({formId: formId}));
+            };
         }
     });
