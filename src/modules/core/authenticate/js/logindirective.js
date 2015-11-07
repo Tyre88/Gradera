@@ -7,7 +7,7 @@ require(
 	],
 	function(app)
 	{
-		app.directive('gkLogin', ["login-service", "user-service", "api", "$state", function(loginService, userService, api, $state)
+		app.directive('gkLogin', ["login-service", "user-service", "api", "$state", "$mdDialog", function(loginService, userService, api, $state, $mdDialog)
 		{
 			return {
 				restrict: "E",
@@ -20,6 +20,15 @@ require(
 							userService.User.InitializeLogin(response);
 							api.init(userService.User.Token);
 							$state.go ('home');
+						}).error(function() {
+							$mdDialog.show(
+								$mdDialog.alert()
+									.clickOutsideToClose(false)
+									.title('Login fel!')
+									.content('Det gick inte att logga in, prova med ett annat användarnamn eller lösenord.')
+									.ariaLabel('Login fel!')
+									.ok('Ok')
+							);
 						});
 					};
 				}

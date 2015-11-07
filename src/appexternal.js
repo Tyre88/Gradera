@@ -16,13 +16,13 @@ define(
         }
         catch(err)
         {
-            return angular.module("graderaklubbexternal", ['ng', 'ngRoute', 'ui.router', 'ui.bootstrap', 'ngMaterial'])
-                .controller('home', homeController);
-
             function homeController() {
                 var vm = this;
                 vm.Test = "Hello world";
                 console.log("testing....");
             }
+
+            return angular.module("graderaklubbexternal", ['ng', 'ngRoute', 'ui.router', 'ui.bootstrap', 'ngMaterial'])
+                .controller('home', homeController);
         }
     });

@@ -4,6 +4,7 @@ require(
         "./routing.js",
 		"./adminrouting.js",
         "./externalrouting.js",
+        "directives/helpers.js",
 		"./modules/core/authenticate/js/logindirective.js",
         "modules/home/js/homecontroller.js",
         "modules/core/common/enums.js",
