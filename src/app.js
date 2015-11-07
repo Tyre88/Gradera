@@ -225,6 +225,11 @@ define(
 					});
 
 					formlyConfig.setType({
+						name: 'textarea',
+						template: '<textarea ng-model="model[options.key]" columns="3" md-maxlength="500"></textarea>'
+					});
+
+					formlyConfig.setType({
 						name: 'input',
 						template: '<input ng-model="model[options.key]">'
 					});
@@ -236,13 +241,13 @@ define(
 
 					formlyConfig.setWrapper({
 						name: 'mdLabel',
-						types: ['input'],
+						types: ['input', 'textarea'],
 						template: '<label>{{to.label}}</label><formly-transclude></formly-transclude>'
 					});
 
 					formlyConfig.setWrapper({
 						name: 'mdInputContainer',
-						types: ['input'],
+						types: ['input', 'textarea'],
 						template: '<md-input-container><formly-transclude></formly-transclude></md-input-container>'
 					});
 				}]);
