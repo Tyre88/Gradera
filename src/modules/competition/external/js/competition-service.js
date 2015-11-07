@@ -5,9 +5,9 @@
 'use-strict';
 
 (function(angular) {
-    angular.module('graderaklubbexternal').service('competition-external-service', function($http) {
+    angular.module('graderaklubbexternal').service('competition-external-service', ["$http", function($http) {
         this.GetCompetition = function(clubShortName, competitionName) {
             return $http.get('/api/ExternalCompetition/GetCompetition?' + $.param({clubShortName: clubShortName, competitionName: competitionName}));
         };
-    });
+    }]);
 }(window.angular));

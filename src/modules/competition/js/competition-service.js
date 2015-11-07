@@ -1,5 +1,5 @@
 (function(angular) {
-    angular.module('graderaklubb').service('competition-service', function($http) {
+    angular.module('graderaklubb').service('competition-service', ["$http", function($http) {
         this.GetCompetitions = function() {
             return $http.get('/api/competition/GetCompetitions');
         };
@@ -15,5 +15,5 @@
         this.GetUpcommingCompetitions = function(count) {
             return $http.get('/api/competition/GetUpcommingCompetitions?' + $.param({count: count}));
         };
-    });
+    }]);
 }(window.angular));

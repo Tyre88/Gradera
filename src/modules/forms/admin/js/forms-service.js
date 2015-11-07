@@ -1,6 +1,8 @@
 (function(angular) {
     angular.module('graderaklubb').service('forms-admin-service', formsAdminService);
 
+    formsAdminService.$inject = ["$http"];
+
     function formsAdminService($http) {
         this.GetForms = function() {
             return $http.get('/api/formsadmin/getallforms');

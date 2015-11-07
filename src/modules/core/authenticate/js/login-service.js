@@ -1,5 +1,5 @@
 (function(angular) {
-    angular.module('graderaklubb').service('login-service', function($http)
+    angular.module('graderaklubb').service('login-service', ["$http", function($http)
     {
         this.Login = function(userName, password)
         {
@@ -11,5 +11,5 @@
         {
             return $http.post('/api/Authenticate/Logout');
         };
-    });
+    }]);
 }(window.angular));

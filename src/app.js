@@ -154,7 +154,7 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
                 }
             }
         }])
-        .factory('api', function($http) {
+        .factory('api', ["$http", function($http) {
             var config = { headers: {
                 'AuthenticateToken': "",
                 'Accept': "application/json, text/plain, */*",
@@ -174,7 +174,7 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
                 init: init,
                 config: config
             };
-        })
+        }])
         .config([
             "$compileProvider",
             "$httpProvider",
@@ -237,7 +237,8 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
                 types: ['input', 'textarea'],
                 template: '<md-input-container><formly-transclude></formly-transclude></md-input-container>'
             });
-        }]).service('user-service', function($http)
+        }])
+        .service('user-service', ["$http", function($http)
         {
             this.UserModel = function(club, user)
             {
@@ -383,7 +384,7 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
             this.DeleteUser = function(id) {
                 return $http.post('/api/User/DeleteUser?' + $.param({id: id}));
             };
-        });
+        }]);
 
 
     $(document).ready(function () {

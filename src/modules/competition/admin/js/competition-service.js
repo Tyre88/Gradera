@@ -1,5 +1,5 @@
 (function(angular) {
-    angular.module('graderaklubb').service('competition-admin-service', function($http) {
+    angular.module('graderaklubb').service('competition-admin-service', ["$http", function($http) {
         this.AddCategory = function(competitionId, categoryName) {
             return $http.post('/api/competition/AddCategory?' + $.param({competitionId: competitionId, categoryName: categoryName}));
         };
@@ -19,5 +19,5 @@
         this.DeleteCompetition = function(competitionId) {
             return $http.post('/api/competition/DeleteCompetition?' + $.param({id: competitionId}));
         };
-    });
+    }]);
 }(window.angular));

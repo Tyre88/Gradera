@@ -18,9 +18,9 @@ module.exports = function (grunt)
         "clean:all",
         "copy",
         "sass",
-        "concat"
+        "concat",
         //"htmlmin",
-        //"uglify"
+        "uglify"
 	]);
 
 	grunt.registerTask("default",
@@ -148,7 +148,7 @@ module.exports = function (grunt)
 					{
 						expand: true,
 						cwd: "<%= config.dist %>",
-						src: "**/*.js",
+						src: "application.js",
 						dest: "<%= config.dist %>"
 					}
 				]
