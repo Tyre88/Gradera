@@ -213,18 +213,18 @@ module.exports = function (grunt)
 					}
 				]
 			},
-			scripts:
-			{
-				files:
-				[
-					{
-						expand: true,
-						cwd: "<%= config.src %>",
-						src: "**/*.js",
-						dest: "<%= config.dist %>"
-					}
-				]
-			},
+			//scripts:
+			//{
+			//	files:
+			//	[
+			//		{
+			//			expand: true,
+			//			cwd: "<%= config.src %>",
+			//			src: "**/*.js",
+			//			dest: "<%= config.dist %>"
+			//		}
+			//	]
+			//},
 			markup:
 			{
 				files:
