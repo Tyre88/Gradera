@@ -4,14 +4,10 @@
 
 'use-strict';
 
-require(
-    [
-        "appexternal"
-    ],
-    function (appexternal) {
-        appexternal.service('competition-external-service', function($http) {
-            this.GetCompetition = function(clubShortName, competitionName) {
-                return $http.get('/api/ExternalCompetition/GetCompetition?' + $.param({clubShortName: clubShortName, competitionName: competitionName}));
-            };
-        });
+(function(angular) {
+    angular.module('graderaklubbexternal').service('competition-external-service', function($http) {
+        this.GetCompetition = function(clubShortName, competitionName) {
+            return $http.get('/api/ExternalCompetition/GetCompetition?' + $.param({clubShortName: clubShortName, competitionName: competitionName}));
+        };
     });
+}(window.angular));

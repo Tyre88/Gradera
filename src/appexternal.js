@@ -1,28 +1,14 @@
-/**
- * Created by Victor on 2015-11-04.
- */
+(function(angular) {
+    angular.module("graderaklubbexternal", ['ng', 'ngRoute', 'ui.router', 'ui.bootstrap', 'ngMaterial'])
+        .controller('home', homeController);
 
-'use-strict';
+    function homeController() {
+        var vm = this;
+        vm.Test = "Hello world";
+        console.log("LALA");
+    }
 
-define(
-    [
-        "ui-router",
-        "ui-bootstrap"
-    ],
-    function () {
-        try
-        {
-            return angular.module("graderaklubbexternal");
-        }
-        catch(err)
-        {
-            function homeController() {
-                var vm = this;
-                vm.Test = "Hello world";
-                console.log("testing....");
-            }
-
-            return angular.module("graderaklubbexternal", ['ng', 'ngRoute', 'ui.router', 'ui.bootstrap', 'ngMaterial'])
-                .controller('home', homeController);
-        }
+    $(document).ready(function () {
+        angular.bootstrap(document, ["graderaklubbexternal"]);
     });
+}(window.angular));

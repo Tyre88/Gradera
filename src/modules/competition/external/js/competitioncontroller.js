@@ -4,32 +4,27 @@
 
 'use-strict';
 
-require(
-    [
-        "appexternal",
-        "modules/competition/external/js/competition-service.js"
-    ],
-    function (appexternal) {
-        appexternal.controller('showexternalcompetition', showexternalcompetitionController);
+(function(angular) {
+    angular.module('graderaklubbexternal').controller('showexternalcompetition', showexternalcompetitionController);
 
-        showexternalcompetitionController.$inject = ["$stateParams", "competition-external-service"];
+    showexternalcompetitionController.$inject = ["$stateParams", "competition-external-service"];
 
-        function showexternalcompetitionController($stateParams, competitionExternalService) {
-            var vm = this;
-            vm.Competition = {};
-            vm.CompetitionName = $stateParams.competitionName;
-            vm.ClubShortName = $stateParams.clubShortName;
+    function showexternalcompetitionController($stateParams, competitionExternalService) {
+        var vm = this;
+        vm.Competition = {};
+        vm.CompetitionName = $stateParams.competitionName;
+        vm.ClubShortName = $stateParams.clubShortName;
 
-            vm.GetCompetition = GetCompetition;
+        vm.GetCompetition = GetCompetition;
 
-            function GetCompetition() {
-                competitionExternalService.GetCompetition(vm.ClubShortName, vm.CompetitionName).success(getCompetitionCallback);
+        function GetCompetition() {
+            competitionExternalService.GetCompetition(vm.ClubShortName, vm.CompetitionName).success(getCompetitionCallback);
 
-                function getCompetitionCallback(response) {
-                    vm.Competition = response;
-                }
+            function getCompetitionCallback(response) {
+                vm.Competition = response;
             }
-
-            vm.GetCompetition();
         }
-    });
+
+        vm.GetCompetition();
+    }
+}(window.angular));

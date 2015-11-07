@@ -3,7 +3,6 @@ require(
         "app",
         "./routing.js",
 		"./adminrouting.js",
-        "./externalrouting.js",
         "directives/helpers.js",
 		"./modules/core/authenticate/js/logindirective.js",
         "modules/home/js/homecontroller.js",
@@ -14,7 +13,6 @@ require(
         "modules/core/users/js/usercontroller.js",
         "modules/competition/admin/js/competitioncontroller.js",
         "modules/competition/js/competitioncontroller.js",
-        "modules/competition/external/js/competitioncontroller.js",
         "modules/forms/admin/js/formscontroller.js",
         "modules/forms/js/formscontroller.js"
     ],

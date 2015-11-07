@@ -1,35 +1,25 @@
-/**
- * Created by Victor on 2015-11-02.
- */
+(function(angular) {
+    angular.module("graderaklubbexternal").config(externalRouting);
 
-'use-strict';
+    externalRouting.$inject = ["$stateProvider", "$urlRouterProvider"];
 
-require(
-    [
-        "appexternal"
-    ],
-    function (appexternal) {
-        appexternal.config(
-            [
-                "$stateProvider",
-                "$urlRouterProvider",
-                function($stateProvider, $urlRouterProvider) {
-                    $stateProvider
-                        .state('home',
-                        {
-                            url: "/",
-                            template: "TEST",
-                            controller: "home",
-                            controllerAs: "vm"
-                        })
-                        .state('showexternalcompetition',
-                        {
-                            url: "/show/competition/:clubShortName/:competitionName",
-                            templateUrl: "modules/competition/external/views/showcompetition.html",
-                            controller: "showexternalcompetition",
-                            controllerAs: "vm"
-                        });
-                }
-            ]
-        );
-    });
+    function externalRouting($stateProvider, $urlRouterProvider) {
+        $stateProvider
+            .state('home',
+            {
+                url: "/",
+                template: "TEST",
+                controller: "home",
+                controllerAs: "vm"
+            })
+            .state('showexternalcompetition',
+            {
+                url: "/show/competition/:clubShortName/:competitionName",
+                templateUrl: "modules/competition/external/views/showcompetition.html",
+                controller: "showexternalcompetition",
+                controllerAs: "vm"
+            });
+
+        $urlRouterProvider.otherwise('/');
+    }
+}(window.angular));

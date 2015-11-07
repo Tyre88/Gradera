@@ -15,17 +15,23 @@ module.exports = function (grunt)
 
 	grunt.registerTask("build",
 	[
-	  "clean:all",
-	  "copy",
-	  "sass"
-	  //"htmlmin",
-	  //"uglify"
+        "clean:all",
+        "copy",
+        "sass",
+        "concat"
+        //"htmlmin",
+        //"uglify"
 	]);
 
 	grunt.registerTask("default",
 	[
 		"server"
 	]);
+
+    grunt.registerTask('con',
+    [
+        "concat"
+    ]);
 
 	grunt.initConfig(
 	{
@@ -97,6 +103,11 @@ module.exports = function (grunt)
 				files: ["<%= config.src %>/**/*.js"],
 				tasks: ["newer:copy:scripts"]
 			},
+            externalScripts:
+            {
+                files: ["<%= config.src %>/appexternal.js", "<%= config.src %>/externalrouting.js"],
+                tasks: ["newer:concat"]
+            },
 			json:
 			{
 				files: ["<%= config.src %>/**/*.json"],
@@ -264,6 +275,29 @@ module.exports = function (grunt)
 		{
 			binaries: ["<%= config.dist %>/bin/**/*"],
 			all: ["<%= config.dist %>/**/*"]
+		},
+		concat:
+		{
+			dist: {
+                options: {
+                    // Replace all 'use strict' statements in the code with a single one at the top
+                    banner: "'use strict';\n",
+                    process: function(src, filepath) {
+                        return '// Source: ' + filepath + '\n' +
+                            src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
+                    }
+                },
+                files: {
+                    'dist/appexternal.js': [
+                        'src/appexternal.js',
+                        'src/externalrouting.js'
+                    ],
+                    'dist/modules/competition/external/js/competition.js': [
+                        'src/modules/competition/external/js/competition-service.js',
+                        'src/modules/competition/external/js/competitioncontroller.js'
+                    ]
+                }
+			}
 		}
 	});
 };
