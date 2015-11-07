@@ -165,11 +165,20 @@ require(
             }
 
             function DeleteFormFieldItem(item) {
-                if(item.Id > 0) {
-                    formsAdminService.DeleteFormFieldItem(item.Id);
-                }
+                var confirm = $mdDialog.confirm()
+                    .title('Ta bort fält?')
+                    .content('Är du säker på att du vill ta bort fältet: ' + item.Label + '?')
+                    .ariaLabel('Ta bort fält?')
+                    .ok('Ja')
+                    .cancel('Nej');
 
-                vm.Form.FormFields.splice(vm.Form.FormFields.indexOf(item), 1);
+                $mdDialog.show(confirm).then(function() {
+                    if(item.Id > 0) {
+                        formsAdminService.DeleteFormFieldItem(item.Id);
+                    }
+
+                    vm.Form.FormFields.splice(vm.Form.FormFields.indexOf(item), 1);
+                });
             }
 
             if(vm.FormId > 0)
