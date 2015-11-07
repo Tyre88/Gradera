@@ -1,40 +1,34 @@
-require(
-    [
-        "app",
-        "modules/core/accessrights/js/accessrights-service.js"
-    ],
-    function(app)
-    {
-        app.controller('listusers', ["$scope", "user-service", "$state", "$mdDialog", function($scope, userService, $state, $mdDialog) {
-            $scope.Users = [];
+(function(angular) {
+    angular.module('graderaklubb').controller('listusers', ["$scope", "user-service", "$state", "$mdDialog", function($scope, userService, $state, $mdDialog) {
+        $scope.Users = [];
 
-            $scope.EditUser = function(userId, event)
-            {
-                $state.go("edituser", {userId : userId});
-            };
+        $scope.EditUser = function(userId, event)
+        {
+            $state.go("edituser", {userId : userId});
+        };
 
-            $scope.DeleteUser = function(user) {
+        $scope.DeleteUser = function(user) {
 
-                var confirm = $mdDialog.confirm()
-                    .title('Ta bort användare?')
-                    .content('Är du säker på att du vill ta bort ' + user.FirstName + ' ' + user.LastName + '?')
-                    .ariaLabel('Ta bort användare?')
-                    .ok('Ja')
-                    .cancel('Nej');
+            var confirm = $mdDialog.confirm()
+                .title('Ta bort användare?')
+                .content('Är du säker på att du vill ta bort ' + user.FirstName + ' ' + user.LastName + '?')
+                .ariaLabel('Ta bort användare?')
+                .ok('Ja')
+                .cancel('Nej');
 
-                $mdDialog.show(confirm).then(function() {
-                    userService.DeleteUser(user.Id).success(function(response) {
-                        $scope.Users.splice($scope.Users.indexOf(user), 1);
-                    });
+            $mdDialog.show(confirm).then(function() {
+                userService.DeleteUser(user.Id).success(function(response) {
+                    $scope.Users.splice($scope.Users.indexOf(user), 1);
                 });
-            };
-
-            userService.GetAllUsers().success(function(response) {
-               $scope.Users = response;
             });
-        }]);
+        };
 
-        app.controller('edituser', ["$scope", "$stateParams", "user-service", "accessrights-service", "$state", "gradeEnum",
+        userService.GetAllUsers().success(function(response) {
+            $scope.Users = response;
+        });
+    }]);
+
+    angular.module('graderaklubb').controller('edituser', ["$scope", "$stateParams", "user-service", "accessrights-service", "$state", "gradeEnum",
         function($scope, $stateParams, userService, accessrightsService, $state, gradeEnum) {
             $scope.UserId = $stateParams.userId;
             $scope.User = {};
@@ -95,5 +89,4 @@ require(
                 }
             });
         }]);
-    }
-);
+}(window.angular));

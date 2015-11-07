@@ -1,52 +1,41 @@
-/**
- * Created by Victor on 2015-10-31.
- */
+(function(angular) {
+    angular.module('graderaklubb').controller('clubsettings', clubsettingsController);
 
-'use-strict';
+    clubsettingsController.$inject = ["$mdToast", "club-service"];
 
-require(
-    [
-        "app",
-        "modules/core/club/js/club-service.js"
-    ],
-    function (app) {
-        app.controller('clubsettings', clubsettingsController);
+    function clubsettingsController($mdToast, clubService) {
+        var vm = this;
+        vm.Club = {};
 
-        clubsettingsController.$inject = ["$mdToast", "club-service"];
+        vm.GetClub = GetClub;
+        vm.Save = Save;
+        vm.OnUploadSuccess = OnUploadSuccess;
 
-        function clubsettingsController($mdToast, clubService) {
-            var vm = this;
-            vm.Club = {};
+        function GetClub() {
+            clubService.GetClub().success(getClubCallback);
 
-            vm.GetClub = GetClub;
-            vm.Save = Save;
-            vm.OnUploadSuccess = OnUploadSuccess;
-
-            function GetClub() {
-                clubService.GetClub().success(getClubCallback);
-
-                function getClubCallback(response) {
-                    vm.Club = response;
-                }
+            function getClubCallback(response) {
+                vm.Club = response;
             }
-
-            function Save() {
-                clubService.SaveClub(vm.Club).success(saveClubCallback);
-
-                function saveClubCallback() {
-                    $mdToast.show(
-                        $mdToast.simple()
-                            .content('Klubben sparades korrekt!')
-                            .position('bottom right')
-                            .hideDelay(3000)
-                    );
-                }
-            }
-
-            function OnUploadSuccess(response) {
-                vm.Club.Image = "/Uploads/" + response.data;
-            }
-
-            vm.GetClub();
         }
-    });
+
+        function Save() {
+            clubService.SaveClub(vm.Club).success(saveClubCallback);
+
+            function saveClubCallback() {
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content('Klubben sparades korrekt!')
+                        .position('bottom right')
+                        .hideDelay(3000)
+                );
+            }
+        }
+
+        function OnUploadSuccess(response) {
+            vm.Club.Image = "/Uploads/" + response.data;
+        }
+
+        vm.GetClub();
+    }
+}(window.angular));

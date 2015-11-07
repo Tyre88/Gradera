@@ -6,11 +6,9 @@ var require =
             "angular-animate":"dependencies/angular-animate/angular-animate.min",
             "angular-aria":"dependencies/angular-aria/angular-aria.min",
             "angular-material":"dependencies/angular-material/angular-material",
-            "angular-dragdrop": "dependencies/angular-drag-and-drop/angular-drag-and-drop",
             "ui-router": "dependencies/angular-ui-router/release/angular-ui-router.min",
             "app": "app",
             "domready": "dependencies/require/domready",
-            "ui-bootstrap": "dependencies/ui-bootstrap-tpls-0.11.0.min",
             "jquery": "dependencies/jquery/jquery.min",
             "jquery-ui": "dependencies/jquery/jquery-ui",
 			"extensions": "dependencies/extensions",
@@ -22,7 +20,7 @@ var require =
         {
             "app":
             {
-                deps: ["ui-router", "ui-bootstrap", "angular-material", "angular-route", "angular-dragdrop", "webbdudes-image-helper", "ng-file-upload", "angular-formly"]
+                deps: ["ui-router", "angular-material", "angular-route", "webbdudes-image-helper", "ng-file-upload", "angular-formly"]
             },
             "angular-material":
             {

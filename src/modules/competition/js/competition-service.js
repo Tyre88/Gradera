@@ -1,29 +1,19 @@
-/**
- * Created by Victor on 2015-11-02.
- */
+(function(angular) {
+    angular.module('graderaklubb').service('competition-service', function($http) {
+        this.GetCompetitions = function() {
+            return $http.get('/api/competition/GetCompetitions');
+        };
 
-'use-strict';
+        this.GetCompetition = function(competitionId) {
+            return $http.get('/api/competition/GetCompetition/' + competitionId);
+        };
 
-require(
-    [
-        "app"
-    ],
-    function (app) {
-        app.service('competition-service', function($http) {
-            this.GetCompetitions = function() {
-                return $http.get('/api/competition/GetCompetitions');
-            };
+        this.SubscribeToCompetition = function(competitionId, categoryId){
+            return $http.post('/api/competition/SubscribeToCompetition?' + $.param({competitionId: competitionId, categoryId: categoryId}));
+        };
 
-            this.GetCompetition = function(competitionId) {
-                return $http.get('/api/competition/GetCompetition/' + competitionId);
-            };
-
-            this.SubscribeToCompetition = function(competitionId, categoryId){
-                return $http.post('/api/competition/SubscribeToCompetition?' + $.param({competitionId: competitionId, categoryId: categoryId}));
-            };
-
-            this.GetUpcommingCompetitions = function(count) {
-                return $http.get('/api/competition/GetUpcommingCompetitions?' + $.param({count: count}));
-            };
-        });
+        this.GetUpcommingCompetitions = function(count) {
+            return $http.get('/api/competition/GetUpcommingCompetitions?' + $.param({count: count}));
+        };
     });
+}(window.angular));

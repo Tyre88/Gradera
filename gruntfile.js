@@ -101,13 +101,8 @@ module.exports = function (grunt)
 			scripts:
 			{
 				files: ["<%= config.src %>/**/*.js"],
-				tasks: ["newer:copy:scripts"]
+				tasks: ["newer:concat"]
 			},
-            externalScripts:
-            {
-                files: ["<%= config.src %>/appexternal.js", "<%= config.src %>/externalrouting.js"],
-                tasks: ["newer:concat"]
-            },
 			json:
 			{
 				files: ["<%= config.src %>/**/*.json"],
@@ -290,11 +285,30 @@ module.exports = function (grunt)
                 files: {
                     'dist/appexternal.js': [
                         'src/appexternal.js',
-                        'src/externalrouting.js'
-                    ],
-                    'dist/modules/competition/external/js/competition.js': [
+                        'src/externalrouting.js',
                         'src/modules/competition/external/js/competition-service.js',
                         'src/modules/competition/external/js/competitioncontroller.js'
+                    ],
+                    'dist/dependencies/dependencies.js': [
+                        'src/dependencies/jquery/jquery.min.js',
+                        'src/dependencies/extensions.js',
+                        'src/dependencies/angular/angular.min.js',
+                        'src/dependencies/angular-animate/angular-animate.min.js',
+                        'src/dependencies/angular-aria/angular-aria.min.js',
+                        'src/dependencies/angular-route/angular-route.min.js',
+                        'src/dependencies/angular-material/angular-material.min.js',
+                        'src/dependencies/angular-ui-router/release/angular-ui-router.min.js',
+                        'src/dependencies/api-check/dist/api-check.min.js',
+                        'src/dependencies/angular-formly/dist/formly.min.js',
+                        'src/dependencies/ng-file-upload/ng-file-upload.min.js',
+                        'src/dependencies/webbdudes/webbdudes-image-helper.js'
+                    ],
+                    'dist/application.js': [
+                        'src/app.js',
+                        'src/routing.js',
+                        'src/adminrouting.js',
+                        'src/directives/helpers.js',
+                        'src/modules/**/*.js'
                     ]
                 }
 			}
