@@ -70,11 +70,6 @@ namespace Gradera_Klubb.Models.Competition
         public static CompetitionModel MapCompetitionDeep(Gradera.Competition.DAL.Competition competition)
         {
             CompetitionModel model = MapCompetition(competition);
-            competition.Competition_Category.ToList().ForEach(c => model.Categories.Add(new CompetitionCategoryModel()
-            {
-                Id = c.Id,
-                Name = c.Name
-            }));
 
             foreach (var c in competition.Competition_Internal_Competitor)
             {

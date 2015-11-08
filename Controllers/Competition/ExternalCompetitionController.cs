@@ -1,5 +1,6 @@
 ﻿using Gradera.Competition.BLL;
 using Gradera_Klubb.Models.Competition;
+using Gradera_Klubb.Models.Competition.External;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +23,10 @@ namespace Gradera_Klubb.Controllers.Competition
         }
 
         [HttpPost, HttpOptions]
-        public HttpResponseMessage Submit(string contactPerson)
+        public HttpResponseMessage Submit(CompetitionContactPersonModel contactPerson)
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-
+            CompetitionBLL.SubmitExternal(CompetitionContactPersonModel.MapToContactPerson(contactPerson));
             return response;
         }
     }

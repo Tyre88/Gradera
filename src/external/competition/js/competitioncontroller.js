@@ -34,6 +34,7 @@
         }
 
         function Submit() {
+            vm.ContactPerson.CompetitionId = vm.Competition.Id;
             competitionExternalService.Submit(vm.ContactPerson).success(submitCallback);
 
             function submitCallback(response) {
