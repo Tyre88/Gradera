@@ -20,5 +20,13 @@ namespace Gradera_Klubb.Controllers.Competition
             response.Content = new ObjectContent<CompetitionModel>(competition, new JsonMediaTypeFormatter());
             return response;
         }
+
+        [HttpPost, HttpOptions]
+        public HttpResponseMessage Submit(string contactPerson)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+
+            return response;
+        }
     }
 }

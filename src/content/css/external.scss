@@ -43,3 +43,27 @@ footer
   z-index: 9999;
   background-color: #FFFFFF;
 }
+
+.form-field-hundred
+{
+  width: 100%;
+}
+
+.form-field-fifty
+{
+  width: 49%;
+}
+
+.form-field-twentyfife
+{
+  width: 24%;
+}
+
+.form-field-hundred,
+.form-field-fifty,
+.form-field-twentyfife
+{
+  @media all and(max-width: 960px) {
+    width: 100%;
+  }
+}

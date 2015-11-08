@@ -1,1 +1,101 @@
-{{vm.Competition | json}}
+<form name="competitionForm" ng-submit="vm.Submit();">
+    <md-subheader class="md-no-sticky">
+        Välkommen till {{vm.Competition.Name}}!
+    </md-subheader>
+
+    <md-input-container md-no-float class="form-field-fifty">
+        <input type="text" ng-model="vm.ContactPerson.Name" placeholder="Namn" required name="name" />
+        <div ng-messages="competitionForm.name.$error">
+            <div ng-message="required">Du måste fylla i en kontaktperson</div>
+        </div>
+    </md-input-container>
+
+    <md-input-container md-no-float class="form-field-fifty">
+        <input type="text" ng-model="vm.ContactPerson.Coaches" placeholder="Coach(er)" required name="coaches" />
+        <div ng-messages="competitionForm.coaches.$error">
+            <div ng-message="required">Du måste fylla i vilka coacher som kommer att närvara</div>
+        </div>
+    </md-input-container>
+
+    <md-input-container md-no-float class="form-field-fifty">
+        <input type="phone" ng-model="vm.ContactPerson.Phone" placeholder="Telefonnummer" required name="phone" />
+        <div ng-messages="competitionForm.phone.$error">
+            <div ng-message="required">Du måste fylla i telefonnummer</div>
+        </div>
+    </md-input-container>
+
+    <md-input-container md-no-float class="form-field-fifty">
+        <input type="email" ng-model="vm.ContactPerson.Email" placeholder="E-post" required name="email" />
+        <div ng-messages="competitionForm.email.$error">
+            <div ng-message="required">Du måste fylla i en e-post</div>
+            <div ng-message="email">Felaktig e-post adress</div>
+        </div>
+    </md-input-container>
+
+    <md-input-container md-no-float class="form-field-fifty">
+        <input type="text" ng-model="vm.ContactPerson.Club" placeholder="Klubb" required name="club" />
+        <div ng-messages="competitionForm.club.$error">
+            <div ng-message="required">Du måste ange en klubb</div>
+        </div>
+    </md-input-container>
+
+    <md-input-container md-no-float class="form-field-fifty">
+        <textarea type="text" ng-model="vm.ContactPerson.Message" placeholder="Meddelande till arrangören"></textarea>
+    </md-input-container>
+
+    <div ng-repeat="compeditor in vm.ContactPerson.Compeditors">
+        <md-subheader class="md-no-sticky">
+            Deltagare {{$index + 1}}: {{compeditor.FirstName}} {{compeditor.LastName}}
+        </md-subheader>
+
+        <md-input-container md-no-float class="form-field-fifty">
+            <input type="text" ng-model="compeditor.FirstName" placeholder="Förnamn" />
+        </md-input-container>
+
+        <md-input-container md-no-float class="form-field-fifty">
+            <input type="text" ng-model="compeditor.LastName" placeholder="Efternamn" />
+        </md-input-container>
+
+        <md-input-container md-no-float class="form-field-fifty">
+            <input type="text" ng-model="compeditor.Birthyear" placeholder="Födelseår" />
+        </md-input-container>
+
+        <md-input-container class="form-field-fifty">
+            <label>Grad</label>
+            <md-select ng-model="compeditor.Grade">
+                <md-option ng-repeat="grade in vm.Grades" value="{{grade.Id}}">
+                    {{grade.Name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container class="form-field-fifty">
+            <label>Kategori</label>
+            <md-select ng-model="compeditor.Category">
+                <md-option ng-repeat="category in vm.Competition.Categories" value="{{category.Id}}">
+                    {{category.Name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container md-no-float class="form-field-fifty">
+            <input type="text" ng-model="compeditor.Weight" placeholder="Vikt" />
+        </md-input-container>
+
+        <md-input-container class="form-field-fifty">
+            <label>Kön</label>
+            <md-select ng-model="compeditor.Gender">
+                <md-option value="0">
+                    Man
+                </md-option>
+                <md-option value="1">
+                    Kvinna
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+
+    <md-button class="md-raised md-primary" ng-click="vm.AddCompeditor();">Lägg till deltagare</md-button>
+
+    <md-button class="md-raised md-primary" type="submit">Skicka</md-button>
+</form>
