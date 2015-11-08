@@ -297,6 +297,7 @@ module.exports = function (grunt)
                         'src/dependencies/angular-route/angular-route.min.js',
                         'src/dependencies/angular-material/angular-material.min.js',
                         'src/dependencies/angular-ui-router/release/angular-ui-router.min.js',
+                        "src/dependencies/angular-messages/angular-messages.min.js",
                         'src/dependencies/api-check/dist/api-check.min.js',
                         'src/dependencies/angular-formly/dist/formly.min.js',
                         'src/dependencies/ng-file-upload/ng-file-upload.min.js',
