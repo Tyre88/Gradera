@@ -79,6 +79,18 @@ namespace Gradera_Klubb.Controllers.Forms
             return response;
         }
 
+        [HttpGet]
+        [AuthorizeFilter(AccessType = AccessType.Forms, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage GetExternalAnswers(int formId)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            response.Content = new ObjectContent<List<ExternalFormSubmit>>(ExternalFormSubmit.MapExternalFormSubmits(
+                FormsAdminBLL.GetExternalSubmits(formId, loggedInUser.AccountSession.ClubId)),
+                new JsonMediaTypeFormatter());
+            return response;
+        }
+
         [HttpDelete, HttpOptions]
         [AuthorizeFilter(AccessType = AccessType.Forms, AccessTypeRight = AccessTypeRight.Write)]
         public HttpResponseMessage DeleteFormFieldItem(int formFieldId)

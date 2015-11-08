@@ -4,10 +4,12 @@ LoadCss(["modules/forms/admin/css/form-admin.css", "modules/forms/css/form.css"]
     angular.module('graderaklubb').controller('formsadminlist', formsadminlistController);
     angular.module('graderaklubb').controller('formsadminedit', formsadmineditController);
     angular.module('graderaklubb').controller('formanswers', formanswersController);
+    angular.module('graderaklubb').controller('formanswersexternal', formanswersexternalController);
 
     formsadminlistController.$inject = ["$state", "forms-admin-service", "$mdDialog"];
     formsadmineditController.$inject = ["$scope", "$state", "$stateParams", "forms-admin-service", "form", "$mdDialog"];
     formanswersController.$inject = ["$state", "$stateParams", "forms-admin-service"];
+    formanswersexternalController.$inject = ["$state", "$stateParams", "forms-admin-service"];
 
     function formsadminlistController($state, formsAdminService, $mdDialog) {
         var vm = this;
@@ -45,8 +47,11 @@ LoadCss(["modules/forms/admin/css/form-admin.css", "modules/forms/css/form.css"]
             });
         }
 
-        function FormAnswers(formId) {
-            $state.go('formanswers', {formId: formId});
+        function FormAnswers(form) {
+            if(form.IsExternal)
+                $state.go('formanswersexternal', {formId: form.Id});
+            else
+                $state.go('formanswers', {formId: form.Id});
         }
 
         vm.GetForms();
@@ -201,5 +206,24 @@ LoadCss(["modules/forms/admin/css/form-admin.css", "modules/forms/css/form.css"]
 
         if(vm.FormId > 0)
             vm.GetUserAnswers();
+    }
+
+    function formanswersexternalController($state, $stateParams, formsAdminService) {
+        var vm = this;
+        vm.FormId = ~~$stateParams.formId;
+        vm.Answers = [];
+
+        vm.GetAnswers = GetAnswers;
+
+        function GetAnswers() {
+            formsAdminService.GetExternalAnswers(vm.FormId).success(getExternalAnswersCallback);
+
+            function getExternalAnswersCallback(response) {
+                vm.Answers = response;
+            }
+        }
+
+        if(vm.FormId > 0)
+            vm.GetAnswers();
     }
 }(window.angular));

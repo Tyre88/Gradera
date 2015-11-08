@@ -70,6 +70,13 @@
                 templateUrl: "modules/forms/admin/views/formanswers.html",
                 controller: "formanswers",
                 controllerAs: "vm"
+            })
+            .state('formanswersexternal',
+            {
+                url: "/form/answersexternal/:formId",
+                templateUrl: "modules/forms/admin/views/formanswersexternal.html",
+                controller: "formanswersexternal",
+                controllerAs: "vm"
             });
     }
 }(window.angular));

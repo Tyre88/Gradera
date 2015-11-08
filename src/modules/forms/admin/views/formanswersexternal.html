@@ -1,0 +1,15 @@
+<md-list ng-cloak>
+    <md-subheader class="md-no-sticky">
+        Formulär svar
+    </md-subheader>
+
+    <md-list-item ng-repeat="answer in vm.Answers" ng-click="answer.Show = !answer.Show">
+        <div class="md-list-item-text" layout="column">
+            <p ng-hide="answer.Show">Svar: {{$index + 1}}</p>
+            <md-subheader ng-show="answer.Show" class="md-no-sticky">
+                <p>Svar: {{$index + 1}}</p>
+            </md-subheader>
+            <p ng-show="answer.Show" ng-repeat="item in answer.FormSubmits">{{item.Name}}: {{item.Value}}</p>
+        </div>
+    </md-list-item>
+</md-list>

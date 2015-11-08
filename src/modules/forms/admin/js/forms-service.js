@@ -24,6 +24,10 @@
             return $http.get('/api/formsadmin/GetUserSubmits?' + $.param({formId: formId}));
         };
 
+        this.GetExternalAnswers = function(formId) {
+            return $http.get('/api/formsadmin/GetExternalAnswers?' + $.param({formId: formId}));
+        };
+
         this.DeleteFormFieldItem = function(formFieldId) {
             return $http.delete('/api/formsadmin/DeleteFormFieldItem?' + $.param({formFieldId: formFieldId}));
         }
