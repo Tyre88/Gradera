@@ -38,8 +38,6 @@
                         .ariaLabel('Tack!')
                         .ok('Ok')
                 );
-                vm.Form = form.Form;
-                vm.GetForm();
             }
         }
 
