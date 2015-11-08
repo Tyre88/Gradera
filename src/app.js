@@ -1,7 +1,7 @@
 LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
 (function(angular) {
-    angular.module('graderaklubb', ['ng', 'ngRoute', 'ui.router', 'ngMaterial',
-        'webbdudes-image-helper', 'ngFileUpload', 'formly']);
+    angular.module('graderaklubb', ['ng', 'ngRoute', 'ngAnimate', 'ui.router', 'ngMaterial',
+        'webbdudes-image-helper', 'ngFileUpload', 'formly', 'angular-loading-bar']);
     angular.module('graderaklubb').controller('index', ["$rootScope", "$scope", "$state", "user-service", "$mdSidenav", "Upload",
             function($rootScope, $scope, $state, userService, $mdSidenav, Upload)
             {
@@ -178,7 +178,8 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
             "$compileProvider",
             "$httpProvider",
             "$mdThemingProvider",
-            function($compileProvider, $httpProvider, $mdThemingProvider)
+            "cfpLoadingBarProvider",
+            function($compileProvider, $httpProvider, $mdThemingProvider, cfpLoadingBarProvider)
             {
                 $compileProvider.debugInfoEnabled(false);
                 $httpProvider.useApplyAsync(true);
@@ -188,6 +189,10 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
                 $mdThemingProvider.theme('default')
                     .primaryPalette('brown')
                     .accentPalette('orange');
+
+                cfpLoadingBarProvider.includeSpinner = true;
+                cfpLoadingBarProvider.latencyThreshold = 250;
+                cfpLoadingBarProvider.spinnerTemplate = '<div class="loader md-whiteframe-z1">Laddar...</div>';
             }
         ])
         .run(["$rootScope", "api", "user-service", "formlyConfig", function($rootScope, api, userService, formlyConfig) {

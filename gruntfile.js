@@ -300,7 +300,8 @@ module.exports = function (grunt)
                         'src/dependencies/api-check/dist/api-check.min.js',
                         'src/dependencies/angular-formly/dist/formly.min.js',
                         'src/dependencies/ng-file-upload/ng-file-upload.min.js',
-                        'src/dependencies/webbdudes/webbdudes-image-helper.js'
+                        'src/dependencies/webbdudes/webbdudes-image-helper.js',
+                        "src/dependencies/angular-loading-bar/build/loading-bar.min.js"
                     ],
                     'dist/application.js': [
                         'src/app.js',

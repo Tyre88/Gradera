@@ -196,6 +196,19 @@ footer
 	color: #9B9B9B;
 }
 
+.loader
+{
+  height: 50px;
+  width: 200px;
+  position: absolute;
+  top: calc(50vh - 25px);
+  left: calc(50vw - 100px);
+  line-height: 50px;
+  text-align: center;
+  z-index: 9999;
+  background-color: #FFFFFF;
+}
+
 
 /* IMPORTS */
 @import 'logged-in';
