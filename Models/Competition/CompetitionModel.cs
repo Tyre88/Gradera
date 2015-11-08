@@ -48,6 +48,20 @@ namespace Gradera_Klubb.Models.Competition
                     Name = competition.Name,
                     StartDate = competition.StartDate
                 };
+
+
+                try
+                {
+                    competition.Competition_Category.ToList().ForEach(c => model.Categories.Add(new CompetitionCategoryModel()
+                    {
+                        Id = c.Id,
+                        Name = c.Name
+                    }));
+                }
+                catch (Exception)
+                {
+                }
+                
             }
 
             return model;

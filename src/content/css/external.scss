@@ -1,0 +1,45 @@
+[wrap]
+{
+  flex-wrap: wrap;
+}
+
+[ng-click]
+{
+  &:hover
+  {
+    cursor: pointer;
+  }
+}
+
+.content
+{
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media all and(max-width: 960px) {
+    width: 100%;
+  }
+}
+
+footer
+{
+  width: 100%;
+  text-align: right;
+  padding: 10px;
+  font-size: 10px;
+  color: #9B9B9B;
+}
+
+.loader
+{
+  height: 50px;
+  width: 200px;
+  position: absolute;
+  top: calc(50vh - 25px);
+  left: calc(50vw - 100px);
+  line-height: 50px;
+  text-align: center;
+  z-index: 9999;
+  background-color: #FFFFFF;
+}

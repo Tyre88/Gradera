@@ -1,3 +1,4 @@
+LoadCss(["content/css/external.css"]);
 (function(angular) {
     angular.module("graderaklubbexternal", ['ng', 'ngRoute', 'ui.router', 'ngMaterial'])
         .controller('home', homeController);
