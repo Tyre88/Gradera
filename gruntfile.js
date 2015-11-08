@@ -286,8 +286,7 @@ module.exports = function (grunt)
                     'dist/appexternal.js': [
                         'src/appexternal.js',
                         'src/externalrouting.js',
-                        'src/modules/competition/external/js/competition-service.js',
-                        'src/modules/competition/external/js/competitioncontroller.js'
+                        'src/external/**/*.js'
                     ],
                     'dist/dependencies/dependencies.js': [
                         'src/dependencies/jquery/jquery.min.js',

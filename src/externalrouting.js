@@ -15,7 +15,7 @@
             .state('showexternalcompetition',
             {
                 url: "/show/competition/:clubShortName/:competitionName",
-                templateUrl: "modules/competition/external/views/showcompetition.html",
+                templateUrl: "external/competition/views/showcompetition.html",
                 controller: "showexternalcompetition",
                 controllerAs: "vm"
             });

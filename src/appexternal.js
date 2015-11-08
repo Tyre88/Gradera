@@ -1,5 +1,5 @@
 (function(angular) {
-    angular.module("graderaklubbexternal", ['ng', 'ngRoute', 'ui.router', 'ui.bootstrap', 'ngMaterial'])
+    angular.module("graderaklubbexternal", ['ng', 'ngRoute', 'ui.router', 'ngMaterial'])
         .controller('home', homeController);
 
     function homeController() {

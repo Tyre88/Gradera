@@ -1,6 +1,5 @@
 LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
 (function(angular) {
-    angular.module("graderaklubbexternal", ['ng', 'ngRoute', 'ui.router', 'ui.bootstrap', 'ngMaterial']);
     angular.module('graderaklubb', ['ng', 'ngRoute', 'ui.router', 'ngMaterial',
         'webbdudes-image-helper', 'ngFileUpload', 'formly']);
     angular.module('graderaklubb').controller('index', ["$rootScope", "$scope", "$state", "user-service", "$mdSidenav", "Upload",
