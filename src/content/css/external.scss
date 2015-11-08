@@ -1,3 +1,15 @@
+@import url(https://fonts.googleapis.com/css?family=Kaushan+Script);
+
+.kaushan-script
+{
+  font-family: 'Kaushan Script', cursive;
+}
+
+.big-header
+{
+  font-size: 1.7em !important;
+}
+
 [wrap]
 {
   flex-wrap: wrap;
@@ -63,6 +75,13 @@ footer
 .form-field-fifty,
 .form-field-twentyfife
 {
+  display: inline-block;
+
+  md-input-container
+  {
+    width: 95%;
+  }
+
   @media all and(max-width: 960px) {
     width: 100%;
   }

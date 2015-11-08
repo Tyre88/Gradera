@@ -18,6 +18,13 @@
                 templateUrl: "external/competition/views/showcompetition.html",
                 controller: "showexternalcompetition",
                 controllerAs: "vm"
+            })
+            .state('showexternalform',
+            {
+                url: "/show/form/:clubShortName/:formName",
+                templateUrl: "external/forms/views/showform.html",
+                controller: "showexternalform",
+                controllerAs: "vm"
             });
 
         $urlRouterProvider.otherwise('/');

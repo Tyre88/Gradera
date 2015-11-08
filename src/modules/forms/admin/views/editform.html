@@ -19,6 +19,12 @@
     <md-checkbox ng-model="vm.Form.IsExternal" aria-label="Externt formulär?">
         Externt formulär?
     </md-checkbox>
+
+    <span ng-show="vm.Form.IsExternal">
+        <a href="external.html#/show/form/{{$root.UserService.User.Club.ShortName}}/{{vm.Form.Name}}" target="_blank">
+            Länk till formulär
+        </a>
+    </span>
 </div>
 
 <div class="divider"></div>

@@ -29,9 +29,9 @@
         <md-tooltip>Tävlingen är extern och man kan anmäla sig utanför klubben.</md-tooltip>
     </md-checkbox>
 
-    <span ng-show="vm.Competition.IsExternal">Länk:
+    <span ng-show="vm.Competition.IsExternal">
         <a href="external.html#/show/competition/{{$root.UserService.User.Club.ShortName}}/{{vm.Competition.Name}}" target="_blank">
-            http://club.gradera.nu/external.html/#/show/competition/{{$root.UserService.User.Club.ShortName}}/{{vm.Competition.Name}}
+            Länk till tävlingen
         </a>
     </span>
 </div>

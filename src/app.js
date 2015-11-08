@@ -212,7 +212,7 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
             formlyConfig.setType({
                 name: 'select',
                 //template: "<pre>{{this.options.templateOptions.options | json}}</pre>"
-                template: '<md-input-container><label>{{model[options.templateOptions.label]}}</label><md-select ng-model="model[options.key]"><md-option ng-repeat="option in this.options.templateOptions.options" value="{{option.name}}">{{option.name}}</md-option></md-select></md-input-container>'
+                template: '<md-input-container><label>{{model[options.templateOptions.label]}}</label><md-select placeholder="{{to.label}}" ng-model="model[options.key]"><md-option ng-repeat="option in this.options.templateOptions.options" value="{{option.name}}">{{option.name}}</md-option></md-select></md-input-container>'
             });
 
             formlyConfig.setType({
