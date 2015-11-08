@@ -148,7 +148,7 @@ module.exports = function (grunt)
 					{
 						expand: true,
 						cwd: "<%= config.dist %>",
-						src: "application.js",
+						src: ["application.js", "appexternal.js"],
 						dest: "<%= config.dist %>"
 					}
 				]
