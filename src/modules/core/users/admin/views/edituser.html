@@ -1,95 +1,127 @@
-<md-subheader class="md-no-sticky">
-    Redigera: {{User.FirstName}} {{User.LastName}}
-</md-subheader>
+<form name="editUser" ng-submit="Save()">
+    <md-subheader class="md-no-sticky">
+        Redigera: {{User.FirstName}} {{User.LastName}}
+    </md-subheader>
 
-<div class="edit-image drop-box" fit-image="150" ngf-drop="$root.UploadImage($files, OnUploadSuccess)" ngf-drag-over-class="'dragover'" ngf-multiple="false"
-     ngf-pattern="'image/*'" ngf-capture="'camera'" ngf-select="$root.UploadImage($files, OnUploadSuccess)">
-    <img src="{{User.Image}}" fallback-src="content/images/No_Image_Available.png" />
-</div>
+    <div class="edit-image drop-box" fit-image="150" ngf-drop="$root.UploadImage($files, OnUploadSuccess)" ngf-drag-over-class="'dragover'" ngf-multiple="false"
+         ngf-pattern="'image/*'" ngf-capture="'camera'" ngf-select="$root.UploadImage($files, OnUploadSuccess)">
+        <img src="{{User.Image}}" fallback-src="content/images/No_Image_Available.png" />
+    </div>
 
-<div class="edit-container">
-    <md-input-container md-no-float>
-        <input type="text" ng-model="User.FirstName" placeholder="Förnamn" />
-    </md-input-container>
+    <div class="edit-container">
+        <md-input-container md-no-float>
+            <input type="text" ng-model="User.FirstName" placeholder="Förnamn" required name="firstname" />
+            <div ng-messages="editUser.firstname.$error">
+                <div ng-message="required">Du måste fylla i ett förnamn</div>
+            </div>
+        </md-input-container>
 
-    <md-input-container md-no-float>
-        <input type="text" ng-model="User.LastName" placeholder="Efternamn" />
-    </md-input-container>
+        <md-input-container md-no-float>
+            <input type="text" ng-model="User.LastName" placeholder="Efternamn" required name="lastname" />
+            <div ng-messages="editUser.lastname.$error">
+                <div ng-message="required">Du måste fylla i ett efternamn</div>
+            </div>
+        </md-input-container>
 
-    <md-input-container md-no-float>
-        <input type="text" ng-model="User.UserName" placeholder="Användarnamn" />
-    </md-input-container>
+        <md-input-container md-no-float>
+            <input type="text" ng-model="User.UserName" placeholder="Användarnamn" required name="username" />
+            <div ng-messages="editUser.username.$error">
+                <div ng-message="required">Du måste fylla i ett användarnamn</div>
+            </div>
+        </md-input-container>
 
-    <md-input-container md-no-float>
-        <input type="text" ng-model="User.UserInformation.Email" placeholder="E-post" />
-    </md-input-container>
+        <md-input-container md-no-float>
+            <input type="email" ng-model="User.UserInformation.Email" placeholder="E-post" required name="email" />
+            <div ng-messages="editUser.email.$error">
+                <div ng-message="required">Du måste fylla i en e-post adress</div>
+                <div ng-message="email">Ej giltig e-post adress</div>
+            </div>
+        </md-input-container>
 
-    <md-input-container md-no-float>
-        <input type="password" ng-model="User.Password" placeholder="Lösenord" />
-    </md-input-container>
+        <md-input-container md-no-float ng-if="User.Id > 0">
+            <input type="password" ng-model="User.Password" placeholder="Lösenord" />
+        </md-input-container>
 
-    <md-input-container md-no-float>
-        <input type="text" ng-model="User.UserInformation.Phone" placeholder="Telefonnummer" />
-    </md-input-container>
+        <md-input-container md-no-float ng-if="User.Id <= 0">
+            <input type="password" ng-model="User.Password" placeholder="Lösenord" required minlength="5" name="password" />
+            <div ng-messages="editUser.password.$error">
+                <div ng-message="required">Du måste fylla i ett lösenord</div>
+                <div ng-message="minlength">Lösenordet är för kort</div>
+            </div>
+        </md-input-container>
 
-    <md-input-container md-no-float>
-        <input type="text" ng-model="User.UserInformation.Street" placeholder="Adress" />
-    </md-input-container>
+        <md-input-container md-no-float>
+            <input type="text" ng-model="User.UserInformation.Phone" placeholder="Telefonnummer" />
+        </md-input-container>
 
-    <md-input-container md-no-float>
-        <input type="text" ng-model="User.UserInformation.Zip" placeholder="Postnummer" />
-    </md-input-container>
+        <md-input-container md-no-float>
+            <input type="text" ng-model="User.UserInformation.Street" placeholder="Adress" />
+        </md-input-container>
 
-    <md-input-container md-no-float>
-        <input type="text" ng-model="User.UserInformation.City" placeholder="Stad" />
-    </md-input-container>
+        <md-input-container md-no-float>
+            <input type="text" ng-model="User.UserInformation.Zip" placeholder="Postnummer" />
+        </md-input-container>
 
-    <md-input-container md-no-float>
-        <input type="text" ng-model="User.UserInformation.Occupation" placeholder="Arbete" />
-    </md-input-container>
+        <md-input-container md-no-float>
+            <input type="text" ng-model="User.UserInformation.City" placeholder="Stad" />
+        </md-input-container>
 
-    <md-input-container md-no-float>
-        <input type="text" ng-model="User.UserInformation.Weight" placeholder="Vikt" />
-    </md-input-container>
+        <md-input-container md-no-float>
+            <input type="text" ng-model="User.UserInformation.Occupation" placeholder="Arbete" />
+        </md-input-container>
 
-    <md-input-container>
-        <label>Grad</label>
-        <md-select ng-model="User.UserInformation.Grade">
-            <md-option ng-repeat="grade in Grades" value="{{grade.Id}}">
-                {{grade.Name}}
-            </md-option>
-        </md-select>
-    </md-input-container>
+        <md-input-container md-no-float>
+            <input type="text" ng-model="User.UserInformation.Weight" placeholder="Vikt" required name="weight" />
+            <div ng-messages="editUser.weight.$error">
+                <div ng-message="required">Du måste lägga in en vikt</div>
+            </div>
+        </md-input-container>
 
-    <md-input-container>
-        <label>Kön</label>
-        <md-select ng-model="User.Gender">
-            <md-option value="0">
-                Man
-            </md-option>
-            <md-option value="1">
-                Kvinna
-            </md-option>
-        </md-select>
-    </md-input-container>
+        <md-input-container>
+            <label>Grad</label>
+            <md-select ng-model="User.UserInformation.Grade" required name="grade">
+                <md-option ng-repeat="grade in Grades" value="{{grade.Id}}">
+                    {{grade.Name}}
+                </md-option>
+            </md-select>
+            <div ng-messages="editUser.grade.$error">
+                <div ng-message="required">Du måste välja en grad</div>
+            </div>
+        </md-input-container>
 
-    <md-datepicker ng-model="User.UserInformation.Birthday" md-placeholder="Födelsedag">
-        <md-tooltip>Födelsedag</md-tooltip>
-    </md-datepicker>
-</div>
+        <md-input-container>
+            <label>Kön</label>
+            <md-select ng-model="User.Gender" required name="gender">
+                <md-option value="0">
+                    Man
+                </md-option>
+                <md-option value="1">
+                    Kvinna
+                </md-option>
+            </md-select>
+            <div ng-messages="editUser.gender.$error">
+                <div ng-message="required">Du måste välja ett kön</div>
+            </div>
+        </md-input-container>
 
-<md-subheader class="md-no-sticky">
-    Rättigheter
-</md-subheader>
+        <md-datepicker ng-model="User.UserInformation.Birthday" md-placeholder="Födelsedag">
+            <md-tooltip>Födelsedag</md-tooltip>
+        </md-datepicker>
+    </div>
 
-<div class="edit-accessrights">
-    <md-checkbox ng-repeat="accessright in AccessRights" ng-model="accessright.Checked" aria-label="{{accessright.Name}}">
-        {{accessright.Name}}
-        <md-tooltip>{{accessright.Description}}</md-tooltip>
-    </md-checkbox>
-</div>
+    <md-subheader class="md-no-sticky">
+        Rättigheter
+    </md-subheader>
 
-<div>
-    <md-button class="md-raised md-primary" ng-click="Save();">Spara</md-button>
-    <md-button class="md-raised md-warn" ng-click="Back();">Avbryt</md-button>
-</div>
+    <div class="edit-accessrights">
+        <md-checkbox ng-repeat="accessright in AccessRights" ng-model="accessright.Checked" aria-label="{{accessright.Name}}">
+            {{accessright.Name}}
+            <md-tooltip>{{accessright.Description}}</md-tooltip>
+        </md-checkbox>
+    </div>
+
+    <div>
+        <md-button class="md-raised md-primary" type="submit">Spara</md-button>
+        <md-button class="md-raised md-warn" ng-click="Back();">Avbryt</md-button>
+    </div>
+</form>
