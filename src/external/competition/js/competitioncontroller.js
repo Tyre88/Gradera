@@ -7,9 +7,9 @@
 (function(angular) {
     angular.module('graderaklubbexternal').controller('showexternalcompetition', showexternalcompetitionController);
 
-    showexternalcompetitionController.$inject = ["$stateParams", "competition-external-service", "gradeEnum"];
+    showexternalcompetitionController.$inject = ["$stateParams", "competition-external-service", "gradeEnum", "$mdDialog"];
 
-    function showexternalcompetitionController($stateParams, competitionExternalService, gradeEnum) {
+    function showexternalcompetitionController($stateParams, competitionExternalService, gradeEnum, $mdDialog) {
         var vm = this;
         vm.Competition = {};
         vm.CompetitionName = $stateParams.competitionName;
@@ -37,8 +37,16 @@
             vm.ContactPerson.CompetitionId = vm.Competition.Id;
             competitionExternalService.Submit(vm.ContactPerson).success(submitCallback);
 
-            function submitCallback(response) {
-
+            function submitCallback() {
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title('Tack!')
+                        .content('Tack för din anmälan!')
+                        .ariaLabel('Tack!')
+                        .ok('Ok')
+                );
+                vm.ContactPerson = { Compeditors: [] };
             }
         }
 
