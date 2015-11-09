@@ -1,0 +1,21 @@
+<span class="md-button md-raised" ng-click="vm.EditGrade(0);"><i
+        class="fa fa-plus-circle"></i> Lägg till bältesgrad</span>
+
+<md-list ng-cloak>
+    <md-subheader class="md-no-sticky">
+        Bältesgrader
+    </md-subheader>
+
+    <md-list-item ng-repeat="grade in vm.Grades" ng-click="vm.EditGrade(grade.Id)">
+        <p>{{grade.Name}}</p>
+
+        <div class="more-icons md-secondary">
+            <i ng-if="$root.HasAccess(3, 40);" ng-click="vm.DeleteGrade(grade); $event.stopPropagation();"
+               class="fa fa-trash md-hue-3">
+                <md-tooltip>
+                    Ta bort grad
+                </md-tooltip>
+            </i>
+        </div>
+    </md-list-item>
+</md-list>

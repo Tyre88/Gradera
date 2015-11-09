@@ -52,6 +52,18 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
                         Text: "Hantera formulär",
                         AccessType: 6,
                         AccessTypeRight: 20
+                    },
+                    {
+                        Sref: "gradingadminlist",
+                        Text: "Hantera graderings bestämmelser",
+                        AccessType: 3,
+                        AccessTypeRight: 20
+                    },
+                    {
+                        Sref: "gradingcategoryadminlist",
+                        Text: "Hantera graderings kategorier",
+                        AccessType: 3,
+                        AccessTypeRight: 20
                     }
                 ];
 

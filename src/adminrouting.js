@@ -5,11 +5,19 @@
 
     function graderaAdminRouting($stateProvider) {
         $stateProvider
-            .state('gradingadmin',
+            .state('gradingadminlist',
             {
-                url: "/admin/grading/:id",
-                templateUrl: "views/gradingadmin.html",
-                controller: "gradingadmin"
+                url: "/admin/gradinglist",
+                templateUrl: "modules/grading/admin/views/gradinglist.html",
+                controller: "gradingadminlist",
+                controllerAs: "vm"
+            })
+            .state('gradingcategoryadminlist',
+            {
+                url: "/admin/gradingcategorylist",
+                templateUrl: "modules/grading/admin/views/gradingcategoryadminlist.html",
+                controller: "gradingcategoryadminlist",
+                controllerAs: "vm"
             })
             .state('settingsadmin',
             {
