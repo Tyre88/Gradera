@@ -1,5 +1,5 @@
 <md-toolbar class="md-theme-light">
-    <h1 class="md-toolbar-tools">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
         Välkommen till {{UserService.User.Club.Name}}
     </h1>
 </md-toolbar>
@@ -14,7 +14,7 @@
     </div>
 
     <div class="home-widgets">
-        <div class="widget blue" ng-if="$root.HasAccess(6, 10) && vm.UnansweredForms.length">
+        <div class="widget blue md-whiteframe-z1" ng-if="$root.HasAccess(6, 10) && vm.UnansweredForms.length">
             <div class="header blue">Obesvarade formulär</div>
             <div class="widget-content">
                 <ul>
@@ -22,7 +22,7 @@
                 </ul>
             </div>
         </div>
-        <div class="widget pink" ng-if="$root.HasAccess(5, 10) && vm.UpcommingCompetitions.length">
+        <div class="widget pink md-whiteframe-z1" ng-if="$root.HasAccess(5, 10) && vm.UpcommingCompetitions.length">
             <div class="header pink">Kommande tävlingar</div>
             <div class="widget-content">
                 <ul>

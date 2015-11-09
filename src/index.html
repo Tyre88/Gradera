@@ -10,7 +10,7 @@
         <div>
             <gk-logged-in ng-if="UserService.User.IsLoggedIn"></gk-logged-in>
             <div layout="row" wrap>
-                <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="leftNav" md-is-locked-open="$mdMedia('gt-md')" ng-if="UserService.User.IsLoggedIn">
+                <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="leftNav" md-is-locked-open="$mdMedia('gt-md')" ng-if="UserService.User.IsLoggedIn">
                     <ul>
                         <li class="nav-header">{{UserService.User.Club.Name}}</li>
                         <li><a ui-sref="home" ng-click="SetActiveNav($event)">Hem</a></li>

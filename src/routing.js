@@ -1,9 +1,9 @@
 (function(angular) {
     angular.module('graderaklubb').config(graderaRouting);
 
-    graderaRouting.$inject = ["$stateProvider"];
+    graderaRouting.$inject = ["$stateProvider", "$urlRouterProvider"];
 
-    function graderaRouting($stateProvider) {
+    function graderaRouting($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('login',
             {
@@ -85,5 +85,7 @@
                 controller: "formanswersexternal",
                 controllerAs: "vm"
             });
+
+        $urlRouterProvider.otherwise('/login');
     }
 }(window.angular));
