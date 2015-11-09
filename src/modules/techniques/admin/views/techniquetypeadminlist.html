@@ -1,0 +1,20 @@
+<span class="md-button md-raised" ng-click="vm.Edit(0);"><i class="fa fa-plus-circle"></i> Lägg till teknik typ</span>
+
+<md-list ng-cloak>
+    <md-subheader class="md-no-sticky">
+        Teknik typer
+    </md-subheader>
+
+    <md-list-item ng-repeat="item in vm.Items" ng-click="vm.Edit(item.Id)">
+        <p>{{item.Name}}</p>
+
+        <div class="more-icons md-secondary">
+            <i ng-if="$root.HasAccess(3, 40);" ng-click="vm.Delete(item); $event.stopPropagation();"
+               class="fa fa-trash md-hue-3">
+                <md-tooltip>
+                    Ta bort typ
+                </md-tooltip>
+            </i>
+        </div>
+    </md-list-item>
+</md-list>

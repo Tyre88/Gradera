@@ -91,6 +91,20 @@
                 templateUrl: "modules/forms/admin/views/editform.html",
                 controller: "formsadminedit",
                 controllerAs: "vm"
+            })
+            .state('techniqueadminlist',
+            {
+                url: "/admin/techniques",
+                templateUrl: "modules/techniques/admin/views/techniqueadminlist.html",
+                controller: "techniqueadminlist",
+                controllerAs: "vm"
+            })
+            .state('techniquetypeadminlist',
+            {
+                url: "/admin/technique/types",
+                templateUrl: "modules/techniques/admin/views/techniquetypeadminlist.html",
+                controller: "techniquetypeadminlist",
+                controllerAs: "vm"
             });
     }
 }(window.angular));
