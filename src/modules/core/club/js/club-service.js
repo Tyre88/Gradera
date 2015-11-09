@@ -4,6 +4,10 @@
             return $http.get('/api/club/getclub');
         };
 
+        this.GetClubByShortName = function(shortName) {
+            return $http.get('/api/club/GetClubByShortName?' + $.param({shortName: shortName}));
+        };
+
         this.SaveClub = function(club) {
             return $http.post('/api/club/saveclub', club);
         };

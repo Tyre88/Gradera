@@ -11,6 +11,13 @@
                 templateUrl: "views/home.html",
                 controller: "home"
             })
+            .state('clublogin',
+            {
+                url: "/login/:clubShortName",
+                templateUrl: "modules/core/authenticate/views/clublogin.html",
+                controller: "clublogin",
+                controllerAs: "vm"
+            })
             .state('logout',
             {
                 url: "/logout",

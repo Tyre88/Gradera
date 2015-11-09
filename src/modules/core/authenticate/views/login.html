@@ -1,5 +1,6 @@
 <div class="login-container">
     <div class="login-data">
+        <ng-transclude></ng-transclude>
         <form name="loginForm" ng-submit="Login()">
             <md-input-container md-no-float>
                 <input name="username" type="text" ng-model="UserService.User.UserName" placeholder="Användarnamn (krävs)" required />

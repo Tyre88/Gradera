@@ -1,3 +1,5 @@
+$primary-color: #795548;
+
 .login-container
 {
 	padding-top: 25vh;
@@ -8,8 +10,24 @@
 		margin: 0 auto;
 		height: 300px;
 		padding: 75px 15px 15px 15px;
-		border: 1px solid #795548;
+		border: 1px solid $primary-color;
 		border-radius: 10px;
+        position: relative;
+
+        .login-image
+        {
+          position: absolute;
+          top: -30%;
+          left: 25%;
+          width: 165px;
+          height: 165px;
+          background-color: #FFFFFF;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+          border-radius: 10px;
+          border: 1px solid $primary-color;
+          overflow: hidden;
+        }
 
 		.md-button
 		{

@@ -27,6 +27,16 @@ namespace Gradera_Klubb.Controllers
             return response;
         }
 
+        [HttpGet]
+        public HttpResponseMessage GetClubByShortName(string shortName)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+
+            response.Content = new ObjectContent<ClubModel>(ClubModel.MapClub(ClubBLL.GetClubByShortName(shortName)),
+                new JsonMediaTypeFormatter());
+            return response;
+        }
+
         [HttpPost, HttpOptions]
         [AuthorizeFilter(AccessType = AccessType.Club, AccessTypeRight = AccessTypeRight.Write)]
         public HttpResponseMessage SaveClub(ClubModel club)

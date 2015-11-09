@@ -22,9 +22,6 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
                     $mdSidenav('leftNav').toggle();
                 };
 
-                if(!userService.User.IsLoggedIn)
-                    $state.go ('login');
-
                 $scope.AdminLinks = [
                     {
                         Sref: "listusers",

@@ -6,6 +6,7 @@ LoadCss("content/css/login.css");
         return {
             restrict: "E",
             templateUrl: "modules/core/authenticate/views/login.html",
+            transclude: true,
             link: function(scope)
             {
                 scope.Login = function()
