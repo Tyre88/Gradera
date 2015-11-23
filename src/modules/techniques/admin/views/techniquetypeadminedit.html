@@ -5,6 +5,11 @@
     <md-input-container md-no-float>
         <input type="text" ng-model="vm.TechniqueType.Name" placeholder="Namn" />
     </md-input-container>
+
+    <md-checkbox ng-if="$root.HasAccess(3, 40);" ng-model="vm.TechniqueType.IsGlobal" aria-label="Global">
+        Global
+        <md-tooltip>Typen kan användas av andra klubbar.</md-tooltip>
+    </md-checkbox>
 </div>
 
 <div>
