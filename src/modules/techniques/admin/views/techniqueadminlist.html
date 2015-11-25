@@ -9,7 +9,7 @@
         <p>{{technique.Name}}</p>
 
         <div class="more-icons md-secondary">
-            <i ng-if="$root.HasAccess(3, 40);" ng-click="vm.Delete(technique); $event.stopPropagation();"
+            <i ng-if="$root.HasAccess(3, 40); !technique.IsGlobal" ng-click="vm.Delete(technique); $event.stopPropagation();"
                class="fa fa-trash md-hue-3">
                 <md-tooltip>
                     Ta bort teknik
