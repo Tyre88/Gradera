@@ -5,7 +5,11 @@
 
     function gradingAdminService($http) {
         this.GetGrades = function() {
-            return $http.get('/api/gradesadmin/getgrades');
+            return $http.get('/api/GradingAdmin/GetGrades');
+        };
+
+        this.SaveGrade = function(grade) {
+            return $http.post('/api/GradingAdmin/SaveGrade', grade);
         };
 
         this.GetCategories = function() {

@@ -1,4 +1,4 @@
-<span class="md-button md-raised" ng-click="vm.EditGrade(0);"><i
+<span class="md-button md-raised" ng-click="vm.Edit(0);"><i
         class="fa fa-plus-circle"></i> Lägg till bältesgrad</span>
 
 <md-list ng-cloak>
@@ -6,7 +6,7 @@
         Bältesgrader
     </md-subheader>
 
-    <md-list-item ng-repeat="grade in vm.Grades" ng-click="vm.EditGrade(grade.Id)">
+    <md-list-item ng-repeat="grade in vm.Grades" ng-click="vm.Edit(grade.Id)">
         <p>{{grade.Name}}</p>
 
         <div class="more-icons md-secondary">

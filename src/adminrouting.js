@@ -125,6 +125,12 @@
                 templateUrl: "modules/grading/admin/views/gradingcategoryadminedit.html",
                 controller: "gradingcategoryadminedit",
                 controllerAs: "vm"
+            }).state('gradingadminedit',
+            {
+                url: "/admin/gradingadminedit/:id",
+                templateUrl: "modules/grading/admin/views/gradingadminedit.html",
+                controller: "gradingadminedit",
+                controllerAs: "vm"
             });
     }
 }(window.angular));

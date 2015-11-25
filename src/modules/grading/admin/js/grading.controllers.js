@@ -1,13 +1,14 @@
 (function (angular) {
     angular.module('graderaklubb').controller('gradingadminlist', gradingadminlistController);
 
-    gradingadminlistController.$inject = ["grading-admin-service"];
+    gradingadminlistController.$inject = ["$state", "grading-admin-service"];
 
-    function gradingadminlistController(gradingAdminService) {
+    function gradingadminlistController($state, gradingAdminService) {
         var vm = this;
         vm.Grades = [];
 
         vm.GetGrades = GetGrades;
+        vm.Edit = Edit;
 
         function GetGrades() {
             gradingAdminService.GetGrades().success(getGradesCallback);
@@ -17,7 +18,19 @@
             }
         }
 
+        function Edit(id) {
+            $state.go('gradingadminedit', {id: id});
+        }
+
         vm.GetGrades();
+    }
+
+    angular.module('graderaklubb').controller('gradingadminedit', gradingadmineditController);
+
+    gradingadmineditController.$inject = [];
+
+    function gradingadmineditController() {
+        var vm = this;
     }
 
     angular.module('graderaklubb').controller('gradingcategoryadminlist', gradingcategoryadminlistController);
