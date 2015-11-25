@@ -112,6 +112,13 @@
                 templateUrl: "modules/techniques/admin/views/techniquetypeadminedit.html",
                 controller: "techniquetypeadminedit",
                 controllerAs: "vm"
+            })
+            .state('techniqueedit',
+            {
+                url: "/admin/technique/:id",
+                templateUrl: "modules/techniques/admin/views/techniqueedit.html",
+                controller: "techniqueedit",
+                controllerAs: "vm"
             });
     }
 }(window.angular));

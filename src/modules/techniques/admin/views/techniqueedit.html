@@ -1,0 +1,31 @@
+<form name="editTechnique" ng-submit="vm.Save()">
+    <md-subheader class="md-no-sticky">
+        Redigera: {{vm.Technique.Name}}
+    </md-subheader>
+    <div class="edit-container">
+        <md-input-container md-no-float>
+            <input type="text" md-maxlength="50" ng-model="vm.Technique.Name" placeholder="Namn"/>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Typ</label>
+            <md-select ng-model="vm.Technique.TechniqueTypeId" required name="TechniqueTypeId">
+                <md-option ng-repeat="type in vm.TechniqueTypes" value="{{type.Id}}">
+                    {{type.Name}}
+                </md-option>
+            </md-select>
+            <div ng-messages="editTechnique.TechniqueTypeId.$error">
+                <div ng-message="required">Du måste välja typ</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float>
+            <textarea type="text" md-maxlength="4000" ng-model="vm.Technique.Description" placeholder="Beskrivning"></textarea>
+        </md-input-container>
+    </div>
+
+    <div>
+        <md-button class="md-raised md-primary" type="submit">Spara</md-button>
+        <md-button class="md-raised md-warn" ng-click="vm.Back();">Avbryt</md-button>
+    </div>
+</form>

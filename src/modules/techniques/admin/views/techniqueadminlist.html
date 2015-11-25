@@ -5,11 +5,11 @@
         Tekniker
     </md-subheader>
 
-    <md-list-item ng-repeat="item in vm.Items" ng-click="vm.Edit(item.Id)">
-        <p>{{item.Name}}</p>
+    <md-list-item ng-repeat="technique in vm.Techniques" ng-click="vm.Edit(technique.Id)">
+        <p>{{technique.Name}}</p>
 
         <div class="more-icons md-secondary">
-            <i ng-if="$root.HasAccess(3, 40);" ng-click="vm.Delete(item); $event.stopPropagation();"
+            <i ng-if="$root.HasAccess(3, 40);" ng-click="vm.Delete(technique); $event.stopPropagation();"
                class="fa fa-trash md-hue-3">
                 <md-tooltip>
                     Ta bort teknik
