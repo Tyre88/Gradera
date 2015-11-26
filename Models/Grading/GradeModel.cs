@@ -12,6 +12,8 @@ namespace Gradera_Klubb.Models.Grading
         public int ClubId { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
+        public List<GradeCategoryLinkModel> GradeCategoryLinks { get; set; }
+        public List<GradeCategoryLinkTechniqueModel> GradeCategoryLinkTechniques { get; set; }
 
         public static List<GradeModel> MapGradeModels(List<Gradera.Grading.DAL.Grade> grades)
         {
