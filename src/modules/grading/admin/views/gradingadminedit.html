@@ -1,1 +1,19 @@
-TEST
+<form ng-submit="vm.Save()" name="">
+    <md-subheader class="md-no-sticky">
+        Redigera: {{vm.Grade.Name}}
+    </md-subheader>
+    <div class="edit-container">
+        <md-input-container md-no-float>
+            <input type="text" ng-model="vm.Grade.Name" placeholder="Namn"/>
+        </md-input-container>
+    </div>
+
+    <div ng-if="vm.Grade.Id > 0">
+
+    </div>
+
+    <div>
+        <md-button class="md-raised md-primary" type="submit">Spara</md-button>
+        <md-button class="md-raised md-warn" ng-click="vm.Back();">Avbryt</md-button>
+    </div>
+</form>

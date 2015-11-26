@@ -27,10 +27,46 @@
 
     angular.module('graderaklubb').controller('gradingadminedit', gradingadmineditController);
 
-    gradingadmineditController.$inject = [];
+    gradingadmineditController.$inject = ["$state", "$stateParams", "grading-admin-service", "$mdToast"];
 
-    function gradingadmineditController() {
+    function gradingadmineditController($state, $stateParams, gradingAdminService) {
         var vm = this;
+        vm.Grade = {};
+        vm.GradeId = ~~$stateParams.id;
+
+        vm.GetGrade = GetGrade;
+        vm.Back = Back;
+        vm.Save = Save;
+
+        function GetGrade() {
+            if(vm.GradeId <= 0) return;
+
+            gradingAdminService.GetGrade(vm.GradeId).success(getGradeCallback);
+
+            function getGradeCallback(response) {
+                vm.Grade = response;
+            }
+        }
+
+        function Back() {
+            $state.go('gradingadminlist');
+        }
+
+        function Save() {
+            gradingAdminService.SaveGrade(vm.Grade).success(saveGradeCallback);
+
+            function saveGradeCallback(response) {
+                vm.Grade = response;
+
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('Bältesgraden sparad!')
+                );
+
+            }
+        }
+
+        vm.GetGrade();
     }
 
     angular.module('graderaklubb').controller('gradingcategoryadminlist', gradingcategoryadminlistController);

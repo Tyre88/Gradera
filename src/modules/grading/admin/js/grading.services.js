@@ -8,6 +8,10 @@
             return $http.get('/api/GradingAdmin/GetGrades');
         };
 
+        this.GetGrade = function(id) {
+            return $http.get('/api/GradingAdmin/GetGrade?' + $.param({id: id}));
+        };
+
         this.SaveGrade = function(grade) {
             return $http.post('/api/GradingAdmin/SaveGrade', grade);
         };
