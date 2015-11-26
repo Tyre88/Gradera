@@ -2,7 +2,7 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.0.0-rc3-master-1ae16cb
+ * v1.0.0-rc5-master-76c6299
  */
 (function( window, angular, undefined ){
 "use strict";
@@ -13,14 +13,6 @@
  */
 
 /***************************************************
-
- ### TODO ###
- **DOCUMENTATION AND DEMOS**
-
- - [ ] ng-model with child mdOptions (basic)
- - [ ] ng-model="foo" ng-model-options="{ trackBy: '$value.id' }" for objects
- - [ ] mdOption with value
- - [ ] Usage with input inside
 
  ### TODO - POST RC1 ###
  - [ ] Abstract placement logic in $mdSelect service to $mdMenu service
@@ -236,10 +228,12 @@ function SelectDirective($mdSelect, $mdUtil, $mdTheming, $mdAria, $compile, $par
 
       if (attr.name && formCtrl) {
         var selectEl = element.parent()[0].querySelector('select[name=".' + attr.name + '"]');
-        var controller = angular.element(selectEl).controller();
-        if (controller) {
-          formCtrl.$removeControl(controller);
-        }
+        $mdUtil.nextTick(function() {
+          var controller = angular.element(selectEl).controller('ngModel');
+          if (controller) {
+            formCtrl.$removeControl(controller);
+          }
+        });
       }
 
       if (formCtrl) {
@@ -264,7 +258,7 @@ function SelectDirective($mdSelect, $mdUtil, $mdTheming, $mdAria, $compile, $par
         var tmpPlaceholder = attr.placeholder || (containerCtrl && containerCtrl.label ? containerCtrl.label.text() : '');
         text = text || tmpPlaceholder || '';
         var target = valueEl.children().eq(0);
-        target.text(text);
+        target.html(text);
       };
 
       mdSelectCtrl.setIsPlaceholder = function(isPlaceholder) {
@@ -313,6 +307,8 @@ function SelectDirective($mdSelect, $mdUtil, $mdTheming, $mdAria, $compile, $par
         $mdAria.expect(element, 'aria-label', labelText);
       }
 
+      scope.$watch(selectMenuCtrl.selectedLabels, syncLabelText);
+
       function syncLabelText() {
         if (selectContainer) {
           selectMenuCtrl = selectMenuCtrl || selectContainer.find('md-select-menu').controller('mdSelectMenu');
@@ -339,8 +335,9 @@ function SelectDirective($mdSelect, $mdUtil, $mdTheming, $mdAria, $compile, $par
             ngModelCtrl.$render = function() {
               originalRender();
               syncLabelText();
+              inputCheckValue();
             };
-            selectMenuCtrl.refreshViewValue();
+            ngModelCtrl.$render();
           }
         });
       });
@@ -644,7 +641,7 @@ function SelectMenuDirective($parse, $mdUtil, $mdTheming) {
       var selectedOptionEls = $mdUtil.nodesToArray($element[0].querySelectorAll('md-option[selected]'));
       if (selectedOptionEls.length) {
         return selectedOptionEls.map(function(el) {
-          return el.textContent;
+          return el.innerHTML;
         }).join(', ');
       } else {
         return '';
@@ -1214,14 +1211,16 @@ function SelectProvider($$interimElementProvider) {
           if (ev && ( ev.type == 'mouseup') && (ev.currentTarget != dropDown[0])) return;
           if ( mouseOnScrollbar() ) return;
 
-          if (!selectCtrl.isMultiple) {
-            opts.restoreFocus = true;
+          var option = $mdUtil.getClosest(ev.target, 'md-option');
+          if (option && option.hasAttribute && !option.hasAttribute('disabled')) {
+            if (!selectCtrl.isMultiple) {
+              opts.restoreFocus = true;
 
-            $mdUtil.nextTick(function() {
-              $mdSelect.hide(selectCtrl.ngModel.$viewValue);
-            }, true);
+              $mdUtil.nextTick(function () {
+                $mdSelect.hide(selectCtrl.ngModel.$viewValue);
+              }, true);
+            }
           }
-
           /**
            * check if the mouseup event was on a scrollbar
            */
@@ -1327,6 +1326,8 @@ function SelectProvider($$interimElementProvider) {
 
       if (contentNode.offsetWidth > maxWidth) {
         contentNode.style['max-width'] = maxWidth + 'px';
+      } else {
+        contentNode.style.maxWidth = null;
       }
       if (shouldOpenAroundTarget) {
         contentNode.style['min-width'] = targetRect.width + 'px';
@@ -1389,7 +1390,7 @@ function SelectProvider($$interimElementProvider) {
         transformOrigin = (centeredRect.left + targetRect.width / 2) + 'px ' +
           (centeredRect.top + centeredRect.height / 2 - contentNode.scrollTop) + 'px 0px';
 
-        minWidth = targetRect.width + centeredRect.paddingLeft + centeredRect.paddingRight;
+        minWidth = Math.min(targetRect.width + centeredRect.paddingLeft + centeredRect.paddingRight, maxWidth);
       }
 
       // Keep left and top within the window

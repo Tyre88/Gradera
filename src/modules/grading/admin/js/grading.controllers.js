@@ -29,7 +29,7 @@
 
     gradingadmineditController.$inject = ["$state", "$stateParams", "grading-admin-service", "$mdToast"];
 
-    function gradingadmineditController($state, $stateParams, gradingAdminService) {
+    function gradingadmineditController($state, $stateParams, gradingAdminService, $mdToast) {
         var vm = this;
         vm.Grade = {};
         vm.GradeId = ~~$stateParams.id;

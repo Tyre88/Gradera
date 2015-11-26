@@ -1,3 +1,96 @@
+<a name"1.0.0-rc5"></a>
+### 1.0.0-rc5 (2015-11-25)
+
+
+#### Features
+
+* **card:** improved to behave as spec ([b8ffdfe0](https://github.com/angular/material/commit/b8ffdfe0), closes [#1900](https://github.com/angular/material/issues/1900), [#5607](https://github.com/angular/material/issues/5607))
+* **dialog:** added fullscreen option to dialog ([19c2df83](https://github.com/angular/material/commit/19c2df83), closes [#2148](https://github.com/angular/material/issues/2148), [#5793](https://github.com/angular/material/issues/5793))
+* **select:** add support for raw HTML in options ([e07c52da](https://github.com/angular/material/commit/e07c52da), closes [#2242](https://github.com/angular/material/issues/2242), [#5847](https://github.com/angular/material/issues/5847))
+
+#### Breaking Changes
+
+* default for `layout-align` is `start stretch` (for main and cross-axis respectively)
+* no longer removes Layout attributes from DOM elements
+* `md-toast` now uses `textContent` instead of `content` - `content` is deprecated
+
+
+#### Bug Fixes
+
+* **autocomplete:**
+  * fixes autocomplete height when near the bottom of the page ([c667b549](https://github.com/angular/material/commit/c667b549), closes [#5209](https://github.com/angular/material/issues/5209))
+  * fixes height issue on `md-not-found` message ([f1dcaf96](https://github.com/angular/material/commit/f1dcaf96), closes [#5305](https://github.com/angular/material/issues/5305))
+  * should now properly support `ng-disabled` ([2ab1d2d9](https://github.com/angular/material/commit/2ab1d2d9), closes [#4999](https://github.com/angular/material/issues/4999))
+* **datepicker:**
+  * prevent calendar pane being in wrong position after body scrolling is disabled. ([a899c5b4](https://github.com/angular/material/commit/a899c5b4), closes [#5201](https://github.com/angular/material/issues/5201), [#5918](https://github.com/angular/material/issues/5918))
+  * correctly position datepicker inside dialogs. Fixes ([d423a656](https://github.com/angular/material/commit/d423a656))
+* **dialog:** removed no dialog actions warning ([75a565e8](https://github.com/angular/material/commit/75a565e8), closes [#5767](https://github.com/angular/material/issues/5767), [#5774](https://github.com/angular/material/issues/5774))
+* **input:**
+  * fixes label alignment in Firefox ([035a4ef3](https://github.com/angular/material/commit/035a4ef3))
+  * fixes alignment issues between textareas and inputs ([b2b4c933](https://github.com/angular/material/commit/b2b4c933), closes [#5462](https://github.com/angular/material/issues/5462), [#5682](https://github.com/angular/material/issues/5682))
+* **layouts:**
+  * support layout-align start and stretch ([d24cf25b](https://github.com/angular/material/commit/d24cf25b), closes [#5509](https://github.com/angular/material/issues/5509), [#5249](https://github.com/angular/material/issues/5249))
+  * do NOT remove layout attributes after className generation ([7cb035d9](https://github.com/angular/material/commit/7cb035d9))
+* **list:**
+  * Copy md-icon.md-secondary attributes to button. ([7d8bc2d2](https://github.com/angular/material/commit/7d8bc2d2), closes [#3356](https://github.com/angular/material/issues/3356), [#5716](https://github.com/angular/material/issues/5716))
+  * Don't wrap secondary buttons in a button. ([5cc492c6](https://github.com/angular/material/commit/5cc492c6), closes [#3176](https://github.com/angular/material/issues/3176), [#5721](https://github.com/angular/material/issues/5721))
+* **mdUtil:** disableBodyScroll no longer scrolls page to top in IE ([badc1ef1](https://github.com/angular/material/commit/badc1ef1), closes [#4640](https://github.com/angular/material/issues/4640), [#5334](https://github.com/angular/material/issues/5334), [#3627](https://github.com/angular/material/issues/3627))
+* **progressCircular:**
+  * fixes scaling issues ([ff2e92b4](https://github.com/angular/material/commit/ff2e92b4), closes [#4839](https://github.com/angular/material/issues/4839), [#5891](https://github.com/angular/material/issues/5891))
+  * fixes animation bug when used inside `md-dialog` ([f780beb0](https://github.com/angular/material/commit/f780beb0), closes [#5039](https://github.com/angular/material/issues/5039))
+* **radio:** no longer prevents events from nested elements ([7a87ddad](https://github.com/angular/material/commit/7a87ddad), closes [#2960](https://github.com/angular/material/issues/2960))
+* **select:**
+  * reduce overly agressive truncation ([8051e980](https://github.com/angular/material/commit/8051e980))
+  * fix select label not updating on option model changes ([4f3c5d91](https://github.com/angular/material/commit/4f3c5d91), closes [#3052](https://github.com/angular/material/issues/3052), [#3909](https://github.com/angular/material/issues/3909))
+  * select no longer overflows window, resizes from small to big correctly ([ee4ab189](https://github.com/angular/material/commit/ee4ab189), closes [#5291](https://github.com/angular/material/issues/5291))
+  * fix IE 11 select not growing ([4306331c](https://github.com/angular/material/commit/4306331c))
+* **tabs:**
+  * resolves issue with nested tabs ([20ba8a59](https://github.com/angular/material/commit/20ba8a59), closes [#4989](https://github.com/angular/material/issues/4989), [#5719](https://github.com/angular/material/issues/5719))
+  * rename `disabled` to the right `ng-disabled` ([b8d3519f](https://github.com/angular/material/commit/b8d3519f), closes [#5691](https://github.com/angular/material/issues/5691), [#5699](https://github.com/angular/material/issues/5699))
+  * labels with fraction CSS width disabling pagination ([a120a358](https://github.com/angular/material/commit/a120a358), closes [#5794](https://github.com/angular/material/issues/5794), [#5770](https://github.com/angular/material/issues/5770), [#5692](https://github.com/angular/material/issues/5692), [#5801](https://github.com/angular/material/issues/5801))
+* **toast:** switch `content` to `textContent`  to unify w/ dialog. Deprecate `content` ([1eeafee4](https://github.com/angular/material/commit/1eeafee4))
+* **toolbar:** add support in scrollshrink to ngshow/hide ([eb94d640](https://github.com/angular/material/commit/eb94d640), closes [#5706](https://github.com/angular/material/issues/5706), [#5863](https://github.com/angular/material/issues/5863))
+* **tooltip:** tooltip sometimes not hidden after element is disabled. ([7920dba1](https://github.com/angular/material/commit/7920dba1), closes [#5912](https://github.com/angular/material/issues/5912))
+* **util:** added toUpperCase to nodeName ([6260a769](https://github.com/angular/material/commit/6260a769), closes [#5609](https://github.com/angular/material/issues/5609), [#5771](https://github.com/angular/material/issues/5771))
+
+
+<a name"1.0.0-rc4"></a>
+### 1.0.0-rc4 (2015-11-13)
+
+
+#### Features
+
+* **card:** improved to behave closer to spec ([323d5f6e](https://github.com/angular/material/commit/323d5f6e), closes [#1900](https://github.com/angular/material/issues/1900))
+* **chips:** add support for custom separator keys ([5f5ae455](https://github.com/angular/material/commit/5f5ae455), closes [#5279](https://github.com/angular/material/issues/5279), [#5281](https://github.com/angular/material/issues/5281))
+* **mdMenu:** add md-prevent-menu-close ([e9bcec1b](https://github.com/angular/material/commit/e9bcec1b), closes [#5457](https://github.com/angular/material/issues/5457), [#4334](https://github.com/angular/material/issues/4334))
+
+
+#### Breaking Changes
+
+* Dialog presets for `alert` and `confirm` no longer have a `content` option.  There is now `textContent` and `htmlContent`.  In order to use `htmlContent` you must load the `ngSanitize` module.  HTML will not be compiled as an Angular template to prevent XSS attack vectors.
+
+
+#### Bug Fixes
+
+* **autocomplete:** adjusts dropdown position for standard input style ([44d1636b](https://github.com/angular/material/commit/44d1636b), closes [#5558](https://github.com/angular/material/issues/5558), [#5680](https://github.com/angular/material/issues/5680))
+* **datepicker:** icon jumping upon open/close. ([e73c560b](https://github.com/angular/material/commit/e73c560b), closes [#4570](https://github.com/angular/material/issues/4570), [#5703](https://github.com/angular/material/issues/5703))
+* **dialog:** break `content` into `textContent` and `htmlContent` to help keep users from acc ([6a564508](https://github.com/angular/material/commit/6a564508))
+* **input:**
+  * textarea auto grow fixed ([7fe6f87b](https://github.com/angular/material/commit/7fe6f87b), closes [#5627](https://github.com/angular/material/issues/5627), [#5636](https://github.com/angular/material/issues/5636))
+  * fixes alignment issues between textareas and inputs ([fb6f81a5](https://github.com/angular/material/commit/fb6f81a5), closes [#5462](https://github.com/angular/material/issues/5462), [#5682](https://github.com/angular/material/issues/5682))
+* **mdMenu:** fix attempting to close non-existant nested menus ([6bf98aa6](https://github.com/angular/material/commit/6bf98aa6))
+* **menu:**
+  * all menus no longer self destruct when one is destroyed ([667a05ff](https://github.com/angular/material/commit/667a05ff), closes [#5395](https://github.com/angular/material/issues/5395))
+  * fix divider disappearing on scrolling menu ([3ab6aa35](https://github.com/angular/material/commit/3ab6aa35), closes [#5081](https://github.com/angular/material/issues/5081))
+  * menu items are not aligned in Microsoft Edge ([818652d4](https://github.com/angular/material/commit/818652d4), closes [#3987](https://github.com/angular/material/issues/3987), [#5487](https://github.com/angular/material/issues/5487))
+* **ripple:** Fix failing spec. ([fe84405d](https://github.com/angular/material/commit/fe84405d))
+* **select:**
+  * disabled option no longer reacting to hover and closing on click ([ab0ffc4d](https://github.com/angular/material/commit/ab0ffc4d), closes [#4967](https://github.com/angular/material/issues/4967), [#5619](https://github.com/angular/material/issues/5619))
+  * fix floating label not rendering until focus ([a3a0f48c](https://github.com/angular/material/commit/a3a0f48c), closes [#5566](https://github.com/angular/material/issues/5566))
+  * fix auto-complete element not being removed from form ([2760f67e](https://github.com/angular/material/commit/2760f67e), closes [#5575](https://github.com/angular/material/issues/5575))
+* **toast:** added position relative to toast parent ([617ab2c8](https://github.com/angular/material/commit/617ab2c8), closes [#4542](https://github.com/angular/material/issues/4542), [#5660](https://github.com/angular/material/issues/5660))
+
+
 <a name"1.0.0-rc3"></a>
 ### 1.0.0-rc3 (2015-11-06)
 

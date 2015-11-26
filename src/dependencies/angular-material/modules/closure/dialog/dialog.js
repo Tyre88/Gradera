@@ -2,7 +2,7 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.0.0-rc3-master-1ae16cb
+ * v1.0.0-rc5-master-76c6299
  */
 goog.provide('ng.material.components.dialog');
 goog.require('ng.material.components.backdrop');
@@ -199,7 +199,7 @@ MdDialogDirective.$inject = ["$$rAF", "$mdTheming", "$mdDialog"];
  *     function showAlert() {
  *       alert = $mdDialog.alert()
  *         .title('Attention, ' + $scope.userName)
- *         .content('This is an example of how easy dialogs can be!')
+ *         .textContent('This is an example of how easy dialogs can be!')
  *         .ok('Close');
  *
  *       $mdDialog
@@ -304,10 +304,15 @@ MdDialogDirective.$inject = ["$$rAF", "$mdTheming", "$mdDialog"];
  *
  * @returns {obj} an `$mdDialogPreset` with the chainable configuration methods:
  *
- * - $mdDialogPreset#title(string) - sets title to string
- * - $mdDialogPreset#content(string) - sets content / message to string
- * - $mdDialogPreset#ok(string) - sets okay button text to string
- * - $mdDialogPreset#theme(string) - sets the theme of the dialog
+ * - $mdDialogPreset#title(string) - Sets the alert title.
+ * - $mdDialogPreset#textContent(string) - Sets the alert message.
+ * - $mdDialogPreset#htmlContent(string) - Sets the alert message as HTML. Requires ngSanitize
+ *     module to be loaded. HTML is not run through Angular's compiler.
+ * - $mdDialogPreset#ok(string) - Sets the alert "Okay" button text.
+ * - $mdDialogPreset#theme(string) - Sets the theme of the alert dialog.
+ * - $mdDialogPreset#targetEvent(DOMClickEvent=) - A click's event object. When passed in as an option,
+ *     the location of the click will be used as the starting point for the opening animation
+ *     of the the dialog.
  *
  */
 
@@ -323,11 +328,16 @@ MdDialogDirective.$inject = ["$$rAF", "$mdTheming", "$mdDialog"];
  *
  * Additionally, it supports the following methods:
  *
- * - $mdDialogPreset#title(string) - sets title to string
- * - $mdDialogPreset#content(string) - sets content / message to string
- * - $mdDialogPreset#ok(string) - sets okay button text to string
- * - $mdDialogPreset#cancel(string) - sets cancel button text to string
- * - $mdDialogPreset#theme(string) - sets the theme of the dialog
+ * - $mdDialogPreset#title(string) - Sets the confirm title.
+ * - $mdDialogPreset#textContent(string) - Sets the confirm message.
+ * - $mdDialogPreset#htmlContent(string) - Sets the confirm message as HTML. Requires ngSanitize
+ *     module to be loaded. HTML is not run through Angular's compiler.
+ * - $mdDialogPreset#ok(string) - Sets the confirm "Okay" button text.
+ * - $mdDialogPreset#cancel(string) - Sets the confirm "Cancel" button text.
+ * - $mdDialogPreset#theme(string) - Sets the theme of the confirm dialog.
+ * - $mdDialogPreset#targetEvent(DOMClickEvent=) - A click's event object. When passed in as an option,
+ *     the location of the click will be used as the starting point for the opening animation
+ *     of the the dialog.
  *
  */
 
@@ -342,7 +352,9 @@ MdDialogDirective.$inject = ["$$rAF", "$mdTheming", "$mdDialog"];
  * `confirm()`, or an options object with the following properties:
  *   - `templateUrl` - `{string=}`: The url of a template that will be used as the content
  *   of the dialog.
- *   - `template` - `{string=}`: Same as templateUrl, except this is an actual template string.
+ *   - `template` - `{string=}`: HTML template to show in the dialog. This **must** be trusted HTML
+ *      with respect to Angular's [$sce service](https://docs.angularjs.org/api/ng/service/$sce).
+ *      This template should **never** be constructed with any kind of user input or user data.
  *   - `autoWrap` - `{boolean=}`: Whether or not to automatically wrap the template with a
  *     `<md-dialog>` tag if one is not provided. Defaults to true. Can be disabled if you provide a
  *     custom dialog directive.
@@ -389,7 +401,7 @@ MdDialogDirective.$inject = ["$$rAF", "$mdTheming", "$mdDialog"];
  *     finished.
  *   - `onRemoving` `{function=}`: Callback function used to announce the close/hide() action is
  *     starting. This allows developers to run custom animations in parallel the close animations.
- *
+ *   - `fullscreen` `{boolean=}`: An option to apply `.md-dialog-fullscreen` class on open.
  * @returns {promise} A promise that can be resolved with `$mdDialog.hide()` or
  * rejected with `$mdDialog.cancel()`.
  */
@@ -421,18 +433,18 @@ MdDialogDirective.$inject = ["$$rAF", "$mdTheming", "$mdDialog"];
 function MdDialogProvider($$interimElementProvider) {
 
   advancedDialogOptions.$inject = ["$mdDialog", "$mdTheming"];
-  dialogDefaultOptions.$inject = ["$mdDialog", "$mdAria", "$mdUtil", "$mdConstant", "$animate", "$document", "$window", "$rootElement", "$log"];
+  dialogDefaultOptions.$inject = ["$mdDialog", "$mdAria", "$mdUtil", "$mdConstant", "$animate", "$document", "$window", "$rootElement", "$log", "$injector"];
   return $$interimElementProvider('$mdDialog')
     .setDefaults({
-      methods: ['disableParentScroll', 'hasBackdrop', 'clickOutsideToClose', 'escapeToClose', 'targetEvent', 'closeTo', 'openFrom', 'parent'],
+      methods: ['disableParentScroll', 'hasBackdrop', 'clickOutsideToClose', 'escapeToClose', 'targetEvent', 'closeTo', 'openFrom', 'parent', 'fullscreen'],
       options: dialogDefaultOptions
     })
     .addPreset('alert', {
-      methods: ['title', 'content', 'ariaLabel', 'ok', 'theme', 'css'],
+      methods: ['title', 'htmlContent', 'textContent', 'ariaLabel', 'ok', 'theme', 'css'],
       options: advancedDialogOptions
     })
     .addPreset('confirm', {
-      methods: ['title', 'content', 'ariaLabel', 'ok', 'cancel', 'theme', 'css'],
+      methods: ['title', 'htmlContent', 'textContent', 'ariaLabel', 'ok', 'cancel', 'theme', 'css'],
       options: advancedDialogOptions
     });
 
@@ -443,7 +455,11 @@ function MdDialogProvider($$interimElementProvider) {
         '<md-dialog md-theme="{{ dialog.theme }}" aria-label="{{ dialog.ariaLabel }}" ng-class="dialog.css">',
         '  <md-dialog-content class="md-dialog-content" role="document" tabIndex="-1">',
         '    <h2 class="md-title">{{ dialog.title }}</h2>',
-        '    <div class="md-dialog-content-body" md-template="::dialog.mdContent"></div>',
+        '    <div ng-if="::dialog.mdHtmlContent" class="md-dialog-content-body" ',
+        '        ng-bind-html="::dialog.mdHtmlContent"></div>',
+        '    <div ng-if="::!dialog.mdHtmlContent" class="md-dialog-content-body">',
+        '      <p>{{::dialog.mdTextContent}}</p>',
+        '    </div>',
         '  </md-dialog-content>',
         '  <md-dialog-actions>',
         '    <md-button ng-if="dialog.$type == \'confirm\'"' +
@@ -471,11 +487,12 @@ function MdDialogProvider($$interimElementProvider) {
   }
 
   /* ngInject */
-  function dialogDefaultOptions($mdDialog, $mdAria, $mdUtil, $mdConstant, $animate, $document, $window, $rootElement, $log) {
+  function dialogDefaultOptions($mdDialog, $mdAria, $mdUtil, $mdConstant, $animate, $document, $window, $rootElement, $log, $injector) {
     return {
       hasBackdrop: true,
       isolateScope: true,
       onShow: onShow,
+      onShowing: beforeShow,
       onRemove: onRemove,
       clickOutsideToClose: false,
       escapeToClose: true,
@@ -485,6 +502,7 @@ function MdDialogProvider($$interimElementProvider) {
       focusOnOpen: true,
       disableParentScroll: true,
       autoWrap: true,
+      fullscreen: false,
       transformTemplate: function(template, options) {
         return '<div class="md-dialog-container">' + validatedTemplate(template) + '</div>';
 
@@ -501,13 +519,24 @@ function MdDialogProvider($$interimElementProvider) {
       }
     };
 
-    /**
-     * Show method for dialogs
-     */
+    function beforeShow(scope, element, options, controller) {
+      if (controller) {
+        controller.mdHtmlContent = controller.htmlContent || options.htmlContent || '';
+        controller.mdTextContent = controller.textContent || options.textContent || '';
+
+        if (controller.mdHtmlContent && !$injector.has('$sanitize')) {
+          throw Error('The ngSanitize module must be loaded in order to use htmlContent.');
+        }
+
+        if (controller.mdHtmlContent && controller.mdTextContent) {
+          throw Error('md-dialog cannot have both `htmlContent` and `textContent`');
+        }
+      }
+    }
+
+    /** Show method for dialogs */
     function onShow(scope, element, options, controller) {
       angular.element($document[0].body).addClass('md-dialog-is-showing');
-
-      wrapSimpleContent();
 
       captureParentAndFromToElements(options);
       configureAria(element.find('md-dialog'), options);
@@ -538,7 +567,7 @@ function MdDialogProvider($$interimElementProvider) {
        */
       function focusOnOpen() {
         if (options.focusOnOpen) {
-          var target = $mdUtil.findFocusTarget(element) || findCloseButtonOrWarn();
+          var target = $mdUtil.findFocusTarget(element) || findCloseButton();
           target.focus();
         }
 
@@ -548,39 +577,15 @@ function MdDialogProvider($$interimElementProvider) {
          *
          * If we find no actions at all, log a warning to the console.
          */
-        function findCloseButtonOrWarn() {
+        function findCloseButton() {
           var closeButton = element[0].querySelector('.dialog-close');
           if (!closeButton) {
             var actionButtons = element[0].querySelectorAll('.md-actions button, md-dialog-actions button');
             closeButton = actionButtons[actionButtons.length - 1];
-            if (actionButtons.length === 0) {
-              $log.warn('At least one action button is required for <md-dialog-actions>.');
-            }
           }
           return angular.element(closeButton);
         }
       }
-
-      /**
-       * Wrap any simple content [specified via .content("")] in <p></p> tags.
-       * otherwise accept HTML content within the dialog content area...
-       * NOTE: Dialog uses the md-template directive to safely inject HTML content.
-       */
-      function wrapSimpleContent() {
-        if ( controller ) {
-          var HTML_END_TAG = /<\/[\w-]*>/gm;
-          var content = controller.content || options.content || "";
-
-          var hasHTML = HTML_END_TAG.test(content);
-          if (!hasHTML) {
-            content = $mdUtil.supplant("<p>{0}</p>", [content]);
-          }
-
-          // Publish updated dialog content body... to be compiled by mdTemplate directive
-          controller.mdContent = content;
-        }
-      }
-
     }
 
     /**
@@ -899,6 +904,10 @@ function MdDialogProvider($$interimElementProvider) {
       var translateOptions = {transitionInClass: 'md-transition-in', transitionOutClass: 'md-transition-out'};
       var from = animator.toTransformCss(buildTranslateToOrigin(dialogEl, options.openFrom || options.origin));
       var to = animator.toTransformCss("");  // defaults to center display (or parent or $rootElement)
+
+      if (options.fullscreen) {
+        dialogEl.addClass('md-dialog-fullscreen');
+      }
 
       return animator
         .translate3d(dialogEl, from, to, translateOptions)
