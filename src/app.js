@@ -1,7 +1,7 @@
 LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
 (function(angular) {
     angular.module('graderaklubb', ['ng', 'ngRoute', 'ngAnimate', 'ui.router', 'ngMaterial', "ngMessages",
-        'webbdudes-image-helper', 'ngFileUpload', 'formly', 'angular-loading-bar']);
+        'webbdudes-image-helper', 'ngFileUpload', 'formly', 'angular-loading-bar', 'dndLists']);
     angular.module('graderaklubb').controller('index', ["$rootScope", "$scope", "$state", "user-service", "$mdSidenav", "Upload",
             function($rootScope, $scope, $state, userService, $mdSidenav, Upload)
             {

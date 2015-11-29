@@ -302,7 +302,8 @@ module.exports = function (grunt)
                         'src/dependencies/angular-formly/dist/formly.min.js',
                         'src/dependencies/ng-file-upload/ng-file-upload.min.js',
                         'src/dependencies/webbdudes/webbdudes-image-helper.js',
-                        "src/dependencies/angular-loading-bar/build/loading-bar.min.js"
+                        "src/dependencies/angular-loading-bar/build/loading-bar.min.js",
+                        "src/dependencies/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"
                     ],
                     'dist/application.js': [
                         'src/app.js',

@@ -8,8 +8,51 @@
         </md-input-container>
     </div>
 
-    <div ng-if="vm.Grade.Id > 0">
+    <div ng-if="vm.Grade.Id > 0" class="hide-md hide-sm">
+        <md-input-container>
+            <label>Kategori</label>
+            <md-select ng-model="vm.SelectedCategoryId" name="category">
+                <md-option ng-repeat="category in vm.Categories" value="{{category.Id}}">
+                    {{category.Name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
 
+        <md-button class="md-raised" ng-click="vm.AddCategory();">Lägg till kategori</md-button>
+
+        <div class="grading-information">
+            <div class="grading-categories md-whiteframe-z1">
+                <div class="category-link" ng-repeat="categoryLink in vm.Grade.GradeCategoryLinks">
+                    <ul dnd-list="categoryLink.GradeCategoryLinkTechniques">
+                        <md-subheader class="md-no-sticky">
+                            {{categoryLink.CategoryName}}
+                        </md-subheader>
+                        <li ng-repeat="technique in categoryLink.GradeCategoryLinkTechniques" dnd-draggable="technique" dnd-moved="categoryLink.GradeCategoryLinkTechniques.splice($index, 1)"
+                            dnd-effect-allowed="move">
+                            {{technique.Name}}
+                        </li>
+                    </ul>
+                    <md-input-container md-no-float style="width: 95%;">
+                        <textarea ng-model="categoryLink.Text" placeholder="Text"></textarea>
+                    </md-input-container>
+                </div>
+            </div>
+            <div class="md-whiteframe-z1 techniques">
+                <md-input-container md-no-float>
+                    <input type="text" ng-model="vm.TechniqueSearch.Name" placeholder="Sök"/>
+                </md-input-container>
+                <md-input-container md-no-float>
+                    <md-checkbox ng-model="vm.ShowGlobalTechniques">Visa globala tekniker</md-checkbox>
+                </md-input-container>
+                <ul dnd-list="vm.Techniques">
+                    <li ng-repeat="technique in vm.Techniques | filter:vm.TechniqueSearch | filter:{IsGlobal: vm.ShowGlobalTechniques}" dnd-draggable="technique" dnd-moved="vm.Techniques.splice($index, 1)"
+                        dnd-effect-allowed="move" dnd-selected="vm.SelectedTechnique = technique"
+                        ng-class="{'selected': vm.Techniques.selected === technique}">
+                        {{technique.Name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div>

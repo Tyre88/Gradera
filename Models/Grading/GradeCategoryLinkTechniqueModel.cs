@@ -9,6 +9,7 @@ namespace Gradera_Klubb.Models.Grading
     {
         public int Id { get; set; }
         public int TechniqueId { get; set; }
+        public string Name { get; set; }
         public int GradeCategoryLinkId { get; set; }
         public int GradeId { get; set; }
     }

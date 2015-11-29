@@ -1,4 +1,6 @@
 (function (angular) {
+    LoadCss('modules/grading/admin/css/gradingadmin.css');
+
     angular.module('graderaklubb').controller('gradingadminlist', gradingadminlistController);
 
     gradingadminlistController.$inject = ["$state", "grading-admin-service"];
@@ -27,16 +29,23 @@
 
     angular.module('graderaklubb').controller('gradingadminedit', gradingadmineditController);
 
-    gradingadmineditController.$inject = ["$state", "$stateParams", "grading-admin-service", "$mdToast"];
+    gradingadmineditController.$inject = ["$state", "$stateParams", "grading-admin-service", "technique-service", "$mdToast"];
 
-    function gradingadmineditController($state, $stateParams, gradingAdminService, $mdToast) {
+    function gradingadmineditController($state, $stateParams, gradingAdminService, techniqueService, $mdToast) {
         var vm = this;
         vm.Grade = {};
         vm.GradeId = ~~$stateParams.id;
+        vm.Categories = [];
+        vm.SelectedCategoryId = 0;
+        vm.Techniques = [];
+        vm.ShowGlobalTechniques = true;
 
         vm.GetGrade = GetGrade;
         vm.Back = Back;
         vm.Save = Save;
+        vm.GetCategories = GetCategories;
+        vm.AddCategory = AddCategory;
+        vm.GetTechniques = GetTechniques;
 
         function GetGrade() {
             if(vm.GradeId <= 0) return;
@@ -66,7 +75,37 @@
             }
         }
 
+        function GetCategories() {
+            gradingAdminService.GetCategories().success(getCategoriesCallback);
+
+            function getCategoriesCallback(response) {
+                vm.Categories = response;
+            }
+        }
+
+        function AddCategory() {
+            var category = vm.Categories.GetItemByValue('Id', vm.SelectedCategoryId);
+            vm.Grade.GradeCategoryLinks.push(
+                {
+                    GradeCategoryId: category.Id,
+                    GradeId: vm.Grade.Id,
+                    Text: '',
+                    CategoryName: category.Name,
+                    GradeCategoryLinkTechniques: []
+                });
+        }
+
+        function GetTechniques() {
+            techniqueService.GetTechniques().success(getTechniquesCallback);
+
+            function getTechniquesCallback(response) {
+                vm.Techniques = response;
+            }
+        }
+
         vm.GetGrade();
+        vm.GetCategories();
+        vm.GetTechniques();
     }
 
     angular.module('graderaklubb').controller('gradingcategoryadminlist', gradingcategoryadminlistController);
