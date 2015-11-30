@@ -70,7 +70,7 @@ namespace Gradera_Klubb.Controllers.Grading
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
-            GradeModel grade = GradeModel.MapGradeModel(GradingAdminBLL.GetGrade(id, loggedInUser.AccountSession.ClubId));
+            GradeModel grade = GradeModel.MapGradeModel(GradingAdminBLL.GetGrade(id, loggedInUser.AccountSession.ClubId), true);
             response.Content = new ObjectContent<GradeModel>(grade,
                 new JsonMediaTypeFormatter());
             return response;
@@ -83,7 +83,7 @@ namespace Gradera_Klubb.Controllers.Grading
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
             grade.ClubId = loggedInUser.AccountSession.ClubId;
-            grade = GradeModel.MapGradeModel(GradingAdminBLL.SaveGrade(GradeModel.MapGradeDal(grade)));
+            grade = GradeModel.MapGradeModel(GradingAdminBLL.SaveGrade(GradeModel.MapGradeDal(grade)), true);
             response.Content = new ObjectContent<GradeModel>(grade, new JsonMediaTypeFormatter());
             return response;
         }

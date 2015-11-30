@@ -46,6 +46,7 @@
         vm.GetCategories = GetCategories;
         vm.AddCategory = AddCategory;
         vm.GetTechniques = GetTechniques;
+        vm.GetCategoryName = GetCategoryName;
 
         function GetGrade() {
             if(vm.GradeId <= 0) return;
@@ -101,6 +102,10 @@
             function getTechniquesCallback(response) {
                 vm.Techniques = response;
             }
+        }
+
+        function GetCategoryName(categoryId) {
+            return vm.Categories.GetItemByValue('Id', categoryId).Name;
         }
 
         vm.GetGrade();

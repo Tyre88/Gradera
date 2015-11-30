@@ -7,7 +7,7 @@ namespace Gradera_Klubb.Models.Techniques
 {
     public class TechniqueModel
     {
-        public int Id { get; set; }
+        public int TechniqueId { get; set; }
         public int ClubId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -20,7 +20,7 @@ namespace Gradera_Klubb.Models.Techniques
             {
                 ClubId = tec.ClubId,
                 Description = tec.Description,
-                Id = tec.Id,
+                TechniqueId = tec.Id,
                 IsGlobal = tec.IsGlobal,
                 Name = tec.Name,
                 TechniqueTypeId = tec.TechniqueTypeId
@@ -40,7 +40,7 @@ namespace Gradera_Klubb.Models.Techniques
             {
                 ClubId = model.ClubId,
                 Description = model.Description,
-                Id = model.Id,
+                Id = model.TechniqueId,
                 IsGlobal = model.IsGlobal,
                 Name = model.Name,
                 TechniqueTypeId = model.TechniqueTypeId

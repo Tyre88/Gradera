@@ -25,7 +25,7 @@
                 <div class="category-link" ng-repeat="categoryLink in vm.Grade.GradeCategoryLinks">
                     <ul dnd-list="categoryLink.GradeCategoryLinkTechniques">
                         <md-subheader class="md-no-sticky">
-                            {{categoryLink.CategoryName}}
+                            {{vm.GetCategoryName(categoryLink.GradeCategoryId);}}
                         </md-subheader>
                         <li ng-repeat="technique in categoryLink.GradeCategoryLinkTechniques" dnd-draggable="technique" dnd-moved="categoryLink.GradeCategoryLinkTechniques.splice($index, 1)"
                             dnd-effect-allowed="move">
