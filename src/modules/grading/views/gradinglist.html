@@ -1,0 +1,9 @@
+<md-list ng-cloak>
+    <md-subheader class="md-no-sticky">
+        Bältesgrader
+    </md-subheader>
+
+    <md-list-item ng-repeat="grade in vm.Grades" ng-click="vm.Show(grade.Id)">
+        <p>{{grade.Name}}</p>
+    </md-list-item>
+</md-list>

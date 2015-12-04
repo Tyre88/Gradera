@@ -17,6 +17,7 @@
                         <!--<li><a ui-sref="gradingbasic" ng-click="SetActiveNav($event)">Graderingsbestämmelser</a></li>-->
                         <li ng-show="$root.HasAccess(2, 10)"><a ui-sref="userlist" ng-click="SetActiveNav($event)">Medlemmar</a></li>
                         <li ng-show="$root.HasAccess(5, 10)"><a ui-sref="competitionlist" ng-click="SetActiveNav($event)">Tävlingar</a></li>
+                        <li ng-show="$root.HasAccess(3, 10)"><a ui-sref="gradinglist" ng-click="SetActiveNav($event)">Graderingsbestämmelser</a></li>
                         <div ng-if="$root.HasSomeWriteAccess();">
                             <hr />
                             <li class="nav-header">Klubb administration</li>

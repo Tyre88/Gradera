@@ -84,6 +84,18 @@
                 templateUrl: "modules/forms/admin/views/formanswersexternal.html",
                 controller: "formanswersexternal",
                 controllerAs: "vm"
+            }).state('gradinglist',
+            {
+                url: "/grading",
+                templateUrl: "modules/grading/views/gradinglist.html",
+                controller: "gradinglist",
+                controllerAs: "vm"
+            }).state('showgrade',
+            {
+                url: "/grading/show/:gradeId",
+                templateUrl: "modules/grading/views/showgrade.html",
+                controller: "showgrade",
+                controllerAs: "vm"
             });
 
         $urlRouterProvider.otherwise('/login');
