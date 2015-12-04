@@ -30,7 +30,8 @@ LoadCss("content/css/login.css");
         };
     }]);
 
-    angular.module('graderaklubb').directive('gkLoggedIn', ["login-service", "user-service", "$mdSidenav", "$state", function(loginService, userService, $mdSidenav, $state)
+    angular.module('graderaklubb').directive('gkLoggedIn', ["login-service", "user-service", "$mdSidenav", "$state",
+        function(loginService, userService, $mdSidenav, $state)
     {
         return {
             restrict: "E",
@@ -50,6 +51,11 @@ LoadCss("content/css/login.css");
                         userService.User.Logout();
                         $state.go ('login');
                     });
+                };
+
+                scope.openMenu = function($mdOpenMenu, ev) {
+                    originatorEv = ev;
+                    $mdOpenMenu(ev);
                 };
             }
         };

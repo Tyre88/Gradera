@@ -1,9 +1,27 @@
 <md-toolbar md-scroll-shrink class="md-whiteframe-z2">
     <div class="logged-in-container">
-        <div class="logged-in-user" ng-click="LoggedInUserToggle = !LoggedInUserToggle;">
+        <md-menu class="logged-in-user" class="md-primary">
+            <div class="logged-in-user" ng-click="$mdOpenMenu($event);" style="display: flex;">
+                <div class="logged-in-image" fit-image="60">
+                    <img src="{{UserService.User.Image}}" alt="" fallback-src="content/images/No_Image_Available.png"/>
+                </div>
+                <span style="margin-left: 1em;">
+                    <i class="fa fa-user"></i>
+                    {{UserService.User.FullName()}}
+                </span>
+                <!--<span class="brand-second-color fa" ng-class="{ false:'fa-sort-desc', true: 'fa-sort-asc' }[LoggedInUserToggle]"></span>-->
+            </div>
+
+            <md-menu-content width="4">
+                <md-menu-item>
+                    <md-button ng-click="Logout()"><i class="fa fa-reply"></i> Logga ut</md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+        <!--<div class="logged-in-user" ng-click="LoggedInUserToggle = !LoggedInUserToggle;">
             {{UserService.User.FullName()}}
             <span class="brand-second-color fa" ng-class="{ false:'fa-sort-desc', true: 'fa-sort-asc' }[LoggedInUserToggle]"></span>
-        </div>
+        </div>-->
 
         <div class="logged-in-club-container">
             <span class="club-name">{{UserService.User.Club.Name}}</span>
@@ -14,8 +32,9 @@
     </div>
 </md-toolbar>
 
-<div class="logged-in-user-settings" ng-show="LoggedInUserToggle">
+<!--<div class="logged-in-user-settings" ng-show="LoggedInUserToggle">
     <ul>
         <li ng-click="Logout()">Logga ut</li>
     </ul>
-</div>
+</div>-->
+

@@ -13,18 +13,25 @@ $height: 60px;
 		border-radius: 50%;
 	}
 
-	> div
+	> div,
+    > md-menu
 	{
 		line-height: $height;
 		height: $height;
 		position: relative;
 		overflow: hidden;
 
+        @media all and (max-width: $mobile-break)
+        {
+          width: 100%;
+        }
+
 		&.logged-in-user
 		{
 			text-align: left;
 			float: right;
             padding-right: 30px;
+            display: flex;
 
 			&:hover
 			{
@@ -45,6 +52,13 @@ $height: 60px;
 			margin: 0 0 0 25%;
 			float: left;
 		}
+
+      .logged-in-image
+      {
+        width: 60px;
+        height: 60px;
+        display: inline-block;
+      }
 	}
 
   .club-name
