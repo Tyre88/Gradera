@@ -9,19 +9,17 @@
                     <i class="fa fa-user"></i>
                     {{UserService.User.FullName()}}
                 </span>
-                <!--<span class="brand-second-color fa" ng-class="{ false:'fa-sort-desc', true: 'fa-sort-asc' }[LoggedInUserToggle]"></span>-->
             </div>
 
             <md-menu-content width="4">
                 <md-menu-item>
                     <md-button ng-click="Logout()"><i class="fa fa-reply"></i> Logga ut</md-button>
                 </md-menu-item>
+                <md-menu-item>
+                    <md-button><i class="fa fa-user"></i> Redigera profil</md-button>
+                </md-menu-item>
             </md-menu-content>
         </md-menu>
-        <!--<div class="logged-in-user" ng-click="LoggedInUserToggle = !LoggedInUserToggle;">
-            {{UserService.User.FullName()}}
-            <span class="brand-second-color fa" ng-class="{ false:'fa-sort-desc', true: 'fa-sort-asc' }[LoggedInUserToggle]"></span>
-        </div>-->
 
         <div class="logged-in-club-container">
             <span class="club-name">{{UserService.User.Club.Name}}</span>
@@ -31,10 +29,4 @@
         <md-button class="mobile-menu-button icon-menu md-accent md-fab fa fa-bars" md-no-ink ng-click="::TriggerMobileMenu()"></md-button>
     </div>
 </md-toolbar>
-
-<!--<div class="logged-in-user-settings" ng-show="LoggedInUserToggle">
-    <ul>
-        <li ng-click="Logout()">Logga ut</li>
-    </ul>
-</div>-->
 
