@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Gradera.Grading.DAL;
 using Gradera.Techniques.BLL;
+using Gradera.Grading.BLL;
 
 namespace Gradera_Klubb.Models.Grading
 {
@@ -69,6 +70,8 @@ namespace Gradera_Klubb.Models.Grading
                             }
                         }
                     }
+
+                    linkModel.CategoryName = GradingBLL.GetGradingCategory(link.GradeCategoryId, model.ClubId).Name;
 
                     model.GradeCategoryLinks.Add(linkModel);
                 }

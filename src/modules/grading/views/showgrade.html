@@ -1,0 +1,25 @@
+<md-subheader class="md-no-sticky">
+    Visar bältesgrad: {{vm.Grade.Name}}
+</md-subheader>
+
+<div class="info-container">
+    <div ng-repeat="categoryLink in vm.Grade.GradeCategoryLinks">
+        <md-subheader>
+            {{categoryLink.CategoryName}}
+        </md-subheader>
+        <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
+                      md-row-height-gt-md="1:1" md-row-height="4:3"
+                      md-gutter="8px" md-gutter-gt-sm="4px">
+
+            <md-grid-tile ng-repeat="technique in categoryLink.GradeCategoryLinkTechniques"
+                          md-rowspan="2"
+                          md-colspan="2"
+                          md-colspan-sm="1">
+                <img src="content/images/No_Image_Available.png" alt="" ng-click="vm.ShowTechnique(technique.Id);"/>
+                <md-grid-tile-footer><h3>{{technique.Name}}</h3></md-grid-tile-footer>
+            </md-grid-tile>
+
+        </md-grid-list>
+        {{categoryLink.Text}}
+    </div>
+</div>

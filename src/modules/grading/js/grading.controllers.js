@@ -1,4 +1,6 @@
 (function (angular) {
+    LoadCss('modules/grading/css/grading.css');
+
     angular.module('graderaklubb').controller('gradinglist', gradinglistController);
 
     gradinglistController.$inject = ["$state", "gradingService"];
@@ -27,10 +29,26 @@
 
     angular.module('graderaklubb').controller('showgrade', showgradeController);
 
-    showgradeController.$inject = ["$state", "$stateParams"];
+    showgradeController.$inject = ["$state", "$stateParams", "gradingService"];
 
-    function showgradeController($state, $stateParams) {
+    function showgradeController($state, $stateParams, gradingService) {
         var vm = this;
         vm.GradeId = ~~$stateParams.gradeId;
+        vm.Grade = {};
+
+        vm.GetGrade = GetGrade;
+
+        function GetGrade() {
+            if(vm.GradeId > 0)
+            {
+                gradingService.GetGrade(vm.GradeId).success(getGradeCallback);
+
+                function getGradeCallback(response) {
+                    vm.Grade = response;
+                }
+            }
+        }
+
+        vm.GetGrade();
     }
 }(window.angular));
