@@ -16,6 +16,7 @@
             IsDeleted: false,
             Name: "",
             FormFields: [],
+            Description: "",
             Initialize: function (formModel) {
                 this.Id = formModel.Id;
                 this.CreatedByUserId = formModel.Id;
@@ -26,6 +27,7 @@
                 this.IsExternal = formModel.IsExternal;
                 this.IsDeleted = formModel.IsDeleted;
                 this.Name = formModel.Name;
+                this.Description = formModel.Description;
 
                 if (formModel.FormFields != undefined && formModel.FormFields.length > 0) {
                     this.FormFields = [];

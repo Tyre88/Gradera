@@ -1,5 +1,7 @@
 <md-subheader class="md-no-sticky kaushan-script big-header">
-    {{vm.Form.Name}}
+    <h2>{{vm.Form.Name}}</h2>
+
+    <div btf-markdown="vm.Form.Description"></div>
 </md-subheader>
 
 <form name="{{vm.Form.Id}}" novalidate>

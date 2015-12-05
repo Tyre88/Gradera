@@ -33,8 +33,7 @@
                 $mdDialog.show(
                     $mdDialog.alert()
                         .clickOutsideToClose(true)
-                        .title('Tack!')
-                        .content('Tack för att du svarade på formuläret!')
+                        .title('Tack för att du svarade på formuläret!')
                         .ariaLabel('Tack!')
                         .ok('Ok')
                 );

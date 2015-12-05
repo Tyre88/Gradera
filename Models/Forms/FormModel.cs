@@ -17,6 +17,7 @@ namespace Gradera_Klubb.Models.Forms
         public bool IsExternal { get; set; }
         public bool IsDeleted { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public List<FormFieldModel> FormFields { get; set; }
         public List<FormEmailModel> Emails { get; set; }
 
@@ -38,7 +39,8 @@ namespace Gradera_Klubb.Models.Forms
                 IsDeleted = form.IsDeleted,
                 IsExternal = form.IsExternal,
                 Name = form.Name,
-                StartDate = form.StartDate
+                StartDate = form.StartDate,
+                Description = form.Description
             };
 
             if(deepLoad)
@@ -67,7 +69,8 @@ namespace Gradera_Klubb.Models.Forms
                 IsDeleted = model.IsDeleted,
                 IsExternal = model.IsExternal,
                 Name = model.Name,
-                StartDate = model.StartDate
+                StartDate = model.StartDate,
+                Description = model.Description
             };
 
             foreach (var item in model.FormFields)
