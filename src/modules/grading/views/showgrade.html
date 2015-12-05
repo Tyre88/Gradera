@@ -18,9 +18,9 @@
                 <span fit-image style="display: inline-block;">
                     <img src="{{technique.TechniqueImages[0] ? technique.TechniqueImages[0].Image : ''}}" alt=""
                          fallback-src="content/images/No_Image_Available.png"
-                         ng-click="vm.ShowTechnique(technique.Id);" />
+                         ng-click="vm.ShowTechnique(technique.TechniqueId);" />
                 </span>
-                <md-grid-tile-footer ng-click="vm.ShowTechnique(technique.Id);">
+                <md-grid-tile-footer ng-click="vm.ShowTechnique(technique.TechniqueId);">
                     <h3>{{technique.Name}}</h3>
                 </md-grid-tile-footer>
             </md-grid-tile>

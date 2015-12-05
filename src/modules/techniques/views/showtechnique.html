@@ -1,0 +1,15 @@
+<md-subheader class="md-no-sticky">
+    Visar teknik: {{vm.Technique.Name}}
+</md-subheader>
+
+<div class="technique-images">
+    <div class="technique-image" fit-image="150" ng-repeat="image in vm.Technique.TechniqueImages">
+        <img src="{{image.Image}}" fallback-src="content/images/No_Image_Available.png" alt=""/>
+    </div>
+</div>
+
+<div layout="row" layout-align="space-around center">
+    <div flex="45" flex-sm="90" flex-md="90">
+        <div btf-markdown="vm.Technique.Description"></div>
+    </div>
+</div>

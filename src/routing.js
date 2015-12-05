@@ -96,6 +96,12 @@
                 templateUrl: "modules/grading/views/showgrade.html",
                 controller: "showgrade",
                 controllerAs: "vm"
+            }).state('showtechnique',
+            {
+                url: "/technique/show/:id",
+                templateUrl: "modules/techniques/views/showtechnique.html",
+                controller: "showtechnique",
+                controllerAs: "vm"
             });
 
         $urlRouterProvider.otherwise('/login');

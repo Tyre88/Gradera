@@ -37,6 +37,7 @@
         vm.Grade = {};
 
         vm.GetGrade = GetGrade;
+        vm.ShowTechnique = ShowTechnique;
 
         function GetGrade() {
             if(vm.GradeId > 0)
@@ -47,6 +48,10 @@
                     vm.Grade = response;
                 }
             }
+        }
+
+        function ShowTechnique(id) {
+            $state.go('showtechnique', {id: id});
         }
 
         vm.GetGrade();
