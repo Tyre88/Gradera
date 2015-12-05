@@ -44,8 +44,7 @@ namespace Gradera_Klubb.Controllers.Forms
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
-            FormModel form = FormModel.MapFormModel(FormsBLL.GetForm(loggedInUser.AccountSession.ClubId,
-                loggedInUser.AccountSession.AccountId, formId), true);
+            FormModel form = FormModel.MapFormModel(FormsBLL.GetForm(loggedInUser.AccountSession.ClubId, formId), true);
             response.Content = new ObjectContent<FormModel>(form, new JsonMediaTypeFormatter());
             return response;
         }

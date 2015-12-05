@@ -30,6 +30,26 @@
 <div class="divider"></div>
 
 <md-subheader class="md-no-sticky">
+    Lägg till e-post som svar skickas till
+</md-subheader>
+
+<div class="edit-container">
+    <md-input-container md-no-float>
+        <input type="text" ng-model="vm.Email" placeholder="E-post"/>
+    </md-input-container>
+
+    <div>
+        <p ng-repeat="email in vm.Form.Emails">
+            {{email.Email}}
+        </p>
+    </div>
+</div>
+
+<md-button class="md-raised md-primary" ng-click="vm.AddEmail();">Lägg till e-post</md-button>
+
+<div class="divider"></div>
+
+<md-subheader class="md-no-sticky">
     Lägg till fält:
 </md-subheader>
 

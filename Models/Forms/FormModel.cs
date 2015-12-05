@@ -18,10 +18,12 @@ namespace Gradera_Klubb.Models.Forms
         public bool IsDeleted { get; set; }
         public string Name { get; set; }
         public List<FormFieldModel> FormFields { get; set; }
+        public List<FormEmailModel> Emails { get; set; }
 
         public FormModel()
         {
             FormFields = new List<FormFieldModel>();
+            Emails = new List<FormEmailModel>();
         }
 
         public static FormModel MapFormModel(Form form, bool deepLoad = false)
@@ -40,7 +42,15 @@ namespace Gradera_Klubb.Models.Forms
             };
 
             if(deepLoad)
+            {
                 form.FormFields.ToList().ForEach(f => model.FormFields.Add(FormFieldModel.MapFormFieldModel(f)));
+                form.Form_Emails.ToList().ForEach(e => model.Emails.Add(new FormEmailModel()
+                {
+                    Email = e.Email,
+                    Id = e.Id,
+                    FormId = e.FormId
+                }));
+            }
 
             return model;
         }
@@ -81,6 +91,16 @@ namespace Gradera_Klubb.Models.Forms
                 }));
 
                 form.FormFields.Add(field);
+            }
+
+            foreach (var email in model.Emails)
+            {
+                form.Form_Emails.Add(new Form_Emails()
+                {
+                    Email = email.Email,
+                    FormId = form.Id,
+                    Id = email.Id
+                });
             }
 
             return form;

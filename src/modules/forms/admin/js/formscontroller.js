@@ -60,7 +60,7 @@ LoadCss(["modules/forms/admin/css/form-admin.css", "modules/forms/css/form.css"]
     function formsadmineditController($scope, $state, $stateParams, formsAdminService, form, $mdDialog) {
         var vm = this;
         vm.FormId = ~~$stateParams.formId;
-        vm.Form = {};
+        vm.Form = {Emails: []};
         vm.PreviewForm = angular.copy(form.Form);
         vm.NewField = {
             ClassName: "form-field-hundred",
@@ -86,6 +86,7 @@ LoadCss(["modules/forms/admin/css/form-admin.css", "modules/forms/css/form.css"]
         vm.ShowPreviewForm = ShowPreviewForm;
         vm.ClosePreview = ClosePreview;
         vm.DeleteFormFieldItem = DeleteFormFieldItem;
+        vm.AddEmail = AddEmail;
 
         function GetForm() {
             formsAdminService.GetForm(vm.FormId).success(getFormCallback);
@@ -172,6 +173,11 @@ LoadCss(["modules/forms/admin/css/form-admin.css", "modules/forms/css/form.css"]
 
                 vm.Form.FormFields.splice(vm.Form.FormFields.indexOf(item), 1);
             });
+        }
+
+        function AddEmail() {
+            vm.Form.Emails.push({Email: vm.Email});
+            vm.Email = "";
         }
 
         if(vm.FormId > 0)
