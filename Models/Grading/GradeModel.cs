@@ -64,7 +64,21 @@ namespace Gradera_Klubb.Models.Grading
                                     TechniqueId = technique.TechniqueId
                                 };
 
-                                gm.Name = TechniqueAdminBLL.GetTechnique(technique.TechniqueId, grade.ClubId).Name;
+                                Gradera.Techniques.DAL.Technique tec = TechniqueAdminBLL.GetTechnique(technique.TechniqueId, grade.ClubId);
+
+                                gm.Name = tec.Name;
+
+                                foreach (var image in tec.Technique_Image)
+                                {
+                                    gm.TechniqueImages.Add(new Techniques.TechniqueImageModel()
+                                    {
+                                        Id = image.Id,
+                                        Image = image.Image,
+                                        TechniqueId = image.TechniqueId,
+                                        ImageOrder = image.ImageOrder
+                                    });
+                                }
+
 
                                 linkModel.GradeCategoryLinkTechniques.Add(gm);
                             }

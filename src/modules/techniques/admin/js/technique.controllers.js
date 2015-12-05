@@ -31,7 +31,7 @@
 
     function techniqueeditController($state, $stateParams, techniqueService) {
         var vm = this;
-        vm.Technique = {};
+        vm.Technique = {TechniqueImages: []};
         vm.TechniqueId = ~~$stateParams.id;
         vm.TechniqueTypes = [];
 
@@ -39,6 +39,7 @@
         vm.Back = Back;
         vm.Save = Save;
         vm.GetTechniqueTypes = GetTechniqueTypes;
+        vm.OnUploadSuccess = OnUploadSuccess;
 
         function GetTechnique() {
             if(vm.TechniqueId <= 0)
@@ -69,6 +70,10 @@
             function getTechniqueTypesCallback(response) {
                 vm.TechniqueTypes = response;
             }
+        }
+
+        function OnUploadSuccess(response) {
+            vm.Technique.TechniqueImages.push({ Image: "/Uploads/" + response.data, TechniqueId: vm.Technique.TechniqueId });
         }
 
         vm.GetTechnique();

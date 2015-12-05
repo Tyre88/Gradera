@@ -5,3 +5,26 @@ md-grid-tile
     width: 100%;
   }
 }
+
+[btf-markdown]
+{
+  padding: 10px;
+
+  ul
+  {
+    list-style: none;
+    padding-left: 10px;
+
+    li
+    {
+
+      &:before
+      {
+        font-family:'FontAwesome';
+        content: '\f105';
+        margin-right: 5px;
+        color: rgba(0, 0, 0, 0.54);
+      }
+    }
+  }
+}

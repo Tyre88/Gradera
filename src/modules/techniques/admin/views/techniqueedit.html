@@ -2,6 +2,16 @@
     <md-subheader class="md-no-sticky">
         Redigera: {{vm.Technique.Name}} - <span class="is-global" ng-if="vm.Technique.IsGlobal">Detta är en "global" teknik som du inte kan redigera.</span>
     </md-subheader>
+
+    <div class="edit-image" fit-image="150" ngf-drop="$root.UploadImage($files, vm.OnUploadSuccess)" ngf-drag-over-class="'dragover'" ngf-multiple="false"
+         ngf-pattern="'image/*'" ngf-capture="'camera'" ngf-select="$root.UploadImage($files, vm.OnUploadSuccess)">
+        <img src="{{vm.Technique.TechniqueImages[0].Image}}" fallback-src="content/images/No_Image_Available.png" />
+    </div>
+
+    <span fit-image="100" ng-repeat="image in vm.Technique.TechniqueImages | orderBy:image.ImageOrder:true" style="display: inline-block;">
+        <img src="{{image.Image}}" alt=""/>
+    </span>
+
     <div class="edit-container">
         <md-input-container md-no-float>
             <input ng-disabled="vm.Technique.IsGlobal" type="text" md-maxlength="50" ng-model="vm.Technique.Name" placeholder="Namn"/>

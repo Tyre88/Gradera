@@ -1,5 +1,5 @@
 /*
- Created by: Victor Öhrström
+ Created by: Victor ï¿½hrstrï¿½m
  Email: victor@webbdudes.se
  Website: http://webbdudes.se
  Version: 0.1
@@ -30,10 +30,17 @@
         };
         return directive;
         function linkFunction(scope, element, attrs) {
+            $(element).css('overflow', 'hidden');
+            //$(element).css('border-radius', '50%');
+
             $(element).find("img").on('load', function () {
                 var limit = 100;
                 if (attrs.fitImage != "")
                     limit = ~~attrs.fitImage;
+
+                $(element).css('height', limit + 'px');
+                $(element).css('width', limit + 'px');
+
                 if (this.width == this.height) {
                     this.width = limit;
                     this.height = limit;
