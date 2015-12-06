@@ -3,7 +3,7 @@
 </md-subheader>
 
 <div class="technique-images">
-    <div class="technique-image" fit-image="150" ng-repeat="image in vm.Technique.TechniqueImages">
+    <div class="technique-image" fit-image="150" ng-repeat="image in vm.Technique.TechniqueImages" ng-click="vm.ViewImage(image.Image)">
         <img src="{{image.Image}}" fallback-src="content/images/No_Image_Available.png" alt=""/>
     </div>
 </div>

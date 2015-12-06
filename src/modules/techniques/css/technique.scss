@@ -11,3 +11,23 @@
     border-radius: 50%;
   }
 }
+
+.image-dialog-content
+{
+  text-align: center;
+}
+
+.image-dialog-actions
+{
+  .md-button
+  {
+    margin-left: calc(100% - 60px);
+  }
+
+  @media all and (max-width: 960px) {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+  }
+}
