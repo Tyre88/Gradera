@@ -42,8 +42,7 @@ LoadCss("modules/competition/admin/css/competition.css");
 
         function DeleteCompetition(competition) {
             var confirm = $mdDialog.confirm()
-                .title('Ta bort tävling?')
-                .content('Är du säker på att du vill ta bort ' + competition.Name + '?')
+                .title('Är du säker på att du vill ta bort ' + competition.Name + '?')
                 .ariaLabel('Ta bort tävling?')
                 .ok('Ja')
                 .cancel('Nej');

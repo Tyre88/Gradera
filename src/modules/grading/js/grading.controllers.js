@@ -38,6 +38,7 @@
 
         vm.GetGrade = GetGrade;
         vm.ShowTechnique = ShowTechnique;
+        vm.ExportGrade = ExportGrade;
 
         function GetGrade() {
             if(vm.GradeId > 0)
@@ -52,6 +53,14 @@
 
         function ShowTechnique(id) {
             $state.go('showtechnique', {id: id});
+        }
+
+        function ExportGrade() {
+            gradingService.ExportGrade(vm.GradeId).success(exportGradeCallback);
+
+            function exportGradeCallback(response) {
+                console.log(response);
+            }
         }
 
         vm.GetGrade();

@@ -123,9 +123,8 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
             }])
         .controller('logoutController', ["$scope", "user-service", "$state", "$mdDialog", function($scope, userService, $state, $mdDialog) {
             var confirm = $mdDialog.confirm()
-                .title('Utloggad')
+                .title('Du har blivit utloggad, vänligen logga in igen.')
                 .clickOutsideToClose(false)
-                .content('Du har blivit utloggad, vänligen logga in igen.')
                 .ariaLabel('Utloggad')
                 .ok('Ok');
             $mdDialog.show(confirm).then(function() {
@@ -135,9 +134,8 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
         }])
         .controller('noaccessController', ["$rootScope", "$state", "$mdDialog", function($rootScope, $state, $mdDialog) {
             var confirm = $mdDialog.confirm()
-                .title('Ej tillgång')
+                .title('Du har inte rättigheter att utföra det du försökte.')
                 .clickOutsideToClose(false)
-                .content('Du har inte rättigheter att utföra det du försökte.')
                 .ariaLabel('Ej tillgång')
                 .ok('Tillbaka')
                 .cancel('Hem');

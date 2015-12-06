@@ -30,8 +30,7 @@
 
             function submitFormCallback() {
                 var confirm = $mdDialog.confirm()
-                    .title('Tack!')
-                    .content('Tack för att du svarade på formuläret!')
+                    .title('Tack för att du svarade på formuläret!')
                     .ariaLabel('Tack!')
                     .ok('Ok')
                     .cancel('Avbryt');

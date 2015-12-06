@@ -34,8 +34,7 @@ LoadCss(["modules/forms/admin/css/form-admin.css", "modules/forms/css/form.css"]
 
         function DeleteForm(form) {
             var confirm = $mdDialog.confirm()
-                .title('Ta bort formulär?')
-                .content('Är du säker på att du vill ta bort ' + form.Name + '?')
+                .title('Är du säker på att du vill ta bort ' + form.Name + '?')
                 .ariaLabel('Ta bort formulär?')
                 .ok('Ja')
                 .cancel('Nej');
@@ -160,8 +159,7 @@ LoadCss(["modules/forms/admin/css/form-admin.css", "modules/forms/css/form.css"]
 
         function DeleteFormFieldItem(item) {
             var confirm = $mdDialog.confirm()
-                .title('Ta bort fält?')
-                .content('Är du säker på att du vill ta bort fältet: ' + item.Label + '?')
+                .title('Är du säker på att du vill ta bort fältet: ' + item.Label + '?')
                 .ariaLabel('Ta bort fält?')
                 .ok('Ja')
                 .cancel('Nej');

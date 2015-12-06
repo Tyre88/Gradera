@@ -10,8 +10,7 @@
         $scope.DeleteUser = function(user) {
 
             var confirm = $mdDialog.confirm()
-                .title('Ta bort användare?')
-                .content('Är du säker på att du vill ta bort ' + user.FirstName + ' ' + user.LastName + '?')
+                .title('Är du säker på att du vill ta bort ' + user.FirstName + ' ' + user.LastName + '?')
                 .ariaLabel('Ta bort användare?')
                 .ok('Ja')
                 .cancel('Nej');
