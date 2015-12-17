@@ -44,10 +44,10 @@
             if(vm.GradeId > 0)
             {
                 gradingService.GetGrade(vm.GradeId).success(getGradeCallback);
+            }
 
-                function getGradeCallback(response) {
-                    vm.Grade = response;
-                }
+            function getGradeCallback(response) {
+                vm.Grade = response;
             }
         }
 
