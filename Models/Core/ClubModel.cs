@@ -13,6 +13,7 @@ namespace Gradera_Klubb.Models
         public string Name { get; set; }
         public string ShortName { get; set; }
         public string Image { get; set; }
+        public string Description { get; set; }
         public ClubSettingsModel Settings { get; set; }
 
         public static ClubModel MapClub(Club club)
@@ -23,6 +24,7 @@ namespace Gradera_Klubb.Models
                 Image = club.Image,
                 Name = club.Name,
                 ShortName = club.ShortName,
+                Description = club.Description,
                 Settings = JsonConvert.DeserializeObject<ClubSettingsModel>(club.Settings)
             };
 
@@ -37,6 +39,7 @@ namespace Gradera_Klubb.Models
                 Name = model.Name,
                 ShortName = model.ShortName,
                 Image = model.Image,
+                Description = model.Description,
                 Settings = JsonConvert.SerializeObject(model.Settings)
             };
         }
