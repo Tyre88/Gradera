@@ -14,6 +14,7 @@ namespace Gradera_Klubb.Models.Grading
         public int ClubId { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
+        public int GradingBookletId { get; set; }
         public List<GradeCategoryLinkModel> GradeCategoryLinks { get; set; }
 
         public GradeModel()
@@ -35,7 +36,8 @@ namespace Gradera_Klubb.Models.Grading
                 ClubId = grade.ClubId,
                 Id = grade.Id,
                 Image = grade.Image,
-                Name = grade.Name
+                Name = grade.Name,
+                GradingBookletId = grade.GradingBookletId
             };
 
             if(deepLoad && grade.Grade_Category_Link.Count > 0)
@@ -101,7 +103,8 @@ namespace Gradera_Klubb.Models.Grading
                 ClubId = model.ClubId,
                 Id = model.Id,
                 Image = model.Image,
-                Name = model.Name
+                Name = model.Name,
+                GradingBookletId = model.GradingBookletId
             };
 
             model.GradeCategoryLinks.ForEach(g => MapCategoryLink(g, grade));
@@ -116,7 +119,7 @@ namespace Gradera_Klubb.Models.Grading
                 GradeCategoryId = g.GradeCategoryId,
                 GradeId = g.GradeId,
                 Id = g.Id,
-                Text = g.Text
+                Text = g.Text,
             };
 
             g.GradeCategoryLinkTechniques.ForEach(t => link.Grade_Category_Link_Technique.Add(new Grade_Category_Link_Technique()
@@ -124,7 +127,7 @@ namespace Gradera_Klubb.Models.Grading
                 GradeCategoryLinkId = link.Id,
                 GradeId = grade.Id,
                 Id = t.Id,
-                TechniqueId = t.TechniqueId
+                TechniqueId = t.TechniqueId,
             }));
 
             grade.Grade_Category_Link.Add(link);

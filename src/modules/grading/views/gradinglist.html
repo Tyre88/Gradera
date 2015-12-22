@@ -1,5 +1,15 @@
 <md-list ng-cloak>
     <md-subheader class="md-no-sticky">
+        Graderings häften
+    </md-subheader>
+
+    <md-list-item ng-repeat="booklet in vm.Booklets" ng-click="vm.ShowBooklet(booklet.Id)">
+        <p>{{booklet.Name}}</p>
+    </md-list-item>
+</md-list>
+
+<md-list ng-cloak ng-if="vm.Grades.length">
+    <md-subheader class="md-no-sticky">
         Bältesgrader
     </md-subheader>
 

@@ -8,15 +8,25 @@
     function gradinglistController($state, gradingService) {
         var vm = this;
         vm.Grades = [];
+        vm.Booklets = [];
 
-        vm.GetGrades = GetGrades;
+        vm.GetGradesWithoutBooklet = GetGradesWithoutBooklet;
+        vm.GetGradingBooklets = GetGradingBooklets;
         vm.Show = Show;
 
-        function GetGrades() {
-            gradingService.GetGrades().success(getGradesCallback);
+        function GetGradesWithoutBooklet() {
+            gradingService.GetGradesWithoutBooklet().success(getGradesCallback);
 
             function getGradesCallback(response) {
                 vm.Grades = response;
+            }
+        }
+
+        function GetGradingBooklets() {
+            gradingService.GetGradingBooklets().success(GetGradingBookletsCallback);
+
+            function GetGradingBookletsCallback(response) {
+                vm.Booklets = response;
             }
         }
 
@@ -24,7 +34,8 @@
             $state.go('showgrade', {gradeId: gradeId});
         }
 
-        vm.GetGrades();
+        vm.GetGradesWithoutBooklet();
+        vm.GetGradingBooklets();
     }
 
     angular.module('graderaklubb').controller('showgrade', showgradeController);
