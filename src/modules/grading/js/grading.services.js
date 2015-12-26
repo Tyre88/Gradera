@@ -23,5 +23,9 @@
         this.GetGradingBooklets = function() {
             return $http.get('/api/Grading/GetGradingBooklets');
         };
+
+        this.GetGradingBooklet = function(bookletId) {
+            return $http.get('/api/Grading/GetGradingBooklet?' + $.param({bookletId: bookletId}));
+        };
     }
 }(window.angular));

@@ -13,6 +13,7 @@
         vm.GetGradesWithoutBooklet = GetGradesWithoutBooklet;
         vm.GetGradingBooklets = GetGradingBooklets;
         vm.Show = Show;
+        vm.ShowBooklet = ShowBooklet;
 
         function GetGradesWithoutBooklet() {
             gradingService.GetGradesWithoutBooklet().success(getGradesCallback);
@@ -32,6 +33,10 @@
 
         function Show(gradeId) {
             $state.go('showgrade', {gradeId: gradeId});
+        }
+
+        function ShowBooklet(bookletId) {
+            $state.go('showbooklet', {id: bookletId});
         }
 
         vm.GetGradesWithoutBooklet();
@@ -75,5 +80,30 @@
         }
 
         vm.GetGrade();
+    }
+
+    angular.module('graderaklubb').controller('showbookletController', showbookletController);
+
+    showbookletController.$inject = ["$state", "$stateParams", "gradingService"];
+
+    function showbookletController($state, $stateParams, gradingService) {
+        var vm = this;
+        vm.BookletId = ~~$stateParams.id;
+        vm.Booklet = {};
+
+        vm.GetGradingBooklet = GetGradingBooklet;
+
+        function GetGradingBooklet() {
+            if(vm.BookletId > 0)
+            {
+                gradingService.GetGradingBooklet(vm.BookletId).success(GetGradingBookletCallback);
+            }
+
+            function GetGradingBookletCallback(response) {
+                vm.Booklet = response;
+            }
+        }
+
+        vm.GetGradingBooklet();
     }
 }(window.angular));

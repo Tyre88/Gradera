@@ -22,10 +22,10 @@ namespace Gradera_Klubb.Models.Grading
             GradeCategoryLinks = new List<GradeCategoryLinkModel>();
         }
 
-        public static List<GradeModel> MapGradeModels(List<Gradera.Grading.DAL.Grade> grades)
+        public static List<GradeModel> MapGradeModels(List<Gradera.Grading.DAL.Grade> grades, bool deepLoad = false)
         {
             List<GradeModel> models = new List<GradeModel>();
-            grades.ForEach(g => models.Add(MapGradeModel(g)));
+            grades.ForEach(g => models.Add(MapGradeModel(g, deepLoad)));
             return models;
         }
 
