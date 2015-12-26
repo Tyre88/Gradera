@@ -177,4 +177,34 @@
 
         vm.GetCategory();
     }
+
+    angular.module('graderaklubb').controller('editbookletController', editbookletController);
+
+    editbookletController.$inject = ["$state", "$stateParams", "grading-admin-service"];
+
+    function editbookletController($state, $stateParams, gradingAdminService) {
+        var vm = this;
+        vm.BookletId = ~~$stateParams.id;
+        vm.Booklet = {};
+
+        vm.GetGradingBooklet = GetGradingBooklet;
+        vm.Back = Back;
+
+        function GetGradingBooklet() {
+            if(vm.BookletId > 0)
+            {
+                gradingAdminService.GetGradingBooklet(vm.BookletId).success(GetGradingBookletCallback);
+            }
+
+            function GetGradingBookletCallback(response) {
+                vm.Booklet = response;
+            }
+        }
+
+        function Back() {
+            $state.go('listbooklets');
+        }
+
+        vm.GetGradingBooklet();
+    }
 }(window.angular));

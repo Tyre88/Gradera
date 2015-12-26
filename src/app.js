@@ -66,6 +66,12 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
                         AccessTypeRight: 20
                     },
                     {
+                        Sref: "listbooklets",
+                        Text: "Hantera graderings häften",
+                        AccessType: 3,
+                        AccessTypeRight: 20
+                    },
+                    {
                         Sref: "techniqueadminlist",
                         Text: "Hantera tekniker",
                         AccessType: 7,

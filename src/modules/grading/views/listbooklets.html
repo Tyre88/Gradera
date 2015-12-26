@@ -1,0 +1,20 @@
+<span class="md-button md-raised" ng-click="vm.Edit(0);"><i class="fa fa-plus-circle"></i> Lägg till häfte</span>
+
+<md-list ng-cloak>
+    <md-subheader class="md-no-sticky">
+        Graderings häften
+    </md-subheader>
+
+    <md-list-item ng-repeat="booklet in vm.Booklets" ng-click="vm.Edit(booklet.Id)">
+        <p>{{booklet.Name}}</p>
+
+        <div class="more-icons md-secondary">
+            <i ng-if="$root.HasAccess(3, 40);" ng-click="vm.Delete(booklet); $event.stopPropagation();"
+               class="fa fa-trash md-hue-3">
+                <md-tooltip>
+                    Ta bort {{booklet.Name}}
+                </md-tooltip>
+            </i>
+        </div>
+    </md-list-item>
+</md-list>

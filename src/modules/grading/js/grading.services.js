@@ -25,7 +25,7 @@
         };
 
         this.GetGradingBooklet = function(bookletId) {
-            return $http.get('/api/Grading/GetGradingBooklet?' + $.param({bookletId: bookletId}));
+            return $http.get('/api/Grading/GetGradingBooklet?' + $.param({bookletId: bookletId, deepLoad: true}));
         };
     }
 }(window.angular));

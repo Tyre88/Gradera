@@ -131,6 +131,12 @@
                 templateUrl: "modules/grading/admin/views/gradingadminedit.html",
                 controller: "gradingadminedit",
                 controllerAs: "vm"
+            }).state('editbooklet',
+            {
+                url: "/admin/booklet/edit/:id",
+                templateUrl: "modules/grading/admin/views/bookletadminedit.html",
+                controller: "editbookletController",
+                controllerAs: "vm"
             });
     }
 }(window.angular));

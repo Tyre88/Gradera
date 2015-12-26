@@ -1,0 +1,15 @@
+<form ng-submit="vm.Save()" name="editbooklet">
+    <md-subheader class="md-no-sticky">
+        Redigera: {{vm.Booklet.Name}}
+    </md-subheader>
+    <div class="edit-container">
+        <md-input-container md-no-float>
+            <input type="text" ng-model="vm.Booklet.Name" placeholder="Namn"/>
+        </md-input-container>
+    </div>
+
+    <div>
+        <md-button class="md-raised md-primary" type="submit">Spara</md-button>
+        <md-button class="md-raised md-warn" ng-click="vm.Back();">Avbryt</md-button>
+    </div>
+</form>

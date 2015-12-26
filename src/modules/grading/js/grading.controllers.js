@@ -106,4 +106,30 @@
 
         vm.GetGradingBooklet();
     }
+
+    angular.module('graderaklubb').controller('listbookletsController', listbookletsController);
+
+    listbookletsController.$inject = ["$state", "gradingService"];
+
+    function listbookletsController($state, gradingService) {
+        var vm = this;
+        vm.Booklets = [];
+
+        vm.GetBooklets = GetBooklets;
+        vm.Edit = Edit;
+
+        function GetBooklets() {
+            gradingService.GetGradingBooklets().success(GetGradingBookletsCallback);
+
+            function GetGradingBookletsCallback(response) {
+                vm.Booklets = response;
+            }
+        }
+
+        function Edit(bookletId) {
+            $state.go('editbooklet', {id: bookletId});
+        }
+
+        vm.GetBooklets();
+    }
 }(window.angular));

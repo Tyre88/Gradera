@@ -26,6 +26,10 @@
 
         this.SaveGradingCategory = function(category) {
             return $http.post('/api/GradingAdmin/SaveGradingCategory', category);
-        }
+        };
+
+        this.GetGradingBooklet = function(bookletId) {
+            return $http.get('/api/Grading/GetGradingBooklet?' + $.param({bookletId: bookletId, deepLoad: false}));
+        };
     }
 }(window.angular));

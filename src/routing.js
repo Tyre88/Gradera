@@ -108,6 +108,12 @@
                 templateUrl: "modules/grading/views/showbooklet.html",
                 controller: "showbookletController",
                 controllerAs: "vm"
+            }).state('listbooklets',
+            {
+                url: "/booklets",
+                templateUrl: "modules/grading/views/listbooklets.html",
+                controller: "listbookletsController",
+                controllerAs: "vm"
             });
 
         $urlRouterProvider.otherwise('/login');
