@@ -188,6 +188,7 @@
         vm.Booklet = {};
 
         vm.GetGradingBooklet = GetGradingBooklet;
+        vm.Save = Save;
         vm.Back = Back;
 
         function GetGradingBooklet() {
@@ -198,6 +199,14 @@
 
             function GetGradingBookletCallback(response) {
                 vm.Booklet = response;
+            }
+        }
+
+        function Save() {
+            gradingAdminService.SaveBooklet(vm.Booklet).success(SaveBookletCallback);
+
+            function SaveBookletCallback() {
+                vm.Back();
             }
         }
 

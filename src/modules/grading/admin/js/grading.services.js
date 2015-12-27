@@ -31,5 +31,9 @@
         this.GetGradingBooklet = function(bookletId) {
             return $http.get('/api/Grading/GetGradingBooklet?' + $.param({bookletId: bookletId, deepLoad: false}));
         };
+
+        this.SaveBooklet = function(booklet) {
+            return $http.post('/api/GradingAdmin/SaveBooklet', booklet);
+        };
     }
 }(window.angular));

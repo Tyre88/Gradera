@@ -87,5 +87,17 @@ namespace Gradera_Klubb.Controllers.Grading
             response.Content = new ObjectContent<GradeModel>(grade, new JsonMediaTypeFormatter());
             return response;
         }
+
+        [HttpPost, HttpOptions]
+        [AuthorizeFilter(AccessType = AccessType.Grading, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage SaveBooklet(GradingBookletModel booklet)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            booklet.ClubId = loggedInUser.AccountSession.ClubId;
+            booklet = GradingBookletModel.MapBookletModel(GradingAdminBLL.SaveBooklet(GradingBookletModel.MapBookletDal(booklet)), true);
+            response.Content = new ObjectContent<GradingBookletModel>(booklet, new JsonMediaTypeFormatter());
+            return response;
+        }
     }
 }
