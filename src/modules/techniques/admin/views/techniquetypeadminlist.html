@@ -5,7 +5,7 @@
         Teknik typer
     </md-subheader>
 
-    <md-list-item ng-repeat="item in vm.TechniqueTypes" ng-click="vm.Edit(item.Id)">
+    <md-list-item ng-repeat="item in vm.TechniqueTypes | filter:{IsGlobal: false}" ng-click="vm.Edit(item.Id)">
         <p>{{item.Name}}</p>
 
         <div class="more-icons md-secondary">

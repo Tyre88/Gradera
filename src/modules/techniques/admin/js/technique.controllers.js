@@ -27,9 +27,9 @@
 
     angular.module('graderaklubb').controller('techniqueedit', techniqueeditController);
 
-    techniqueeditController.$inject = ["$state", "$stateParams", "technique-service"];
+    techniqueeditController.$inject = ["$state", "$stateParams", "technique-service", "user-service"];
 
-    function techniqueeditController($state, $stateParams, techniqueService) {
+    function techniqueeditController($state, $stateParams, techniqueService, userService) {
         var vm = this;
         vm.Technique = {TechniqueImages: []};
         vm.TechniqueId = ~~$stateParams.id;
@@ -73,7 +73,7 @@
         }
 
         function OnUploadSuccess(response) {
-            vm.Technique.TechniqueImages.push({ Image: "/Uploads/" + response.data, TechniqueId: vm.Technique.TechniqueId });
+            vm.Technique.TechniqueImages.push({ Image: "/Uploads/" + userService.User.Club.Id + "/" + response.data, TechniqueId: vm.Technique.TechniqueId });
         }
 
         vm.GetTechnique();

@@ -5,11 +5,11 @@
         Graderings häften
     </md-subheader>
 
-    <md-list-item ng-repeat="booklet in vm.Booklets" ng-click="vm.Edit(booklet.Id)">
+    <md-list-item ng-repeat="booklet in vm.Booklets | filter:{IsGlobal: false}" ng-click="vm.Edit(booklet.Id)">
         <p>{{booklet.Name}}</p>
 
         <div class="more-icons md-secondary">
-            <i ng-if="$root.HasAccess(3, 40);" ng-click="vm.Delete(booklet); $event.stopPropagation();"
+            <i ng-if="$root.HasAccess(3, 40)" ng-click="vm.Delete(booklet); $event.stopPropagation();"
                class="fa fa-trash md-hue-3">
                 <md-tooltip>
                     Ta bort {{booklet.Name}}

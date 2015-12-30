@@ -99,5 +99,16 @@ namespace Gradera_Klubb.Controllers.Grading
             response.Content = new ObjectContent<GradingBookletModel>(booklet, new JsonMediaTypeFormatter());
             return response;
         }
+
+        [HttpDelete, HttpOptions]
+        [AuthorizeFilter(AccessType = AccessType.Grading, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage DeleteBooklet(int bookletId)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            GradingAdminBLL.DeleteBooklet(bookletId, loggedInUser.AccountSession.ClubId);
+            response.Content = new ObjectContent<bool>(true, new JsonMediaTypeFormatter());
+            return response;
+        }
     }
 }

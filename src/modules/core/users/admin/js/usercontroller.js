@@ -68,7 +68,7 @@
             };
 
             $scope.OnUploadSuccess = function(response) {
-                $scope.User.Image = "/Uploads/" + response.data;
+                $scope.User.Image = "/Uploads/" + userService.User.Club.Id + "/" + response.data;
             };
 
             accessrightsService.GetAccessRights().success(function(response) {

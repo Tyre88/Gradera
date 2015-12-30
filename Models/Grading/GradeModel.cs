@@ -5,6 +5,8 @@ using System.Web;
 using Gradera.Grading.DAL;
 using Gradera.Techniques.BLL;
 using Gradera.Grading.BLL;
+using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 namespace Gradera_Klubb.Models.Grading
 {
@@ -24,9 +26,12 @@ namespace Gradera_Klubb.Models.Grading
 
         public static List<GradeModel> MapGradeModels(List<Gradera.Grading.DAL.Grade> grades, bool deepLoad = false)
         {
-            List<GradeModel> models = new List<GradeModel>();
-            grades.ForEach(g => models.Add(MapGradeModel(g, deepLoad)));
-            return models;
+            ConcurrentBag<GradeModel> models = new ConcurrentBag<GradeModel>();
+            Parallel.ForEach(grades, g =>
+            {
+                models.Add(MapGradeModel(g, deepLoad));
+            });
+            return models.OrderBy(m => m.Id).ToList();
         }
 
         public static GradeModel MapGradeModel(Grade grade, bool deepLoad = false)

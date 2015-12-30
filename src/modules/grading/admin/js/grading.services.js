@@ -35,5 +35,9 @@
         this.SaveBooklet = function(booklet) {
             return $http.post('/api/GradingAdmin/SaveBooklet', booklet);
         };
+
+        this.DeleteBooklet = function(bookletId) {
+            return $http.delete('/api/GradingAdmin/DeleteBooklet?' + $.param({bookletId: bookletId}));
+        };
     }
 }(window.angular));

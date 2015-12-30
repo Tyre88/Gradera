@@ -1,9 +1,9 @@
 (function(angular) {
     angular.module('graderaklubb').controller('clubsettings', clubsettingsController);
 
-    clubsettingsController.$inject = ["$mdToast", "club-service"];
+    clubsettingsController.$inject = ["$mdToast", "club-service", "user-service"];
 
-    function clubsettingsController($mdToast, clubService) {
+    function clubsettingsController($mdToast, clubService, userService) {
         var vm = this;
         vm.Club = {};
 
@@ -33,7 +33,7 @@
         }
 
         function OnUploadSuccess(response) {
-            vm.Club.Image = "/Uploads/" + response.data;
+            vm.Club.Image = "/Uploads/" + userService.User.Club.Id + "/" + response.data;
         }
 
         vm.GetClub();

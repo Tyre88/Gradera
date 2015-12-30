@@ -109,14 +109,15 @@
 
     angular.module('graderaklubb').controller('listbookletsController', listbookletsController);
 
-    listbookletsController.$inject = ["$state", "gradingService"];
+    listbookletsController.$inject = ["$state", "gradingService", "grading-admin-service", "$mdDialog"];
 
-    function listbookletsController($state, gradingService) {
+    function listbookletsController($state, gradingService, gradingAdminService, $mdDialog) {
         var vm = this;
         vm.Booklets = [];
 
         vm.GetBooklets = GetBooklets;
         vm.Edit = Edit;
+        vm.Delete = Delete;
 
         function GetBooklets() {
             gradingService.GetGradingBooklets().success(GetGradingBookletsCallback);
@@ -128,6 +129,24 @@
 
         function Edit(bookletId) {
             $state.go('editbooklet', {id: bookletId});
+        }
+
+        function Delete(booklet) {
+
+            var confirm = $mdDialog.confirm()
+                .title('Är du säker på att du vill ta bort ' + booklet.Name + '?')
+                .ariaLabel('Ta bort häfte?')
+                .ok('Ja')
+                .cancel('Nej');
+
+            $mdDialog.show(confirm).then(function() {
+                gradingAdminService.DeleteBooklet(booklet.Id).success(DeleteBookletCallback);
+            });
+
+
+            function DeleteBookletCallback() {
+                vm.Booklets.splice(vm.Booklets.indexOf(booklet), 1);
+            }
         }
 
         vm.GetBooklets();
