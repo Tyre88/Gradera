@@ -5,7 +5,7 @@
         Graderings häften
     </md-subheader>
 
-    <md-list-item ng-repeat="booklet in vm.Booklets | filter:{IsGlobal: false}" ng-click="vm.Edit(booklet.Id)">
+    <md-list-item ng-repeat="booklet in vm.Booklets | filter:{ClubId: $root.UserService.User.Club.Id}" ng-click="vm.Edit(booklet.Id)">
         <p>{{booklet.Name}}</p>
 
         <div class="more-icons md-secondary">

@@ -29,9 +29,9 @@
 
     angular.module('graderaklubb').controller('gradingadminedit', gradingadmineditController);
 
-    gradingadmineditController.$inject = ["$state", "$stateParams", "grading-admin-service", "technique-service", "$mdToast"];
+    gradingadmineditController.$inject = ["$state", "$stateParams", "grading-admin-service", "technique-service", "$mdToast", "gradingService"];
 
-    function gradingadmineditController($state, $stateParams, gradingAdminService, techniqueService, $mdToast) {
+    function gradingadmineditController($state, $stateParams, gradingAdminService, techniqueService, $mdToast, gradingService) {
         var vm = this;
         vm.Grade = {};
         vm.GradeId = ~~$stateParams.id;
@@ -39,6 +39,8 @@
         vm.SelectedCategoryId = 0;
         vm.Techniques = [];
         vm.ShowGlobalTechniques = true;
+        vm.SelectedBookletId = 0;
+        vm.Booklets = [];
 
         vm.GetGrade = GetGrade;
         vm.Back = Back;
@@ -47,6 +49,7 @@
         vm.AddCategory = AddCategory;
         vm.GetTechniques = GetTechniques;
         vm.GetCategoryName = GetCategoryName;
+        vm.GetGradingBooklets = GetGradingBooklets;
 
         function GetGrade() {
             if(vm.GradeId <= 0) return;
@@ -108,9 +111,18 @@
             return vm.Categories.GetItemByValue('Id', categoryId).Name;
         }
 
+        function GetGradingBooklets() {
+            gradingService.GetGradingBooklets().success(GetGradingBookletsCallback);
+
+            function GetGradingBookletsCallback(response) {
+                vm.Booklets = response;
+            }
+        }
+
         vm.GetGrade();
         vm.GetCategories();
         vm.GetTechniques();
+        vm.GetGradingBooklets();
     }
 
     angular.module('graderaklubb').controller('gradingcategoryadminlist', gradingcategoryadminlistController);

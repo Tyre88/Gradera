@@ -6,6 +6,18 @@
         <md-input-container md-no-float>
             <input type="text" ng-model="vm.Grade.Name" placeholder="Namn"/>
         </md-input-container>
+
+        <md-input-container>
+            <label>Häfte</label>
+            <md-select ng-model="vm.Grade.GradingBookletId" name="booklet">
+                <md-option value="0">
+                    -- Inget --
+                </md-option>
+                <md-option ng-repeat="booklet in vm.Booklets" value="{{booklet.Id}}">
+                    {{booklet.Name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
     </div>
 
     <div ng-if="vm.Grade.Id > 0" class="hide-md hide-sm">
