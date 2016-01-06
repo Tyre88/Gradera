@@ -1,7 +1,10 @@
-<md-list ng-cloak>
-    <md-subheader class="md-no-sticky">
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
         Graderings häften
-    </md-subheader>
+    </h1>
+</md-toolbar>
+
+<md-list ng-cloak>
 
     <md-list-item ng-repeat="booklet in vm.Booklets" ng-click="vm.ShowBooklet(booklet.Id)">
         <p>{{booklet.Name}}</p>

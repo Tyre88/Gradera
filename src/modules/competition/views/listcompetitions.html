@@ -1,8 +1,10 @@
-<md-list ng-cloak>
-    <md-subheader class="md-no-sticky">
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
         Tävlingar
-    </md-subheader>
+    </h1>
+</md-toolbar>
 
+<md-list ng-cloak>
     <md-list-item ng-repeat="competition in vm.Competitions" ng-click="vm.ShowCompetition(competition.Id)">
         <p>{{competition.Name}}</p>
         <p class="hide-sm hide-md">{{competition.StartDate | date:'yyyy-MM-dd HH:mm'}} - {{competition.EndDate | date:'yyyy-MM-dd HH:mm'}}</p>

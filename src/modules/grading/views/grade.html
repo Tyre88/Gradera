@@ -1,7 +1,9 @@
 <section>
-    <md-subheader>
-        <h1>Visar bältesgrad: {{vm.Grade.Name}}</h1>
-    </md-subheader>
+    <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools md-whiteframe-z1">
+            Visar bältesgrad: {{vm.Grade.Name}}
+        </h1>
+    </md-toolbar>
 
     <div class="info-container" layout="row" layout-wrap layout-align="space-around center">
         <md-card ng-repeat="categoryLink in vm.Grade.GradeCategoryLinks" flex="90" flex-md="90" flex-sm="90" flex-gt-lg="45">

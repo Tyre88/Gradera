@@ -1,8 +1,11 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
+        Tävlingar
+    </h1>
+</md-toolbar>
+
 <span class="md-button md-raised" ng-click="vm.EditCompetition(0, $event);"><i class="fa fa-plus-circle"></i> Lägg till tävling</span>
 <md-list ng-cloak>
-    <md-subheader class="md-no-sticky">
-        Tävlingar
-    </md-subheader>
 
     <md-list-item ng-repeat="competition in vm.Competitions" ng-click="vm.EditCompetition(competition.Id, $event)">
         <p>{{competition.Name}}</p>

@@ -7,11 +7,11 @@
         <script src="dependencies/dependencies.js"></script>
         <script src="application.js"></script>
     </head>
-    <body ng-controller="index" ng-cloak>
-        <div>
+    <body ng-controller="index" ng-cloak layout="column">
+        <div flex layout="column">
             <gk-logged-in ng-if="UserService.User.IsLoggedIn"></gk-logged-in>
-            <div layout="row" wrap>
-                <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="leftNav" md-is-locked-open="$mdMedia('gt-md')" ng-if="UserService.User.IsLoggedIn">
+            <div layout="row" wrap flex layout="column">
+                <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="leftNav" flex md-is-locked-open="$mdMedia('gt-md')" ng-if="UserService.User.IsLoggedIn">
                     <ul>
                         <li class="nav-header">{{UserService.User.Club.Name}}</li>
                         <li><a ui-sref="home" ng-click="SetActiveNav($event)">Hem</a></li>

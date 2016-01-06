@@ -1,9 +1,12 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
+        Graderings häften
+    </h1>
+</md-toolbar>
+
 <span class="md-button md-raised" ng-click="vm.Edit(0);"><i class="fa fa-plus-circle"></i> Lägg till häfte</span>
 
 <md-list ng-cloak>
-    <md-subheader class="md-no-sticky">
-        Graderings häften
-    </md-subheader>
 
     <md-list-item ng-repeat="booklet in vm.Booklets | filter:{ClubId: $root.UserService.User.Club.Id}" ng-click="vm.Edit(booklet.Id)">
         <p>{{booklet.Name}}</p>

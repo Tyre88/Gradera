@@ -1,7 +1,10 @@
-<form ng-submit="vm.Save()" name="editbooklet">
-    <md-subheader class="md-no-sticky">
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
         Redigera: {{vm.Booklet.Name}}
-    </md-subheader>
+    </h1>
+</md-toolbar>
+
+<form ng-submit="vm.Save()" name="editbooklet">
     <div class="edit-container">
         <md-input-container md-no-float>
             <input type="text" ng-model="vm.Booklet.Name" placeholder="Namn"/>

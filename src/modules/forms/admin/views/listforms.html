@@ -1,9 +1,11 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
+        Formulär
+    </h1>
+</md-toolbar>
+
 <span class="md-button md-raised" ng-click="vm.EditForm(0);"><i class="fa fa-plus-circle"></i> Lägg till formulär</span>
 <md-list ng-cloak>
-    <md-subheader class="md-no-sticky">
-        Formulär
-    </md-subheader>
-
     <md-list-item ng-repeat="form in vm.Forms" ng-click="vm.EditForm(form.Id)">
         <p>{{form.Name}}</p>
         <p class="hide-sm hide-md">{{form.StartDate | date:'yyyy-MM-dd HH:mm'}} - {{form.EndDate | date:'yyyy-MM-dd HH:mm'}}</p>

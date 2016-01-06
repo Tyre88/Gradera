@@ -1,9 +1,12 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
+        Teknik typer
+    </h1>
+</md-toolbar>
+
 <span class="md-button md-raised" ng-click="vm.Edit(0);"><i class="fa fa-plus-circle"></i> Lägg till teknik typ</span>
 
 <md-list ng-cloak>
-    <md-subheader class="md-no-sticky">
-        Teknik typer
-    </md-subheader>
 
     <md-list-item ng-repeat="item in vm.TechniqueTypes | filter:{IsGlobal: false}" ng-click="vm.Edit(item.Id)">
         <p>{{item.Name}}</p>

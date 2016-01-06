@@ -1,7 +1,10 @@
-<form name="editTechnique" ng-submit="vm.Save()">
-    <md-subheader class="md-no-sticky">
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
         Redigera: {{vm.Technique.Name}} - <span class="is-global" ng-if="vm.Technique.IsGlobal">Detta är en "global" teknik som du inte kan redigera.</span>
-    </md-subheader>
+    </h1>
+</md-toolbar>
+
+<form name="editTechnique" ng-submit="vm.Save()">
 
     <div class="edit-image" fit-image="150" ngf-drop="$root.UploadImage($files, vm.OnUploadSuccess)" ngf-drag-over-class="'dragover'" ngf-multiple="false"
          ngf-pattern="'image/*'" ngf-capture="'camera'" ngf-select="$root.UploadImage($files, vm.OnUploadSuccess)">

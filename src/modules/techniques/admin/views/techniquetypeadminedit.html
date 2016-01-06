@@ -1,6 +1,8 @@
-<md-subheader class="md-no-sticky">
-    Redigera: {{vm.TechniqueType.Name}} - <span class="is-global" ng-if="vm.TechniqueType.IsGlobal">Detta är en "global" teknik typ som du inte kan redigera.</span>
-</md-subheader>
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
+        Redigera: {{vm.TechniqueType.Name}} - <span class="is-global" ng-if="vm.TechniqueType.IsGlobal">Detta är en "global" teknik typ som du inte kan redigera.</span>
+    </h1>
+</md-toolbar>
 <div class="edit-container">
     <md-input-container md-no-float>
         <input ng-disabled="vm.TechniqueType.IsGlobal" type="text" ng-model="vm.TechniqueType.Name" placeholder="Namn" />

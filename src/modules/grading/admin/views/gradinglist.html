@@ -1,10 +1,13 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
+        Bältesgrader
+    </h1>
+</md-toolbar>
+
 <span class="md-button md-raised" ng-click="vm.Edit(0);"><i
         class="fa fa-plus-circle"></i> Lägg till bältesgrad</span>
 
 <md-list ng-cloak>
-    <md-subheader class="md-no-sticky">
-        Bältesgrader
-    </md-subheader>
 
     <md-list-item ng-repeat="grade in vm.Grades" ng-click="vm.Edit(grade.Id)">
         <p>{{grade.Name}}</p>

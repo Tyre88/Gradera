@@ -1,7 +1,10 @@
-<md-list ng-cloak>
-    <md-subheader class="md-no-sticky">
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
         Formulär svar
-    </md-subheader>
+    </h1>
+</md-toolbar>
+
+<md-list ng-cloak>
 
     <md-list-item ng-repeat="answer in vm.UserAnswers" ng-click="answer.Show = !answer.Show">
         <img alt="{{ answer.FirstName }}" src="{{ answer.UserImage }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
