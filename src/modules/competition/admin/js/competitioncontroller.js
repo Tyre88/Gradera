@@ -21,6 +21,11 @@ LoadCss("modules/competition/admin/css/competition.css");
 
             function getCompetitionsCallback(response) {
                 vm.Competitions = response;
+
+                for(var i = 0; i < vm.Competitions.length; i++)
+                {
+                    vm.Competitions[i].Location = JSON.parse(vm.Competitions[i].Location);
+                }
             }
         }
 
@@ -73,6 +78,7 @@ LoadCss("modules/competition/admin/css/competition.css");
 
             function getCompetitionCallback(response) {
                 vm.Competition = response;
+                vm.Competition.Location = JSON.parse(vm.Competition.Location);
                 vm.Competition.StartDate = new Date(vm.Competition.StartDate);
                 vm.Competition.EndDate = new Date(vm.Competition.EndDate);
                 vm.Competition.StartSignupDate = new Date(vm.Competition.StartSignupDate);
@@ -85,6 +91,8 @@ LoadCss("modules/competition/admin/css/competition.css");
         }
 
         function SaveCompetition() {
+            vm.Competition.Location = JSON.stringify(vm.Competition.Location);
+
             competitionAdminService.SaveCompetition(vm.Competition).success(saveCompetitionCallback);
 
             function saveCompetitionCallback() {

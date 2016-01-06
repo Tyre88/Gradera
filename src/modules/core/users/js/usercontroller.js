@@ -16,7 +16,10 @@
             userService.GetAllUsers().success(getUsersCallback);
 
             function getUsersCallback(response) {
-                vm.Users = response;
+                for(var i = 0; i < response.length; i++)
+                {
+                    vm.Users.push(new userService.UserModel(userService.User.Club, response[i]));
+                }
             }
         }
 

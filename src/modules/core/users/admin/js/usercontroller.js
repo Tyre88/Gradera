@@ -23,7 +23,10 @@
         };
 
         userService.GetAllUsers().success(function(response) {
-            $scope.Users = response;
+            for(var i = 0; i < response.length; i++)
+            {
+                $scope.Users.push(new userService.UserModel(userService.User.Club, response[i]));
+            }
         });
     }]);
 
@@ -33,6 +36,7 @@
             $scope.User = {};
             $scope.AccessRights = [];
             $scope.Grades = gradeEnum.grades;
+            $scope.UserCity = {};
 
             $scope.Save = function() {
 
@@ -47,6 +51,8 @@
                         });
                     }
                 }
+
+                $scope.User.UserInformation.City = JSON.stringify($scope.UserCity);
 
                 userService.SaveUser($scope.User).success(function(response) {
                     $state.go ('listusers');
@@ -78,6 +84,11 @@
                 {
                     userService.GetUser($scope.UserId).success(function(response) {
                         $scope.User = new userService.UserModel(userService.User.Club, response);
+                        try{
+                            $scope.UserCity = $scope.User.UserInformation.City;
+                        } catch(ex) {
+                            console.warn(ex);
+                        }
 
                         $scope.MapAccessRights();
                     });

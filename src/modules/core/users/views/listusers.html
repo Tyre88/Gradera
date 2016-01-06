@@ -11,7 +11,7 @@
         <img alt="{{ user.FirstName }}" src="{{ user.Image }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
         <p>{{ user.FullName }}</p>
         <p class="hide-sm hide-md">{{user.UserInformation.Email}}</p>
-        <p class="hide-sm hide-md">{{user.UserInformation.City}}</p>
+        <p class="hide-sm hide-md">{{user.UserInformation.City.name}}</p>
         <p class="hide-sm hide-md">{{user.UserInformation.Occupation}}</p>
     </md-list-item>
 </md-list>

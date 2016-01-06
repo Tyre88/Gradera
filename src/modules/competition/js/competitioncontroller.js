@@ -17,6 +17,11 @@
 
             function getCompetitionsCallback(response) {
                 vm.Competitions = response;
+
+                for(var i = 0; i < vm.Competitions.length; i++)
+                {
+                    vm.Competitions[i].Location = JSON.parse(vm.Competitions[i].Location);
+                }
             }
         }
 
@@ -44,6 +49,7 @@
 
             function getCompetitionCallback(response) {
                 vm.Competition = response;
+                vm.Competition.Location = JSON.parse(vm.Competition.Location);
                 vm.Competition.StartDate = new Date(vm.Competition.StartDate);
                 vm.Competition.EndDate = new Date(vm.Competition.EndDate);
                 vm.Competition.StartSignupDate = new Date(vm.Competition.StartSignupDate);

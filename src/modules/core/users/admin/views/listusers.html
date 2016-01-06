@@ -13,7 +13,7 @@
         <img alt="{{ user.FirstName }}" src="{{ user.Image }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
         <p>{{ user.FullName }}</p>
         <p class="hide-sm hide-md">{{user.UserInformation.Email}}</p>
-        <p class="hide-sm hide-md">{{user.UserInformation.City}}</p>
+        <p class="hide-sm hide-md">{{user.UserInformation.City.name}}</p>
         <p class="hide-sm hide-md">{{user.UserInformation.Occupation}}</p>
         <p ng-if="$root.HasAccess(2, 40);" ng-click="DeleteUser(user)" class="fa fa-trash md-secondary md-hue-3"></p>
     </md-list-item>

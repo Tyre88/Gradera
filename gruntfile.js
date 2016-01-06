@@ -306,7 +306,8 @@ module.exports = function (grunt)
                         "src/dependencies/angular-loading-bar/build/loading-bar.min.js",
                         "src/dependencies/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js",
                         "src/dependencies/showdown/compressed/showdown.min.js",
-                        "src/dependencies/angular-markdown-directive/markdown.js"
+                        "src/dependencies/angular-markdown-directive/markdown.js",
+                        "src/dependencies/angular-google-places-autocomplete/dist/autocomplete.min.js"
                     ],
                     'dist/application.js': [
                         'src/app.js',

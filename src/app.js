@@ -1,7 +1,8 @@
 LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
 (function(angular) {
     angular.module('graderaklubb', ['ng', 'ngRoute', 'ngAnimate', 'ui.router', 'ngMaterial', "ngMessages",
-        'webbdudes-image-helper', 'ngFileUpload', 'formly', 'angular-loading-bar', 'dndLists', 'ngSanitize', 'btford.markdown']);
+        'webbdudes-image-helper', 'ngFileUpload', 'formly', 'angular-loading-bar', 'dndLists', 'ngSanitize', 'btford.markdown',
+        'google.places']);
     angular.module('graderaklubb').controller('index', ["$rootScope", "$scope", "$state", "user-service", "$mdSidenav", "Upload",
             function($rootScope, $scope, $state, userService, $mdSidenav, Upload)
             {
@@ -287,7 +288,7 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
                     };
                 }
 
-                return {
+                var userToReturn = {
                     Id: user.Id,
                     FirstName: user.FirstName,
                     LastName: user.LastName,
@@ -298,7 +299,7 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
                     Club: club,
                     Gender: user.Gender,
                     UserInformation: {
-                        Email: user.UserInformation.Email,
+                        Email: user.UserInformation.Email ? user.UserInformation.Email : "",
                         City: user.UserInformation.City,
                         Occupation: user.UserInformation.Occupation,
                         Phone: user.UserInformation.Phone,
@@ -309,6 +310,14 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
                         Weight: user.UserInformation.Weight
                     }
                 };
+
+                try {
+                    userToReturn.UserInformation.City = JSON.parse(userToReturn.UserInformation.City);
+                } catch (ex) {
+                    console.warn('Error parsing user: ', userToReturn);
+                }
+
+                return userToReturn;
             };
 
             this.User =
