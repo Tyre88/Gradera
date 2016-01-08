@@ -343,6 +343,15 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
                 {
                     return String.format("{0} {1}", this.FirstName, this.LastName);
                 },
+                Update: function(user) {
+                    this.FirstName = user.FirstName;
+                    this.LastName = user.LastName;
+                    this.UserName = user.UserName;
+                    this.Email = user.Email;
+                    this.Club = user.Club;
+                    this.Weight = user.Weight;
+                    this.Image = user.Image;
+                },
                 Initialize: function(user) {
                     this.Id = user.Id;
                     this.IsLoggedIn = user.IsLoggedIn;
@@ -415,8 +424,16 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
                 return $http.get('/api/User/GetUser/' + userId);
             };
 
+            this.GetMe = function() {
+                return $http.get('/api/User/GetMe/');
+            };
+
             this.SaveUser = function(user) {
                 return $http.post('/api/User/SaveUser', user);
+            };
+
+            this.SaveMe = function(user) {
+                return $http.post('/api/User/SaveMe', user);
             };
 
             this.DeleteUser = function(id) {

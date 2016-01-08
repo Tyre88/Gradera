@@ -53,6 +53,11 @@ LoadCss("content/css/login.css");
                     });
                 };
 
+                scope.GoTo = function(sref)
+                {
+                    $state.go(sref);
+                };
+
                 scope.openMenu = function($mdOpenMenu, ev) {
                     originatorEv = ev;
                     $mdOpenMenu(ev);

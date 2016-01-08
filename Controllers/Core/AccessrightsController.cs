@@ -17,7 +17,7 @@ namespace Gradera_Klubb.Controllers
 {
     public class AccessrightsController : ApiController
     {
-        [AuthorizeFilter(AccessType = AccessType.Core, AccessTypeRight = AccessTypeRight.Read)]
+        [AuthorizeFilter]
         public HttpResponseMessage GetAccessRights()
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);

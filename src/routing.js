@@ -114,6 +114,12 @@
                 templateUrl: "modules/grading/views/listbooklets.html",
                 controller: "listbookletsController",
                 controllerAs: "vm"
+            }).state('editme',
+            {
+                url: "/edit/me",
+                templateUrl: "modules/core/users/admin/views/editme.html",
+                controller: "editme",
+                controllerAs: "vm"
             });
 
         $urlRouterProvider.otherwise('/login');

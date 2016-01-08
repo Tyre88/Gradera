@@ -16,7 +16,7 @@ namespace Gradera_Klubb.Controllers
     public class ClubController : ApiController
     {
         [HttpGet]
-        [AuthorizeFilter(AccessType = AccessType.Club, AccessTypeRight = AccessTypeRight.Read)]
+        [AuthorizeFilter]
         public HttpResponseMessage GetClub()
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);

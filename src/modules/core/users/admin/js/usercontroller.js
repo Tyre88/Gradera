@@ -99,4 +99,78 @@
                 }
             });
         }]);
+
+        angular.module('graderaklubb').controller('editme', editmeController);
+
+        editmeController.$inject = ["user-service", "accessrights-service", "gradeEnum", "$mdToast"];
+
+        function editmeController(userService, accessrightsService, gradeEnum, $mdToast) {
+            var vm = this;
+            vm.User = {};
+            vm.AccessRights = [];
+            vm.Grades = gradeEnum.grades;
+            vm.UserCity = {};
+
+            vm.MapAccessRights = MapAccessRights;
+            vm.Save = Save;
+            vm.OnUploadSuccess = OnUploadSuccess;
+
+            function GetAccessRightsCallback(response) {
+                vm.AccessRights = response;
+
+                userService.GetMe(vm.UserId).success(GetMeCallback);
+            }
+
+            function GetMeCallback(response) {
+                vm.User = new userService.UserModel(userService.User.Club, response);
+                try{
+                    vm.UserCity = vm.User.UserInformation.City;
+                } catch(ex) {
+                    console.warn('Error maping the city...');
+                }
+
+                vm.MapAccessRights();
+            }
+
+            function MapAccessRights() {
+                for(var i = 0; i < vm.User.AccessRights.length; i++)
+                {
+                    var right = vm.AccessRights.GetItemByValue("Id", vm.User.AccessRights[i].Id);
+                    if(right != null)
+                        right.Checked = true;
+                }
+            }
+
+            function Save() {
+                vm.User.AccountAccess = [];
+
+                for(var i = 0; i < vm.AccessRights.length; i++)
+                {
+                    if(vm.AccessRights[i].Checked == true) {
+                        vm.User.AccountAccess.push({
+                            AccessId: vm.AccessRights[i].Id,
+                            AccountId: vm.User.Id
+                        });
+                    }
+                }
+
+                vm.User.UserInformation.City = JSON.stringify(vm.User.UserInformation.City);
+
+                userService.SaveMe(vm.User).success(function() {
+                    vm.User.UserInformation.City = JSON.parse(vm.User.UserInformation.City);
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Din profil sparades.')
+                    );
+
+                    userService.User.Update(vm.User);
+                });
+            }
+
+            function OnUploadSuccess(response) {
+                vm.User.Image = "/Uploads/" + userService.User.Club.Id + "/" + response.data;
+            }
+
+            accessrightsService.GetAccessRights().success(GetAccessRightsCallback);
+        }
 }(window.angular));

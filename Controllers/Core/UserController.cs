@@ -38,6 +38,30 @@ namespace Gradera_Klubb.Controllers
             return response;
         }
 
+        [AuthorizeFilter]
+        public HttpResponseMessage GetMe()
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            response.Content = new ObjectContent<UserModel>(UserModel.MapUserModel(AccountBLL.GetUser(loggedInUser.AccountSession.AccountId), true), new JsonMediaTypeFormatter());
+            return response;
+        }
+
+        [HttpPost]
+        [HttpOptions]
+        [AuthorizeFilter]
+        public HttpResponseMessage SaveMe(UserModel user)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            user.Id = loggedInUser.AccountSession.AccountId;
+            user.ClubId = loggedInUser.AccountSession.ClubId;
+            Account acc = UserModel.ConvertToAccount(user);
+            Account account = AccountBLL.SaveAccount(acc);
+            //response.Content = new ObjectContent<Account>(account, new JsonMediaTypeFormatter());
+            return response;
+        }
+
         [HttpPost]
         [HttpOptions]
         [AuthorizeFilter(AccessType = AccessType.Account, AccessTypeRight = AccessTypeRight.Write)]

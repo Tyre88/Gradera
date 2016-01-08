@@ -1,0 +1,120 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
+        Redigera: {{vm.User.FirstName}} {{vm.User.LastName}}
+    </h1>
+</md-toolbar>
+
+<form name="editUser" ng-submit="vm.Save()">
+    <div class="edit-image drop-box" fit-image="150" ngf-drop="$root.UploadImage($files, vm.OnUploadSuccess)" ngf-drag-over-class="'dragover'" ngf-multiple="false"
+         ngf-pattern="'image/*'" ngf-capture="'camera'" ngf-select="$root.UploadImage($files, vm.OnUploadSuccess)">
+        <img src="{{vm.User.Image}}" fallback-src="content/images/No_Image_Available.png" />
+    </div>
+
+    <div class="edit-container">
+        <md-input-container md-no-float>
+            <input type="text" ng-model="vm.User.FirstName" placeholder="Förnamn" required name="firstname" />
+            <div ng-messages="editUser.firstname.$error">
+                <div ng-message="required">Du måste fylla i ett förnamn</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float>
+            <input type="text" ng-model="vm.User.LastName" placeholder="Efternamn" required name="lastname" />
+            <div ng-messages="editUser.lastname.$error">
+                <div ng-message="required">Du måste fylla i ett efternamn</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float>
+            <input type="text" ng-model="vm.User.UserName" placeholder="Användarnamn" required name="username" />
+            <div ng-messages="editUser.username.$error">
+                <div ng-message="required">Du måste fylla i ett användarnamn</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float>
+            <input type="email" ng-model="vm.User.UserInformation.Email" placeholder="E-post" required name="email" />
+            <div ng-messages="editUser.email.$error">
+                <div ng-message="required">Du måste fylla i en e-post adress</div>
+                <div ng-message="email">Ej giltig e-post adress</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container md-no-float ng-if="vm.User.Id > 0">
+            <input type="password" ng-model="vm.User.Password" placeholder="Lösenord" />
+        </md-input-container>
+
+        <md-input-container md-no-float>
+            <input type="text" ng-model="vm.User.UserInformation.Phone" placeholder="Telefonnummer" />
+        </md-input-container>
+
+        <md-input-container md-no-float>
+            <input type="text" ng-model="vm.User.UserInformation.Street" placeholder="Adress" />
+        </md-input-container>
+
+        <md-input-container md-no-float>
+            <input type="text" ng-model="vm.User.UserInformation.Zip" placeholder="Postnummer" />
+        </md-input-container>
+
+        <md-input-container md-no-float>
+            <input type="text" g-places-autocomplete force-selection="true" ng-model="vm.User.UserInformation.City" placeholder="Stad" />
+        </md-input-container>
+
+        <md-input-container md-no-float>
+            <input type="text" ng-model="vm.User.UserInformation.Occupation" placeholder="Arbete" />
+        </md-input-container>
+
+        <md-input-container md-no-float>
+            <input type="text" ng-model="vm.User.UserInformation.Weight" placeholder="Vikt" required name="weight" />
+            <div ng-messages="editUser.weight.$error">
+                <div ng-message="required">Du måste lägga in en vikt</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Grad</label>
+            <md-select ng-model="vm.User.UserInformation.Grade" required name="grade">
+                <md-option ng-repeat="grade in vm.Grades" value="{{grade.Id}}">
+                    {{grade.Name}}
+                </md-option>
+            </md-select>
+            <div ng-messages="editUser.grade.$error">
+                <div ng-message="required">Du måste välja en grad</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Kön</label>
+            <md-select ng-model="vm.User.Gender" required name="gender">
+                <md-option value="0">
+                    Man
+                </md-option>
+                <md-option value="1">
+                    Kvinna
+                </md-option>
+            </md-select>
+            <div ng-messages="editUser.gender.$error">
+                <div ng-message="required">Du måste välja ett kön</div>
+            </div>
+        </md-input-container>
+
+        <md-datepicker ng-model="vm.User.UserInformation.Birthday" md-placeholder="Födelsedag">
+            <md-tooltip>Födelsedag</md-tooltip>
+        </md-datepicker>
+    </div>
+
+    <md-subheader class="md-no-sticky" ng-if="$root.HasAccess(2, 40);">
+        Rättigheter
+    </md-subheader>
+
+    <div class="edit-accessrights" ng-if="$root.HasAccess(2, 40);">
+        <md-checkbox ng-repeat="accessright in vm.AccessRights" ng-model="accessright.Checked" aria-label="{{accessright.Name}}">
+            {{accessright.Name}}
+            <md-tooltip>{{accessright.Description}}</md-tooltip>
+        </md-checkbox>
+    </div>
+
+    <div>
+        <md-button class="md-raised md-primary" type="submit">Spara</md-button>
+    </div>
+</form>
