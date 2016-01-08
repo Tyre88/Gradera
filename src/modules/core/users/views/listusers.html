@@ -11,7 +11,7 @@
 
     <md-list-item ng-repeat="user in vm.Users | filter:vm.Filter" ng-click="vm.ShowUser(user.Id, $event)">
         <img alt="{{ user.FirstName }}" src="{{ user.Image }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
-        <p>{{ user.FullName }}</p>
+        <p>{{ user.FirstName }} {{user.LastName}}</p>
         <p class="hide-sm hide-md">{{user.UserInformation.Email}}</p>
         <p class="hide-sm hide-md">{{user.UserInformation.City.name}}</p>
         <p class="hide-sm hide-md">{{user.UserInformation.Occupation}}</p>
