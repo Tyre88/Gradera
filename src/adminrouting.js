@@ -137,6 +137,18 @@
                 templateUrl: "modules/grading/admin/views/bookletadminedit.html",
                 controller: "editbookletController",
                 controllerAs: "vm"
+            }).state('newsletteradminlist',
+            {
+                url: "/admin/newsletters",
+                templateUrl: "modules/newsletter/admin/views/newsletterlist.html",
+                controller: "newsletter.admin.list",
+                controllerAs: "vm"
+            }).state('newsletteradminedit',
+            {
+                url: "/admin/newsletters/edit/:id",
+                templateUrl: "modules/newsletter/admin/views/newsletteredit.html",
+                controller: "newsletter.admin.edit",
+                controllerAs: "vm"
             });
     }
 }(window.angular));

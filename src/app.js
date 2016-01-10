@@ -83,6 +83,12 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
                         Text: "Hantera teknik typer",
                         AccessType: 7,
                         AccessTypeRight: 20
+                    },
+                    {
+                        Sref: "newsletteradminlist",
+                        Text: "Nyhetsbrev",
+                        AccessType: 8,
+                        AccessTypeRight: 20
                     }
                 ];
 

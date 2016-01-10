@@ -18,9 +18,9 @@ module.exports = function (grunt)
         "clean:all",
         "copy",
         "sass",
-        "concat",
+        "concat"
         //"htmlmin",
-        "uglify"
+        //"uglify"
 	]);
 
 	grunt.registerTask("default",
@@ -307,7 +307,8 @@ module.exports = function (grunt)
                         "src/dependencies/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js",
                         "src/dependencies/showdown/compressed/showdown.min.js",
                         "src/dependencies/angular-markdown-directive/markdown.js",
-                        "src/dependencies/angular-google-places-autocomplete/dist/autocomplete.min.js"
+                        "src/dependencies/angular-google-places-autocomplete/dist/autocomplete.min.js",
+                        "src/dependencies/moment/min/moment.min.js"
                     ],
                     'dist/application.js': [
                         'src/app.js',

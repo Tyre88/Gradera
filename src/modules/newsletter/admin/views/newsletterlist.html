@@ -1,0 +1,36 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
+        Nyhetsbrev
+    </h1>
+</md-toolbar>
+
+<span class="md-button md-raised" ng-click="vm.Edit(0);"><i class="fa fa-plus-circle"></i> Lägg till nyhetsbrev</span>
+
+<md-list ng-cloak>
+    <md-list-item>
+        <p><b>Namn:</b></p>
+        <p><b>Skapat av:</b></p>
+        <p><b>Skapat:</b></p>
+    </md-list-item>
+
+    <md-list-item ng-repeat="newsletter in vm.Newsletters" ng-click="vm.Edit(newsletter.Id)">
+        <p ng-bind="newsletter.Name"></p>
+        <p ng-bind="newsletter.CreatedByName"></p>
+        <p ng-bind="vm.GetDate(newsletter.CreatedDate)"></p>
+        <div class="more-icons md-secondary">
+            <i ng-if="$root.HasAccess(8, 30);" ng-click="vm.ShowStats(newsletter); $event.stopPropagation();"
+               class="fa fa-bar-chart md-hue-3">
+                <md-tooltip>
+                    Visa utskicksstatistik
+                </md-tooltip>
+            </i>
+
+            <i ng-if="$root.HasAccess(8, 40);" ng-click="vm.Delete(newsletter); $event.stopPropagation();"
+               class="fa fa-trash md-hue-3">
+                <md-tooltip>
+                    Ta bort Nyhetsbrev
+                </md-tooltip>
+            </i>
+        </div>
+    </md-list-item>
+</md-list>

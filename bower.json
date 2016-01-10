@@ -25,6 +25,8 @@
     "angular-sanitize": "~1.4.8",
     "angular-ui-router": "~0.2.15",
     "api-check": "~7.5.5",
-    "ng-file-upload": "~9.1.2"
+    "ng-ckeditor": "~0.2.1",
+    "ng-file-upload": "~9.1.2",
+    "moment": "~2.11.1"
   }
 }
