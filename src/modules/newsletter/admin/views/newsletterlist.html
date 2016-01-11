@@ -18,6 +18,13 @@
         <p ng-bind="newsletter.CreatedByName"></p>
         <p ng-bind="vm.GetDate(newsletter.CreatedDate)"></p>
         <div class="more-icons md-secondary">
+            <i ng-if="$root.HasAccess(8, 30);" ng-click="vm.Send(newsletter); $event.stopPropagation();"
+               class="fa fa-send md-hue-3">
+                <md-tooltip>
+                    Skicka
+                </md-tooltip>
+            </i>
+
             <i ng-if="$root.HasAccess(8, 30);" ng-click="vm.ShowStats(newsletter); $event.stopPropagation();"
                class="fa fa-bar-chart md-hue-3">
                 <md-tooltip>

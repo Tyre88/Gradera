@@ -445,7 +445,27 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
             this.DeleteUser = function(id) {
                 return $http.post('/api/User/DeleteUser?' + $.param({id: id}));
             };
-        }]);
+        }])
+        .directive('ckEditor', ckEditorDirective);
+
+    function ckEditorDirective() {
+        return {
+            require: '?ngModel',
+            link: function ($scope, elm, attr, ngModel) {
+                var ck = CKEDITOR.replace(elm[0]);
+
+                ck.on('pasteState', function () {
+                    $scope.$apply(function () {
+                        ngModel.$setViewValue(ck.getData());
+                    });
+                });
+
+                ngModel.$render = function (value) {
+                    ck.setData(ngModel.$modelValue);
+                };
+            }
+        };
+    }
 
 
     $(document).ready(function () {
