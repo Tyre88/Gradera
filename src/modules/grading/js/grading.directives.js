@@ -1,9 +1,9 @@
 (function (angular) {
     angular.module('graderaklubb').directive('grade', gradeDirective);
 
-    gradeDirective.$inject = [];
+    gradeDirective.$inject = ["$state"];
 
-    function gradeDirective() {
+    function gradeDirective($state) {
         var directive = {
             restrict: "E",
             scope: {
@@ -19,6 +19,12 @@
 
         function gradeController() {
             var vm = this;
+
+            vm.ShowTechnique = ShowTechnique;
+
+            function ShowTechnique(id) {
+                $state.go('showtechnique', {id: id});
+            }
         }
 
         return directive;
