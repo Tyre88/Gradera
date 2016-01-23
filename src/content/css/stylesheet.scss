@@ -228,6 +228,29 @@ footer
   color: red;
 }
 
+.left-banner
+{
+  position: absolute;
+  top: 9px;
+  left: -26px;
+  text-align: center;
+  width: 100px;
+  -webkit-transform: rotate(315deg);
+  -moz-transform: rotate(315deg);
+  -ms-transform: rotate(315deg);
+  -o-transform: rotate(315deg);
+  transform: rotate(315deg);
+  height: 30px;
+  line-height: 30px;
+  z-index: 100000;
+  font-weight: bold;
+
+  &.green
+  {
+    background-color: #4CAF50;
+  }
+}
+
 
 /* IMPORTS */
 @import 'logged-in';
