@@ -1,0 +1,22 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
+        Nyhetsbrevs statistik
+    </h1>
+</md-toolbar>
+
+<md-list ng-cloak>
+    <md-list-item>
+        <p><b>Till:</b></p>
+        <p><b>Skickat:</b></p>
+        <p><b>Läst:</b></p>
+    </md-list-item>
+
+    <md-list-item ng-repeat="item in vm.Stats">
+        <p>{{item.FirstName}} {{item.LastName}} ({{item.Email}})</p>
+        <p>
+            <span ng-if="item.IsSent">{{vm.GetDate(item.SendDate);}}</span>
+            <span ng-if="!item.IsSent">I kö</span>
+        </p>
+        <p><md-checkbox ng-model="item.IsRead" ng-disabled="true"></md-checkbox></p>
+    </md-list-item>
+</md-list>

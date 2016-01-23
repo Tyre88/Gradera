@@ -15,5 +15,13 @@
         this.SaveNewsletter = function(newsletter) {
             return $http.post('/api/NewsletterAdmin/SaveNewsletter', newsletter);
         };
+
+        this.SendNewsletter = function(sendNewsletterModel) {
+            return $http.post('/api/NewsletterAdmin/SendNewsletter', sendNewsletterModel);
+        };
+
+        this.GetNewsletterStatsByNewsletterId = function(id) {
+            return $http.get('/api/NewsletterAdmin/GetNewsletterStatsByNewsletterId?' + $.param({id: id}));
+        };
     }
 }(window.angular));

@@ -149,6 +149,12 @@
                 templateUrl: "modules/newsletter/admin/views/newsletteredit.html",
                 controller: "newsletter.admin.edit",
                 controllerAs: "vm"
+            }).state('newsletteradminstats',
+            {
+                url: "/admin/newsletters/stats/:id",
+                templateUrl: "modules/newsletter/admin/views/newsletterstats.html",
+                controller: "newsletter.admin.stats",
+                controllerAs: "vm"
             });
     }
 }(window.angular));

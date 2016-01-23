@@ -34,6 +34,12 @@ namespace Gradera_Klubb
             );
 
             config.Routes.MapHttpRoute(
+                name: "ReadNewsletter",
+                routeTemplate: "api/NewsletterJob/ReadNewsletter/{newsletterSendItemGuid}",
+                defaults: new { controller = "NewsletterJob", action = "ReadNewsletter", newsletterSendItemGuid = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }

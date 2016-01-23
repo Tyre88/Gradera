@@ -1,0 +1,17 @@
+<md-dialog>
+    <md-dialog-content>
+        <h2 class="dialog-header">Skicka nyhetsbrev</h2>
+
+        <p>Skicka till grupper:</p>
+        <div ng-repeat="accessright in vm.Accessrights">
+            <md-checkbox ng-model="accessright.Checked" aria-label="{{accessright.Name}}">
+                {{accessright.Name}}
+                <md-tooltip>{{accessright.Description}}</md-tooltip>
+            </md-checkbox>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-raised md-primary" ng-click="vm.Send();">Skicka</md-button>
+        <md-button class="md-raised" ng-click="vm.Close();">Avbryt</md-button>
+    </md-dialog-actions>
+</md-dialog>

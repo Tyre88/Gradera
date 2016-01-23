@@ -1,9 +1,9 @@
 (function (angular) {
     angular.module('graderaklubb').controller('newsletter.admin.list', listController);
 
-    listController.$inject = ["newsletter.admin.service", "$state"];
+    listController.$inject = ["newsletter.admin.service", "$state", "$mdDialog"];
 
-    function listController(newsletterAdminService, $state) {
+    function listController(newsletterAdminService, $state, $mdDialog) {
         var vm = this;
 
         vm.Newsletters = [];
@@ -12,6 +12,8 @@
         vm.GetDate = GetDate;
         vm.Edit = Edit;
         vm.Delete = Delete;
+        vm.SendNewsletter = SendNewsletter;
+        vm.ShowStats = ShowStats;
 
         function GetNewsletters() {
             newsletterAdminService.GetNewsletters().success(GetNewslettersCallback);
@@ -31,6 +33,22 @@
 
         function Delete(newsletter) {
 
+        }
+
+        function SendNewsletter(newsletter) {
+            $mdDialog.show({
+                templateUrl: "modules/newsletter/admin/views/newslettersend.html",
+                controller: sendController,
+                locals: {
+                    Newsletter: newsletter
+                },
+                bindToController: true,
+                controllerAs: "vm"
+            });
+        }
+
+        function ShowStats(newsletter) {
+            $state.go('newsletteradminstats', {id: newsletter.Id});
         }
 
         vm.GetNewsletters();
@@ -74,5 +92,84 @@
 
         if(~~vm.NewsletterId > 0)
             vm.GetNewsletter();
+    }
+
+    angular.module('graderaklubb').controller('newsletter.admin.send', sendController);
+
+    sendController.$inject = ["$mdDialog", "accessrights-service", "newsletter.admin.service"];
+
+    function sendController($mdDialog, accessrightsService, newsletterAdminService) {
+        var vm = this;
+        vm.Newsletter;
+        vm.Accessrights = [];
+
+        vm.GetAccessRights = GetAccessRights;
+        vm.Close = Close;
+        vm.Send = Send;
+
+        function GetAccessRights() {
+            accessrightsService.GetAccessRights().success(GetAccessRightsCallback);
+
+            function GetAccessRightsCallback(response) {
+                vm.Accessrights = response;
+            }
+        }
+
+        function Close() {
+            $mdDialog.hide();
+        }
+
+        function Send() {
+            var accessrightIds = [];
+
+            for(var i = 0; i < vm.Accessrights.length; i++)
+            {
+                if(vm.Accessrights[i].Checked == true)
+                    accessrightIds.push(vm.Accessrights[i].Id);
+            }
+
+            var sendNewsletterModel = { NewsletterId: vm.Newsletter.Id, AccessrightIds: accessrightIds };
+
+            newsletterAdminService.SendNewsletter(sendNewsletterModel).success(SendNewsletterCallback);
+
+            function SendNewsletterCallback() {
+                vm.Close();
+            }
+        }
+
+        vm.GetAccessRights();
+    }
+
+    angular.module('graderaklubb').controller('newsletter.admin.stats', statsController);
+
+    statsController.$inject = ["$state", "$stateParams", "newsletter.admin.service"];
+
+    function statsController($state, $stateParams, newsletterAdminService) {
+        var vm = this;
+        vm.NewsletterId = ~~$stateParams.id;
+        vm.Stats = [];
+
+        vm.GetNewsletterStatsByNewsletterId = GetNewsletterStatsByNewsletterId;
+        vm.Back = Back;
+        vm.GetDate = GetDate;
+
+        function GetNewsletterStatsByNewsletterId() {
+            newsletterAdminService.GetNewsletterStatsByNewsletterId(vm.NewsletterId).success(GetNewsletterStatsByNewsletterIdCallback);
+
+            function GetNewsletterStatsByNewsletterIdCallback(response) {
+                vm.Stats = response;
+            }
+        }
+
+        function Back() {
+            $state.go('newsletteradminlist');
+        }
+
+        function GetDate(date) {
+            return moment(date).format('YYYY-MM-DD HH:MM:ss')
+        }
+
+        if(vm.NewsletterId > 0)
+            vm.GetNewsletterStatsByNewsletterId();
     }
 }(window.angular));
