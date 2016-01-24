@@ -27,7 +27,8 @@
     "api-check": "~7.5.5",
     "ng-ckeditor": "~0.2.1",
     "ng-file-upload": "~9.1.2",
-    "moment": "~2.11.1"
+    "moment": "~2.11.1",
+    "angular": "angularjs#~1.4.9"
   },
   "resolutions": {
     "angular": "^1.2.9"
