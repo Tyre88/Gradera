@@ -1,7 +1,7 @@
 (function (angular) {
-    angular.module('graderaklubb').service('newsletter.admin.service', newsletterAdminService);
+    angular.module('graderaklubb').service('newsletter.admin.service', ["$http", newsletterAdminService]);
 
-    newsletterAdminService.$injcet = ["$http"];
+    //newsletterAdminService.$injcet = ["$http"];
 
     function newsletterAdminService($http) {
         this.GetNewsletters = function() {

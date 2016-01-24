@@ -1,4 +1,4 @@
-LoadCss("modules/core/accessrights/css/accessrights.css");
+//LoadCss("modules/core/accessrights/css/accessrights.css");
 
 (function(angular) {
     angular.module('graderaklubb').controller('listaccessrights', listaccessrightsController);

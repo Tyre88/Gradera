@@ -1,7 +1,5 @@
 (function (angular) {
-    angular.module('graderaklubb').service('technique-service', techniqueService);
-
-    techniqueService.$injcet = ["$http"];
+    angular.module('graderaklubb').service('technique-service', ["$http", techniqueService]);
 
     function techniqueService($http) {
         this.SaveTechniqueType = function(techniqueType) {

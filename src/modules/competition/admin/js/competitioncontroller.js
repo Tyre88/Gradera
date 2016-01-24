@@ -1,4 +1,4 @@
-LoadCss("modules/competition/admin/css/competition.css");
+//LoadCss("modules/competition/admin/css/competition.css");
 
 (function(angular) {
     angular.module('graderaklubb').controller('competitionadminlist', competitionadminlistController);

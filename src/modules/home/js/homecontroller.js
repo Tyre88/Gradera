@@ -1,4 +1,4 @@
-LoadCss("modules/home/css/home.css");
+//LoadCss("modules/home/css/home.css");
 
 (function(angular) {
     angular.module('graderaklubb').controller('home', homeController);

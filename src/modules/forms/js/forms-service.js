@@ -1,8 +1,6 @@
 (function(angular) {
     angular.module('graderaklubb').service('form', form);
-    angular.module('graderaklubb').service('form-service', formService);
-
-    formService.$inject = ["$http"];
+    angular.module('graderaklubb').service('form-service', ["$http", formService]);
 
     function form() {
         this.Form = {

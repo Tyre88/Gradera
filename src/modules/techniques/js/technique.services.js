@@ -1,7 +1,5 @@
 (function (angular) {
-    angular.module('graderaklubb').service('techniqueService', techniqueService);
-
-    techniqueService.$injcet = ["$http"];
+    angular.module('graderaklubb').service('techniqueService', ["$http", techniqueService]);
 
     function techniqueService($http) {
         this.GetTechnique = function(id) {

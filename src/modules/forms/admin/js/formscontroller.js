@@ -1,4 +1,4 @@
-LoadCss(["modules/forms/admin/css/form-admin.css", "modules/forms/css/form.css"]);
+//LoadCss(["modules/forms/admin/css/form-admin.css", "modules/forms/css/form.css"]);
 
 (function(angular) {
     angular.module('graderaklubb').controller('formsadminlist', formsadminlistController);

@@ -1,7 +1,5 @@
 (function(angular) {
-    angular.module('graderaklubb').service('forms-admin-service', formsAdminService);
-
-    formsAdminService.$inject = ["$http"];
+    angular.module('graderaklubb').service('forms-admin-service', ["$http", formsAdminService]);
 
     function formsAdminService($http) {
         this.GetForms = function() {

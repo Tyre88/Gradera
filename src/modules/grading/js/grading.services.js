@@ -1,7 +1,5 @@
 (function (angular) {
-    angular.module('graderaklubb').service('gradingService', gradingService);
-
-    gradingService.$injcet = ["$http"];
+    angular.module('graderaklubb').service('grading.service', ["$http", gradingService]);
 
     function gradingService($http) {
         this.GetGrades = function() {

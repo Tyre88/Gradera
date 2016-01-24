@@ -1,4 +1,5 @@
-LoadCss(["content/css/stylesheet.css", "content/css/directives.css"]);
+LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/css/modules.css", "content/css/dependencies.css",
+    "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"]);
 (function(angular) {
     angular.module('graderaklubb', ['ng', 'ngRoute', 'ngAnimate', 'ui.router', 'ngMaterial', "ngMessages",
         'webbdudes-image-helper', 'ngFileUpload', 'formly', 'angular-loading-bar', 'dndLists', 'ngSanitize', 'btford.markdown',

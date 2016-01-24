@@ -1,5 +1,5 @@
 (function (angular) {
-    LoadCss('modules/grading/admin/css/gradingadmin.css');
+    //LoadCss('modules/grading/admin/css/gradingadmin.css');
 
     angular.module('graderaklubb').controller('gradingadminlist', gradingadminlistController);
 
@@ -29,7 +29,7 @@
 
     angular.module('graderaklubb').controller('gradingadminedit', gradingadmineditController);
 
-    gradingadmineditController.$inject = ["$state", "$stateParams", "grading-admin-service", "technique-service", "$mdToast", "gradingService"];
+    gradingadmineditController.$inject = ["$state", "$stateParams", "grading-admin-service", "technique-service", "$mdToast", "grading.service"];
 
     function gradingadmineditController($state, $stateParams, gradingAdminService, techniqueService, $mdToast, gradingService) {
         var vm = this;

@@ -4,6 +4,13 @@ module.exports = function (grunt)
 {
 	//load grunt modules
 	require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
+
+    grunt.registerTask("release",
+    [
+        "build",
+        "htmlmin",
+        "uglify"
+    ]);
 	
 	grunt.registerTask("server",
 	[
@@ -276,10 +283,9 @@ module.exports = function (grunt)
 			dist: {
                 options: {
                     // Replace all 'use strict' statements in the code with a single one at the top
-                    banner: "'use strict';\n",
+                    //banner: "'use strict';\n",
                     process: function(src, filepath) {
-                        return '// Source: ' + filepath + '\n' +
-                            src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
+                        return src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
                     }
                 },
                 files: {
@@ -288,7 +294,7 @@ module.exports = function (grunt)
                         'src/externalrouting.js',
                         'src/external/**/*.js'
                     ],
-                    'dist/dependencies/dependencies.js': [
+                    'dist/dependencies.js': [
                         'src/dependencies/jquery/jquery.min.js',
                         'src/dependencies/extensions.js',
                         'src/dependencies/angular/angular.min.js',
@@ -316,6 +322,15 @@ module.exports = function (grunt)
                         'src/adminrouting.js',
                         'src/directives/helpers.js',
                         'src/modules/**/*.js'
+                    ],
+                    'dist/content/css/modules.css': [
+                        'dist/modules/**/*.css'
+                    ],
+                    'dist/content/css/dependencies.css': [
+                        "src/dependencies/angular-google-places-autocomplete/dist/autocomplete.min.css",
+                        "src/dependencies/angular-material/angular-material.min.css",
+                        "src/dependencies/ng-ckeditor/ng-ckeditor.css",
+                        "src/dependencies/angular-loading-bar/build/loading-bar.min.css"
                     ]
                 }
 			}

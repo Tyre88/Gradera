@@ -1,9 +1,9 @@
 (function (angular) {
-    LoadCss('modules/grading/css/grading.css');
+    //LoadCss('modules/grading/css/grading.css');
 
     angular.module('graderaklubb').controller('gradinglist', gradinglistController);
 
-    gradinglistController.$inject = ["$state", "gradingService"];
+    gradinglistController.$inject = ["$state", "grading.service"];
 
     function gradinglistController($state, gradingService) {
         var vm = this;
@@ -45,7 +45,7 @@
 
     angular.module('graderaklubb').controller('showgrade', showgradeController);
 
-    showgradeController.$inject = ["$state", "$stateParams", "gradingService"];
+    showgradeController.$inject = ["$state", "$stateParams", "grading.service"];
 
     function showgradeController($state, $stateParams, gradingService) {
         var vm = this;
@@ -84,7 +84,7 @@
 
     angular.module('graderaklubb').controller('showbookletController', showbookletController);
 
-    showbookletController.$inject = ["$state", "$stateParams", "gradingService"];
+    showbookletController.$inject = ["$state", "$stateParams", "grading.service"];
 
     function showbookletController($state, $stateParams, gradingService) {
         var vm = this;
@@ -109,7 +109,7 @@
 
     angular.module('graderaklubb').controller('listbookletsController', listbookletsController);
 
-    listbookletsController.$inject = ["$state", "gradingService", "grading-admin-service", "$mdDialog"];
+    listbookletsController.$inject = ["$state", "grading.service", "grading-admin-service", "$mdDialog"];
 
     function listbookletsController($state, gradingService, gradingAdminService, $mdDialog) {
         var vm = this;

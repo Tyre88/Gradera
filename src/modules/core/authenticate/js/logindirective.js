@@ -1,4 +1,4 @@
-LoadCss("content/css/login.css");
+//LoadCss("content/css/login.css");
 
 (function(angular) {
     angular.module('graderaklubb').directive('gkLogin', ["login-service", "user-service", "api", "$state", "$mdDialog", function(loginService, userService, api, $state, $mdDialog)

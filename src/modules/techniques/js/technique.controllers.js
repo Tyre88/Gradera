@@ -1,5 +1,5 @@
 (function (angular) {
-    LoadCss('modules/techniques/css/technique.css');
+    //LoadCss('modules/techniques/css/technique.css');
     angular.module('graderaklubb').controller('showtechnique', showtechniqueController);
 
     showtechniqueController.$inject = ["$state", "$stateParams", "techniqueService", "$mdDialog"];
