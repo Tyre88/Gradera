@@ -5,10 +5,12 @@ using Gradera_Klubb.Filters;
 using Gradera_Klubb.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
@@ -81,6 +83,27 @@ namespace Gradera_Klubb.Controllers
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
             AccountBLL.DeleteUser(id, loggedInUser.AccountSession.ClubId);
+            return response;
+        }
+
+        [HttpPost, HttpOptions]
+        [AuthorizeFilter]
+        public async Task<HttpResponseMessage> ImportUsersFromSportadmin()
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                response.StatusCode = HttpStatusCode.UnsupportedMediaType;
+            }
+            else
+            {
+                UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+                MultipartMemoryStreamProvider provider = new MultipartMemoryStreamProvider();
+                await Request.Content.ReadAsMultipartAsync(provider);
+                Task<byte[]> fileData = provider.Contents.First().ReadAsByteArrayAsync();
+                AccountBLL.ImportUsersFromExcel(fileData.Result, loggedInUser.AccountSession.ClubId);
+            }
+
             return response;
         }
     }

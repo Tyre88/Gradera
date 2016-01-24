@@ -5,6 +5,10 @@
 </md-toolbar>
 
 <span class="md-button md-raised" ng-click="EditUser(0, $event);"><i class="fa fa-plus-circle"></i> Lägg till användare</span>
+<span class="md-button md-raised" ngf-multiple="false"
+     ngf-select="ImportFromSportadmin($files)">
+    Importera från sportadmin
+</span>
 <md-list ng-cloak>
 
     <md-input-container md-no-float>

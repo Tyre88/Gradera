@@ -275,7 +275,7 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                 template: '<md-input-container><formly-transclude></formly-transclude></md-input-container>'
             });
         }])
-        .service('user-service', ["$http", function($http)
+        .service('user-service', ["$http", "Upload", function($http, Upload)
         {
             this.UserModel = function(club, user)
             {
@@ -445,6 +445,18 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
 
             this.DeleteUser = function(id) {
                 return $http.post('/api/User/DeleteUser?' + $.param({id: id}));
+            };
+
+            this.ImportUsersFromSportadmin = function(file, successCallback) {
+                Upload.upload({
+                    url: "/api/User/ImportUsersFromSportadmin",
+                    data: {file: file}
+                }).then(successCallback, function(err) {
+                    console.error(err);
+                }, function(evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + progressPercentage + '% ');
+                });
             };
         }])
         .directive('ckEditor', ckEditorDirective);

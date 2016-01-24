@@ -22,6 +22,12 @@
             });
         };
 
+        $scope.ImportFromSportadmin = function(files) {
+            userService.ImportUsersFromSportadmin(files[0], function() {
+                console.log('Success');
+            });
+        };
+
         userService.GetAllUsers().success(function(response) {
             for(var i = 0; i < response.length; i++)
             {
