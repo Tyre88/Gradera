@@ -35,7 +35,8 @@
             {
                 url: "/admin/listusers",
                 templateUrl: "modules/core/users/admin/views/listusers.html",
-                controller: "listusers"
+                controller: "listusers",
+                controllerAs: "vm"
             })
             .state('edituser',
             {

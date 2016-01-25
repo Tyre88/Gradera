@@ -4,23 +4,20 @@
     </h1>
 </md-toolbar>
 
-<span class="md-button md-raised" ng-click="EditUser(0, $event);"><i class="fa fa-plus-circle"></i> Lägg till användare</span>
-<span class="md-button md-raised" ngf-multiple="false"
-     ngf-select="ImportFromSportadmin($files)">
-    Importera från sportadmin
-</span>
+<span class="md-button md-raised" ng-click="vm.EditUser(0, $event);"><i class="fa fa-plus-circle"></i> Lägg till användare</span>
+<span ng-if="$root.HasAccess(2, 40);" class="md-button md-raised" ng-click="vm.OpenImportDialog();"><i class="fa fa-users"></i> Importera från sportadmin</span>
 <md-list ng-cloak>
 
     <md-input-container md-no-float>
-        <input type="text" ng-model="Filter" placeholder="Filter" />
+        <input type="text" ng-model="vm.Filter" placeholder="Filter" />
     </md-input-container>
 
-    <md-list-item ng-repeat="user in Users | filter:Filter" ng-click="EditUser(user.Id, $event)">
+    <md-list-item ng-repeat="user in vm.Users | filter:vm.Filter" ng-click="vm.EditUser(user.Id, $event)">
         <img alt="{{ user.FirstName }}" src="{{ user.Image }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
         <p>{{ user.FirstName }} {{user.LastName}}</p>
         <p class="hide-sm hide-md">{{user.UserInformation.Email}}</p>
         <p class="hide-sm hide-md">{{user.UserInformation.City.name}}</p>
         <p class="hide-sm hide-md">{{user.UserInformation.Occupation}}</p>
-        <p ng-if="$root.HasAccess(2, 40);" ng-click="DeleteUser(user)" class="fa fa-trash md-secondary md-hue-3"></p>
+        <p ng-if="$root.HasAccess(2, 40);" ng-click="vm.DeleteUser(user)" class="fa fa-trash md-secondary md-hue-3"></p>
     </md-list-item>
 </md-list>

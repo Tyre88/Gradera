@@ -1,13 +1,14 @@
 (function(angular) {
     angular.module('graderaklubb').controller('listusers', ["$scope", "user-service", "$state", "$mdDialog", function($scope, userService, $state, $mdDialog) {
-        $scope.Users = [];
+        var vm = this;
+        vm.Users = [];
 
-        $scope.EditUser = function(userId, event)
+        vm.EditUser = function(userId, event)
         {
             $state.go("edituser", {userId : userId});
         };
 
-        $scope.DeleteUser = function(user) {
+        vm.DeleteUser = function(user) {
 
             var confirm = $mdDialog.confirm()
                 .title('Är du säker på att du vill ta bort ' + user.FirstName + ' ' + user.LastName + '?')
@@ -17,21 +18,53 @@
 
             $mdDialog.show(confirm).then(function() {
                 userService.DeleteUser(user.Id).success(function(response) {
-                    $scope.Users.splice($scope.Users.indexOf(user), 1);
+                    vm.Users.splice(vm.Users.indexOf(user), 1);
                 });
             });
         };
 
-        $scope.ImportFromSportadmin = function(files) {
-            userService.ImportUsersFromSportadmin(files[0], function() {
-                console.log('Success');
+        vm.OpenImportDialog = OpenImportDialog;
+
+        function OpenImportDialog() {
+            $mdDialog.show({
+                templateUrl: "modules/core/users/admin/views/import-from-sportadmin-dialog.html",
+                controller: ImportFromSportAdminController,
+                controllerAs: "vm",
+                bindToController: true
             });
-        };
+        }
+
+        ImportFromSportAdminController.$inject = ["$mdDialog"];
+
+        function ImportFromSportAdminController($mdDialog) {
+            var vm = this;
+            vm.File = undefined;
+
+            vm.FileSelect = FileSelect;
+            vm.ImportFromSportadmin = ImportFromSportAdmin;
+            vm.Close = Close;
+
+            function FileSelect(files) {
+                vm.File = files[0];
+                console.log(vm.File);
+            }
+
+            function ImportFromSportAdmin() {
+                userService.ImportUsersFromSportadmin(vm.File, function() {
+                    console.log('Success');
+                    vm.Close();
+                });
+            }
+
+            function Close() {
+                $mdDialog.hide();
+            }
+        }
 
         userService.GetAllUsers().success(function(response) {
             for(var i = 0; i < response.length; i++)
             {
-                $scope.Users.push(new userService.UserModel(userService.User.Club, response[i]));
+                vm.Users.push(new userService.UserModel(userService.User.Club, response[i]));
             }
         });
     }]);
