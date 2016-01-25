@@ -331,6 +331,10 @@ module.exports = function (grunt)
                         "src/dependencies/angular-material/angular-material.min.css",
                         "src/dependencies/ng-ckeditor/ng-ckeditor.css",
                         "src/dependencies/angular-loading-bar/build/loading-bar.min.css"
+                    ],
+                    'dist/content/css/externaldependencies.css': [
+                        "src/dependencies/angular-material/angular-material.min.css",
+                        "src/dependencies/angular-loading-bar/build/loading-bar.min.css"
                     ]
                 }
 			}

@@ -1,4 +1,4 @@
-LoadCss(["content/css/external.css"]);
+LoadCss(["content/css/external.css", "content/css/externaldependencies.css"]);
 (function(angular) {
     angular.module("graderaklubbexternal", ['ng', 'ngRoute', 'ui.router', 'ngMaterial', 'angular-loading-bar', 'ngMessages', 'formly', 'ngSanitize', 'btford.markdown'])
         .controller('home', homeController);
