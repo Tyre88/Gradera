@@ -4,8 +4,11 @@
               ngf-select="vm.FileSelect($files)">
             Välj fil
         </span>
+        <p ng-bind="vm.File.name"></p>
+        <md-checkbox ng-model="vm.SendWelcomeMail">Skicka välkomst mail</md-checkbox>
     </md-dialog-content>
     <md-dialog-actions>
-        <span class="md-button" ng-click="vm.Close();">Close</span>
+        <span class="md-button md-primary md-raised" ng-click="vm.ImportFromSportadmin();">Importera</span>
+        <span class="md-button" ng-click="vm.Close();">Stäng</span>
     </md-dialog-actions>
 </md-dialog>

@@ -39,9 +39,10 @@
         function ImportFromSportAdminController($mdDialog) {
             var vm = this;
             vm.File = undefined;
+            vm.SendWelcomeMail = false;
 
             vm.FileSelect = FileSelect;
-            vm.ImportFromSportadmin = ImportFromSportAdmin;
+            vm.ImportFromSportadmin = ImportFromSportadmin;
             vm.Close = Close;
 
             function FileSelect(files) {
@@ -49,8 +50,8 @@
                 console.log(vm.File);
             }
 
-            function ImportFromSportAdmin() {
-                userService.ImportUsersFromSportadmin(vm.File, function() {
+            function ImportFromSportadmin() {
+                userService.ImportUsersFromSportadmin(vm.File, vm.SendWelcomeMail, function() {
                     console.log('Success');
                     vm.Close();
                 });
