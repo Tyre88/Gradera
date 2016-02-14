@@ -1,3 +1,10 @@
+<style>
+    md-dialog md-checkbox
+    {
+        display: block;
+    }
+</style>
+
 <md-dialog>
     <md-dialog-content>
         <span class="md-button md-raised" ngf-multiple="false"
@@ -5,7 +12,20 @@
             Välj fil
         </span>
         <p ng-bind="vm.File.name"></p>
+        <md-subheader class="md-no-sticky">
+            Inställningar
+        </md-subheader>
         <md-checkbox ng-model="vm.SendWelcomeMail">Skicka välkomst mail</md-checkbox>
+        <md-checkbox ng-model="vm.TryToMatchGroupName">Försök matcha grupp</md-checkbox>
+        <div class="import-users-groups">
+            <md-subheader class="md-no-sticky">
+                Rättigheter
+            </md-subheader>
+            <md-checkbox ng-repeat="accessright in vm.Accessrights" ng-disabled="vm.TryToMatchGroupName" ng-model="accessright.Checked" aria-label="{{accessright.Name}}">
+                {{accessright.Name}}
+                <md-tooltip>{{accessright.Description}}</md-tooltip>
+            </md-checkbox>
+        </div>
     </md-dialog-content>
     <md-dialog-actions>
         <span class="md-button md-primary md-raised" ng-click="vm.ImportFromSportadmin();">Importera</span>

@@ -34,16 +34,19 @@
             });
         }
 
-        ImportFromSportAdminController.$inject = ["$mdDialog"];
+        ImportFromSportAdminController.$inject = ["$mdDialog", "accessrights-service"];
 
-        function ImportFromSportAdminController($mdDialog) {
+        function ImportFromSportAdminController($mdDialog, accessrightsService) {
             var vm = this;
             vm.File = undefined;
             vm.SendWelcomeMail = false;
+            vm.TryToMatchGroupName = false;
+            vm.Accessrights = [];
 
             vm.FileSelect = FileSelect;
             vm.ImportFromSportadmin = ImportFromSportadmin;
             vm.Close = Close;
+            vm.GetAccessrights = GetAccessrights;
 
             function FileSelect(files) {
                 vm.File = files[0];
@@ -51,7 +54,17 @@
             }
 
             function ImportFromSportadmin() {
-                userService.ImportUsersFromSportadmin(vm.File, vm.SendWelcomeMail, function() {
+                var accessrightIds = "";
+
+                for(var i = 0; i < vm.Accessrights.length; i++)
+                {
+                    if(vm.Accessrights[i].Checked == true)
+                        accessrightIds = accessrightIds + vm.Accessrights[i].Id + ",";
+                }
+
+                accessrightIds = accessrightIds.substring(0, accessrightIds.length - 1);
+
+                userService.ImportUsersFromSportadmin(vm.File, vm.SendWelcomeMail, vm.TryToMatchGroupName, accessrightIds, function() {
                     console.log('Success');
                     vm.Close();
                 });
@@ -60,6 +73,16 @@
             function Close() {
                 $mdDialog.hide();
             }
+
+            function GetAccessrights() {
+                accessrightsService.GetAccessRights().success(GetAccessRightsCallback);
+
+                function GetAccessRightsCallback(response) {
+                    vm.Accessrights = response;
+                }
+            }
+
+            vm.GetAccessrights();
         }
 
         userService.GetAllUsers().success(function(response) {

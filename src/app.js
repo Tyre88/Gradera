@@ -447,10 +447,10 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                 return $http.post('/api/User/DeleteUser?' + $.param({id: id}));
             };
 
-            this.ImportUsersFromSportadmin = function(file, sendWelcomeMail, successCallback) {
+            this.ImportUsersFromSportadmin = function(file, sendWelcomeMail, tryToMatchGroupName, accessrightIds, successCallback) {
                 Upload.upload({
                     url: "/api/User/ImportUsersFromSportadmin",
-                    data: {file: file, sendWelcomeMail: sendWelcomeMail}
+                    data: {file: file, sendWelcomeMail: sendWelcomeMail, tryToMatchGroupName: tryToMatchGroupName, accessrightIds: accessrightIds}
                 }).then(successCallback, function(err) {
                     console.error(err);
                 }, function(evt) {

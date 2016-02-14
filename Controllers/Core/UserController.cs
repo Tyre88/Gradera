@@ -87,7 +87,7 @@ namespace Gradera_Klubb.Controllers
         }
 
         [HttpPost, HttpOptions]
-        [AuthorizeFilter]
+        [AuthorizeFilter(AccessType = AccessType.Account, AccessTypeRight = AccessTypeRight.Admin)]
         public async Task<HttpResponseMessage> ImportUsersFromSportadmin()
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
@@ -101,7 +101,21 @@ namespace Gradera_Klubb.Controllers
                 MultipartMemoryStreamProvider provider = new MultipartMemoryStreamProvider();
                 await Request.Content.ReadAsMultipartAsync(provider);
                 Task<byte[]> fileData = provider.Contents.First().ReadAsByteArrayAsync();
-                AccountBLL.ImportUsersFromExcel(fileData.Result, loggedInUser.AccountSession.ClubId);
+                bool sendWelcomeMail = bool.Parse(((System.Web.HttpContextWrapper)Request.Properties["MS_HttpContext"]).Request.Form["sendWelcomeMail"]);
+                bool tryToMatchGroupName = bool.Parse(((System.Web.HttpContextWrapper)Request.Properties["MS_HttpContext"]).Request.Form["tryToMatchGroupName"]);
+                List<int> accessrightIds = new List<int>();
+                try
+                {
+                    List<string> ids = ((System.Web.HttpContextWrapper)Request
+                        .Properties["MS_HttpContext"]).Request.Form["accessrightIds"]
+                        .ToString().Split(',').ToList();
+
+                    ids.ForEach(i => accessrightIds.Add(int.Parse(i.Trim())));
+                }
+                catch (Exception)
+                {
+                }
+                AccountBLL.ImportUsersFromExcel(fileData.Result, loggedInUser.AccountSession.ClubId, sendWelcomeMail, tryToMatchGroupName, accessrightIds);
             }
 
             return response;
