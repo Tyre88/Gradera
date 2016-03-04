@@ -16,7 +16,12 @@
             Inställningar
         </md-subheader>
         <md-checkbox ng-model="vm.SendWelcomeMail">Skicka välkomst mail</md-checkbox>
-        <md-checkbox ng-model="vm.TryToMatchGroupName">Försök matcha grupp</md-checkbox>
+        <md-checkbox ng-model="vm.TryToMatchGroupName">
+            Försök matcha grupp
+            <md-tooltip>
+                Försöker matcha "Gruppkoppling" med ett namn på en användargrupp.
+            </md-tooltip>
+        </md-checkbox>
         <div class="import-users-groups">
             <md-subheader class="md-no-sticky">
                 Rättigheter

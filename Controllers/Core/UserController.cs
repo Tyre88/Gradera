@@ -1,6 +1,7 @@
 ﻿using Gradera.Core.BLL;
 using Gradera.Core.DAL;
 using Gradera.Core.Enums;
+using Gradera.Core.Helpers;
 using Gradera_Klubb.Filters;
 using Gradera_Klubb.Models;
 using System;
@@ -112,9 +113,12 @@ namespace Gradera_Klubb.Controllers
 
                     ids.ForEach(i => accessrightIds.Add(int.Parse(i.Trim())));
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    LogHelper.LogError(string.Format("Error importing users from sportadmin, cound't read accessrightIds."), 
+                        ex, loggedInUser.AccountSession.ClubId);
                 }
+
                 AccountBLL.ImportUsersFromExcel(fileData.Result, loggedInUser.AccountSession.ClubId, sendWelcomeMail, tryToMatchGroupName, accessrightIds);
             }
 
