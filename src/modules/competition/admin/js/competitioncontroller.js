@@ -93,10 +93,14 @@
         function SaveCompetition() {
             vm.Competition.Location = JSON.stringify(vm.Competition.Location);
 
-            competitionAdminService.SaveCompetition(vm.Competition).success(saveCompetitionCallback);
+            competitionAdminService.SaveCompetition(vm.Competition).success(saveCompetitionCallback).error(saveCompetitionError);
 
             function saveCompetitionCallback() {
                 vm.Back();
+            }
+
+            function saveCompetitionError() {
+
             }
         }
 
@@ -119,5 +123,12 @@
 
         if(~~vm.CompetitionId > 0)
             vm.GetCompetition();
+        else
+        {
+            vm.Competition.StartDate = new Date();
+            vm.Competition.EndDate = new Date();
+            vm.Competition.StartSignupDate = new Date();
+            vm.Competition.EndSignupDate = new Date();
+        }
     }
 }(window.angular));

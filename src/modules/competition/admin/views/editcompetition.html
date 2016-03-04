@@ -4,60 +4,65 @@
     </h1>
 </md-toolbar>
 
-<div class="edit-container">
-    <md-input-container md-no-float>
-        <input type="text" ng-model="vm.Competition.Name" placeholder="Namn" />
-    </md-input-container>
+<form name="editCompetition" ng-submit="vm.SaveCompetition()">
+    <div class="edit-container">
+        <md-input-container md-no-float>
+            <input type="text" ng-model="vm.Competition.Name" placeholder="Namn" required name="name" />
+            <div ng-messages="editCompetition.name.$error">
+                <div ng-message="required">Du måste fylla i ett namn på tävlingen</div>
+            </div>
+        </md-input-container>
 
-    <md-input-container md-no-float>
-        <input type="text" ng-model="vm.Competition.Description" placeholder="Beskrivning" />
-    </md-input-container>
+        <md-input-container md-no-float>
+            <input type="text" ng-model="vm.Competition.Description" placeholder="Beskrivning" />
+        </md-input-container>
 
-    <md-input-container md-no-float>
-        <input type="text" ng-model="vm.Competition.Location" placeholder="Plats" g-places-autocomplete force-selection="true" />
-    </md-input-container>
+        <md-input-container md-no-float>
+            <input type="text" ng-model="vm.Competition.Location" placeholder="Plats" g-places-autocomplete force-selection="true" />
+        </md-input-container>
 
-    <md-datepicker ng-model="vm.Competition.StartDate" md-placeholder="StartDatum"></md-datepicker>
+        <md-datepicker ng-model="vm.Competition.StartDate" md-placeholder="StartDatum" name="startDate"></md-datepicker>
 
-    <md-datepicker ng-model="vm.Competition.EndDate" md-placeholder="Slutdatum"></md-datepicker>
+        <md-datepicker ng-model="vm.Competition.EndDate" md-placeholder="Slutdatum"></md-datepicker>
 
-    <md-datepicker ng-model="vm.Competition.StartSignupDate" md-placeholder="Första anmälningsdagen"></md-datepicker>
+        <md-datepicker ng-model="vm.Competition.StartSignupDate" md-placeholder="Första anmälningsdagen"></md-datepicker>
 
-    <md-datepicker ng-model="vm.Competition.EndSignupDate" md-placeholder="Sista anmälningsdagen"></md-datepicker>
-</div>
+        <md-datepicker ng-model="vm.Competition.EndSignupDate" md-placeholder="Sista anmälningsdagen"></md-datepicker>
+    </div>
 
-<div class="edit-container">
-    <md-checkbox ng-model="vm.Competition.IsExternal" aria-label="{{vm.Competition.Name}}">
-        Extern tävling
-        <md-tooltip>Tävlingen är extern och man kan anmäla sig utanför klubben.</md-tooltip>
-    </md-checkbox>
+    <div class="edit-container">
+        <md-checkbox ng-model="vm.Competition.IsExternal" aria-label="{{vm.Competition.Name}}">
+            Extern tävling
+            <md-tooltip>Tävlingen är extern och man kan anmäla sig utanför klubben.</md-tooltip>
+        </md-checkbox>
 
     <span ng-show="vm.Competition.IsExternal">
         <a href="external.html#/show/competition/{{$root.UserService.User.Club.ShortName}}/{{vm.Competition.Name}}" target="_blank">
             Länk till tävlingen
         </a>
     </span>
-</div>
+    </div>
 
-<md-list ng-cloak>
-    <md-subheader class="md-no-sticky">
-        Kategorier
-    </md-subheader>
+    <md-list ng-cloak>
+        <md-subheader class="md-no-sticky">
+            Kategorier
+        </md-subheader>
 
-    <md-input-container md-no-float class="new-competition-category">
-        <input type="text" ng-model="vm.NewCategoryName" placeholder="Ny kategori namn" />
-    </md-input-container>
-    <button ng-disabled="vm.CompetitionId <= 0" class="md-button md-raised" ng-click="vm.AddCategory();"><i class="fa fa-plus-circle"></i> Lägg till kategori</button>
+        <md-input-container md-no-float class="new-competition-category">
+            <input type="text" ng-model="vm.NewCategoryName" placeholder="Ny kategori namn" />
+        </md-input-container>
+        <button ng-disabled="vm.CompetitionId <= 0" class="md-button md-raised" ng-click="vm.AddCategory();"><i class="fa fa-plus-circle"></i> Lägg till kategori</button>
 
-    <md-list-item ng-repeat="category in vm.Competition.Categories">
-        <p>
-            <i class="fa fa-trash" ng-click="vm.DeleteCategory(category);"></i>
-            {{category.Name}}
-        </p>
-    </md-list-item>
-</md-list>
+        <md-list-item ng-repeat="category in vm.Competition.Categories">
+            <p>
+                <i class="fa fa-trash" ng-click="vm.DeleteCategory(category);"></i>
+                {{category.Name}}
+            </p>
+        </md-list-item>
+    </md-list>
 
-<div>
-    <md-button class="md-raised md-primary" ng-click="vm.SaveCompetition();">Spara</md-button>
-    <md-button class="md-raised md-warn" ng-click="vm.Back();">Avbryt</md-button>
-</div>
+    <div>
+        <md-button class="md-raised md-primary" type="submit">Spara</md-button>
+        <md-button class="md-raised md-warn" ng-click="vm.Back();">Avbryt</md-button>
+    </div>
+</form>
