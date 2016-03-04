@@ -65,7 +65,8 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                         Sref: "gradingcategoryadminlist",
                         Text: "Hantera graderings kategorier",
                         AccessType: 3,
-                        AccessTypeRight: 20
+                        AccessTypeRight: 20,
+                        ClubId: 1
                     },
                     {
                         Sref: "listbooklets",
@@ -83,7 +84,8 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                         Sref: "techniquetypeadminlist",
                         Text: "Hantera teknik typer",
                         AccessType: 7,
-                        AccessTypeRight: 20
+                        AccessTypeRight: 20,
+                        ClubId: 1
                     },
                     {
                         Sref: "newsletteradminlist",
@@ -104,8 +106,10 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                     return false;
                 };
 
-                $rootScope.HasAccess = function(accessType, accessTypeRight)
+                $rootScope.HasAccess = function(accessType, accessTypeRight, clubId)
                 {
+                    if(clubId !== undefined && $scope.UserService.User.Club.Id != clubId) return false;
+
                     for(var i = 0; i < $scope.UserService.User.AccessRightsRight.length; i++)
                     {
                         if($scope.UserService.User.AccessRightsRight[i].AccessTypeRight >= accessTypeRight

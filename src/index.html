@@ -25,7 +25,7 @@
                         <div ng-if="$root.HasSomeWriteAccess();">
                             <hr />
                             <li class="nav-header">Klubb administration</li>
-                            <li ng-repeat="link in AdminLinks" ng-show="$root.HasAccess(link.AccessType, link.AccessTypeRight)">
+                            <li ng-repeat="link in AdminLinks" ng-show="$root.HasAccess(link.AccessType, link.AccessTypeRight, link.ClubId)">
                                 <a ui-sref="{{link.Sref}}" ng-click="SetActiveNav($event)">{{link.Text}}</a>
                             </li>
                         </div>
