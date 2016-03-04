@@ -71,6 +71,13 @@ namespace Gradera_Klubb.Controllers
         public HttpResponseMessage SaveUser(UserModel user)
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            if(AccountBLL.UserNameExists(user.Username))
+            {
+                response.StatusCode = HttpStatusCode.BadRequest;
+                response.Content = new ObjectContent<string>
+                    ("Användarnamnet finns redan, vänligen välj ett annat.", new JsonMediaTypeFormatter());
+                return response;
+            }
             Account acc = UserModel.ConvertToAccount(user);
             Account account = AccountBLL.SaveAccount(acc);
             //response.Content = new ObjectContent<Account>(account, new JsonMediaTypeFormatter());

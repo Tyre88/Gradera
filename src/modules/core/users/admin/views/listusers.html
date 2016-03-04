@@ -15,9 +15,9 @@
     <md-list-item ng-repeat="user in vm.Users | filter:vm.Filter" ng-click="vm.EditUser(user.Id, $event)">
         <img alt="{{ user.FirstName }}" src="{{ user.Image }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
         <p>{{ user.FirstName }} {{user.LastName}}</p>
-        <p class="hide-sm hide-md">{{user.UserInformation.Email}}</p>
-        <p class="hide-sm hide-md">{{user.UserInformation.City.name}}</p>
-        <p class="hide-sm hide-md">{{user.UserInformation.Occupation}}</p>
+        <p class="hide-sm hide-md hide-xs">{{user.UserInformation.Email}}</p>
+        <p class="hide-sm hide-md hide-xs">{{user.UserInformation.City.name}}</p>
+        <p class="hide-sm hide-md hide-xs">{{user.UserInformation.Occupation}}</p>
         <p ng-if="$root.HasAccess(2, 40);" ng-click="vm.DeleteUser(user)" class="fa fa-trash md-secondary md-hue-3"></p>
     </md-list-item>
 </md-list>

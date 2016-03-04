@@ -9,8 +9,8 @@
 
     <md-list-item ng-repeat="competition in vm.Competitions" ng-click="vm.EditCompetition(competition.Id, $event)">
         <p>{{competition.Name}}</p>
-        <p class="hide-sm hide-md">{{competition.StartDate | date:'yyyy-MM-dd HH:mm'}} - {{competition.EndDate | date:'yyyy-MM-dd HH:mm'}}</p>
-        <p class="hide-sm hide-md">{{competition.Location.name}}</p>
+        <p class="hide-sm hide-md hide-xs">{{competition.StartDate | date:'yyyy-MM-dd HH:mm'}} - {{competition.EndDate | date:'yyyy-MM-dd HH:mm'}}</p>
+        <p class="hide-sm hide-md hide-xs">{{competition.Location.name}}</p>
         <div class="more-icons md-secondary">
             <i class="fa fa-file-excel-o md-hue-3" ng-click="vm.ExportCompetition(competition); $event.stopPropagation();">
                 <md-tooltip>

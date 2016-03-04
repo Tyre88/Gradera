@@ -93,8 +93,8 @@
         });
     }]);
 
-    angular.module('graderaklubb').controller('edituser', ["$scope", "$stateParams", "user-service", "accessrights-service", "$state", "gradeEnum",
-        function($scope, $stateParams, userService, accessrightsService, $state, gradeEnum) {
+    angular.module('graderaklubb').controller('edituser', ["$scope", "$stateParams", "user-service", "accessrights-service", "$state", "gradeEnum", "$mdDialog", "$timeout",
+        function($scope, $stateParams, userService, accessrightsService, $state, gradeEnum, $mdDialog, $timeout) {
             $scope.UserId = $stateParams.userId;
             $scope.User = {};
             $scope.AccessRights = [];
@@ -119,6 +119,12 @@
 
                 userService.SaveUser($scope.User).success(function(response) {
                     $state.go ('listusers');
+                }).error(function(err) {
+                    $mdDialog.show($mdDialog.alert({
+                        textContent: err,
+                        ok: 'Ok',
+                        title: 'Obs!'
+                    }));
                 });
             };
 
@@ -159,6 +165,7 @@
                 else
                 {
                     $scope.User = new userService.UserModel(userService.User.Club);
+                    $scope.User.UserInformation.Grade = $scope.Grades[0].Id;
                 }
             });
         }]);

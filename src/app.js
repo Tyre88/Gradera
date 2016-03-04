@@ -290,7 +290,7 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                         Image: "",
                         AccessRights: [],
                         Club: club,
-                        UserInformation: {},
+                        UserInformation: {Birthday: new Date(), },
                         Gender: 0
                     };
                 }
