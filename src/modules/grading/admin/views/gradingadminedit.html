@@ -41,7 +41,10 @@
                     <ul dnd-list="categoryLink.GradeCategoryLinkTechniques">
                         <md-subheader class="md-no-sticky">
                             {{vm.GetCategoryName(categoryLink.GradeCategoryId);}}
-                            <md-button class="md-raised">Lägg till</md-button>
+
+                            <md-button class="md-raised" ng-click="vm.OpenAddTechniqueDialog(categoryLink);">
+                                Lägg till
+                            </md-button>
                         </md-subheader>
                         <li ng-repeat="technique in categoryLink.GradeCategoryLinkTechniques" dnd-draggable="technique" dnd-moved="categoryLink.GradeCategoryLinkTechniques.splice($index, 1)"
                             dnd-effect-allowed="move">

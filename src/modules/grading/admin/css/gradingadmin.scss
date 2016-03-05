@@ -54,3 +54,12 @@ ul[dnd-list], ul[dnd-list] > li {
   position: relative;
 }
 
+.add-technique-dialog
+{
+  .data
+  {
+    display: flex;
+    flex-direction: column;
+  }
+}
+

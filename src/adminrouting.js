@@ -129,7 +129,7 @@
             }).state('gradingadminedit',
             {
                 url: "/admin/gradingadminedit/:id",
-                templateUrl: "modules/grading/admin/views/gradingadminedit.html",
+                    templateUrl: "modules/grading/admin/views/gradingadminedit.html",
                 controller: "gradingadminedit",
                 controllerAs: "vm"
             }).state('editbooklet',

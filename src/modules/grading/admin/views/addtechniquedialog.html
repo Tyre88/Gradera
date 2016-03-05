@@ -1,0 +1,17 @@
+<md-dialog class="add-technique-dialog md-padding">
+    <md-dialog-content>
+        <div class="information">
+            <h3>Välj de tekniker du vill ha med i kategorin: {{vm.categoryLink.CategoryName}}</h3>
+            <md-input-container md-no-float>
+                <input type="text" ng-model="vm.Search.Name" placeholder="Sök teknik"/>
+            </md-input-container>
+        </div>
+        <div class="data">
+            <md-checkbox ng-repeat="tec in vm.techniques | filter:vm.Search" ng-model="tec.Checked">{{tec.Name}}</md-checkbox>
+        </div>
+        <md-dialog-actions>
+            <md-button class="md-raised md-primary" ng-click="vm.Ok();">Ok</md-button>
+            <md-button class="md-raised md-warn" ng-click="vm.Close();">Avbryt</md-button>
+        </md-dialog-actions>
+    </md-dialog-content>
+</md-dialog>

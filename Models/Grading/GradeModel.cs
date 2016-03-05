@@ -7,6 +7,7 @@ using Gradera.Techniques.BLL;
 using Gradera.Grading.BLL;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
+using Gradera.Core.Helpers;
 
 namespace Gradera_Klubb.Models.Grading
 {
@@ -47,54 +48,61 @@ namespace Gradera_Klubb.Models.Grading
 
             if(deepLoad && grade.Grade_Category_Link.Count > 0)
             {
-                foreach (var link in grade.Grade_Category_Link)
+                try
                 {
-                    GradeCategoryLinkModel linkModel = new GradeCategoryLinkModel()
+                    foreach (var link in grade.Grade_Category_Link)
                     {
-                        GradeCategoryId = link.GradeCategoryId,
-                        GradeId = link.GradeId,
-                        Id = link.Id,
-                        Text = link.Text
-                    };
-
-                    if(grade.Grade_Category_Link_Technique.Count > 0)
-                    {
-                        foreach (var technique in grade.Grade_Category_Link_Technique)
+                        GradeCategoryLinkModel linkModel = new GradeCategoryLinkModel()
                         {
-                            if(technique.GradeCategoryLinkId == linkModel.Id)
+                            GradeCategoryId = link.GradeCategoryId,
+                            GradeId = link.GradeId,
+                            Id = link.Id,
+                            Text = link.Text
+                        };
+
+                        if (grade.Grade_Category_Link_Technique.Count > 0)
+                        {
+                            foreach (var technique in grade.Grade_Category_Link_Technique)
                             {
-                                GradeCategoryLinkTechniqueModel gm = new GradeCategoryLinkTechniqueModel()
+                                if (technique.GradeCategoryLinkId == linkModel.Id)
                                 {
-                                    GradeCategoryLinkId = technique.GradeCategoryLinkId,
-                                    GradeId = technique.GradeId,
-                                    Id = technique.Id,
-                                    TechniqueId = technique.TechniqueId
-                                };
-
-                                Gradera.Techniques.DAL.Technique tec = TechniqueAdminBLL.GetTechnique(technique.TechniqueId, grade.ClubId);
-
-                                gm.Name = tec.Name;
-
-                                foreach (var image in tec.Technique_Image)
-                                {
-                                    gm.TechniqueImages.Add(new Techniques.TechniqueImageModel()
+                                    GradeCategoryLinkTechniqueModel gm = new GradeCategoryLinkTechniqueModel()
                                     {
-                                        Id = image.Id,
-                                        Image = image.Image,
-                                        TechniqueId = image.TechniqueId,
-                                        ImageOrder = image.ImageOrder
-                                    });
+                                        GradeCategoryLinkId = technique.GradeCategoryLinkId,
+                                        GradeId = technique.GradeId,
+                                        Id = technique.Id,
+                                        TechniqueId = technique.TechniqueId
+                                    };
+
+                                    Gradera.Techniques.DAL.Technique tec = TechniqueAdminBLL.GetTechnique(technique.TechniqueId, grade.ClubId);
+
+                                    gm.Name = tec.Name;
+
+                                    foreach (var image in tec.Technique_Image)
+                                    {
+                                        gm.TechniqueImages.Add(new Techniques.TechniqueImageModel()
+                                        {
+                                            Id = image.Id,
+                                            Image = image.Image,
+                                            TechniqueId = image.TechniqueId,
+                                            ImageOrder = image.ImageOrder
+                                        });
+                                    }
+
+
+                                    linkModel.GradeCategoryLinkTechniques.Add(gm);
                                 }
-
-
-                                linkModel.GradeCategoryLinkTechniques.Add(gm);
                             }
                         }
+
+                        linkModel.CategoryName = GradingBLL.GetGradingCategory(link.GradeCategoryId, model.ClubId).Name;
+
+                        model.GradeCategoryLinks.Add(linkModel);
                     }
-
-                    linkModel.CategoryName = GradingBLL.GetGradingCategory(link.GradeCategoryId, model.ClubId).Name;
-
-                    model.GradeCategoryLinks.Add(linkModel);
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.LogError(string.Format("Error deeploading GradeModel"), ex, grade.ClubId);
                 }
             }
 
@@ -124,7 +132,7 @@ namespace Gradera_Klubb.Models.Grading
                 GradeCategoryId = g.GradeCategoryId,
                 GradeId = g.GradeId,
                 Id = g.Id,
-                Text = g.Text,
+                Text = g.Text
             };
 
             g.GradeCategoryLinkTechniques.ForEach(t => link.Grade_Category_Link_Technique.Add(new Grade_Category_Link_Technique()
@@ -132,8 +140,10 @@ namespace Gradera_Klubb.Models.Grading
                 GradeCategoryLinkId = link.Id,
                 GradeId = grade.Id,
                 Id = t.Id,
-                TechniqueId = t.TechniqueId,
+                TechniqueId = t.TechniqueId
             }));
+
+            g.GradeCategoryLinkTechniques = g.GradeCategoryLinkTechniques.DistinctBy(t => t.TechniqueId).ToList();
 
             grade.Grade_Category_Link.Add(link);
         }
