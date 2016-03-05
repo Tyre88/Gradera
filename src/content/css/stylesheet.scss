@@ -1,5 +1,10 @@
 $mobile-break: 960px;
 
+*
+{
+  outline: 0;
+}
+
 [wrap]
 {
 	flex-wrap: wrap;
@@ -126,6 +131,15 @@ md-sidenav
     width: calc(100% - 30px);
     padding-left: 15px;
     padding-right: 15px;
+  }
+
+  > .edit-item
+  {
+    > span
+    {
+      color: #CCCCCC;
+      font-size: .8em;
+    }
   }
 }
 

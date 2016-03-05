@@ -21,26 +21,41 @@
             <input type="text" ng-model="vm.Competition.Location" placeholder="Plats" g-places-autocomplete force-selection="true" />
         </md-input-container>
 
-        <md-datepicker ng-model="vm.Competition.StartDate" md-placeholder="StartDatum" name="startDate"></md-datepicker>
+        <div class="full-width edit-item">
+            <span>Start datum</span>
+            <md-datepicker ng-model="vm.Competition.StartDate" md-placeholder="StartDatum" name="startDate"></md-datepicker>
+        </div>
 
-        <md-datepicker ng-model="vm.Competition.EndDate" md-placeholder="Slutdatum"></md-datepicker>
+        <div class="full-width edit-item">
+            <span>Slut datum</span>
+            <md-datepicker ng-model="vm.Competition.EndDate" md-placeholder="Slutdatum"></md-datepicker>
+        </div>
 
-        <md-datepicker ng-model="vm.Competition.StartSignupDate" md-placeholder="Första anmälningsdagen"></md-datepicker>
+        <div class="full-width edit-item">
+            <span>Första anmälningsdagen</span>
+            <md-datepicker ng-model="vm.Competition.StartSignupDate" md-placeholder="Första anmälningsdagen"></md-datepicker>
+        </div>
 
-        <md-datepicker ng-model="vm.Competition.EndSignupDate" md-placeholder="Sista anmälningsdagen"></md-datepicker>
+        <div class="full-width edit-item">
+            <span>Sista anmälningsdagen</span>
+            <md-datepicker ng-model="vm.Competition.EndSignupDate" md-placeholder="Sista anmälningsdagen"></md-datepicker>
+        </div>
     </div>
 
     <div class="edit-container">
-        <md-checkbox ng-model="vm.Competition.IsExternal" aria-label="{{vm.Competition.Name}}">
-            Extern tävling
-            <md-tooltip>Tävlingen är extern och man kan anmäla sig utanför klubben.</md-tooltip>
-        </md-checkbox>
 
-    <span ng-show="vm.Competition.IsExternal">
-        <a href="external.html#/show/competition/{{$root.UserService.User.Club.ShortName}}/{{vm.Competition.Name}}" target="_blank">
-            Länk till tävlingen
-        </a>
-    </span>
+        <div class="full-width">
+            <md-checkbox ng-model="vm.Competition.IsExternal" aria-label="{{vm.Competition.Name}}">
+                Extern tävling
+                <md-tooltip>Tävlingen är extern och man kan anmäla sig utanför klubben.</md-tooltip>
+            </md-checkbox>
+        </div>
+
+        <span ng-show="vm.Competition.IsExternal">
+            <a href="external.html#/show/competition/{{$root.UserService.User.Club.ShortName}}/{{vm.Competition.Name}}" target="_blank">
+                Länk till tävlingen
+            </a>
+        </span>
     </div>
 
     <md-list ng-cloak>
@@ -52,6 +67,11 @@
             <input type="text" ng-model="vm.NewCategoryName" placeholder="Ny kategori namn" />
         </md-input-container>
         <button ng-disabled="vm.CompetitionId <= 0" class="md-button md-raised" ng-click="vm.AddCategory();"><i class="fa fa-plus-circle"></i> Lägg till kategori</button>
+        <i class="fa fa-question-circle">
+            <md-tooltip>
+                Ex: P13, P17, Herr, F13 etc...
+            </md-tooltip>
+        </i>
 
         <md-list-item ng-repeat="category in vm.Competition.Categories">
             <p>
