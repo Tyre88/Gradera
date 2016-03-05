@@ -57,7 +57,7 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                     },
                     {
                         Sref: "gradingadminlist",
-                        Text: "Hantera graderings bestämmelser",
+                        Text: "Hantera bältesgrader",
                         AccessType: 3,
                         AccessTypeRight: 20
                     },

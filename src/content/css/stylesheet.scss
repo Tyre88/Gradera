@@ -28,6 +28,17 @@ md-dialog-content
   padding: 10px;
 }
 
+md-toolbar
+{
+  > h1
+  {
+    > i
+    {
+      margin-right: 15px;
+    }
+  }
+}
+
 /* SECOND BRANDING COLOR */
 .brand-second-color
 {
