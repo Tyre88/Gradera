@@ -30,4 +30,8 @@
     <div>
         <span>Bälte:</span> {{vm.GetGrade()}}
     </div>
+
+    <div ng-repeat="genericValue in vm.User.GenericValues">
+        <span>{{genericValue.Name}}: </span> {{genericValue.Value}}
+    </div>
 </div>

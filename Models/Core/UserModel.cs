@@ -113,10 +113,11 @@ namespace Gradera_Klubb.Models
                     }, () =>
                     {
                         userModel.AccountAccess = AccountAccessModel.MapAccountAccesses(AccountBLL.GetAccountAccesses(userModel.Id));
-                    });
-
-                    userModel.GenericValues = AccountInformationGeneric.MapValues(
+                    }, () =>
+                    {
+                        userModel.GenericValues = AccountInformationGeneric.MapValues(
                             AccountBLL.GetGenericValues(userModel.Id, userModel.ClubId));
+                    });
                 }
                 else if(loadUserInformation)
                 {
@@ -141,7 +142,11 @@ namespace Gradera_Klubb.Models
                 return userModel;
             }
 
-            return null;
+            return new UserModel()
+            {
+                GenericValues = AccountInformationGeneric.MapValues(
+                            AccountBLL.GetGenericValues(0, 0))
+            };
         }
 
         internal static Account ConvertToAccount(UserModel user)

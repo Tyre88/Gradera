@@ -320,7 +320,8 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                         Grade: user.UserInformation.Grade,
                         Birthday: new Date(user.UserInformation.Birthday),
                         Weight: user.UserInformation.Weight
-                    }
+                    },
+                    GenericValues: user.GenericValues
                 };
 
                 try {

@@ -101,6 +101,12 @@
         <md-datepicker ng-model="vm.User.UserInformation.Birthday" md-placeholder="Födelsedag">
             <md-tooltip>Födelsedag</md-tooltip>
         </md-datepicker>
+
+        <div ng-repeat="genericValue in vm.User.GenericValues">
+            <md-input-container md-no-float>
+                <input type="text" ng-model="genericValue.Value" placeholder="{{genericValue.Name}}" name="weight" />
+            </md-input-container>
+        </div>
     </div>
 
     <md-subheader class="md-no-sticky" ng-if="$root.HasAccess(2, 40);">

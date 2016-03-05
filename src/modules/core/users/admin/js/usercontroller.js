@@ -166,6 +166,9 @@
                 {
                     $scope.User = new userService.UserModel(userService.User.Club);
                     $scope.User.UserInformation.Grade = $scope.Grades[0].Id;
+                    userService.GetUser($scope.UserId).success(function(response) {
+                        $scope.User.GenericValues = response.GenericValues;
+                    });
                 }
             });
         }]);
