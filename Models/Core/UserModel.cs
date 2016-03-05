@@ -1,6 +1,7 @@
 ﻿using Gradera.Core.BLL;
 using Gradera.Core.DAL;
 using Gradera.Core.Enums;
+using Gradera_Klubb.Models.Core;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace Gradera_Klubb.Models
         public List<AccountAccessModel> AccountAccess { get; set; }
         public List<AccessrightModel> AccessRights { get; set; }
         public List<AccessrightRightModel> AccessRightsRight { get; set; }
+        public List<AccountInformationGeneric> GenericValues { get; set; }
         public string FullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
 
         public UserModel()
@@ -34,6 +36,7 @@ namespace Gradera_Klubb.Models
             AccessRightsRight = new List<AccessrightRightModel>();
             AccessRights = new List<AccessrightModel>();
             UserInformation = new UserInformationModel();
+            GenericValues = new List<AccountInformationGeneric>();
         }
 
         public static UserModel MapUserModel(Account account, bool deepLoad, bool loadUserInformation = false)
@@ -111,6 +114,9 @@ namespace Gradera_Klubb.Models
                     {
                         userModel.AccountAccess = AccountAccessModel.MapAccountAccesses(AccountBLL.GetAccountAccesses(userModel.Id));
                     });
+
+                    userModel.GenericValues = AccountInformationGeneric.MapValues(
+                            AccountBLL.GetGenericValues(userModel.Id, userModel.ClubId));
                 }
                 else if(loadUserInformation)
                 {
