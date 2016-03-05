@@ -7,7 +7,14 @@
             </md-input-container>
         </div>
         <div class="data">
-            <md-checkbox ng-repeat="tec in vm.techniques | filter:vm.Search" ng-model="tec.Checked">{{tec.Name}}</md-checkbox>
+            <md-checkbox ng-repeat="tec in vm.techniques | filter:vm.Search" ng-model="tec.Checked">
+                {{tec.Name}}
+                <i class="fa fa-globe" ng-if="tec.IsGlobal">
+                    <md-tooltip>
+                        Detta är en teknik som är inlagd av systemet.
+                    </md-tooltip>
+                </i>
+            </md-checkbox>
         </div>
         <md-dialog-actions>
             <md-button class="md-raised md-primary" ng-click="vm.Ok();">Ok</md-button>

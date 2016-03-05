@@ -56,6 +56,13 @@ namespace Gradera_Klubb.Controllers
         public HttpResponseMessage SaveMe(UserModel user)
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            if (AccountBLL.UserNameExists(user.Username, user.Id))
+            {
+                response.StatusCode = HttpStatusCode.BadRequest;
+                response.Content = new ObjectContent<string>
+                    ("Användarnamnet finns redan, vänligen välj ett annat.", new JsonMediaTypeFormatter());
+                return response;
+            }
             UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
             user.Id = loggedInUser.AccountSession.AccountId;
             user.ClubId = loggedInUser.AccountSession.ClubId;
@@ -71,7 +78,7 @@ namespace Gradera_Klubb.Controllers
         public HttpResponseMessage SaveUser(UserModel user)
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            if(AccountBLL.UserNameExists(user.Username))
+            if(AccountBLL.UserNameExists(user.Username, user.Id))
             {
                 response.StatusCode = HttpStatusCode.BadRequest;
                 response.Content = new ObjectContent<string>

@@ -172,9 +172,9 @@
 
         angular.module('graderaklubb').controller('editme', editmeController);
 
-        editmeController.$inject = ["user-service", "accessrights-service", "gradeEnum", "$mdToast"];
+        editmeController.$inject = ["user-service", "accessrights-service", "gradeEnum", "$mdToast", "$mdDialog"];
 
-        function editmeController(userService, accessrightsService, gradeEnum, $mdToast) {
+        function editmeController(userService, accessrightsService, gradeEnum, $mdToast, $mdDialog) {
             var vm = this;
             vm.User = {};
             vm.AccessRights = [];
@@ -234,6 +234,13 @@
                     );
 
                     userService.User.Update(vm.User);
+                }).error(function(err) {
+                    vm.User.UserInformation.City = JSON.parse(vm.User.UserInformation.City);
+                    $mdDialog.show($mdDialog.alert({
+                        textContent: err,
+                        ok: 'Ok',
+                        title: 'Obs!'
+                    }));
                 });
             }
 

@@ -48,8 +48,9 @@
                 scope.Logout = function()
                 {
                     loginService.LogOut().success(function(response) {
+                        var clubName = angular.copy(userService.User.Club.ShortName);
                         userService.User.Logout();
-                        $state.go ('login');
+                        $state.go('clublogin', {clubShortName: clubName});
                     });
                 };
 

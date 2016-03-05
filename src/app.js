@@ -146,8 +146,9 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                 .ariaLabel('Utloggad')
                 .ok('Ok');
             $mdDialog.show(confirm).then(function() {
+                var clubName = angular.copy(userService.User.Club.ShortName);
                 userService.User.Logout();
-                $state.go('login');
+                $state.go('clublogin', {clubShortName: clubName});
             });
         }])
         .controller('noaccessController', ["$rootScope", "$state", "$mdDialog", function($rootScope, $state, $mdDialog) {
