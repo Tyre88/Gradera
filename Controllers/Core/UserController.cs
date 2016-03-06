@@ -4,6 +4,7 @@ using Gradera.Core.Enums;
 using Gradera.Core.Helpers;
 using Gradera_Klubb.Filters;
 using Gradera_Klubb.Models;
+using Gradera_Klubb.Models.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -87,6 +88,9 @@ namespace Gradera_Klubb.Controllers
             }
             Account acc = UserModel.ConvertToAccount(user);
             Account account = AccountBLL.SaveAccount(acc);
+            List<Account_Information_Generic_Value> genericValues = 
+                AccountInformationGeneric.MapGenericValues(user.GenericValues, account.ID);
+            AccountBLL.SaveGenericValues(genericValues, account.ClubId);
             //response.Content = new ObjectContent<Account>(account, new JsonMediaTypeFormatter());
             return response;
         }

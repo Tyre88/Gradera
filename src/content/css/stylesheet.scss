@@ -128,9 +128,9 @@ md-sidenav
 
   > *:not(.full-width)
   {
-	width: calc(50% - 30px);
-	padding-left: 15px;
-	padding-right: 15px;
+	width: calc(50% - 40px);
+	margin-left: 15px;
+	margin-right: 15px;
 
 	@media all and (max-width: 960px) {
 	  width: 100%;

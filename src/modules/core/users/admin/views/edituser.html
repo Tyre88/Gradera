@@ -11,15 +11,17 @@
     </div>
 
     <div class="edit-container">
-        <md-input-container md-no-float>
-            <input type="text" ng-model="User.FirstName" placeholder="Förnamn" required name="firstname" />
+        <md-input-container>
+            <label>Förnamn</label>
+            <input type="text" ng-model="User.FirstName" required name="firstname" />
             <div ng-messages="editUser.firstname.$error">
                 <div ng-message="required">Du måste fylla i ett förnamn</div>
             </div>
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" ng-model="User.LastName" placeholder="Efternamn" required name="lastname" />
+            <label>Efternamn</label>
+            <input type="text" ng-model="User.LastName" required name="lastname" />
             <div ng-messages="editUser.lastname.$error">
                 <div ng-message="required">Du måste fylla i ett efternamn</div>
             </div>
