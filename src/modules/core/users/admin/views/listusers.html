@@ -12,6 +12,13 @@
         <input type="text" ng-model="vm.Filter" placeholder="Filter" />
     </md-input-container>
 
+    <md-list-item>
+        <p style="margin-left: 50px;"><b>Namn</b></p>
+        <p class="hide-sm hide-md hide-xs"><b>Epost</b></p>
+        <p class="hide-sm hide-md hide-xs"><b>Stad</b></p>
+        <p class="hide-sm hide-md hide-xs"><b>Yrke</b></p>
+    </md-list-item>
+
     <md-list-item ng-repeat="user in vm.Users | filter:vm.Filter" ng-click="vm.EditUser(user.Id, $event)">
         <img alt="{{ user.FirstName }}" src="{{ user.Image }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
         <p>{{ user.FirstName }} {{user.LastName}}</p>

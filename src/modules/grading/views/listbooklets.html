@@ -13,6 +13,10 @@
 
 <md-list ng-cloak>
 
+    <md-list-item>
+        <p><b>Namn</b></p>
+    </md-list-item>
+
     <md-list-item ng-repeat="booklet in vm.Booklets | filter:{ClubId: $root.UserService.User.Club.Id}" ng-click="vm.Edit(booklet.Id)">
         <p>{{booklet.Name}}</p>
 

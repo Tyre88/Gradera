@@ -8,6 +8,10 @@
 
 <md-list ng-cloak>
 
+    <md-list-item>
+        <p><b>Namn</b></p>
+    </md-list-item>
+
     <md-list-item ng-repeat="item in vm.Categories" ng-click="vm.Edit(item.Id)">
         <p>{{item.Name}}</p>
 

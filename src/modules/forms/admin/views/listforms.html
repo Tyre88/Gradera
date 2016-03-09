@@ -6,6 +6,12 @@
 
 <span class="md-button md-raised" ng-click="vm.EditForm(0);"><i class="fa fa-plus-circle"></i> Lägg till formulär</span>
 <md-list ng-cloak>
+
+    <md-list-item>
+        <p><b>Namn</b></p>
+        <p class="hide-sm hide-md hide-xs"><b>Aktivt mellan</b></p>
+    </md-list-item>
+
     <md-list-item ng-repeat="form in vm.Forms" ng-click="vm.EditForm(form.Id)">
         <p>{{form.Name}}</p>
         <p class="hide-sm hide-md">{{form.StartDate | date:'yyyy-MM-dd HH:mm'}} - {{form.EndDate | date:'yyyy-MM-dd HH:mm'}}</p>
