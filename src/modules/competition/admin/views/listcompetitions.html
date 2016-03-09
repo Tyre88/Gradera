@@ -6,6 +6,11 @@
 
 <span class="md-button md-raised" ng-click="vm.EditCompetition(0, $event);"><i class="fa fa-plus-circle"></i> Lägg till tävling</span>
 <md-list ng-cloak>
+    <md-list-item>
+        <p><b>Namn</b></p>
+        <p class="hide-sm hide-md hide-xs"><b>När</b></p>
+        <p class="hide-sm hide-md hide-xs"><b>Var</b></p>
+    </md-list-item>
 
     <md-list-item ng-repeat="competition in vm.Competitions" ng-click="vm.EditCompetition(competition.Id, $event)">
         <p>{{competition.Name}}</p>

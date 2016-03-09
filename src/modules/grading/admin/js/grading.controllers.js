@@ -88,8 +88,10 @@
             }
         }
 
-        function AddCategory() {
-            var category = vm.Categories.GetItemByValue('Id', vm.SelectedCategoryId);
+        function AddCategory(category) {
+            if(category === undefined)
+                category = vm.Categories.GetItemByValue('Id', vm.SelectedCategoryId);
+
             vm.Grade.GradeCategoryLinks.push(
                 {
                     GradeCategoryId: category.Id,

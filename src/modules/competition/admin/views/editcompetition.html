@@ -45,17 +45,23 @@
     <div class="edit-container">
 
         <div class="full-width">
-            <md-checkbox ng-model="vm.Competition.IsExternal" aria-label="{{vm.Competition.Name}}">
-                Extern tävling
-                <md-tooltip>Tävlingen är extern och man kan anmäla sig utanför klubben.</md-tooltip>
+            <md-checkbox ng-model="vm.Competition.IsExternal" aria-label="Skapa anmälningsformulär">
+                Skapa anmälningsformulär
+                <md-tooltip>Ett anmälningsformulär kommer att skapas för denna tävlingen.</md-tooltip>
             </md-checkbox>
+            <span ng-show="vm.Competition.IsExternal">
+                <a href="external.html#/show/competition/{{$root.UserService.User.Club.ShortName}}/{{vm.Competition.Name}}" target="_blank">
+                    Länk till tävlingen
+                </a>
+            </span>
         </div>
 
-        <span ng-show="vm.Competition.IsExternal">
-            <a href="external.html#/show/competition/{{$root.UserService.User.Club.ShortName}}/{{vm.Competition.Name}}" target="_blank">
-                Länk till tävlingen
-            </a>
-        </span>
+        <div class="full-width">
+            <md-checkbox ng-model="vm.Competition.IsGlobal" aria-label="Öppen för andra klubbar i systemet">
+                Öppen för andra klubbar i systemet
+                <md-tooltip>Tävlingen kommer att synas under "Tävlingar" hos andra klubbar i systemet.</md-tooltip>
+            </md-checkbox>
+        </div>
     </div>
 
     <md-list ng-cloak>
