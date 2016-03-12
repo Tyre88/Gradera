@@ -1,15 +1,27 @@
 (function(angular) {
     angular.module('graderaklubb').controller('clubsettings', clubsettingsController);
 
-    clubsettingsController.$inject = ["$mdToast", "club-service", "user-service"];
+    clubsettingsController.$inject = ["$rootScope", "$scope", "$mdToast", "club-service", "user-service"];
 
-    function clubsettingsController($mdToast, clubService, userService) {
+    function clubsettingsController($rootScope, $scope, $mdToast, clubService, userService) {
         var vm = this;
         vm.Club = {};
+        vm.SelectedTheme = "brown";
+        vm.Themes = [{
+            Name: "Brunt",
+            Value: "brown"
+        }, {
+            Name: "Blått",
+            Value: "blue"
+        }, {
+            Name: "Rosa",
+            Value: "pink"
+        }];
 
         vm.GetClub = GetClub;
         vm.Save = Save;
         vm.OnUploadSuccess = OnUploadSuccess;
+        vm.ChangeTheme = ChangeTheme;
 
         function GetClub() {
             clubService.GetClub().success(getClubCallback);
@@ -35,6 +47,15 @@
         function OnUploadSuccess(response) {
             vm.Club.Image = "/Uploads/" + userService.User.Club.Id + "/" + response.data;
         }
+
+        function ChangeTheme(theme) {
+            $rootScope.Theme = theme;
+        }
+
+        $scope.$watch('vm.SelectedTheme', function(newVal) {
+            if(newVal !== undefined)
+                vm.ChangeTheme(newVal);
+        });
 
         vm.GetClub();
     }

@@ -9,27 +9,35 @@
         <script src="dependencies.js"></script>
         <script src="application.js"></script>
     </head>
-    <body ng-controller="index" ng-cloak layout="column">
+    <body ng-controller="index" ng-cloak layout="column" md-theme="{{$root.Theme}}" md-theme-watch>
         <div class="left-banner green">BETA</div>
         <div flex layout="column">
             <gk-logged-in ng-if="UserService.User.IsLoggedIn"></gk-logged-in>
             <div layout="row" wrap flex layout="column">
                 <md-sidenav class="md-sidenav-left md-whiteframe-z1" md-component-id="leftNav" flex md-is-locked-open="$mdMedia('gt-md')" ng-if="UserService.User.IsLoggedIn">
-                    <ul>
-                        <li class="nav-header">{{UserService.User.Club.Name}}</li>
-                        <li><a ui-sref="home" ng-click="SetActiveNav($event)">Hem</a></li>
-                        <!--<li><a ui-sref="gradingbasic" ng-click="SetActiveNav($event)">Graderingsbestämmelser</a></li>-->
-                        <li ng-show="$root.HasAccess(2, 10)"><a ui-sref="userlist" ng-click="SetActiveNav($event)">Medlemmar</a></li>
-                        <li ng-show="$root.HasAccess(5, 10)"><a ui-sref="competitionlist" ng-click="SetActiveNav($event)">Tävlingar</a></li>
-                        <li ng-show="$root.HasAccess(3, 10)"><a ui-sref="gradinglist" ng-click="SetActiveNav($event)">Graderingsbestämmelser</a></li>
+                    <md-list>
+                        <md-list-item class="nav-header">{{UserService.User.Club.Name}}</md-list-item>
+                        <md-list-item ng-click="$root.NavigateTo('home'); SetActiveNav($event)">
+                            <a class="md-{{$root.Theme}}-theme md-primary">Hem</a>
+                        </md-list-item>
+                        <md-list-item ng-show="$root.HasAccess(2, 10)" ng-click="$root.NavigateTo('userlist'); SetActiveNav($event)">
+                            <a class="md-{{$root.Theme}}-theme md-primary">Medlemmar</a>
+                        </md-list-item>
+                        <md-list-item ng-show="$root.HasAccess(5, 10)" ng-click="$root.NavigateTo('competitionlist'); SetActiveNav($event)">
+                            <a class="md-{{$root.Theme}}-theme md-primary">Tävlingar</a>
+                        </md-list-item>
+                        <md-list-item ng-show="$root.HasAccess(3, 10)" ng-click="$root.NavigateTo('gradinglist'); SetActiveNav($event)">
+                            <a class="md-{{$root.Theme}}-theme md-primary">Graderingsbestämmelser</a>
+                        </md-list-item>
                         <div ng-if="$root.HasSomeWriteAccess();">
                             <hr />
-                            <li class="nav-header">Klubb administration</li>
-                            <li ng-repeat="link in AdminLinks" ng-show="$root.HasAccess(link.AccessType, link.AccessTypeRight, link.ClubId)">
-                                <a ui-sref="{{link.Sref}}" ng-click="SetActiveNav($event)">{{link.Text}}</a>
-                            </li>
+                            <md-list-item class="nav-header">Klubb administration</md-list-item>
+                            <md-list-item ng-repeat="link in AdminLinks" ng-show="$root.HasAccess(link.AccessType, link.AccessTypeRight, link.ClubId)"
+                                          ng-click="$root.NavigateTo(link.Sref); SetActiveNav($event)">
+                                <a class="md-{{$root.Theme}}-theme md-primary">{{link.Text}}</a>
+                            </md-list-item>
                         </div>
-                    </ul>
+                    </md-list>
                 </md-sidenav>
                 <md-content flex ui-view class="md-padding" ng-class="{'md-whiteframe-z1 content': UserService.User.IsLoggedIn}"></md-content>
                 <!--<footer>Copyright &copy; 2015 | Gradera.nu</footer>-->

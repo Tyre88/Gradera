@@ -224,16 +224,32 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                 $httpProvider.defaults.withCredentials = true;
                 $httpProvider.interceptors.push('authHttpResponseInterceptor');
 
-                $mdThemingProvider.theme('default')
+                $mdThemingProvider.theme('brown')
                     .primaryPalette('brown')
                     .accentPalette('orange');
+
+                $mdThemingProvider.theme('blue')
+                    .primaryPalette('blue')
+                    .accentPalette('grey');
+
+                $mdThemingProvider.theme('pink')
+                    .primaryPalette('pink')
+                    .accentPalette('indigo');
+
+                $mdThemingProvider.alwaysWatchTheme(true);
 
                 cfpLoadingBarProvider.includeSpinner = true;
                 cfpLoadingBarProvider.latencyThreshold = 250;
                 cfpLoadingBarProvider.spinnerTemplate = '<div class="loader md-whiteframe-z1">Laddar...</div>';
             }
         ])
-        .run(["$rootScope", "api", "user-service", "formlyConfig", function($rootScope, api, userService, formlyConfig) {
+        .run(["$rootScope", "api", "user-service", "formlyConfig", "$state", function($rootScope, api, userService, formlyConfig, $state) {
+
+            $rootScope.Theme = "brown";
+
+            $rootScope.NavigateTo = function(state) {
+                $state.go(state);
+            };
 
             if(typeof(Storage) !== "undefined") {
                 var user = window.sessionStorage.getItem('gk-user');

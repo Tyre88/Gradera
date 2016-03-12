@@ -83,43 +83,13 @@ md-toolbar
 
 md-sidenav
 {
-	ul
-	{
-		list-style: none;
-		padding: 0;
+  background-color: #FFF !important;
 
-		li
-		{
-			padding-left: 15px;
-			height: 40px;
-			line-height: 40px;
-
-			a
-			{
-				width: 100%;
-				display: block;
-				text-decoration: none;
-				color: black;
-			}
-
-			&:hover:not(.nav-header)
-			{
-				background-color: #BCAAA4;
-			}
-
-			&:active:not(.nav-header),
-			&.active:not(.nav-header)
-			{
-				background-color: #D7CCC8;
-			}
-
-			&.nav-header
-			{
-				color: #9B9B9B;
-				font-weight: bold;
-			}
-		}
-	}
+  .nav-header
+  {
+    color: #9B9B9B;
+    font-weight: bold;
+  }
 
 	@media all and (max-width: 960px)
 	{

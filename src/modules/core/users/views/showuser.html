@@ -13,10 +13,10 @@
         <span>Namn:</span> {{vm.User.FirstName}} {{vm.User.LastName}}
     </div>
     <div>
-        <span>Epost:</span> <a href="mailto:{{vm.User.UserInformation.Email}}">{{vm.User.UserInformation.Email}}</a>
+        <span>Epost:</span> <a class="md-{{$root.Theme}}-theme md-primary" href="mailto:{{vm.User.UserInformation.Email}}">{{vm.User.UserInformation.Email}}</a>
     </div>
     <div>
-        <span>Telefonnummer:</span> <a href="tel:{{vm.User.UserInformation.Phone}}">{{vm.User.UserInformation.Phone}}</a>
+        <span>Telefonnummer:</span> <a class="md-{{$root.Theme}}-theme md-primary" href="tel:{{vm.User.UserInformation.Phone}}">{{vm.User.UserInformation.Phone}}</a>
     </div>
     <div>
         <span>Arbete:</span> {{vm.User.UserInformation.Occupation}}
