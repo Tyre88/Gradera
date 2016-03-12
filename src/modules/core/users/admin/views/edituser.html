@@ -28,14 +28,16 @@
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" ng-model="User.UserName" placeholder="Användarnamn" required name="username" />
+            <label>Användarnamn</label>
+            <input type="text" ng-model="User.UserName" required name="username" />
             <div ng-messages="editUser.username.$error">
                 <div ng-message="required">Du måste fylla i ett användarnamn</div>
             </div>
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="email" ng-model="User.UserInformation.Email" placeholder="E-post" required name="email" />
+            <label>E-post</label>
+            <input type="email" ng-model="User.UserInformation.Email" required name="email" />
             <div ng-messages="editUser.email.$error">
                 <div ng-message="required">Du måste fylla i en e-post adress</div>
                 <div ng-message="email">Ej giltig e-post adress</div>
@@ -43,11 +45,13 @@
         </md-input-container>
 
         <md-input-container md-no-float ng-if="User.Id > 0">
-            <input type="password" ng-model="User.Password" placeholder="Lösenord" />
+            <label>Lösenord</label>
+            <input type="password" ng-model="User.Password" />
         </md-input-container>
 
         <md-input-container md-no-float ng-if="User.Id <= 0">
-            <input type="password" ng-model="User.Password" placeholder="Lösenord" required minlength="5" name="password" />
+            <label>Lösenord</label>
+            <input type="password" ng-model="User.Password" required minlength="5" name="password" />
             <div ng-messages="editUser.password.$error">
                 <div ng-message="required">Du måste fylla i ett lösenord</div>
                 <div ng-message="minlength">Lösenordet är för kort</div>
@@ -55,27 +59,33 @@
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" ng-model="User.UserInformation.Phone" placeholder="Telefonnummer" />
+            <label>Telefonnummer</label>
+            <input type="text" ng-model="User.UserInformation.Phone" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" ng-model="User.UserInformation.Street" placeholder="Adress" />
+            <label>Adress</label>
+            <input type="text" ng-model="User.UserInformation.Street" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" ng-model="User.UserInformation.Zip" placeholder="Postnummer" />
+            <label>Postnummer</label>
+            <input type="text" ng-model="User.UserInformation.Zip" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" g-places-autocomplete force-selection="true" ng-model="UserCity" placeholder="Stad" />
+            <label>Stad</label>
+            <input type="text" g-places-autocomplete force-selection="true" ng-model="UserCity" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" ng-model="User.UserInformation.Occupation" placeholder="Arbete" />
+            <label>Arbete</label>
+            <input type="text" ng-model="User.UserInformation.Occupation" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" ng-model="User.UserInformation.Weight" placeholder="Vikt" name="weight" />
+            <label>Vikt</label>
+            <input type="text" ng-model="User.UserInformation.Weight" name="weight" />
         </md-input-container>
 
         <md-input-container>
@@ -105,16 +115,16 @@
             </div>
         </md-input-container>
 
-        <md-datepicker ng-model="User.UserInformation.Birthday" md-placeholder="Födelsedag">
-            <md-tooltip>Födelsedag</md-tooltip>
-        </md-datepicker>
-
-        <div ng-repeat="genericValue in User.GenericValues">
-            <md-input-container>
-                <label>{{genericValue.Name}}</label>
-                <input type="text" ng-model="genericValue.Value" name="weight" />
-            </md-input-container>
+        <div>
+            <span>Födelsedag</span>
+            <md-datepicker ng-model="User.UserInformation.Birthday" md-placeholder="Födelsedag"></md-datepicker>
         </div>
+
+
+        <md-input-container md-no-float ng-repeat="genericValue in User.GenericValues">
+            <label>{{genericValue.Name}}</label>
+            <input type="text" ng-model="genericValue.Value" name="weight" />
+        </md-input-container>
     </div>
 
     <md-subheader class="md-no-sticky">
