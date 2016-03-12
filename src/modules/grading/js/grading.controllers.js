@@ -1,5 +1,5 @@
 (function (angular) {
-    //LoadCss('modules/grading/css/grading.css');
+    LoadCss('modules/grading/css/grading.css');
 
     angular.module('graderaklubb').controller('gradinglist', gradinglistController);
 

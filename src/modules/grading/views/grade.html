@@ -7,17 +7,31 @@
 
     <div class="info-container" layout="row" layout-wrap layout-align="space-around center">
         <md-card ng-repeat="categoryLink in vm.Grade.GradeCategoryLinks" flex="90" flex-md="90" flex-sm="90" flex-gt-lg="45">
-            <md-subheader class="md-whiteframe-z1" md-no-sticky>
+            <md-subheader class="md-whiteframe-z1 md-no-sticky">
                 <span>{{categoryLink.CategoryName}}</span>
             </md-subheader>
-            <md-grid-list md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
+
+            <div class="techniques">
+                <div class="technique md-whiteframe-z1" ng-repeat="technique in categoryLink.GradeCategoryLinkTechniques" ng-click="vm.ShowTechnique(technique.TechniqueId);">
+                    <span fit-image style="display: inline-block;">
+                        <img src="{{technique.TechniqueImages[0] ? technique.TechniqueImages[0].Image : ''}}" alt=""
+                             fallback-src="content/images/No_Image_Available.png" />
+                    </span>
+
+                    <div class="footer md-whiteframe-z1">
+                        <h3>{{technique.Name}}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!--<md-grid-list md-cols-sm="4" md-cols-md="4" md-cols-gt-md="6"
                           md-row-height-gt-md="1:1" md-row-height="4:3"
                           md-gutter="8px" md-gutter-gt-sm="4px">
 
                 <md-grid-tile ng-repeat="technique in categoryLink.GradeCategoryLinkTechniques"
                               md-rowspan="2"
                               md-colspan="2"
-                              md-colspan-sm="1">
+                              md-colspan-sm="2">
                 <span fit-image style="display: inline-block;">
                     <img src="{{technique.TechniqueImages[0] ? technique.TechniqueImages[0].Image : ''}}" alt=""
                          fallback-src="content/images/No_Image_Available.png"
@@ -28,7 +42,7 @@
                     </md-grid-tile-footer>
                 </md-grid-tile>
 
-            </md-grid-list>
+            </md-grid-list>-->
             <div btf-markdown="categoryLink.Text"></div>
         </md-card>
     </div>

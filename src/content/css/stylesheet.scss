@@ -28,6 +28,14 @@ md-dialog-content
   padding: 10px;
 }
 
+md-backdrop
+{
+  @media all and (min-width: 960px)
+  {
+    display: none !important;
+  }
+}
+
 md-toolbar
 {
   > h1
