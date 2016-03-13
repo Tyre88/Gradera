@@ -107,7 +107,8 @@ namespace Gradera_Klubb.Models
                                 Zip = information.Zip,
                                 Birthday = information.Birthday,
                                 Grade = (Grade)information.Grade,
-                                Weight = information.Weight
+                                Weight = information.Weight,
+                                Theme = information.Theme
                             };
                         }
                     }, () =>
@@ -134,7 +135,8 @@ namespace Gradera_Klubb.Models
                             Zip = information.Zip,
                             Birthday = information.Birthday,
                             Grade = (Grade)information.Grade,
-                            Weight = information.Weight
+                            Weight = information.Weight,
+                            Theme = information.Theme
                         };
                     }
                 }
@@ -173,7 +175,8 @@ namespace Gradera_Klubb.Models
                 Zip = user.UserInformation.Zip,
                 Grade = (int)user.UserInformation.Grade,
                 Birthday = user.UserInformation.Birthday,
-                Weight = user.UserInformation.Weight
+                Weight = user.UserInformation.Weight,
+                Theme = user.UserInformation.Theme
             });
 
             foreach (var access in user.AccountAccess)

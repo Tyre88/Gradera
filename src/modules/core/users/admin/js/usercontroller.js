@@ -175,9 +175,9 @@
 
         angular.module('graderaklubb').controller('editme', editmeController);
 
-        editmeController.$inject = ["user-service", "accessrights-service", "gradeEnum", "$mdToast", "$mdDialog"];
+        editmeController.$inject = ["$rootScope", "user-service", "accessrights-service", "gradeEnum", "$mdToast", "$mdDialog"];
 
-        function editmeController(userService, accessrightsService, gradeEnum, $mdToast, $mdDialog) {
+        function editmeController($rootScope, userService, accessrightsService, gradeEnum, $mdToast, $mdDialog) {
             var vm = this;
             vm.User = {};
             vm.AccessRights = [];
@@ -228,9 +228,11 @@
                 }
 
                 vm.User.UserInformation.City = JSON.stringify(vm.User.UserInformation.City);
+                vm.User.UserInformation.Theme = $rootScope.Theme;
 
                 userService.SaveMe(vm.User).success(function() {
                     vm.User.UserInformation.City = JSON.parse(vm.User.UserInformation.City);
+
                     $mdToast.show(
                         $mdToast.simple()
                             .textContent('Din profil sparades.')

@@ -22,16 +22,6 @@
     <md-input-container md-no-float class="full-width">
         <textarea type="text" ng-model="vm.Club.Description" placeholder="Klubb beskrivning"></textarea>
     </md-input-container>
-
-    <md-input-container>
-        <label>Tema</label>
-        <md-select ng-model="vm.SelectedTheme">
-            <md-option ng-repeat="theme in vm.Themes" value="{{theme.Value}}">
-                {{theme.Name}}
-            </md-option>
-        </md-select>
-    </md-input-container>
-
 </div>
 
 <div>

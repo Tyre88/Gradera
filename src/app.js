@@ -230,11 +230,19 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
 
                 $mdThemingProvider.theme('blue')
                     .primaryPalette('blue')
-                    .accentPalette('grey');
+                    .accentPalette('cyan');
 
                 $mdThemingProvider.theme('pink')
                     .primaryPalette('pink')
                     .accentPalette('indigo');
+
+                $mdThemingProvider.theme('green')
+                    .primaryPalette('green')
+                    .accentPalette('amber');
+
+                $mdThemingProvider.theme('grey')
+                    .primaryPalette('grey')
+                    .accentPalette('deep-purple');
 
                 $mdThemingProvider.alwaysWatchTheme(true);
 
@@ -247,6 +255,23 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
 
             $rootScope.Theme = "brown";
 
+            $rootScope.Themes = [{
+                Name: "Brunt",
+                Value: "brown"
+            }, {
+                Name: "Blått",
+                Value: "blue"
+            }, {
+                Name: "Rosa",
+                Value: "pink"
+            }, {
+                Name: "Grön",
+                Value: "green"
+            }, {
+                Name: "Grå",
+                Value: "grey"
+            }];
+
             $rootScope.NavigateTo = function(state) {
                 $state.go(state);
             };
@@ -255,6 +280,7 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                 var user = window.sessionStorage.getItem('gk-user');
                 if(user != undefined) {
                     userService.User.Initialize(JSON.parse(user));
+                    $rootScope.Theme = userService.User.UserInformation.Theme;
                     api.init(userService.User.Token);
                 }
                 else
@@ -311,7 +337,7 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                         Image: "",
                         AccessRights: [],
                         Club: club,
-                        UserInformation: {Birthday: new Date(), },
+                        UserInformation: {Birthday: new Date(), Theme: "brown" },
                         Gender: 0
                     };
                 }
@@ -335,7 +361,8 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                         Zip: user.UserInformation.Zip,
                         Grade: user.UserInformation.Grade,
                         Birthday: new Date(user.UserInformation.Birthday),
-                        Weight: user.UserInformation.Weight
+                        Weight: user.UserInformation.Weight,
+                        Theme: user.UserInformation.Theme
                     },
                     GenericValues: user.GenericValues
                 };
@@ -394,6 +421,9 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                     this.Club = user.Club;
                     this.Weight = user.Weight;
                     this.Image = user.Image;
+                    this.UserInformation = {
+                        Theme: user.UserInformation.Theme
+                    };
                 },
                 InitializeLogin: function(account) {
                     this.Id = account.Id;
@@ -408,6 +438,9 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                     this.Club.Name = account.Club.Name;
                     this.Club.ShortName = account.Club.ShortName;
                     this.Club.Image = account.Club.Image;
+                    this.UserInformation = {
+                        Theme: account.UserInformation.Theme
+                    };
 
                     for(var i = 0; i < account.AccessRightsRight.length; i++)
                     {
