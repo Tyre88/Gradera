@@ -1,7 +1,8 @@
 //LoadCss("content/css/login.css");
 
 (function(angular) {
-    angular.module('graderaklubb').directive('gkLogin', ["$rootScope", "login-service", "user-service", "api", "$state", "$mdDialog", function($rootScope, loginService, userService, api, $state, $mdDialog)
+    angular.module('graderaklubb').directive('gkLogin', ["$rootScope", "login-service", "user-service", "api", "$state", "$mdDialog", 'club-service',
+        function($rootScope, loginService, userService, api, $state, $mdDialog, clubService)
     {
         return {
             restrict: "E",
@@ -15,7 +16,11 @@
                         userService.User.InitializeLogin(response);
                         api.init(userService.User.Token);
                         $rootScope.Theme = userService.User.UserInformation.Theme;
-                        $state.go ('home');
+
+                        clubService.GetModuleLinks().success(function(response) {
+                            $rootScope.Links = response;
+                            $state.go ('home');
+                        });
                     }).error(function() {
                         $mdDialog.show(
                             $mdDialog.alert()

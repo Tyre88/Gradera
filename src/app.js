@@ -8,7 +8,6 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
             function($rootScope, $scope, $state, userService, $mdSidenav, Upload)
             {
                 $scope.UserService = userService;
-                $scope.AdminLinks = [];
 
                 $rootScope.UserService = userService;
 
@@ -24,77 +23,6 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                     $mdSidenav('leftNav').toggle();
                 };
 
-                $scope.AdminLinks = [
-                    {
-                        Sref: "listusers",
-                        Text: "Hantera medlemar",
-                        AccessType: 2,
-                        AccessTypeRight: 20
-                    },
-                    {
-                        Sref: "listaccessrights",
-                        Text: "Hantera användargrupper",
-                        AccessType: 1,
-                        AccessTypeRight: 20
-                    },
-                    {
-                        Sref: "clubsettings",
-                        Text: "Klubb inställningar",
-                        AccessType: 4,
-                        AccessTypeRight: 20
-                    },
-                    {
-                        Sref: "competitionadminlist",
-                        Text: "Hantera tävlingar",
-                        AccessType: 5,
-                        AccessTypeRight: 20
-                    },
-                    {
-                        Sref: "formsadminlist",
-                        Text: "Hantera formulär",
-                        AccessType: 6,
-                        AccessTypeRight: 20
-                    },
-                    {
-                        Sref: "gradingadminlist",
-                        Text: "Hantera bältesgrader",
-                        AccessType: 3,
-                        AccessTypeRight: 20
-                    },
-                    {
-                        Sref: "gradingcategoryadminlist",
-                        Text: "Hantera graderings kategorier",
-                        AccessType: 3,
-                        AccessTypeRight: 20,
-                        ClubId: 1
-                    },
-                    {
-                        Sref: "listbooklets",
-                        Text: "Hantera graderings häften",
-                        AccessType: 3,
-                        AccessTypeRight: 20
-                    },
-                    {
-                        Sref: "techniqueadminlist",
-                        Text: "Hantera tekniker",
-                        AccessType: 7,
-                        AccessTypeRight: 20
-                    },
-                    {
-                        Sref: "techniquetypeadminlist",
-                        Text: "Hantera teknik typer",
-                        AccessType: 7,
-                        AccessTypeRight: 20,
-                        ClubId: 1
-                    },
-                    {
-                        Sref: "newsletteradminlist",
-                        Text: "Nyhetsbrev",
-                        AccessType: 8,
-                        AccessTypeRight: 20
-                    }
-                ];
-
                 $rootScope.HasSomeWriteAccess = function()
                 {
                     for(var i = 0; i < $scope.UserService.User.AccessRightsRight.length; i++)
@@ -106,10 +34,8 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                     return false;
                 };
 
-                $rootScope.HasAccess = function(accessType, accessTypeRight, clubId)
+                $rootScope.HasAccess = function(accessType, accessTypeRight)
                 {
-                    if(clubId !== undefined && $scope.UserService.User.Club.Id != clubId) return false;
-
                     for(var i = 0; i < $scope.UserService.User.AccessRightsRight.length; i++)
                     {
                         if($scope.UserService.User.AccessRightsRight[i].AccessTypeRight >= accessTypeRight
@@ -251,7 +177,8 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                 cfpLoadingBarProvider.spinnerTemplate = '<div class="loader md-whiteframe-z1">Laddar...</div>';
             }
         ])
-        .run(["$rootScope", "api", "user-service", "formlyConfig", "$state", function($rootScope, api, userService, formlyConfig, $state) {
+        .run(["$rootScope", "api", "user-service", "formlyConfig", "$state", "club-service",
+            function($rootScope, api, userService, formlyConfig, $state, clubService) {
 
             $rootScope.Theme = "brown";
 
@@ -282,6 +209,10 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                     userService.User.Initialize(JSON.parse(user));
                     $rootScope.Theme = userService.User.UserInformation.Theme;
                     api.init(userService.User.Token);
+
+                    clubService.GetModuleLinks().success(function(response) {
+                        $rootScope.Links = response;
+                    });
                 }
                 else
                     api.init("");

@@ -11,5 +11,9 @@
         this.SaveClub = function(club) {
             return $http.post('/api/club/saveclub', club);
         };
+
+        this.GetModuleLinks = function() {
+            return $http.get('/api/club/GetModuleLinks');
+        };
     }]);
 }(window.angular));

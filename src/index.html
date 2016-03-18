@@ -20,19 +20,16 @@
                         <md-list-item ng-click="$root.NavigateTo('home'); SetActiveNav($event)">
                             <a class="md-{{$root.Theme}}-theme md-primary">Hem</a>
                         </md-list-item>
-                        <md-list-item ng-show="$root.HasAccess(2, 10)" ng-click="$root.NavigateTo('userlist'); SetActiveNav($event)">
-                            <a class="md-{{$root.Theme}}-theme md-primary">Medlemmar</a>
+
+                        <md-list-item ng-repeat="link in $root.Links | filter:{IsAdminLink: false}:true" ng-show="$root.HasAccess(link.AccessType, link.AccessTypeRight)"
+                                      ng-click="$root.NavigateTo(link.Sref); SetActiveNav($event)">
+                            <a class="md-{{$root.Theme}}-theme md-primary">{{link.Text}}</a>
                         </md-list-item>
-                        <md-list-item ng-show="$root.HasAccess(5, 10)" ng-click="$root.NavigateTo('competitionlist'); SetActiveNav($event)">
-                            <a class="md-{{$root.Theme}}-theme md-primary">Tävlingar</a>
-                        </md-list-item>
-                        <md-list-item ng-show="$root.HasAccess(3, 10)" ng-click="$root.NavigateTo('gradinglist'); SetActiveNav($event)">
-                            <a class="md-{{$root.Theme}}-theme md-primary">Graderingsbestämmelser</a>
-                        </md-list-item>
+
                         <div ng-if="$root.HasSomeWriteAccess();">
                             <hr />
                             <md-list-item class="nav-header">Klubb administration</md-list-item>
-                            <md-list-item ng-repeat="link in AdminLinks" ng-show="$root.HasAccess(link.AccessType, link.AccessTypeRight, link.ClubId)"
+                            <md-list-item ng-repeat="link in $root.Links | filter:{IsAdminLink: true}:true" ng-show="$root.HasAccess(link.AccessType, link.AccessTypeRight)"
                                           ng-click="$root.NavigateTo(link.Sref); SetActiveNav($event)">
                                 <a class="md-{{$root.Theme}}-theme md-primary">{{link.Text}}</a>
                             </md-list-item>
