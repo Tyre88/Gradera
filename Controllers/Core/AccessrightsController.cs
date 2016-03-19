@@ -4,6 +4,7 @@ using Gradera.Core.Entities;
 using Gradera.Core.Enums;
 using Gradera_Klubb.Filters;
 using Gradera_Klubb.Models;
+using Gradera_Klubb.Models.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,5 +97,15 @@ namespace Gradera_Klubb.Controllers
             return response;
         }
 
+        [HttpGet]
+        [AuthorizeFilter]
+        public HttpResponseMessage GetModules()
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            response.Content = new ObjectContent<List<ModuleModel>>(ModuleModel.MapModules(
+                AccessrightBLL.GetModules(loggedInUser.AccountSession.ClubId)), new JsonMediaTypeFormatter());
+            return response;
+        }  
     }
 }

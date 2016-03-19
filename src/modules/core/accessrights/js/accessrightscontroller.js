@@ -40,10 +40,12 @@
         vm.Accessright = {};
         vm.AccessTypes = [];
         vm.AccessTypeRights = [];
+        vm.Modules = [];
 
         vm.GetAccessright = GetAccessright;
         vm.SaveAccessright = SaveAccessright;
         vm.GetAccessTypes = GetAccessTypes;
+        vm.GetModules = GetModules;
         vm.GetAccessTypeRights = GetAccessTypeRights;
         vm.Back = Back;
 
@@ -55,7 +57,7 @@
 
                 for(var i = 0; i < vm.Accessright.Accessright_Rights.length; i++)
                 {
-                    var accessType = vm.AccessTypes.GetItemByValue("Id", vm.Accessright.Accessright_Rights[i].AccessType);
+                    var accessType = vm.Modules.GetItemByValue("AccessTypeId", vm.Accessright.Accessright_Rights[i].AccessType);
                     accessType.Checked = true;
                     accessType.SelectedRightId = vm.Accessright.Accessright_Rights[i].AccessTypeRight;
                 }
@@ -64,13 +66,14 @@
 
         function SaveAccessright() {
             vm.Accessright.Accessright_Rights = [];
-            for(var i = 0; i < vm.AccessTypes.length; i++)
+
+            for(var i = 0; i < vm.Modules.length; i++)
             {
-                if(vm.AccessTypes[i].Checked == true)
+                if(vm.Modules[i].Checked == true)
                 {
                     vm.Accessright.Accessright_Rights.push({
-                        AccessType: vm.AccessTypes[i].Id,
-                        AccessTypeRight: vm.AccessTypes[i].SelectedRightId
+                        AccessType: vm.Modules[i].AccessTypeId,
+                        AccessTypeRight: vm.Modules[i].SelectedRightId
                     });
                 }
             }
@@ -101,7 +104,15 @@
             }
         }
 
-        $q.all([vm.GetAccessTypes(), vm.GetAccessTypeRights()]).then(function() {
+        function GetModules() {
+            accessrightsService.GetModules().success(GetModulesCallback);
+
+            function GetModulesCallback(response) {
+                vm.Modules = response;
+            }
+        }
+
+        $q.all([vm.GetModules(), vm.GetAccessTypeRights()]).then(function() {
             if(~~vm.AccessrightId > 0)
                 vm.GetAccessright(~~vm.AccessrightId);
         });

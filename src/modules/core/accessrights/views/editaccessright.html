@@ -14,9 +14,9 @@
     </md-input-container>
 </div>
 
-<div ng-repeat="accessType in vm.AccessTypes" class="access-types">
-    <md-checkbox ng-model="accessType.Checked" aria-label="{{accessType.Name}}">{{accessType.Name}}</md-checkbox>
-    <md-select ng-model="accessType.SelectedRightId" aria-label="{{accessType.Name}}">
+<div ng-repeat="module in vm.Modules" class="access-types">
+    <md-checkbox ng-model="module.Checked" aria-label="{{module.Name}}">{{module.Name}}</md-checkbox>
+    <md-select ng-model="module.SelectedRightId" aria-label="{{module.Name}}">
         <md-option ng-repeat="accessTypeRight in vm.AccessTypeRights" value="{{accessTypeRight.Id}}">
             {{accessTypeRight.Name}}
         </md-option>

@@ -19,5 +19,9 @@
         this.SaveAccessright = function(accessright) {
             return $http.post('/api/Accessrights/SaveAccessright', accessright);
         };
+
+        this.GetModules = function() {
+            return $http.get('/api/Accessrights/GetModules');
+        };
     }]);
 }(window.angular));
