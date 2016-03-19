@@ -12,28 +12,32 @@
 
     <div class="edit-container">
         <md-input-container md-no-float>
-            <input type="text" ng-model="vm.User.FirstName" placeholder="Förnamn" required name="firstname" />
+            <label>Förnamn</label>
+            <input type="text" ng-model="vm.User.FirstName" required name="firstname" />
             <div ng-messages="editUser.firstname.$error">
                 <div ng-message="required">Du måste fylla i ett förnamn</div>
             </div>
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" ng-model="vm.User.LastName" placeholder="Efternamn" required name="lastname" />
+            <label>Efternamn</label>
+            <input type="text" ng-model="vm.User.LastName" required name="lastname" />
             <div ng-messages="editUser.lastname.$error">
                 <div ng-message="required">Du måste fylla i ett efternamn</div>
             </div>
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" ng-model="vm.User.UserName" placeholder="Användarnamn" required name="username" />
+            <label>Användarnamn</label>
+            <input type="text" ng-model="vm.User.UserName" required name="username" />
             <div ng-messages="editUser.username.$error">
                 <div ng-message="required">Du måste fylla i ett användarnamn</div>
             </div>
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="email" ng-model="vm.User.UserInformation.Email" placeholder="E-post" required name="email" />
+            <label>E-post</label>
+            <input type="email" ng-model="vm.User.UserInformation.Email" required name="email" />
             <div ng-messages="editUser.email.$error">
                 <div ng-message="required">Du måste fylla i en e-post adress</div>
                 <div ng-message="email">Ej giltig e-post adress</div>
@@ -41,34 +45,38 @@
         </md-input-container>
 
         <md-input-container md-no-float ng-if="vm.User.Id > 0">
-            <input type="password" ng-model="vm.User.Password" placeholder="Lösenord" />
+            <label>Lösenord</label>
+            <input type="password" ng-model="vm.User.Password" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" ng-model="vm.User.UserInformation.Phone" placeholder="Telefonnummer" />
+            <label>Telefonnummer</label>
+            <input type="text" ng-model="vm.User.UserInformation.Phone" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" ng-model="vm.User.UserInformation.Street" placeholder="Adress" />
+            <label>Adress</label>
+            <input type="text" ng-model="vm.User.UserInformation.Street" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" ng-model="vm.User.UserInformation.Zip" placeholder="Postnummer" />
+            <label>Postnummer</label>
+            <input type="text" ng-model="vm.User.UserInformation.Zip" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" g-places-autocomplete force-selection="true" ng-model="vm.User.UserInformation.City" placeholder="Stad" />
+            <label>Stad</label>
+            <input type="text" g-places-autocomplete force-selection="true" ng-model="vm.User.UserInformation.City" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" ng-model="vm.User.UserInformation.Occupation" placeholder="Arbete" />
+            <label>Arbete</label>
+            <input type="text" ng-model="vm.User.UserInformation.Occupation" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <input type="text" ng-model="vm.User.UserInformation.Weight" placeholder="Vikt" required name="weight" />
-            <div ng-messages="editUser.weight.$error">
-                <div ng-message="required">Du måste lägga in en vikt</div>
-            </div>
+            <label>Vikt</label>
+            <input type="text" ng-model="vm.User.UserInformation.Weight" name="weight" />
         </md-input-container>
 
         <md-input-container>
@@ -113,7 +121,8 @@
 
         <div ng-repeat="genericValue in vm.User.GenericValues">
             <md-input-container md-no-float>
-                <input type="text" ng-model="genericValue.Value" placeholder="{{genericValue.Name}}" name="weight" />
+                <label>{{genericValue.Name}}</label>
+                <input type="text" ng-model="genericValue.Value" name="weight" />
             </md-input-container>
         </div>
     </div>
