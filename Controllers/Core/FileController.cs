@@ -1,4 +1,5 @@
-﻿using Gradera_Klubb.Filters;
+﻿using Gradera.Core.Entities;
+using Gradera.Core.Filters;
 using Gradera_Klubb.Models;
 using System;
 using System.Collections.Generic;

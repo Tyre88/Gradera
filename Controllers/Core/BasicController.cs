@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Net.Http.Formatting;
 using Gradera_Klubb.Models;
-using Gradera_Klubb.Filters;
+using Gradera.Core.Filters;
 
 namespace Gradera_Klubb.Controllers
 {

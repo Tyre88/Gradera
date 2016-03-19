@@ -1,6 +1,7 @@
-﻿using Gradera.Core.Enums;
+﻿using Gradera.Core.Entities;
+using Gradera.Core.Enums;
+using Gradera.Core.Filters;
 using Gradera.Grading.BLL;
-using Gradera_Klubb.Filters;
 using Gradera_Klubb.Models;
 using Gradera_Klubb.Models.Grading;
 using System;

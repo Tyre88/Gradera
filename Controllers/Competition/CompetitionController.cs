@@ -1,8 +1,8 @@
 ﻿using Gradera.Competition.BLL;
+using Gradera.Core.Entities;
 using Gradera.Core.Enums;
+using Gradera.Core.Filters;
 using Gradera.Core.Helpers;
-using Gradera_Klubb.Filters;
-using Gradera_Klubb.Models;
 using Gradera_Klubb.Models.Competition;
 using System;
 using System.Collections.Generic;
