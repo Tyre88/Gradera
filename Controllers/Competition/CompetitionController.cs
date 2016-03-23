@@ -112,6 +112,42 @@ namespace Gradera_Klubb.Controllers.Competition
             return response;
         }
 
+        [HttpPost, HttpOptions]
+        [AuthorizeFilter(AccessType = AccessType.Competition, AccessTypeRight = AccessTypeRight.Admin)]
+        public HttpResponseMessage DeleteInternalCompeditor(int compeditorId)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            try
+            {
+                CompetitionBLL.DeleteInternalCompeditor(compeditorId);
+            }
+            catch (Exception ex)
+            {
+                UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+                LogHelper.LogError(string.Format("Error: DeleteInternalCompeditor"), ex, loggedInUser.AccountSession.ClubId);
+                response.StatusCode = HttpStatusCode.InternalServerError;
+            }
+            return response;
+        }
+
+        [HttpPost, HttpOptions]
+        [AuthorizeFilter(AccessType = AccessType.Competition, AccessTypeRight = AccessTypeRight.Admin)]
+        public HttpResponseMessage DeleteExternalCompeditor(int compeditorId)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            try
+            {
+                CompetitionBLL.DeleteExternalCompeditor(compeditorId);
+            }
+            catch (Exception ex)
+            {
+                UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+                LogHelper.LogError(string.Format("Error: DeleteExternalCompeditor"), ex, loggedInUser.AccountSession.ClubId);
+                response.StatusCode = HttpStatusCode.InternalServerError;
+            }
+            return response;
+        }
+
         [HttpGet]
         [AuthorizeFilter(AccessType = AccessType.Competition, AccessTypeRight = AccessTypeRight.Read)]
         public HttpResponseMessage GetUpcommingCompetitions(int count)

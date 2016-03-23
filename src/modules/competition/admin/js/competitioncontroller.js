@@ -72,6 +72,7 @@
         vm.SaveCompetition = SaveCompetition;
         vm.AddCategory = AddCategory;
         vm.DeleteCategory = DeleteCategory;
+        vm.RemoveCompeditor = RemoveCompeditor;
 
         function GetCompetition() {
             competitionService.GetCompetition(vm.CompetitionId).success(getCompetitionCallback);
@@ -118,6 +119,17 @@
 
             function deleteCategoryCallback() {
                 vm.Competition.Categories.splice(vm.Competition.Categories.indexOf(category), 1);
+            }
+        }
+
+        function RemoveCompeditor(compeditor) {
+            if(compeditor.IsExternal === false)
+                competitionAdminService.RemoveInternalCompeditor(compeditor.Id).success(RemoveCompeditorCallback);
+            else
+                competitionAdminService.RemoveExternalCompeditor(compeditor.Id).success(RemoveCompeditorCallback);
+
+            function RemoveCompeditorCallback() {
+                vm.Competition.Compeditors.splice(vm.Competition.Compeditors.indexOf(compeditor), 1);
             }
         }
 

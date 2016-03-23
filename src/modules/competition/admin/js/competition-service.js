@@ -19,5 +19,13 @@
         this.DeleteCompetition = function(competitionId) {
             return $http.post('/api/competition/DeleteCompetition?' + $.param({id: competitionId}));
         };
+
+        this.RemoveInternalCompeditor = function(compeditorId) {
+            return $http.post('/api/competition/DeleteInternalCompeditor?' + $.param({compeditorId : compeditorId}));
+        };
+
+        this.RemoveExternalCompeditor = function(compeditorId) {
+            return $http.post('/api/competition/DeleteExternalCompeditor?' + $.param({compeditorId : compeditorId}));
+        };
     }]);
 }(window.angular));

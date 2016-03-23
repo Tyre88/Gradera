@@ -87,6 +87,26 @@
         </md-list-item>
     </md-list>
 
+    <md-list>
+        <md-subheader class="md-no-sticky">
+            Deltagare
+        </md-subheader>
+
+        <md-list-item ng-repeat="compeditor in vm.Competition.Compeditors">
+            <img class="md-avatar" src="{{compeditor.Image}}" fallback-src="content/images/No_Image_Available.png" />
+            <p>{{compeditor.FirstName}} {{compeditor.LastName}}</p>
+            <p>{{compeditor.ClubName}}</p>
+            <p>{{compeditor.Category.Name}}</p>
+            <div class="more-icons md-secondary">
+                <i ng-if="$root.HasAccess(5, 40);" ng-click="vm.RemoveCompeditor(compeditor); $event.stopPropagation();" class="fa fa-trash md-hue-3">
+                    <md-tooltip>
+                        Ta bort deltagare
+                    </md-tooltip>
+                </i>
+            </div>
+        </md-list-item>
+    </md-list>
+
     <div>
         <md-button class="md-raised md-primary" type="submit">Spara</md-button>
         <md-button class="md-raised md-warn" ng-click="vm.Back();">Avbryt</md-button>
