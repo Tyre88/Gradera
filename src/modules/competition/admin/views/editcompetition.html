@@ -62,6 +62,13 @@
                 <md-tooltip>Tävlingen kommer att synas under "Tävlingar" hos andra klubbar i systemet.</md-tooltip>
             </md-checkbox>
         </div>
+
+        <div class="full-width">
+            <md-checkbox ng-model="vm.Competition.IsClubCompetition" aria-label="Klubbtävling">
+                Klubbtävling
+                <md-tooltip>Detta är en klubbtävling, det betyder att anmälningsformuläret är låst till bara klubben.</md-tooltip>
+            </md-checkbox>
+        </div>
     </div>
 
     <md-list ng-cloak>

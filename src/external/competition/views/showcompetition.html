@@ -3,45 +3,47 @@
         Välkommen till {{vm.Competition.Name}}!
     </md-subheader>
 
-    <md-input-container md-no-float class="form-field-fifty">
-        <input type="text" ng-model="vm.ContactPerson.Name" placeholder="Namn" required name="name" />
-        <div ng-messages="competitionForm.name.$error">
-            <div ng-message="required">Du måste fylla i en kontaktperson</div>
-        </div>
-    </md-input-container>
+    <div ng-if="!vm.Competition.IsClubCompetition">
+        <md-input-container md-no-float class="form-field-fifty">
+            <input type="text" ng-model="vm.ContactPerson.Name" placeholder="Namn" required name="name" />
+            <div ng-messages="competitionForm.name.$error">
+                <div ng-message="required">Du måste fylla i en kontaktperson</div>
+            </div>
+        </md-input-container>
 
-    <md-input-container md-no-float class="form-field-fifty">
-        <input type="text" ng-model="vm.ContactPerson.Coaches" placeholder="Coach(er)" required name="coaches" />
-        <div ng-messages="competitionForm.coaches.$error">
-            <div ng-message="required">Du måste fylla i vilka coacher som kommer att närvara</div>
-        </div>
-    </md-input-container>
+        <md-input-container md-no-float class="form-field-fifty">
+            <input type="text" ng-model="vm.ContactPerson.Coaches" placeholder="Coach(er)" required name="coaches" />
+            <div ng-messages="competitionForm.coaches.$error">
+                <div ng-message="required">Du måste fylla i vilka coacher som kommer att närvara</div>
+            </div>
+        </md-input-container>
 
-    <md-input-container md-no-float class="form-field-fifty">
-        <input type="phone" ng-model="vm.ContactPerson.Phone" placeholder="Telefonnummer" required name="phone" />
-        <div ng-messages="competitionForm.phone.$error">
-            <div ng-message="required">Du måste fylla i telefonnummer</div>
-        </div>
-    </md-input-container>
+        <md-input-container md-no-float class="form-field-fifty">
+            <input type="phone" ng-model="vm.ContactPerson.Phone" placeholder="Telefonnummer" required name="phone" />
+            <div ng-messages="competitionForm.phone.$error">
+                <div ng-message="required">Du måste fylla i telefonnummer</div>
+            </div>
+        </md-input-container>
 
-    <md-input-container md-no-float class="form-field-fifty">
-        <input type="email" ng-model="vm.ContactPerson.Email" placeholder="E-post" required name="email" />
-        <div ng-messages="competitionForm.email.$error">
-            <div ng-message="required">Du måste fylla i en e-post</div>
-            <div ng-message="email">Felaktig e-post adress</div>
-        </div>
-    </md-input-container>
+        <md-input-container md-no-float class="form-field-fifty">
+            <input type="email" ng-model="vm.ContactPerson.Email" placeholder="E-post" required name="email" />
+            <div ng-messages="competitionForm.email.$error">
+                <div ng-message="required">Du måste fylla i en e-post</div>
+                <div ng-message="email">Felaktig e-post adress</div>
+            </div>
+        </md-input-container>
 
-    <md-input-container md-no-float class="form-field-fifty">
-        <input type="text" ng-model="vm.ContactPerson.Club" placeholder="Klubb" required name="club" />
-        <div ng-messages="competitionForm.club.$error">
-            <div ng-message="required">Du måste ange en klubb</div>
-        </div>
-    </md-input-container>
+        <md-input-container md-no-float class="form-field-fifty">
+            <input type="text" ng-model="vm.ContactPerson.Club" placeholder="Klubb" required name="club" />
+            <div ng-messages="competitionForm.club.$error">
+                <div ng-message="required">Du måste ange en klubb</div>
+            </div>
+        </md-input-container>
 
-    <md-input-container md-no-float class="form-field-fifty">
-        <textarea type="text" ng-model="vm.ContactPerson.Message" placeholder="Meddelande till arrangören"></textarea>
-    </md-input-container>
+        <md-input-container md-no-float class="form-field-fifty">
+            <textarea type="text" ng-model="vm.ContactPerson.Message" placeholder="Meddelande till arrangören"></textarea>
+        </md-input-container>
+    </div>
 
     <div ng-repeat="compeditor in vm.ContactPerson.Compeditors">
         <md-subheader class="md-no-sticky">

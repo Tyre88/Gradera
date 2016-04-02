@@ -26,16 +26,25 @@
 
             function getCompetitionCallback(response) {
                 vm.Competition = response;
+
+                if(vm.Competition.IsClubCompetition)
+                    vm.AddCompeditor();
             }
         }
 
         function AddCompeditor() {
-            vm.ContactPerson.Compeditors.push({});
+            vm.ContactPerson.Compeditors.push({
+                BirthYear: "",
+                FirstName: "",
+                LastName: "",
+                Weight: "",
+                Grade: vm.Grades[0].Id
+            });
         }
 
         function Submit() {
             vm.ContactPerson.CompetitionId = vm.Competition.Id;
-            competitionExternalService.Submit(vm.ContactPerson).success(submitCallback);
+            competitionExternalService.Submit(vm.ContactPerson).success(submitCallback).error(submitError);
 
             function submitCallback() {
                 $mdDialog.show(
@@ -46,7 +55,19 @@
                         .ariaLabel('Tack!')
                         .ok('Ok')
                 );
+
                 vm.ContactPerson = { Compeditors: [] };
+            }
+
+            function submitError() {
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title('Fel!')
+                        .content('Ett fel uppstod! Kontrollera att du har fyllt i alla uppgifter.')
+                        .ariaLabel('Fel!')
+                        .ok('Ok')
+                );
             }
         }
 

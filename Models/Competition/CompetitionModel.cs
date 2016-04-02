@@ -20,6 +20,8 @@ namespace Gradera_Klubb.Models.Competition
         public bool IsExternal { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsGlobal { get; set; }
+        public bool IsClubCompetition { get; set; }
+        public int? CreatedBy { get; set; }
 
         public List<CompetitionCategoryModel> Categories { get; set; }
         public List<CompetitionCompeditorModel> Compeditors { get; set; }
@@ -48,7 +50,9 @@ namespace Gradera_Klubb.Models.Competition
                     Location = competition.Location,
                     Name = competition.Name,
                     StartDate = competition.StartDate,
-                    IsGlobal = competition.IsGlobal
+                    IsGlobal = competition.IsGlobal,
+                    IsClubCompetition = competition.IsClubCompetition,
+                    CreatedBy = competition.CreatedBy
                 };
 
 
@@ -158,7 +162,9 @@ namespace Gradera_Klubb.Models.Competition
                 IsExternal = model.IsExternal,
                 Location = model.Location,
                 StartSignupDate = model.StartSignupDate,
-                IsGlobal = model.IsGlobal
+                IsGlobal = model.IsGlobal,
+                IsClubCompetition = model.IsClubCompetition,
+                CreatedBy = model.CreatedBy
             };
 
             return competition;
