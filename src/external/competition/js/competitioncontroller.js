@@ -20,6 +20,8 @@
         vm.GetCompetition = GetCompetition;
         vm.AddCompeditor = AddCompeditor;
         vm.Submit = Submit;
+        vm.DeleteCompeditor = DeleteCompeditor;
+        vm.GetDate = GetDate;
 
         function GetCompetition() {
             competitionExternalService.GetCompetition(vm.ClubShortName, vm.CompetitionName).success(getCompetitionCallback);
@@ -69,6 +71,14 @@
                         .ok('Ok')
                 );
             }
+        }
+
+        function DeleteCompeditor(compeditor) {
+            vm.ContactPerson.Compeditors.splice(vm.ContactPerson.Compeditors.indexOf(compeditor), 1);
+        }
+
+        function GetDate(date) {
+            return moment(date).format('YYYY-MM-DD HH:mm');
         }
 
         vm.GetCompetition();

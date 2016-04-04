@@ -61,6 +61,10 @@ namespace Gradera_Klubb.Controllers.Competition
             UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
             Gradera.Competition.DAL.Competition comp = CompetitionModel.MapCompetitionToDAL(competition);
             comp.ClubId = loggedInUser.AccountSession.ClubId;
+
+            if (comp.Id <= 0)
+                comp.CreatedBy = loggedInUser.AccountSession.AccountId;
+
             CompetitionBLL.SaveCompetition(comp);
             return response;
         }

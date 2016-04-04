@@ -23,6 +23,14 @@ namespace Gradera_Klubb.Models.Competition
         public bool IsClubCompetition { get; set; }
         public int? CreatedBy { get; set; }
 
+        public bool IsActive
+        {
+            get
+            {
+                return StartSignupDate < DateTime.Now && EndSignupDate > DateTime.Now;
+            }
+        }
+
         public List<CompetitionCategoryModel> Categories { get; set; }
         public List<CompetitionCompeditorModel> Compeditors { get; set; }
 
