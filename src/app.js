@@ -4,8 +4,8 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
     angular.module('graderaklubb', ['ng', 'ngRoute', 'ngAnimate', 'ui.router', 'ngMaterial', "ngMessages",
         'webbdudes-image-helper', 'ngFileUpload', 'formly', 'angular-loading-bar', 'dndLists', 'ngSanitize', 'btford.markdown',
         'google.places']);
-    angular.module('graderaklubb').controller('index', ["$rootScope", "$scope", "$state", "user-service", "$mdSidenav", "Upload",
-            function($rootScope, $scope, $state, userService, $mdSidenav, Upload)
+    angular.module('graderaklubb').controller('index', ["$rootScope", "$scope", "$state", "user-service", "$mdSidenav", "Upload", "objectChange", "$mdToast",
+            function($rootScope, $scope, $state, userService, $mdSidenav, Upload, objectChange, $mdToast)
             {
                 $scope.UserService = userService;
 
@@ -44,6 +44,14 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                     }
 
                     return false;
+                };
+
+                $rootScope.setObjectValues = function(assemblyhash, objecthash, getdatetime, forcesave) {
+                    objectChange.setValues(assemblyhash, objecthash, getdatetime, forcesave);
+                };
+
+                $rootScope.ShowConflictToast = function() {
+                    $mdToast.show($mdToast.simple().textContent('The object has been changed by someone else, force save or reload the page...'));
                 };
 
                 $rootScope.UploadImage = function(file, successCallback) {
@@ -90,13 +98,34 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                 $state.go('home');
             });
         }])
-        .factory('authHttpResponseInterceptor', ['$q', function($q){
+        .factory('objectChange', ["$http", function($http) {
+            function setValues(assemblyhash, objecthash, getdatetime, forcesave)
+            {
+                $http.defaults.headers.common["assemblyhash"] = assemblyhash;
+                $http.defaults.headers.common["objecthash"] = objecthash;
+                $http.defaults.headers.common["getdatetime"] = getdatetime;
+
+                if(forcesave !== undefined)
+                    $http.defaults.headers.common["forcesave"] = forcesave;
+            }
+
+            return {
+                setValues: setValues
+            };
+        }])
+        .factory('authHttpResponseInterceptor', ['$q', '$rootScope', function($q, $rootScope){
             return {
                 request: function(request)
                 {
                     return request;
                 },
                 response: function(response) {
+
+                    if(response.config.method == "GET" && response.headers().assemblyhash !== undefined
+                        && response.headers().objecthash !== undefined && response.headers().getdatetime !== undefined) {
+                        $rootScope.setObjectValues(response.headers().assemblyhash, response.headers().objecthash, response.headers().getdatetime)
+                    }
+
                     return response || $q.when(response);
                 },
                 responseError: function(rejection) {
@@ -111,6 +140,9 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                     {
                         console.error('Forbidden....');
                         location.href = "#/noaccess";
+                    }
+                    else if(rejection.status == 409) {
+                        $rootScope.ShowConflictToast();
                     }
 
                     return $q.reject(rejection);

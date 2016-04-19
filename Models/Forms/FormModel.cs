@@ -64,12 +64,12 @@ namespace Gradera_Klubb.Models.Forms
                 ClubId = model.ClubId,
                 CreatedByUserId = model.CreatedByUserId,
                 CreatedDate = model.CreatedDate,
-                EndDate = model.EndDate,
+                EndDate = model.EndDate.ToUniversalTime(),
                 Id = model.Id,
                 IsDeleted = model.IsDeleted,
                 IsExternal = model.IsExternal,
                 Name = model.Name,
-                StartDate = model.StartDate,
+                StartDate = model.StartDate.ToUniversalTime(),
                 Description = model.Description
             };
 
