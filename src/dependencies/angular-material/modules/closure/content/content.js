@@ -2,7 +2,7 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.0.6-master-3f34900
+ * v1.1.0-rc4-master-2806ec8
  */
 goog.provide('ng.material.components.content');
 goog.require('ng.material.core');
@@ -56,8 +56,8 @@ function mdContentDirective($mdTheming) {
   return {
     restrict: 'E',
     controller: ['$scope', '$element', ContentController],
-    link: function(scope, element, attr) {
-      var node = element[0];
+    link: function(scope, element) {
+      element.addClass('_md');     // private md component indicator for styling
 
       $mdTheming(element);
       scope.$broadcast('$mdContentLoaded', element);

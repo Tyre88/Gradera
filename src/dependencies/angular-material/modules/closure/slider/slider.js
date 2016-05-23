@@ -2,7 +2,7 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.0.6-master-3f34900
+ * v1.1.0-rc4-master-2806ec8
  */
 goog.provide('ng.material.components.slider');
 goog.require('ng.material.core');
@@ -35,7 +35,6 @@ function SliderContainerDirective() {
     controller: function () {},
     compile: function (elem) {
       var slider = elem.find('md-slider');
-
       if (!slider) {
         return;
       }
@@ -50,7 +49,8 @@ function SliderContainerDirective() {
         slider.attr('flex', '');
       }
 
-      return function (scope, element, attr, ctrl) {
+      return function postLink(scope, element, attr, ctrl) {
+        element.addClass('_md');     // private md component indicator for styling
 
         // We have to manually stop the $watch on ngDisabled because it exists
         // on the parent scope, and won't be automatically destroyed when
@@ -61,6 +61,7 @@ function SliderContainerDirective() {
         }
 
         var stopDisabledWatch = angular.noop;
+
         if (attr.disabled) {
           setDisable(true);
         }

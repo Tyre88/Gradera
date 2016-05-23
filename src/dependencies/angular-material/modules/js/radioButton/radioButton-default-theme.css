@@ -2,12 +2,12 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.0.6-master-3f34900
+ * v1.1.0-rc4-master-2806ec8
  */
 /*  Only used with Theme processes */
 html.md-THEME_NAME-theme, body.md-THEME_NAME-theme {
   color: '{{foreground-1}}';
-  background-color: '{{background-50}}'; }
+  background-color: '{{background-color}}'; }
 
 md-radio-button.md-THEME_NAME-theme ._md-off {
   border-color: '{{foreground-2}}'; }
@@ -22,7 +22,7 @@ md-radio-button.md-THEME_NAME-theme.md-checked .md-ink-ripple {
   color: '{{accent-color-0.87}}'; }
 
 md-radio-button.md-THEME_NAME-theme ._md-container .md-ripple {
-  color: '{{accent-600}}'; }
+  color: '{{accent-A700}}'; }
 
 md-radio-group.md-THEME_NAME-theme:not([disabled]) .md-primary ._md-on, md-radio-group.md-THEME_NAME-theme:not([disabled]).md-primary ._md-on,
 md-radio-button.md-THEME_NAME-theme:not([disabled]) .md-primary ._md-on,

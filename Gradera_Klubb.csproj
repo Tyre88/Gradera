@@ -53,13 +53,18 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Gradera.ObjectChangeFilter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gradera.ObjectChangeFilter.1.0.1\lib\net45\Gradera.ObjectChangeFilter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Data.OData, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Data.OData.5.2.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -154,74 +159,68 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\BasicController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Filters\AuthorizeFilter.cs" />
+    <Compile Include="Controllers\Competition\CompetitionController.cs" />
+    <Compile Include="Controllers\Competition\ExternalCompetitionController.cs" />
+    <Compile Include="Controllers\Core\AccessrightsController.cs" />
+    <Compile Include="Controllers\Core\AuthenticateController.cs" />
+    <Compile Include="Controllers\Core\BasicController.cs" />
+    <Compile Include="Controllers\Core\ClubController.cs" />
+    <Compile Include="Controllers\Core\FileController.cs" />
+    <Compile Include="Controllers\Core\UserController.cs" />
+    <Compile Include="Controllers\Forms\ExternalFormsController.cs" />
+    <Compile Include="Controllers\Forms\FormsAdminController.cs" />
+    <Compile Include="Controllers\Forms\FormsController.cs" />
+    <Compile Include="Controllers\Grading\GradingAdminController.cs" />
+    <Compile Include="Controllers\Grading\GradingController.cs" />
+    <Compile Include="Controllers\Newsletter\NewsletterAdminController.cs" />
+    <Compile Include="Controllers\Newsletter\NewsletterJobController.cs" />
+    <Compile Include="Controllers\Techniques\TechniqueAdminController.cs" />
+    <Compile Include="Controllers\Techniques\TechniqueController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Accessright.cs">
-      <DependentUpon>GraderaDataSet.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Account.cs">
-      <DependentUpon>GraderaDataSet.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AccountAccess.cs">
-      <DependentUpon>GraderaDataSet.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Club.cs">
-      <DependentUpon>GraderaDataSet.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Combination.cs">
-      <DependentUpon>GraderaDataSet.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Combination_Technique.cs">
-      <DependentUpon>GraderaDataSet.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GraderaDataSet.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GraderaDataSet.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GraderaDataSet.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GraderaDataSet.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GraderaDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GraderaDataSet.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GradingTabs.cs">
-      <DependentUpon>GraderaDataSet.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Image.cs">
-      <DependentUpon>GraderaDataSet.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Movie.cs">
-      <DependentUpon>GraderaDataSet.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Search.cs">
-      <DependentUpon>GraderaDataSet.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TECHNICS.cs">
-      <DependentUpon>GraderaDataSet.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TecModel.cs" />
-    <Compile Include="Models\Type.cs">
-      <DependentUpon>GraderaDataSet.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserModel.cs" />
-    <Compile Include="Models\Wordlist.cs">
-      <DependentUpon>GraderaDataSet.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Competition\CompetitionCategoryModel.cs" />
+    <Compile Include="Models\Competition\CompetitionCompeditorExcelModel.cs" />
+    <Compile Include="Models\Competition\CompetitionCompeditorModel.cs" />
+    <Compile Include="Models\Competition\CompetitionModel.cs" />
+    <Compile Include="Models\Competition\External\CompetitionContactPersonModel.cs" />
+    <Compile Include="Models\Competition\External\CompetitionExternalCompeditorModel.cs" />
+    <Compile Include="Models\Core\AccessrightModel.cs" />
+    <Compile Include="Models\Core\AccessrightRightModel.cs" />
+    <Compile Include="Models\Core\AccountAccessModel.cs" />
+    <Compile Include="Models\Core\AccountInformationGeneric.cs" />
+    <Compile Include="Models\Core\ClubSettingsModel.cs" />
+    <Compile Include="Models\Core\ClubModel.cs" />
+    <Compile Include="Models\Core\ModuleLinkModel.cs" />
+    <Compile Include="Models\Core\ModuleModel.cs" />
+    <Compile Include="Models\Core\UserInformationModel.cs" />
+    <Compile Include="Models\Core\UserModel.cs" />
+    <Compile Include="Models\Forms\Admin\ExternalFormSubmit.cs" />
+    <Compile Include="Models\Forms\Admin\FormSubmitValuesModel.cs" />
+    <Compile Include="Models\Forms\Admin\UserFormSubmit.cs" />
+    <Compile Include="Models\Forms\FormEmailModel.cs" />
+    <Compile Include="Models\Forms\FormFieldModel.cs" />
+    <Compile Include="Models\Forms\FormFieldOptionModel.cs" />
+    <Compile Include="Models\Forms\FormModel.cs" />
+    <Compile Include="Models\Forms\SubmitFormFieldModel.cs" />
+    <Compile Include="Models\Grading\GradeCategoryLinkModel.cs" />
+    <Compile Include="Models\Grading\GradeCategoryLinkTechniqueModel.cs" />
+    <Compile Include="Models\Grading\GradeModel.cs" />
+    <Compile Include="Models\Grading\GradingBookletModel.cs" />
+    <Compile Include="Models\Grading\GradingCategoryModel.cs" />
+    <Compile Include="Models\Newsletter\NewsletterModel.cs" />
+    <Compile Include="Models\Newsletter\SendNewsletterModel.cs" />
+    <Compile Include="Models\Techniques\TechniqueImageModel.cs" />
+    <Compile Include="Models\Techniques\TechniqueModel.cs" />
+    <Compile Include="Models\Techniques\TechniqueTypeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -231,6 +230,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\Training\" />
+    <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -239,28 +240,44 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\GraderaDataSet.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GraderaDataSet.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Models\GraderaDataSet.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GraderaDataSet.edmx</DependentUpon>
-      <LastGenOutput>GraderaDataSet.Context.cs</LastGenOutput>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Models\GraderaDataSet.edmx.diagram">
-      <DependentUpon>GraderaDataSet.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\GraderaDataSet.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GraderaDataSet.edmx</DependentUpon>
-      <LastGenOutput>GraderaDataSet.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\GraderaKlubb.pubxml" />
+    <None Include="Properties\PublishProfiles\Release.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Gradera.Core.csproj">
+      <Project>{939fcd74-fc6b-4f8e-a99f-19f9a2834c54}</Project>
+      <Name>Gradera.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gradera.Competition\Gradera.Competition.csproj">
+      <Project>{2d03f748-00b1-4ece-98c7-61e274e5a29e}</Project>
+      <Name>Gradera.Competition</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gradera.Forms\Gradera.Forms.csproj">
+      <Project>{52c8fafd-92ad-47b8-8ba8-431f0539e1dd}</Project>
+      <Name>Gradera.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gradera.Grading\Gradera.Grading.csproj">
+      <Project>{86f53157-c20c-40e5-b053-0ed4f349f1fd}</Project>
+      <Name>Gradera.Grading</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gradera.Newsletter\Gradera.Newsletter.csproj">
+      <Project>{9a0f3748-4fa9-4160-907c-6886612528a8}</Project>
+      <Name>Gradera.Newsletter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gradera.Techniques\Gradera.Techniques.csproj">
+      <Project>{a469ab39-4651-4fdd-86f1-5976681c3ee7}</Project>
+      <Name>Gradera.Techniques</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gradera.Training\Gradera.Training.csproj">
+      <Project>{1064d8ec-815b-4f5a-bd30-9ee69a14bedb}</Project>
+      <Name>Gradera.Training</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -2,7 +2,7 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.0.6-master-3f34900
+ * v1.1.0-rc4-master-2806ec8
  */
 goog.provide('ng.material.components.dialog');
 goog.require('ng.material.components.backdrop');
@@ -59,7 +59,9 @@ angular
 function MdDialogDirective($$rAF, $mdTheming, $mdDialog) {
   return {
     restrict: 'E',
-    link: function(scope, element, attr) {
+    link: function(scope, element) {
+      element.addClass('_md');     // private md component indicator for styling
+
       $mdTheming(element);
       $$rAF(function() {
         var images;
@@ -639,10 +641,8 @@ function MdDialogProvider($$interimElementProvider) {
        * Check to see if they used the deprecated .md-actions class and log a warning
        */
       function warnDeprecatedActions() {
-        var badActions = element[0].querySelectorAll('.md-actions');
-
-        if (badActions.length > 0) {
-          $log.warn('Using a class of md-actions is deprected, please use <md-dialog-actions>.');
+        if (element[0].querySelector('.md-actions')) {
+          $log.warn('Using a class of md-actions is deprecated, please use <md-dialog-actions>.');
         }
       }
 
@@ -762,9 +762,7 @@ function MdDialogProvider($$interimElementProvider) {
            */
           function getDomElement(element, defaultElement) {
             if (angular.isString(element)) {
-              var simpleSelector = element,
-                container = $document[0].querySelectorAll(simpleSelector);
-                element = container.length ? container[0] : null;
+              element = $document[0].querySelector(element);
             }
 
             // If we have a reference to a raw dom element, always wrap it in jqLite
@@ -906,7 +904,8 @@ function MdDialogProvider($$interimElementProvider) {
 
       var role = (options.$type === 'alert') ? 'alertdialog' : 'dialog';
       var dialogContent = element.find('md-dialog-content');
-      var dialogContentId = 'dialogContent_' + (element.attr('id') || $mdUtil.nextUid());
+      var existingDialogId = element.attr('id');
+      var dialogContentId = 'dialogContent_' + (existingDialogId || $mdUtil.nextUid());
 
       element.attr({
         'role': role,
@@ -915,6 +914,10 @@ function MdDialogProvider($$interimElementProvider) {
 
       if (dialogContent.length === 0) {
         dialogContent = element;
+        // If the dialog element already had an ID, don't clobber it.
+        if (existingDialogId) {
+          dialogContentId = existingDialogId;
+        }
       }
 
       dialogContent.attr('id', dialogContentId);

@@ -2,7 +2,7 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.0.6-master-3f34900
+ * v1.1.0-rc4-master-2806ec8
  */
 (function( window, angular, undefined ){
 "use strict";
@@ -20,7 +20,6 @@ angular.module('material.components.switch', [
   .directive('mdSwitch', MdSwitch);
 
 /**
- * @private
  * @ngdoc directive
  * @module material.components.switch
  * @name mdSwitch

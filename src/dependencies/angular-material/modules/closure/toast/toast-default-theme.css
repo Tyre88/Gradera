@@ -2,12 +2,12 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.0.6-master-3f34900
+ * v1.1.0-rc4-master-2806ec8
  */
 /*  Only used with Theme processes */
 html.md-THEME_NAME-theme, body.md-THEME_NAME-theme {
   color: '{{foreground-1}}';
-  background-color: '{{background-50}}'; }
+  background-color: '{{background-color}}'; }
 
 md-toast.md-THEME_NAME-theme .md-toast-content {
   background-color: #323232;
@@ -15,8 +15,8 @@ md-toast.md-THEME_NAME-theme .md-toast-content {
   md-toast.md-THEME_NAME-theme .md-toast-content .md-button {
     color: '{{background-50}}'; }
     md-toast.md-THEME_NAME-theme .md-toast-content .md-button.md-highlight {
-      color: '{{accent-A200}}'; }
+      color: '{{accent-color}}'; }
       md-toast.md-THEME_NAME-theme .md-toast-content .md-button.md-highlight.md-primary {
-        color: '{{primary-A200}}'; }
+        color: '{{primary-color}}'; }
       md-toast.md-THEME_NAME-theme .md-toast-content .md-button.md-highlight.md-warn {
-        color: '{{warn-A200}}'; }
+        color: '{{warn-color}}'; }

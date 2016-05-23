@@ -2,7 +2,7 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.0.6-master-3f34900
+ * v1.1.0-rc4-master-2806ec8
  */
 goog.provide('ng.material.components.menu');
 goog.require('ng.material.components.backdrop');
@@ -50,7 +50,9 @@ function MenuController($mdMenu, $attrs, $element, $scope, $mdUtil, $timeout, $r
 
     menuContainer.on('$mdInterimElementRemove', function() {
       self.isOpen = false;
+      $mdUtil.nextTick(function(){ self.onIsOpenChanged(self.isOpen);});
     });
+    $mdUtil.nextTick(function(){ self.onIsOpenChanged(self.isOpen);});
 
     var menuContainerId = 'menu_container_' + $mdUtil.nextUid();
     menuContainer.attr('id', menuContainerId);
@@ -89,7 +91,7 @@ function MenuController($mdMenu, $attrs, $element, $scope, $mdUtil, $timeout, $r
       deregisterScopeListeners.shift()();
     }
     menuItems && menuItems.off('mouseenter', self.handleMenuItemHover);
-    menuItems && menuItems.off('mouseleave', self.handleMenuMouseLeave);
+    menuItems && menuItems.off('mouseleave', self.handleMenuItemMouseLeave);
   };
 
   this.handleMenuItemHover = function(event) {
@@ -106,11 +108,11 @@ function MenuController($mdMenu, $attrs, $element, $scope, $mdUtil, $timeout, $r
       if (self.currentlyOpenMenu && self.currentlyOpenMenu != nestedMenu) {
         var closeTo = self.nestLevel + 1;
         self.currentlyOpenMenu.close(true, { closeTo: closeTo });
-        self.isAlreadyOpening = true;
-        nestedMenu.open();
+        self.isAlreadyOpening = !!nestedMenu;
+        nestedMenu && nestedMenu.open();
       } else if (nestedMenu && !nestedMenu.isOpen && nestedMenu.open) {
-        self.isAlreadyOpening = true;
-        nestedMenu.open();
+        self.isAlreadyOpening = !!nestedMenu;
+        nestedMenu && nestedMenu.open();
       }
     }, nestedMenu ? 100 : 250);
     var focusableTarget = event.currentTarget.querySelector('.md-button:not([disabled])');
@@ -134,6 +136,7 @@ function MenuController($mdMenu, $attrs, $element, $scope, $mdUtil, $timeout, $r
     if (self.isOpen) return;
     self.enableHoverListener();
     self.isOpen = true;
+    $mdUtil.nextTick(function(){ self.onIsOpenChanged(self.isOpen);});
     triggerElement = triggerElement || (ev ? ev.target : $element[0]);
     triggerElement.setAttribute('aria-expanded', 'true');
     $scope.$emit('$mdMenuOpen', $element);
@@ -154,7 +157,7 @@ function MenuController($mdMenu, $attrs, $element, $scope, $mdUtil, $timeout, $r
   // Expose a open function to the child scope for html to use
   $scope.$mdOpenMenu = this.open;
 
-  $scope.$watch(function() { return self.isOpen; }, function(isOpen) {
+  this.onIsOpenChanged = function(isOpen) {
     if (isOpen) {
       menuContainer.attr('aria-hidden', 'false');
       $element[0].classList.add('_md-open');
@@ -166,10 +169,10 @@ function MenuController($mdMenu, $attrs, $element, $scope, $mdUtil, $timeout, $r
       $element[0].classList.remove('_md-open');
     }
     $scope.$mdMenuIsOpen = self.isOpen;
-  });
+  };
 
   this.focusMenuContainer = function focusMenuContainer() {
-    var focusTarget = menuContainer[0].querySelector('[md-menu-focus-target]');
+    var focusTarget = menuContainer[0].querySelector('[md-menu-focus-target], [md-autofocus]');
     if (!focusTarget) focusTarget = menuContainer[0].querySelector('.md-button');
     focusTarget.focus();
   };
@@ -190,6 +193,7 @@ function MenuController($mdMenu, $attrs, $element, $scope, $mdUtil, $timeout, $r
   this.close = function closeMenu(skipFocus, closeOpts) {
     if ( !self.isOpen ) return;
     self.isOpen = false;
+    $mdUtil.nextTick(function(){ self.onIsOpenChanged(self.isOpen);});
 
     var eventDetails = angular.extend({}, closeOpts, { skipFocus: skipFocus });
     $scope.$emit('$mdMenuClose', $element, eventDetails);
@@ -348,7 +352,22 @@ MenuController.$inject = ["$mdMenu", "$attrs", "$element", "$scope", "$mdUtil", 
  *   <!-- menu-content -->
  * </md-menu>
  * </hljs>
-
+ *
+ * ### Auto Focus
+ * By default, when a menu opens, `md-menu` focuses the first button in the menu content.
+ * 
+ * But sometimes you would like to focus another specific menu item instead of the first.<br/>
+ * This can be done by applying the `md-autofocus` directive on the given element.
+ *
+ * <hljs lang="html">
+ * <md-menu-item>
+ *   <md-button md-autofocus ng-click="doSomething()">
+ *     Auto Focus
+ *   </md-button>
+ * </md-menu-item>
+ * </hljs>
+ *
+ *
  * ### Preventing close
  *
  * Sometimes you would like to be able to click on a menu item without having the menu
@@ -437,14 +456,15 @@ function MenuDirective($mdUtil) {
     return link;
   }
 
-  function link(scope, element, attrs, ctrls) {
+  function link(scope, element, attr, ctrls) {
     var mdMenuCtrl = ctrls[0];
     var isInMenuBar = ctrls[1] != undefined;
     // Move everything into a md-menu-container and pass it to the controller
-    var menuContainer = angular.element(
-      '<div class="_md-open-menu-container md-whiteframe-z2"></div>'
-    );
+    var menuContainer = angular.element( '<div class="_md _md-open-menu-container md-whiteframe-z2"></div>');
     var menuContents = element.children()[1];
+
+    element.addClass('_md');     // private md component indicator for styling
+
     if (!menuContents.hasAttribute('role')) {
       menuContents.setAttribute('role', 'menu');
     }
@@ -457,6 +477,7 @@ function MenuDirective($mdUtil) {
     element.append(menuContainer);
     menuContainer[0].style.display = 'none';
     mdMenuCtrl.init(menuContainer, { isInMenuBar: isInMenuBar });
+
   }
 }
 MenuDirective.$inject = ["$mdUtil"];
@@ -674,7 +695,7 @@ function MenuProvider($$interimElementProvider) {
         opts.menuContentEl[0].addEventListener('click', captureClickListener, true);
 
         // kick off initial focus in the menu on the first element
-        var focusTarget = opts.menuContentEl[0].querySelector('[md-menu-focus-target]');
+        var focusTarget = opts.menuContentEl[0].querySelector('[md-menu-focus-target], [md-autofocus]');
         if ( !focusTarget ) {
           var firstChild = opts.menuContentEl[0].firstElementChild;
 

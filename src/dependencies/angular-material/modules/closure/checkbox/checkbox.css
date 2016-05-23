@@ -2,12 +2,12 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.0.6-master-3f34900
+ * v1.1.0-rc4-master-2806ec8
  */
 /*  Only used with Theme processes */
 html.md-THEME_NAME-theme, body.md-THEME_NAME-theme {
   color: '{{foreground-1}}';
-  background-color: '{{background-50}}'; }
+  background-color: '{{background-color}}'; }
 
 .md-inline-form md-checkbox {
   margin: 19px 0 18px; }
@@ -42,6 +42,8 @@ md-checkbox {
     bottom: -8px; }
   md-checkbox.md-focused:not([disabled]):not(.md-checked) ._md-container:before {
     background-color: rgba(0, 0, 0, 0.12); }
+  md-checkbox.md-align-top-left > div._md-container {
+    top: 12px; }
   md-checkbox ._md-container {
     position: absolute;
     top: 50%;
@@ -52,8 +54,7 @@ md-checkbox {
     width: 20px;
     height: 20px;
     left: 0;
-    right: auto;
-    pointer-events: none; }
+    right: auto; }
     [dir=rtl] md-checkbox ._md-container {
       left: auto; }
     [dir=rtl] md-checkbox ._md-container {
@@ -89,8 +90,6 @@ md-checkbox {
       top: -15px;
       right: -15px;
       bottom: -15px; }
-  md-checkbox.md-align-top-left > div._md-container {
-    top: 12px; }
   md-checkbox ._md-icon {
     box-sizing: border-box;
     transition: 240ms;
@@ -104,18 +103,33 @@ md-checkbox {
     border-radius: 2px; }
   md-checkbox.md-checked ._md-icon {
     border: none; }
+    md-checkbox.md-checked ._md-icon:after {
+      box-sizing: border-box;
+      -webkit-transform: rotate(45deg);
+              transform: rotate(45deg);
+      position: absolute;
+      left: 6.66667px;
+      top: 2.22222px;
+      display: table;
+      width: 6.66667px;
+      height: 13.33333px;
+      border-width: 2px;
+      border-style: solid;
+      border-top: 0;
+      border-left: 0;
+      content: ''; }
   md-checkbox[disabled] {
     cursor: default; }
-  md-checkbox.md-checked ._md-icon:after {
+  md-checkbox.md-indeterminate ._md-icon:after {
     box-sizing: border-box;
-    -webkit-transform: rotate(45deg);
-            transform: rotate(45deg);
     position: absolute;
-    left: 6.66667px;
-    top: 2.22222px;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
     display: table;
-    width: 6.66667px;
-    height: 13.33333px;
+    width: 12px;
+    height: 2px;
     border-width: 2px;
     border-style: solid;
     border-top: 0;

@@ -2,12 +2,12 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.0.6-master-3f34900
+ * v1.1.0-rc4-master-2806ec8
  */
 /*  Only used with Theme processes */
 html.md-THEME_NAME-theme, body.md-THEME_NAME-theme {
   color: '{{foreground-1}}';
-  background-color: '{{background-50}}'; }
+  background-color: '{{background-color}}'; }
 
 .md-contact-chips .md-chips md-chip {
   padding: 0 25px 0 0; }
@@ -25,7 +25,9 @@ html.md-THEME_NAME-theme, body.md-THEME_NAME-theme {
     height: 32px;
     margin-left: 8px; }
     [dir=rtl] .md-contact-chips .md-chips md-chip .md-contact-name {
+      margin-left: 0;
       margin-left: auto;
+      margin-left: initial;
       margin-right: 8px; }
 
 .md-contact-suggestion {
@@ -38,7 +40,9 @@ html.md-THEME_NAME-theme, body.md-THEME_NAME-theme {
     margin-left: 8px;
     width: 120px; }
     [dir=rtl] .md-contact-suggestion .md-contact-name {
+      margin-left: 0;
       margin-left: auto;
+      margin-left: initial;
       margin-right: 8px; }
   .md-contact-suggestion .md-contact-name, .md-contact-suggestion .md-contact-email {
     display: inline-block;
@@ -67,12 +71,16 @@ html.md-THEME_NAME-theme, body.md-THEME_NAME-theme {
     .md-chips:not(.md-readonly) md-chip:not(.md-readonly) {
       padding-right: 22px; }
       [dir=rtl] .md-chips:not(.md-readonly) md-chip:not(.md-readonly) {
+        padding-right: 0;
         padding-right: auto;
+        padding-right: initial;
         padding-left: 22px; }
       .md-chips:not(.md-readonly) md-chip:not(.md-readonly) ._md-chip-content {
         padding-right: 4px; }
         [dir=rtl] .md-chips:not(.md-readonly) md-chip:not(.md-readonly) ._md-chip-content {
+          padding-right: 0;
           padding-right: auto;
+          padding-right: initial;
           padding-left: 4px; }
   .md-chips md-chip {
     cursor: default;
@@ -101,12 +109,23 @@ html.md-THEME_NAME-theme, body.md-THEME_NAME-theme {
         float: right; }
       .md-chips md-chip ._md-chip-content:focus {
         outline: none; }
+    .md-chips md-chip._md-chip-content-edit-is-enabled {
+      -webkit-user-select: none;
+      /* webkit (safari, chrome) browsers */
+      -moz-user-select: none;
+      /* mozilla browsers */
+      -khtml-user-select: none;
+      /* webkit (konqueror) browsers */
+      -ms-user-select: none;
+      /* IE10+ */ }
     .md-chips md-chip ._md-chip-remove-container {
       position: absolute;
       right: 0;
       line-height: 22px; }
       [dir=rtl] .md-chips md-chip ._md-chip-remove-container {
+        right: 0;
         right: auto;
+        right: initial;
         left: 0; }
     .md-chips md-chip ._md-chip-remove {
       text-align: center;

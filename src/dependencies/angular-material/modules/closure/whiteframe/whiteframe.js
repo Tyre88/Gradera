@@ -2,7 +2,7 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.0.6-master-3f34900
+ * v1.1.0-rc4-master-2806ec8
  */
 goog.provide('ng.material.components.whiteframe');
 goog.require('ng.material.core');
@@ -15,7 +15,6 @@ angular
   .directive('mdWhiteframe', MdWhiteframeDirective);
 
 /**
- * @private
  * @ngdoc directive
  * @module material.components.whiteframe
  * @name mdWhiteframe
