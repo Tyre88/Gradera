@@ -6,38 +6,39 @@
 
 <span class="md-button md-raised" ng-click="vm.Edit(0);"><i class="fa fa-plus-circle"></i> Lägg till nyhetsbrev</span>
 
-<md-list ng-cloak>
-    <md-list-item>
-        <p><b>Namn:</b></p>
-        <p><b>Skapat av:</b></p>
-        <p><b>Skapat:</b></p>
-    </md-list-item>
+<dtable options="$root.TableOptions" rows="vm.Newsletters" class="material dt">
+    <column name="Namn">
+        {{$row.Name}}
+    </column>
+    <column name="Skapat av">
+        {{$row.CreatedByName}}
+    </column>
+    <column name="Skapat">
+        {{vm.GetDate($row.CreatedDate)}}
+    </column>
+    <column name="Mer">
+        <i class="fa fa-pencil-square-o action-icon" aria-hidden="true" ng-click="vm.Edit($row.Id)">
+            <md-tooltip>
+                Redigera
+            </md-tooltip>
+        </i>
 
-    <md-list-item ng-repeat="newsletter in vm.Newsletters" ng-click="vm.Edit(newsletter.Id)">
-        <p ng-bind="newsletter.Name"></p>
-        <p ng-bind="newsletter.CreatedByName"></p>
-        <p ng-bind="vm.GetDate(newsletter.CreatedDate)"></p>
-        <div class="more-icons md-secondary">
-            <i ng-if="$root.HasAccess(8, 30);" ng-click="vm.SendNewsletter(newsletter); $event.stopPropagation();"
-               class="fa fa-send md-hue-3">
-                <md-tooltip>
-                    Skicka
-                </md-tooltip>
-            </i>
+        <i class="fa fa-send md-hue-3 action-icon" ng-if="$root.HasAccess(8, 30);" ng-click="vm.SendNewsletter($row); $event.stopPropagation();">
+            <md-tooltip>
+                Skicka
+            </md-tooltip>
+        </i>
 
-            <i ng-if="$root.HasAccess(8, 30);" ng-click="vm.ShowStats(newsletter); $event.stopPropagation();"
-               class="fa fa-bar-chart md-hue-3">
-                <md-tooltip>
-                    Visa utskicksstatistik
-                </md-tooltip>
-            </i>
+        <i class="fa fa-bar-chart md-hue-3 action-icon" ng-if="$root.HasAccess(8, 30);" ng-click="vm.ShowStats($row); $event.stopPropagation();">
+            <md-tooltip>
+                Visa utskicksstatistik
+            </md-tooltip>
+        </i>
 
-            <i ng-if="$root.HasAccess(8, 40);" ng-click="vm.Delete(newsletter); $event.stopPropagation();"
-               class="fa fa-trash md-hue-3">
-                <md-tooltip>
-                    Ta bort Nyhetsbrev
-                </md-tooltip>
-            </i>
-        </div>
-    </md-list-item>
-</md-list>
+        <i class="fa fa-trash md-hue-3 action-icon" ng-if="$root.HasAccess(8, 40);" ng-click="vm.Delete($row); $event.stopPropagation();">
+            <md-tooltip>
+                Ta bort Nyhetsbrev
+            </md-tooltip>
+        </i>
+    </column>
+</dtable>

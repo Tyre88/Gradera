@@ -314,7 +314,8 @@ module.exports = function (grunt)
                         "src/dependencies/showdown/compressed/showdown.min.js",
                         "src/dependencies/angular-markdown-directive/markdown.js",
                         "src/dependencies/angular-google-places-autocomplete/dist/autocomplete.min.js",
-                        "src/dependencies/moment/min/moment.min.js"
+                        "src/dependencies/moment/min/moment.min.js",
+                        "src/dependencies/angular-data-table/release/dataTable.min.js"
                     ],
                     'dist/application.js': [
                         'src/app.js',
@@ -330,7 +331,9 @@ module.exports = function (grunt)
                         "src/dependencies/angular-google-places-autocomplete/dist/autocomplete.min.css",
                         "src/dependencies/angular-material/angular-material.min.css",
                         "src/dependencies/ng-ckeditor/ng-ckeditor.css",
-                        "src/dependencies/angular-loading-bar/build/loading-bar.min.css"
+                        "src/dependencies/angular-loading-bar/build/loading-bar.min.css",
+                        "src/dependencies/angular-data-table/release/dataTable.css",
+                        "src/dependencies/angular-data-table/release/material.css"
                     ],
                     'dist/content/css/externaldependencies.css': [
                         "src/dependencies/angular-material/angular-material.min.css",

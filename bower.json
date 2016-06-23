@@ -28,6 +28,9 @@
     "ng-ckeditor": "~0.2.1",
     "ng-file-upload": "~9.1.2",
     "moment": "~2.11.1",
-    "angular": "angularjs#~1.5.5"
+    "angular": "angularjs#~1.5.5",
+    "mdDataTable": "^1.4.3",
+    "underscore": "^1.8.3",
+    "angular-data-table": "^0.5.1"
   }
 }

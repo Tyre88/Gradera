@@ -156,6 +156,12 @@
                 templateUrl: "modules/newsletter/admin/views/newsletterstats.html",
                 controller: "newsletter.admin.stats",
                 controllerAs: "vm"
+            }).state('contactadminlist',
+            {
+                url: "/admin/contacts",
+                templateUrl: "modules/core/contact/admin/views/contactlist.html",
+                controller: "core.contact.admin.list",
+                controllerAs: "vm"
             });
     }
 }(window.angular));

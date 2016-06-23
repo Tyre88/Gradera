@@ -3,13 +3,17 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
 (function(angular) {
     angular.module('graderaklubb', ['ng', 'ngRoute', 'ngAnimate', 'ui.router', 'ngMaterial', "ngMessages",
         'webbdudes-image-helper', 'ngFileUpload', 'formly', 'angular-loading-bar', 'dndLists', 'ngSanitize', 'btford.markdown',
-        'google.places']);
+        'google.places', 'data-table']);
     angular.module('graderaklubb').controller('index', ["$rootScope", "$scope", "$state", "user-service", "$mdSidenav", "Upload", "objectChange", "$mdToast",
             function($rootScope, $scope, $state, userService, $mdSidenav, Upload, objectChange, $mdToast)
             {
                 $scope.UserService = userService;
 
                 $rootScope.UserService = userService;
+                $rootScope.TableOptions = {
+                    scrollbarV: false,
+                    columnMode: 'force'
+                };
 
                 $scope.SetActiveNav = function(element)
                 {
