@@ -4,19 +4,22 @@
     </h1>
 </md-toolbar>
 
-<md-list ng-cloak>
-    <md-list-item>
-        <p><b>Till:</b></p>
-        <p><b>Skickat:</b></p>
-        <p><b>Läst:</b></p>
-    </md-list-item>
-
-    <md-list-item ng-repeat="item in vm.Stats">
-        <p>{{item.FirstName}} {{item.LastName}} ({{item.Email}})</p>
-        <p>
-            <span ng-if="item.IsSent">{{vm.GetDate(item.SendDate);}}</span>
-            <span ng-if="!item.IsSent">I kö</span>
-        </p>
-        <p><md-checkbox ng-model="item.IsRead" ng-disabled="true"></md-checkbox></p>
-    </md-list-item>
-</md-list>
+<table class="gradera-list" ng-cloak="">
+    <thead>
+        <tr>
+            <th>Till</th>
+            <th>Skickat</th>
+            <th>Läst</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in vm.Stats">
+            <td>{{item.FirstName}} {{item.LastName}} ({{item.Email}})</td>
+            <td>
+                <span ng-if="item.IsSent">{{vm.GetDate(item.SendDate);}}</span>
+                <span ng-if="!item.IsSent">I kö</span>
+            </td>
+            <td><md-checkbox ng-model="item.IsRead" ng-disabled="true"></md-checkbox></td>
+        </tr>
+    </tbody>
+</table>

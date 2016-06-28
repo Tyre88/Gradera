@@ -4,23 +4,29 @@
     </h1>
 </md-toolbar>
 
-<md-list ng-cloak>
-    <md-input-container md-no-float>
-        <input type="text" ng-model="vm.Filter" placeholder="Filter" />
-    </md-input-container>
+<md-input-container md-no-float>
+    <input type="text" ng-model="vm.Filter" placeholder="Filter" />
+</md-input-container>
 
-    <md-list-item>
-        <p style="margin-left: 50px;"><b>Namn</b></p>
-        <p class="hide-sm hide-md hide-xs"><b>Epost</b></p>
-        <p class="hide-sm hide-md hide-xs"><b>Stad</b></p>
-        <p class="hide-sm hide-md hide-xs"><b>Yrke</b></p>
-    </md-list-item>
-
-    <md-list-item ng-repeat="user in vm.Users | filter:vm.Filter" ng-click="vm.ShowUser(user.Id, $event)">
-        <img alt="{{ user.FirstName }}" src="{{ user.Image }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
-        <p>{{ user.FirstName }} {{user.LastName}}</p>
-        <p class="hide-sm hide-md hide-xs">{{user.UserInformation.Email}}</p>
-        <p class="hide-sm hide-md hide-xs">{{user.UserInformation.City.name}}</p>
-        <p class="hide-sm hide-md hide-xs">{{user.UserInformation.Occupation}}</p>
-    </md-list-item>
-</md-list>
+<table class="gradera-list" ng-cloak>
+    <thead>
+        <tr>
+            <th class="image"></th>
+            <th>Namn</th>
+            <th>Epost</th>
+            <th>Stad</th>
+            <th>Yrke</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="row" ng-repeat="user in vm.Users | filter:vm.Filter" ng-click="vm.ShowUser(user.Id, $event)">
+            <td class="image">
+                <img alt="{{ user.FirstName }}" src="{{ user.Image }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
+            </td>
+            <td>{{user.FirstName}} {{user.LastName}}</td>
+            <td>{{user.UserInformation.Email}}</td>
+            <td>{{user.UserInformation.City.name}}</td>
+            <td>{{user.UserInformation.Occupation}}</td>
+        </tr>
+    </tbody>
+</table>
