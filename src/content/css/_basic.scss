@@ -43,6 +43,14 @@ table {
   tr {
     min-width: 56px;
     height: $table-height;
+
+    > td, th {
+      &:not(.image) {
+        &:first-child {
+          padding-left: 10px;
+        }
+      }
+    }
   }
 
   thead {
