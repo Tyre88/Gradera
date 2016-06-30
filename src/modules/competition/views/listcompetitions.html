@@ -4,16 +4,22 @@
     </h1>
 </md-toolbar>
 
-<md-list ng-cloak>
-    <md-list-item>
-        <p><b>Namn</b></p>
-        <p class="hide-sm hide-md hide-xs"><b>När</b></p>
-        <p class="hide-sm hide-md hide-xs"><b>Var</b></p>
-    </md-list-item>
-
-    <md-list-item ng-repeat="competition in vm.Competitions" ng-click="vm.ShowCompetition(competition.Id)">
-        <p>{{competition.Name}}</p>
-        <p class="hide-sm hide-md">{{competition.StartDate | date:'yyyy-MM-dd HH:mm'}} <span class="hide-sm hide-md hide-xs">- {{competition.EndDate | date:'yyyy-MM-dd HH:mm'}}</span></p>
-        <p class="hide-sm hide-md hide-xs">{{competition.Location.name}}</p>
-    </md-list-item>
-</md-list>
+<table class="gradera-list" ng-cloak="">
+    <thead>
+        <tr>
+            <th>Namn</th>
+            <th class="hide-sm hide-md hide-xs">När</th>
+            <th class="hide-sm hide-md hide-xs">Var</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="competition in vm.Competitions" ng-click="vm.ShowCompetition(competition.Id)">
+            <td>{{competition.Name}}</td>
+            <td class="hide-sm hide-md">
+                {{competition.StartDate | date:'yyyy-MM-dd HH:mm'}}
+                <span class="hide-sm hide-md hide-xs">- {{competition.EndDate | date:'yyyy-MM-dd HH:mm'}}</span>
+            </td>
+            <td class="hide-sm hide-md hide-xs">{{competition.Location.name}}</td>
+        </tr>
+    </tbody>
+</table>

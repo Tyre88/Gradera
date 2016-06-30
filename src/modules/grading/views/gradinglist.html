@@ -4,19 +4,28 @@
     </h1>
 </md-toolbar>
 
-<md-list ng-cloak>
+<table class="gradera-list" ng-cloak>
+    <thead>
+        <tr>
+            <th>Namn</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="booklet in vm.Booklets" ng-click="vm.ShowBooklet(booklet.Id)">
+            <td>{{booklet.Name}}</td>
+        </tr>
+    </tbody>
+</table>
 
-    <md-list-item ng-repeat="booklet in vm.Booklets" ng-click="vm.ShowBooklet(booklet.Id)">
-        <p>{{booklet.Name}}</p>
-    </md-list-item>
-</md-list>
-
-<md-list ng-cloak ng-if="vm.Grades.length">
-    <md-subheader class="md-no-sticky">
-        Bältesgrader
-    </md-subheader>
-
-    <md-list-item ng-repeat="grade in vm.Grades" ng-click="vm.Show(grade.Id)">
-        <p>{{grade.Name}}</p>
-    </md-list-item>
-</md-list>
+<table class="gradera-list" ng-cloak ng-if="vm.Grades.length">
+    <thead>
+        <tr>
+            <th>Bältesgrader</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="grade in vm.Grades" ng-click="vm.Show(grade.Id)">
+            <td>{{grade.Name}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -5,29 +5,37 @@
 </md-toolbar>
 
 <span class="md-button md-raised" ng-click="vm.EditCompetition(0, $event);"><i class="fa fa-plus-circle"></i> Lägg till tävling</span>
-<md-list ng-cloak>
-    <md-list-item>
-        <p><b>Namn</b></p>
-        <p class="hide-sm hide-md hide-xs"><b>När</b></p>
-        <p class="hide-sm hide-md hide-xs"><b>Var</b></p>
-    </md-list-item>
 
-    <md-list-item ng-repeat="competition in vm.Competitions" ng-click="vm.EditCompetition(competition.Id, $event)">
-        <p>{{competition.Name}}</p>
-        <p class="hide-sm hide-md hide-xs">{{competition.StartDate | date:'yyyy-MM-dd HH:mm'}} - {{competition.EndDate | date:'yyyy-MM-dd HH:mm'}}</p>
-        <p class="hide-sm hide-md hide-xs">{{competition.Location.name}}</p>
-        <div class="more-icons md-secondary">
-            <i class="fa fa-file-excel-o md-hue-3" ng-click="vm.ExportCompetition(competition); $event.stopPropagation();">
-                <md-tooltip>
-                    Exportera tävling till excel för import i judo shiai
-                </md-tooltip>
-            </i>
+<table class="gradera-list" ng-cloak="">
+    <thead>
+        <tr>
+            <th>Namn</th>
+            <th class="hide-sm hide-md hide-xs">När</th>
+            <th class="hide-sm hide-md hide-xs">Var</th>
+            <th>Mer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="competition in vm.Competitions" ng-click="vm.EditCompetition(competition.Id, $event)">
+            <td>{{competition.Name}}</td>
+            <td class="hide-sm hide-md">
+                {{competition.StartDate | date:'yyyy-MM-dd HH:mm'}}
+                <span class="hide-sm hide-md hide-xs">- {{competition.EndDate | date:'yyyy-MM-dd HH:mm'}}</span>
+            </td>
+            <td class="hide-sm hide-md hide-xs">{{competition.Location.name}}</td>
+            <td>
+                <i class="fa fa-file-excel-o action-icon" ng-click="vm.ExportCompetition(competition); $event.stopPropagation();">
+                    <md-tooltip>
+                        Exportera tävling till excel för import i judo shiai
+                    </md-tooltip>
+                </i>
 
-            <i ng-if="$root.HasAccess(5, 40);" ng-click="vm.DeleteCompetition(competition); $event.stopPropagation();" class="fa fa-trash md-hue-3">
-                <md-tooltip>
-                    Ta bort tävling
-                </md-tooltip>
-            </i>
-        </div>
-    </md-list-item>
-</md-list>
+                <i ng-if="$root.HasAccess(5, 40);" ng-click="vm.DeleteCompetition(competition); $event.stopPropagation();" class="fa fa-trash action-icon">
+                    <md-tooltip>
+                        Ta bort tävling
+                    </md-tooltip>
+                </i>
+            </td>
+        </tr>
+    </tbody>
+</table>

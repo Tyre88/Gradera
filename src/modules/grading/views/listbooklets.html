@@ -11,22 +11,24 @@
 
 <span class="md-button md-raised" ng-click="vm.Edit(0);"><i class="fa fa-plus-circle"></i> Lägg till häfte</span>
 
-<md-list ng-cloak>
-
-    <md-list-item>
-        <p><b>Namn</b></p>
-    </md-list-item>
-
-    <md-list-item ng-repeat="booklet in vm.Booklets | filter:{ClubId: $root.UserService.User.Club.Id}" ng-click="vm.Edit(booklet.Id)">
-        <p>{{booklet.Name}}</p>
-
-        <div class="more-icons md-secondary">
-            <i ng-if="$root.HasAccess(3, 40)" ng-click="vm.Delete(booklet); $event.stopPropagation();"
-               class="fa fa-trash md-hue-3">
-                <md-tooltip>
-                    Ta bort {{booklet.Name}}
-                </md-tooltip>
-            </i>
-        </div>
-    </md-list-item>
-</md-list>
+<table class="gradera-list" ng-cloak="">
+    <thead>
+        <tr>
+            <th>Namn</th>
+            <th>Mer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="booklet in vm.Booklets | filter:{ClubId: $root.UserService.User.Club.Id}" ng-click="vm.Edit(booklet.Id)">
+            <td>{{booklet.Name}}</td>
+            <td>
+                <i ng-if="$root.HasAccess(3, 40)" ng-click="vm.Delete(booklet); $event.stopPropagation();"
+                   class="fa fa-trash action-icon">
+                    <md-tooltip>
+                        Ta bort {{booklet.Name}}
+                    </md-tooltip>
+                </i>
+            </td>
+        </tr>
+    </tbody>
+</table>
