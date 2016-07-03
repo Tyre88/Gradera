@@ -16,11 +16,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="contact in vm.Contacts" ng-click="vm.Edit(item.Id)">
+        <tr ng-repeat="contact in vm.Contacts" ng-click="vm.Edit(contact.Id)">
             <td>{{contact.FullName}}</td>
             <td>{{contact.Email}}</td>
             <td>
-                <i class="fa fa-edit action-icon" ng-click="vm.Edit(item.Id); $event.stopPropagation();">
+                <i class="fa fa-edit action-icon" ng-click="vm.Edit(contact.Id); $event.stopPropagation();">
                     <md-tooltip>
                         Redigera
                     </md-tooltip>

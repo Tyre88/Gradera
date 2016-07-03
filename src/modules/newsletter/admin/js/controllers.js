@@ -96,14 +96,16 @@
 
     angular.module('graderaklubb').controller('newsletter.admin.send', sendController);
 
-    sendController.$inject = ["$mdDialog", "accessrights-service", "newsletter.admin.service"];
+    sendController.$inject = ["$mdDialog", "accessrights-service", "newsletter.admin.service", "core.contact.admin.service"];
 
-    function sendController($mdDialog, accessrightsService, newsletterAdminService) {
+    function sendController($mdDialog, accessrightsService, newsletterAdminService, contactAdminService) {
         var vm = this;
         vm.Newsletter;
         vm.Accessrights = [];
+        vm.Contacts = [];
 
         vm.GetAccessRights = GetAccessRights;
+        vm.GetContacts = GetContacts;
         vm.Close = Close;
         vm.Send = Send;
 
@@ -115,12 +117,21 @@
             }
         }
 
+        function GetContacts() {
+            contactAdminService.GetAllContacts().success(GetContactsSuccess);
+
+            function GetContactsSuccess(response) {
+                vm.Contacts = response;
+            }
+        }
+
         function Close() {
             $mdDialog.hide();
         }
 
         function Send() {
             var accessrightIds = [];
+            var contactIds = [];
 
             for(var i = 0; i < vm.Accessrights.length; i++)
             {
@@ -128,7 +139,12 @@
                     accessrightIds.push(vm.Accessrights[i].Id);
             }
 
-            var sendNewsletterModel = { NewsletterId: vm.Newsletter.Id, AccessrightIds: accessrightIds };
+            for(var i = 0; i < vm.Contacts.length; i++) {
+                if(vm.Contacts[i].Checked == true)
+                    contactIds.push(vm.Contacts[i].Id);
+            }
+
+            var sendNewsletterModel = { NewsletterId: vm.Newsletter.Id, AccessrightIds: accessrightIds, ContactIds: contactIds };
 
             newsletterAdminService.SendNewsletter(sendNewsletterModel).success(SendNewsletterCallback);
 
@@ -138,6 +154,7 @@
         }
 
         vm.GetAccessRights();
+        vm.GetContacts();
     }
 
     angular.module('graderaklubb').controller('newsletter.admin.stats', statsController);

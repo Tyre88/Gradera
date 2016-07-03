@@ -162,6 +162,13 @@
                 templateUrl: "modules/core/contact/admin/views/contactlist.html",
                 controller: "core.contact.admin.list",
                 controllerAs: "vm"
+            })
+            .state('contactadminedit',
+            {
+                url: "/admin/contact/edit/:id",
+                templateUrl: "modules/core/contact/admin/views/editcontact.html",
+                controller: "core.contact.admin.edit",
+                controllerAs: "vm"
             });
     }
 }(window.angular));

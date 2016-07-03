@@ -1,14 +1,45 @@
+<style>
+    .newsletter-send-container {
+        display: flex;
+        min-width: 600px;
+    }
+
+    .newsletter-send-container > div {
+        flex: 1;
+    }
+</style>
+
 <md-dialog>
     <md-dialog-content>
         <h2 class="dialog-header">Skicka nyhetsbrev</h2>
 
-        <p>Skicka till grupper:</p>
-        <div ng-repeat="accessright in vm.Accessrights">
-            <md-checkbox ng-model="accessright.Checked" aria-label="{{accessright.Name}}">
-                {{accessright.Name}}
-                <md-tooltip>{{accessright.Description}}</md-tooltip>
-            </md-checkbox>
+        <div class="newsletter-send-container">
+            <div>
+                <p>Skicka till grupper:</p>
+                <div ng-repeat="accessright in vm.Accessrights">
+                    <md-checkbox ng-model="accessright.Checked" aria-label="{{accessright.Name}}">
+                        {{accessright.Name}}
+                        <md-tooltip>{{accessright.Description}}</md-tooltip>
+                    </md-checkbox>
+                </div>
+            </div>
+
+            <div>
+                <p>Skicka till kontakter</p>
+                <md-input-container>
+                    <label>Sök kontakt</label>
+                    <input type="text" ng-model="vm.ContactSearch" />
+                </md-input-container>
+
+                <div ng-repeat="contact in vm.Contacts">
+                    <md-checkbox ng-model="contact.Checked" aria-label="{{contact.FullName}}">
+                        {{contact.FullName}}
+                        <md-tooltip>{{contact.Email}}</md-tooltip>
+                    </md-checkbox>
+                </div>
+            </div>
         </div>
+
     </md-dialog-content>
     <md-dialog-actions>
         <md-button class="md-raised md-primary" ng-click="vm.Send();">Skicka</md-button>

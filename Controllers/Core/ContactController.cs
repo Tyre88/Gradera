@@ -3,6 +3,7 @@ using Gradera.Core.DAL;
 using Gradera.Core.Entities;
 using Gradera.Core.Enums;
 using Gradera.Core.Filters;
+using Gradera.Core.Helpers;
 using Gradera_Klubb.Models.Core;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,16 @@ namespace Gradera_Klubb.Controllers.Core
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             Contact contact = ContactBLL.GetContact(contactId);
-            response.Content = new ObjectContent<Contact>(contact, new JsonMediaTypeFormatter());
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            if (loggedInUser.AccountSession.ClubId == contact.ClubId)
+                response.Content = new ObjectContent<ContactModel>(new ContactModel(contact), new JsonMediaTypeFormatter());
+            else
+            {
+                LogHelper.LogWarn(string.Format("UserId: {0} trying to get a contact outside of the club, contact: {1}",
+                    loggedInUser.AccountSession.AccountId, contactId), null, loggedInUser.AccountSession.ClubId);
+                response.StatusCode = HttpStatusCode.Forbidden;
+            }
+                
             return response;
         }
 
@@ -44,8 +54,37 @@ namespace Gradera_Klubb.Controllers.Core
         public HttpResponseMessage GetContactForEmail(string email, int clubId)
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-
             Contact contact = ContactBLL.GetContactForEmail(email, clubId);
+            response.Content = new ObjectContent<ContactModel>(new ContactModel(contact), new JsonMediaTypeFormatter());
+            return response;
+        }
+
+        [HttpPost]
+        [AuthorizeFilter(AccessType = AccessType.Contact, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage SaveContact(Contact contact)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            ContactBLL.SaveContact(contact, loggedInUser.AccountSession.ClubId);
+            return response;
+        }
+
+        [HttpDelete]
+        [AuthorizeFilter(AccessType = AccessType.Contact, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage DeleteContact(int contactId)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+
+            Contact contact = ContactBLL.GetContact(contactId);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            if (loggedInUser.AccountSession.ClubId == contact.ClubId)
+                ContactBLL.DeleteContact(contact);
+            else
+            {
+                LogHelper.LogWarn(string.Format("UserId: {0} trying to delete a contact outside of the club, contact: {1}",
+                    loggedInUser.AccountSession.AccountId, contactId), null, loggedInUser.AccountSession.ClubId);
+                response.StatusCode = HttpStatusCode.Forbidden;
+            }
 
             return response;
         }

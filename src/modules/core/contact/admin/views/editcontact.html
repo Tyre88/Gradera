@@ -1,0 +1,41 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
+        Redigera {{vm.Contact.FullName}}
+    </h1>
+</md-toolbar>
+
+<form name="editContact" ng-submit="vm.Save()">
+
+    <div class="edit-container">
+        <md-input-container>
+            <label>Förnamn</label>
+            <input type="text" ng-model="vm.Contact.FirstName" required name="firstname" />
+            <div ng-messages="editContact.firstname.$error">
+                <div ng-message="required">Du måste fylla i ett förnamn</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Efternamn</label>
+            <input type="text" ng-model="vm.Contact.LastName" name="lastname" />
+        </md-input-container>
+
+        <md-input-container>
+            <label>E-post</label>
+            <input type="text" ng-model="vm.Contact.Email" required name="email" />
+            <div ng-messages="editContact.email.$error">
+                <div ng-message="required">Du måste fylla i en e-post</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Telefon</label>
+            <input type="text" ng-model="vm.Contact.Phone" name="phone" />
+        </md-input-container>
+    </div>
+
+    <div>
+        <md-button class="md-raised md-primary" type="submit">Spara</md-button>
+        <md-button class="md-raised md-warn" ng-click="vm.Back();">Avbryt</md-button>
+    </div>
+</form>
