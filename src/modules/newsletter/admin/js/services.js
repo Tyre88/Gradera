@@ -23,5 +23,9 @@
         this.GetNewsletterStatsByNewsletterId = function(id) {
             return $http.get('/api/NewsletterAdmin/GetNewsletterStatsByNewsletterId?' + $.param({id: id}));
         };
+
+        this.Delete = function(newsletterId) {
+            return $http.delete('/api/NewsletterAdmin/DeleteNewsletter?' + $.param({newsletterId: newsletterId}));
+        };
     }
 }(window.angular));

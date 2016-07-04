@@ -32,7 +32,19 @@
         }
 
         function Delete(newsletter) {
+            var confirm = $mdDialog.confirm()
+                .title('Är du säker på att du vill ta bort ' + newsletter.Name +  '?')
+                .ariaLabel('Ta bort nyhetsbrev?')
+                .ok('Ja')
+                .cancel('Nej');
 
+            $mdDialog.show(confirm).then(function() {
+                newsletterAdminService.Delete(newsletter.Id).success(DeleteSuccess);
+            });
+
+            function DeleteSuccess() {
+                vm.Newsletters.splice(vm.Newsletters.indexOf(newsletter), 1);
+            }
         }
 
         function SendNewsletter(newsletter) {
