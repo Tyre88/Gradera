@@ -5,6 +5,7 @@
 </md-toolbar>
 
 <span class="md-button md-raised" ng-click="vm.Edit(0);"><i class="fa fa-plus-circle"></i> Lägg till </span>
+<span ng-if="$root.HasAccess(9, 40);" class="md-button md-raised" ng-click="vm.CsvImport();"><i class="fa fa-download"></i> CSV import </span>
 
 
 <table class="gradera-list" ng-cloak="">

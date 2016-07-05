@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
@@ -84,6 +85,27 @@ namespace Gradera_Klubb.Controllers.Core
                 LogHelper.LogWarn(string.Format("UserId: {0} trying to delete a contact outside of the club, contact: {1}",
                     loggedInUser.AccountSession.AccountId, contactId), null, loggedInUser.AccountSession.ClubId);
                 response.StatusCode = HttpStatusCode.Forbidden;
+            }
+
+            return response;
+        }
+
+        [HttpPost, HttpOptions]
+        [AuthorizeFilter(AccessType = AccessType.Contact, AccessTypeRight = AccessTypeRight.Admin)]
+        public async Task<HttpResponseMessage> CsvImport()
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                response.StatusCode = HttpStatusCode.UnsupportedMediaType;
+            }
+            else
+            {
+                UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+                MultipartMemoryStreamProvider provider = new MultipartMemoryStreamProvider();
+                await Request.Content.ReadAsMultipartAsync(provider);
+                Task<byte[]> fileData = provider.Contents.First().ReadAsByteArrayAsync();
+                ContactBLL.CsvImport(fileData.Result, loggedInUser.AccountSession.ClubId);
             }
 
             return response;

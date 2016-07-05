@@ -1,7 +1,7 @@
 <style>
     .newsletter-send-container {
         display: flex;
-        min-width: 600px;
+        min-width: 700px;
     }
 
     .newsletter-send-container > div {
@@ -31,7 +31,7 @@
                     <input type="text" ng-model="vm.ContactSearch" />
                 </md-input-container>
 
-                <div ng-repeat="contact in vm.Contacts">
+                <div ng-repeat="contact in vm.Contacts | filter:vm.ContactSearch">
                     <md-checkbox ng-model="contact.Checked" aria-label="{{contact.FullName}}">
                         {{contact.FullName}}
                         <md-tooltip>{{contact.Email}}</md-tooltip>
