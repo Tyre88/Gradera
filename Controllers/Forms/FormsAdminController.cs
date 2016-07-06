@@ -42,7 +42,6 @@ namespace Gradera_Klubb.Controllers.Forms
 
         [HttpGet]
         [AuthorizeFilter(AccessType = AccessType.Forms, AccessTypeRight = AccessTypeRight.Write)]
-        [ObjectChangeFilter(IdentifierProperty = "Id", ChangeType = ChangeType.Get)]
         public HttpResponseMessage GetForm(int id)
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
@@ -54,7 +53,6 @@ namespace Gradera_Klubb.Controllers.Forms
 
         [HttpPost, HttpOptions]
         [AuthorizeFilter(AccessType = AccessType.Forms, AccessTypeRight = AccessTypeRight.Write)]
-        [ObjectChangeFilter(IdentifierProperty = "Id", ChangeType = ChangeType.Save)]
         public HttpResponseMessage SaveForm(FormModel form)
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);

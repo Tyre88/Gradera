@@ -50,6 +50,10 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                     return false;
                 };
 
+                $rootScope.IsModuleEnabled = function(moduleId) {
+                    return $rootScope.EnabledModules.indexOf(moduleId) >= 0;
+                };
+
                 $rootScope.setObjectValues = function(assemblyhash, objecthash, getdatetime, forcesave) {
                     objectChange.setValues(assemblyhash, objecthash, getdatetime, forcesave);
                 };

@@ -19,6 +19,13 @@
 
                         clubService.GetModuleLinks().success(function(response) {
                             $rootScope.Links = response;
+                            $rootScope.EnabledModules = [];
+
+                            for(var i = 0; i < $rootScope.Links.length; i++) {
+                                if($rootScope.EnabledModules.indexOf($rootScope.Links[i].ModuleId) < 0)
+                                    $rootScope.EnabledModules.push($rootScope.Links[i].ModuleId);
+                            }
+
                             $state.go ('home');
                         });
                     }).error(function() {
