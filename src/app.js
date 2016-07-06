@@ -481,7 +481,10 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                 });
             };
         }])
-        .directive('ckEditor', ckEditorDirective);
+        .directive('ckEditor', ckEditorDirective)
+        .constant('pagingValues', {
+            "PageSize": 25
+        });
 
     function ckEditorDirective() {
         return {

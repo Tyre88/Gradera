@@ -322,7 +322,7 @@ module.exports = function (grunt)
                         'src/filters.js',
                         'src/routing.js',
                         'src/adminrouting.js',
-                        'src/directives/helpers.js',
+                        'src/directives/*.js',
                         'src/modules/**/*.js'
                     ],
                     'dist/content/css/modules.css': [

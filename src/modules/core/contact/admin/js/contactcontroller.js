@@ -3,15 +3,15 @@
     angular.module('graderaklubb').controller('core.contact.admin.edit', editController);
     angular.module('graderaklubb').controller('core.contact.admin.csvimport', csvimportController);
 
-    listController.$inject = ["$state", "core.contact.admin.service", "$mdDialog"];
+    listController.$inject = ["$state", "core.contact.admin.service", "$mdDialog", "pagingValues"];
     editController.$inject = ["$state", "$stateParams", "core.contact.admin.service"];
     csvimportController.$inject = ["$mdDialog", "core.contact.admin.service"];
 
-    function listController($state, contactAdminService, $mdDialog) {
+    function listController($state, contactAdminService, $mdDialog, pagingValues) {
         var vm = this;
         vm.Contacts = [];
         vm.CurrentPage = 1;
-        vm.PageSize = 10;
+        vm.PageSize = pagingValues.PageSize;
 
         vm.GetContacts = GetContacts;
         vm.Edit = Edit;

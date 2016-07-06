@@ -30,13 +30,17 @@
                     <label>Sök kontakt</label>
                     <input type="text" ng-model="vm.ContactSearch" />
                 </md-input-container>
+                <div></div>
+                <md-checkbox ng-click="vm.ToggleAll()" md-indeterminate="vm.IsIndeterminate()" ng-checked="vm.IsAllChecked()">Markera alla</md-checkbox>
 
-                <div ng-repeat="contact in vm.Contacts | filter:vm.ContactSearch">
-                    <md-checkbox ng-model="contact.Checked" aria-label="{{contact.FullName}}">
+                <div ng-repeat="contact in vm.Contacts | startFrom:{Page: vm.CurrentPage, PageSize: vm.PageSize, Filter: vm.ContactSearch}">
+                    <md-checkbox ng-checked="vm.IsChecked(contact)" ng-click="vm.Toggle(contact)" aria-label="{{contact.FullName}}">
                         {{contact.FullName}}
                         <md-tooltip>{{contact.Email}}</md-tooltip>
                     </md-checkbox>
                 </div>
+
+                <gk-paging total-size="vm.Contacts.length" current-page="vm.CurrentPage" limit-to="3"></gk-paging>
             </div>
         </div>
 

@@ -108,18 +108,27 @@
 
     angular.module('graderaklubb').controller('newsletter.admin.send', sendController);
 
-    sendController.$inject = ["$mdDialog", "accessrights-service", "newsletter.admin.service", "core.contact.admin.service"];
+    sendController.$inject = ["$scope", "$mdDialog", "accessrights-service", "newsletter.admin.service", "core.contact.admin.service", "pagingValues"];
 
-    function sendController($mdDialog, accessrightsService, newsletterAdminService, contactAdminService) {
+    function sendController($scope, $mdDialog, accessrightsService, newsletterAdminService, contactAdminService, pagingValues) {
         var vm = this;
         vm.Newsletter;
         vm.Accessrights = [];
         vm.Contacts = [];
+        vm.CurrentPage = 1;
+        vm.PageSize = pagingValues.PageSize;
+        vm.IsAllChecked = false;
+        vm.CheckedContacts = [];
 
         vm.GetAccessRights = GetAccessRights;
         vm.GetContacts = GetContacts;
         vm.Close = Close;
         vm.Send = Send;
+        vm.IsIndeterminate = IsIndeterminate;
+        vm.IsAllChecked = IsAllChecked;
+        vm.ToggleAll = ToggleAll;
+        vm.IsChecked = IsChecked;
+        vm.Toggle = Toggle;
 
         function GetAccessRights() {
             accessrightsService.GetAccessRights().success(GetAccessRightsCallback);
@@ -151,9 +160,8 @@
                     accessrightIds.push(vm.Accessrights[i].Id);
             }
 
-            for(var i = 0; i < vm.Contacts.length; i++) {
-                if(vm.Contacts[i].Checked == true)
-                    contactIds.push(vm.Contacts[i].Id);
+            for(var i = 0; i < vm.CheckedContacts.length; i++) {
+                    contactIds.push(vm.CheckedContacts[i].Id);
             }
 
             var sendNewsletterModel = { NewsletterId: vm.Newsletter.Id, AccessrightIds: accessrightIds, ContactIds: contactIds };
@@ -163,6 +171,32 @@
             function SendNewsletterCallback() {
                 vm.Close();
             }
+        }
+
+        function IsIndeterminate() {
+            return (vm.CheckedContacts.length !== 0 && vm.CheckedContacts.length !== vm.Contacts.length);
+        }
+
+        function IsAllChecked() {
+            return vm.CheckedContacts.length === vm.Contacts.length;
+        }
+
+        function ToggleAll() {
+            if(IsAllChecked())
+                vm.CheckedContacts = [];
+            else
+                vm.CheckedContacts = angular.copy(vm.Contacts);
+        }
+
+        function IsChecked(item) {
+            return vm.CheckedContacts.GetItemByValue('Id', item.Id) !== null;
+        }
+
+        function Toggle(item) {
+            if(vm.IsChecked(item))
+                vm.CheckedContacts.splice(item, 1);
+            else
+                vm.CheckedContacts.push(item);
         }
 
         vm.GetAccessRights();
