@@ -1,3 +1,3 @@
-<md-button class="md-fab md-button md-mini md-primary" md-no-ink ng-click="vm.ChangePage(vm.currentPage - 1)" ng-if="vm.currentPage > 1"> < </md-button>
+<md-button class="md-fab md-button md-mini md-primary" md-no-ink ng-click="vm.ChangePage(vm.currentPage - 1)" ng-if="vm.currentPage > 1"> &lt; </md-button>
 <md-button class="md-fab md-button md-mini" md-no-ink ng-class="{'md-primary': page == vm.currentPage}" ng-click="vm.ChangePage(page)" ng-repeat="page in vm.pages | limitTo:vm.limitTo:vm.GetStartIndex()">{{::page}}</md-button>
-<md-button class="md-fab md-button md-mini md-primary" md-no-ink ng-click="vm.ChangePage(vm.currentPage + 1)" ng-if="vm.currentPage < vm.totalPages"> > </md-button>
+<md-button class="md-fab md-button md-mini md-primary" md-no-ink ng-click="vm.ChangePage(vm.currentPage + 1)" ng-if="vm.currentPage < vm.totalPages"> &gt; </md-button>
