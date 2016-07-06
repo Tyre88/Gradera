@@ -319,6 +319,7 @@ module.exports = function (grunt)
                     ],
                     'dist/application.js': [
                         'src/app.js',
+                        'src/filters.js',
                         'src/routing.js',
                         'src/adminrouting.js',
                         'src/directives/helpers.js',

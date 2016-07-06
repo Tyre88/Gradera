@@ -10,6 +10,8 @@
     function listController($state, contactAdminService, $mdDialog) {
         var vm = this;
         vm.Contacts = [];
+        vm.CurrentPage = 1;
+        vm.PageSize = 10;
 
         vm.GetContacts = GetContacts;
         vm.Edit = Edit;

@@ -5,7 +5,13 @@
 </md-toolbar>
 
 <span class="md-button md-raised" ng-click="vm.Edit(0);"><i class="fa fa-plus-circle"></i> Lägg till </span>
-<span ng-if="$root.HasAccess(9, 40);" class="md-button md-raised" ng-click="vm.CsvImport();"><i class="fa fa-download"></i> CSV import </span>
+<span ng-if="$root.HasAccess(9, 40);" class="md-button md-raised" ng-click="vm.CsvImport();"><i class="fa fa-download"></i> CSV import (Outlook) </span>
+
+<div>
+    <md-input-container md-no-float>
+        <input type="text" ng-model="vm.Filter" placeholder="Sök kontakt" ng-model-options="{debounce: 300}" />
+    </md-input-container>
+</div>
 
 
 <table class="gradera-list" ng-cloak="">
@@ -17,7 +23,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="contact in vm.Contacts" ng-click="vm.Edit(contact.Id)">
+        <tr ng-repeat="contact in vm.Contacts | startFrom:{Page: vm.CurrentPage, PageSize: vm.PageSize, Filter: vm.Filter}" ng-click="vm.Edit(contact.Id)">
             <td>{{contact.FullName}}</td>
             <td>{{contact.Email}}</td>
             <td>

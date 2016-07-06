@@ -105,7 +105,8 @@ namespace Gradera_Klubb.Controllers.Core
                 MultipartMemoryStreamProvider provider = new MultipartMemoryStreamProvider();
                 await Request.Content.ReadAsMultipartAsync(provider);
                 Task<byte[]> fileData = provider.Contents.First().ReadAsByteArrayAsync();
-                ContactBLL.CsvImport(fileData.Result, loggedInUser.AccountSession.ClubId);
+                int importCount = ContactBLL.CsvImport(fileData.Result, loggedInUser.AccountSession.ClubId);
+                response.Content = new ObjectContent<int>(importCount, new JsonMediaTypeFormatter());
             }
 
             return response;
