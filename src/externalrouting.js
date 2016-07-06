@@ -25,6 +25,13 @@
                 templateUrl: "external/forms/views/showform.html",
                 controller: "showexternalform",
                 controllerAs: "vm"
+            })
+            .state('unsubscribe',
+            {
+                url: "/unsubscribe/:guid",
+                templateUrl: "external/newsletter/views/unsubscribe.html",
+                controller: "external.newsletter.unsubscribe",
+                controllerAs: "vm"
             });
 
         $urlRouterProvider.otherwise('/');
