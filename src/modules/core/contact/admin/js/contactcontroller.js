@@ -3,11 +3,11 @@
     angular.module('graderaklubb').controller('core.contact.admin.edit', editController);
     angular.module('graderaklubb').controller('core.contact.admin.csvimport', csvimportController);
 
-    listController.$inject = ["$state", "core.contact.admin.service", "$mdDialog", "pagingValues"];
+    listController.$inject = ["$rootScope", "$state", "core.contact.admin.service", "$mdDialog", "pagingValues"];
     editController.$inject = ["$state", "$stateParams", "core.contact.admin.service"];
-    csvimportController.$inject = ["$mdDialog", "core.contact.admin.service"];
+    csvimportController.$inject = ["$rootScope", "$mdDialog", "core.contact.admin.service", "$mdToast"];
 
-    function listController($state, contactAdminService, $mdDialog, pagingValues) {
+    function listController($rootScope, $state, contactAdminService, $mdDialog, pagingValues) {
         var vm = this;
         vm.Contacts = [];
         vm.CurrentPage = 1;
@@ -22,6 +22,7 @@
             contactAdminService.GetAllContacts().success(GetAllContactsSuccess);
 
             function GetAllContactsSuccess(response) {
+                vm.Contacts = [];
                 vm.Contacts = response;
             }
         }
@@ -59,6 +60,8 @@
         }
 
         vm.GetContacts();
+
+        $rootScope.$on('contact.csv.import.done', vm.GetContacts);
     }
 
     function editController($state, $stateParams, contactAdminService) {
@@ -91,7 +94,7 @@
         vm.GetContact();
     }
 
-    function csvimportController($mdDialog, contactAdminService) {
+    function csvimportController($rootScope, $mdDialog, contactAdminService, $mdToast) {
         var vm = this;
         vm.File = undefined;
 
@@ -107,7 +110,14 @@
         function Import() {
             contactAdminService.CsvImport(vm.File, CsvImportSuccess);
 
-            function CsvImportSuccess() {
+            function CsvImportSuccess(response) {
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent(response.data + ' kontakter importerade!')
+                );
+
+                $rootScope.$broadcast('contact.csv.import.done');
+
                 vm.Close();
             }
         }
