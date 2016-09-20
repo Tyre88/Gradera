@@ -2,13 +2,14 @@
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.1.0-rc4-master-2806ec8
+ * v1.1.1-master-72d0685
  */
-goog.provide('ng.material.components.fabShared');
-goog.require('ng.material.core');
+goog.provide('ngmaterial.components.fabShared');
+goog.require('ngmaterial.core');
 (function() {
   'use strict';
 
+  MdFabController.$inject = ["$scope", "$element", "$animate", "$mdUtil", "$mdConstant", "$timeout"];
   angular.module('material.components.fabShared', ['material.core'])
     .controller('MdFabController', MdFabController);
 
@@ -52,7 +53,7 @@ goog.require('ng.material.core');
       resetActionIndex();
 
       // Add an animations waiting class so we know not to run
-      $element.addClass('_md-animations-waiting');
+      $element.addClass('md-animations-waiting');
     }
 
     function setupListeners() {
@@ -152,7 +153,7 @@ goog.require('ng.material.core');
         // Fire our animation
         $animate.addClass($element, '_md-animations-ready').then(function() {
           // Remove the waiting class
-          $element.removeClass('_md-animations-waiting');
+          $element.removeClass('md-animations-waiting');
         });
       }
 
@@ -301,7 +302,6 @@ goog.require('ng.material.core');
       return $element.find('md-fab-actions');
     }
   }
-  MdFabController.$inject = ["$scope", "$element", "$animate", "$mdUtil", "$mdConstant", "$timeout"];
 })();
 
 (function() {
@@ -312,6 +312,8 @@ goog.require('ng.material.core');
    *
    * @type {number}
    */
+  MdFabSpeedDialFlingAnimation.$inject = ["$timeout"];
+  MdFabSpeedDialScaleAnimation.$inject = ["$timeout"];
   var cssAnimationDuration = 300;
 
   /**
@@ -323,7 +325,6 @@ goog.require('ng.material.core');
     .module('material.components.fabSpeedDial', [
       'material.core',
       'material.components.fabShared',
-      'material.components.fabTrigger',
       'material.components.fabActions'
     ])
 
@@ -383,16 +384,16 @@ goog.require('ng.material.core');
    * <hljs lang="html">
    * <md-fab-speed-dial md-direction="up" class="md-fling">
    *   <md-fab-trigger>
-   *     <md-button aria-label="Add..."><md-icon icon="/img/icons/plus.svg"></md-icon></md-button>
+   *     <md-button aria-label="Add..."><md-icon md-svg-src="/img/icons/plus.svg"></md-icon></md-button>
    *   </md-fab-trigger>
    *
    *   <md-fab-actions>
    *     <md-button aria-label="Add User">
-   *       <md-icon icon="/img/icons/user.svg"></md-icon>
+   *       <md-icon md-svg-src="/img/icons/user.svg"></md-icon>
    *     </md-button>
    *
    *     <md-button aria-label="Add Group">
-   *       <md-icon icon="/img/icons/group.svg"></md-icon>
+   *       <md-icon md-svg-src="/img/icons/group.svg"></md-icon>
    *     </md-button>
    *   </md-fab-actions>
    * </md-fab-speed-dial>
@@ -429,7 +430,7 @@ goog.require('ng.material.core');
 
     function runAnimation(element) {
       // Don't run if we are still waiting and we are not ready
-      if (element.hasClass('_md-animations-waiting') && !element.hasClass('_md-animations-ready')) {
+      if (element.hasClass('md-animations-waiting') && !element.hasClass('_md-animations-ready')) {
         return;
       }
 
@@ -512,9 +513,8 @@ goog.require('ng.material.core');
         runAnimation(element);
         delayDone(done);
       }
-    }
+    };
   }
-  MdFabSpeedDialFlingAnimation.$inject = ["$timeout"];
 
   function MdFabSpeedDialScaleAnimation($timeout) {
     function delayDone(done) { $timeout(done, cssAnimationDuration, false); }
@@ -556,9 +556,8 @@ goog.require('ng.material.core');
         runAnimation(element);
         delayDone(done);
       }
-    }
+    };
   }
-  MdFabSpeedDialScaleAnimation.$inject = ["$timeout"];
 })();
 
-ng.material.components.fabShared = angular.module("material.components.fabShared");
+ngmaterial.components.fabShared = angular.module("material.components.fabShared");
