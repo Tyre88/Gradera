@@ -108,9 +108,9 @@
 
     angular.module('graderaklubb').controller('newsletter.admin.send', sendController);
 
-    sendController.$inject = ["$scope", "$mdDialog", "accessrights-service", "newsletter.admin.service", "core.contact.admin.service", "pagingValues"];
+    sendController.$inject = ["$rootScope", "$scope", "$mdDialog", "accessrights-service", "newsletter.admin.service", "core.contact.admin.service", "pagingValues"];
 
-    function sendController($scope, $mdDialog, accessrightsService, newsletterAdminService, contactAdminService, pagingValues) {
+    function sendController($rootScope, $scope, $mdDialog, accessrightsService, newsletterAdminService, contactAdminService, pagingValues) {
         var vm = this;
         vm.Newsletter;
         vm.Accessrights = [];
@@ -129,6 +129,8 @@
         vm.ToggleAll = ToggleAll;
         vm.IsChecked = IsChecked;
         vm.Toggle = Toggle;
+
+        vm.ContactsEnabled = $rootScope.HasAccess(9, 2);
 
         function GetAccessRights() {
             accessrightsService.GetAccessRights().success(GetAccessRightsCallback);
@@ -200,7 +202,8 @@
         }
 
         vm.GetAccessRights();
-        vm.GetContacts();
+        if(vm.ContactsEnabled === true)
+            vm.GetContacts();
     }
 
     angular.module('graderaklubb').controller('newsletter.admin.stats', statsController);
