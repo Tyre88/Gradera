@@ -1,47 +1,82 @@
 <style>
     .newsletter-send-container {
-        display: flex;
         min-width: 700px;
-    }
-
-    .newsletter-send-container > div {
-        flex: 1;
     }
 </style>
 
 <md-dialog>
     <md-dialog-content>
         <h2 class="dialog-header">Skicka nyhetsbrev</h2>
-
         <div class="newsletter-send-container">
-            <div>
-                <p>Skicka till grupper:</p>
-                <div ng-repeat="accessright in vm.Accessrights">
-                    <md-checkbox ng-model="accessright.Checked" aria-label="{{accessright.Name}}">
-                        {{accessright.Name}}
-                        <md-tooltip>{{accessright.Description}}</md-tooltip>
-                    </md-checkbox>
-                </div>
-            </div>
 
-            <div ng-if="vm.ContactsEnabled">
-                <p>Skicka till kontakter</p>
-                <md-input-container>
-                    <label>Sök kontakt</label>
-                    <input type="text" ng-model="vm.ContactSearch" />
-                </md-input-container>
-                <div></div>
-                <md-checkbox ng-click="vm.ToggleAll()" md-indeterminate="vm.IsIndeterminate()" ng-checked="vm.IsAllChecked()">Markera alla</md-checkbox>
+            <md-tabs>
+                <md-tab label="Grupper">
+                    <md-content>
+                        <div>
+                            <p>Skicka till grupper:</p>
+                            <div ng-repeat="accessright in vm.Accessrights">
+                                <md-checkbox ng-model="accessright.Checked" aria-label="{{accessright.Name}}">
+                                    {{accessright.Name}}
+                                    <md-tooltip>{{accessright.Description}}</md-tooltip>
+                                </md-checkbox>
+                            </div>
+                        </div>
+                    </md-content>
+                </md-tab>
 
-                <div ng-repeat="contact in vm.Contacts | startFrom:{Page: vm.CurrentPage, PageSize: vm.PageSize, Filter: vm.ContactSearch}">
-                    <md-checkbox ng-checked="vm.IsChecked(contact)" ng-click="vm.Toggle(contact)" aria-label="{{contact.FullName}}">
-                        {{contact.FullName}}
-                        <md-tooltip>{{contact.Email}}</md-tooltip>
-                    </md-checkbox>
-                </div>
+                <md-tab label="Kontakter" ng-if="vm.ContactsEnabled">
+                    <md-content>
+                        <div>
+                            <p>Skicka till kontakter</p>
+                            <md-input-container>
+                                <label>Sök kontakt</label>
+                                <input type="text" ng-model="vm.ContactSearch" />
+                            </md-input-container>
+                            <div></div>
+                            <md-checkbox ng-click="vm.ToggleAll()" md-indeterminate="vm.IsIndeterminate()" ng-checked="vm.IsAllChecked()">Markera alla</md-checkbox>
 
-                <gk-paging total-size="vm.Contacts.length" current-page="vm.CurrentPage" limit-to="3"></gk-paging>
-            </div>
+                            <div ng-repeat="contact in vm.Contacts | startFrom:{Page: vm.CurrentPage, PageSize: vm.PageSize, Filter: vm.ContactSearch}">
+                                <md-checkbox ng-checked="vm.IsChecked(contact)" ng-click="vm.Toggle(contact)" aria-label="{{contact.FullName}}">
+                                    {{contact.FullName}}
+                                    <md-tooltip>{{contact.Email}}</md-tooltip>
+                                </md-checkbox>
+                            </div>
+
+                            <gk-paging total-size="vm.Contacts.length" current-page="vm.CurrentPage" limit-to="3"></gk-paging>
+                        </div>
+                    </md-content>
+                </md-tab>
+
+                <md-tab label="Formulär" ng-if="vm.FormsEnabled">
+                    <md-content>
+                        <p>Skicka till personer som har fyllt i ett formulär.</p>
+                        <md-input-container>
+                            <label>Formulär: </label>
+                            <md-select ng-model="vm.SelectedFormId" ng-change="vm.SelectForm(vm.SelectedFormId);">
+                                <md-option ng-repeat="form in vm.Forms" ng-value="form.Id">
+                                    {{form.Name}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <div ng-if="vm.SelectedFormId > 0">
+                            <md-input-container>
+                                <label>Fält som innehåller e-post: </label>
+                                <md-select ng-model="vm.SelectedFormField">
+                                    <md-option ng-repeat="formField in vm.SelectedForm.FormFields | filter:{Type: 'input'}:true" ng-value="formField.Id">
+                                        {{formField.Label}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+
+
+                            <pre>
+                                {{vm.SelectedForm | json}}
+                            </pre>
+                        </div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
         </div>
 
     </md-dialog-content>

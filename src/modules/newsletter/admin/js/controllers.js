@@ -108,13 +108,16 @@
 
     angular.module('graderaklubb').controller('newsletter.admin.send', sendController);
 
-    sendController.$inject = ["$rootScope", "$scope", "$mdDialog", "accessrights-service", "newsletter.admin.service", "core.contact.admin.service", "pagingValues"];
+    sendController.$inject = ["$rootScope", "$scope", "$mdDialog", "accessrights-service", "newsletter.admin.service", "core.contact.admin.service", "pagingValues", "forms-admin-service"];
 
-    function sendController($rootScope, $scope, $mdDialog, accessrightsService, newsletterAdminService, contactAdminService, pagingValues) {
+    function sendController($rootScope, $scope, $mdDialog, accessrightsService, newsletterAdminService, contactAdminService, pagingValues, formsAdminService) {
         var vm = this;
         vm.Newsletter;
         vm.Accessrights = [];
         vm.Contacts = [];
+        vm.Forms = [];
+        vm.SelectedFormId = 0;
+        vm.SelectedForm = {};
         vm.CurrentPage = 1;
         vm.PageSize = pagingValues.PageSize;
         vm.IsAllChecked = false;
@@ -129,8 +132,12 @@
         vm.ToggleAll = ToggleAll;
         vm.IsChecked = IsChecked;
         vm.Toggle = Toggle;
+        vm.GetForms = GetForms;
+        vm.SelectForm = SelectForm;
+        vm.GetForm = GetForm;
 
         vm.ContactsEnabled = $rootScope.HasAccess(9, 2);
+        vm.FormsEnabled = $rootScope.HasAccess(6, 2);
 
         function GetAccessRights() {
             accessrightsService.GetAccessRights().success(GetAccessRightsCallback);
@@ -201,9 +208,32 @@
                 vm.CheckedContacts.push(item);
         }
 
+        function GetForms() {
+            formsAdminService.GetForms().success(GetFormsSuccess);
+
+            function GetFormsSuccess(response) {
+                vm.Forms = response;
+            }
+        }
+
+        function SelectForm(formId) {
+            vm.GetForm(formId);
+        }
+
+        function GetForm(formId) {
+            formsAdminService.GetForm(formId).success(GetFormSuccess);
+
+            function GetFormSuccess(response) {
+                vm.SelectedForm = response;
+            }
+        }
+
         vm.GetAccessRights();
         if(vm.ContactsEnabled === true)
             vm.GetContacts();
+
+        if(vm.FormsEnabled === true)
+            vm.GetForms();
     }
 
     angular.module('graderaklubb').controller('newsletter.admin.stats', statsController);
