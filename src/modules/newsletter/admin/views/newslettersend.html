@@ -62,7 +62,7 @@
                         <div ng-if="vm.SelectedFormId > 0">
                             <md-input-container>
                                 <label>Fält som innehåller e-post: </label>
-                                <md-select ng-model="vm.SelectedFormField">
+                                <md-select ng-model="vm.SelectedFormFieldId">
                                     <md-option ng-repeat="formField in vm.SelectedForm.FormFields | filter:{Type: 'input'}:true" ng-value="formField.Id">
                                         {{formField.Label}}
                                     </md-option>

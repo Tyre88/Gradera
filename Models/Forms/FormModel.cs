@@ -70,7 +70,7 @@ namespace Gradera_Klubb.Models.Forms
                 IsExternal = model.IsExternal,
                 Name = model.Name,
                 StartDate = model.StartDate.ToUniversalTime(),
-                Description = model.Description
+                Description = model.Description ?? string.Empty
             };
 
             foreach (var item in model.FormFields)

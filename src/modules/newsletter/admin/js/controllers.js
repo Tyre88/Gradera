@@ -162,18 +162,24 @@
         function Send() {
             var accessrightIds = [];
             var contactIds = [];
+            var formFieldId = -1;
 
-            for(var i = 0; i < vm.Accessrights.length; i++)
-            {
-                if(vm.Accessrights[i].Checked == true)
-                    accessrightIds.push(vm.Accessrights[i].Id);
+            if(vm.SelectedFormId > 0 && vm.SelectedFormFieldId > 0) {
+                formFieldId = vm.SelectedFormFieldId;
             }
+            else {
+                for(var i = 0; i < vm.Accessrights.length; i++)
+                {
+                    if(vm.Accessrights[i].Checked == true)
+                        accessrightIds.push(vm.Accessrights[i].Id);
+                }
 
-            for(var i = 0; i < vm.CheckedContacts.length; i++) {
+                for(var i = 0; i < vm.CheckedContacts.length; i++) {
                     contactIds.push(vm.CheckedContacts[i].Id);
+                }
             }
 
-            var sendNewsletterModel = { NewsletterId: vm.Newsletter.Id, AccessrightIds: accessrightIds, ContactIds: contactIds };
+            var sendNewsletterModel = { NewsletterId: vm.Newsletter.Id, AccessrightIds: accessrightIds, ContactIds: contactIds, FormFieldId: formFieldId };
 
             newsletterAdminService.SendNewsletter(sendNewsletterModel).success(SendNewsletterCallback);
 
