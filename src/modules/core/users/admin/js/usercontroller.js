@@ -1,5 +1,6 @@
 (function(angular) {
-    angular.module('graderaklubb').controller('listusers', ["$scope", "user-service", "$state", "$mdDialog", function($scope, userService, $state, $mdDialog) {
+    angular.module('graderaklubb').controller('listusers', ["$rootScope", "$scope", "user-service", "$state", "$mdDialog",
+        function($rootScope, $scope, userService, $state, $mdDialog) {
         var vm = this;
         vm.Users = [];
 
@@ -34,9 +35,9 @@
             });
         }
 
-        ImportFromSportAdminController.$inject = ["$mdDialog", "accessrights-service"];
+        ImportFromSportAdminController.$inject = ["$rootScope", "$mdDialog", "accessrights-service"];
 
-        function ImportFromSportAdminController($mdDialog, accessrightsService) {
+        function ImportFromSportAdminController($rootScope, $mdDialog, accessrightsService) {
             var vm = this;
             vm.File = undefined;
             vm.SendWelcomeMail = false;
@@ -65,7 +66,7 @@
                 accessrightIds = accessrightIds.substring(0, accessrightIds.length - 1);
 
                 userService.ImportUsersFromSportadmin(vm.File, vm.SendWelcomeMail, vm.TryToMatchGroupName, accessrightIds, function() {
-                    console.log('Success');
+                    $rootScope.$broadcast('users.update');
                     vm.Close();
                 });
             }
@@ -90,6 +91,16 @@
             {
                 vm.Users.push(new userService.UserModel(userService.User.Club, response[i]));
             }
+        });
+
+        $rootScope.$on('users.update', function() {
+            userService.GetAllUsers().success(function(response) {
+                vm.Users = [];
+                for(var i = 0; i < response.length; i++)
+                {
+                    vm.Users.push(new userService.UserModel(userService.User.Club, response[i]));
+                }
+            });
         });
     }]);
 
