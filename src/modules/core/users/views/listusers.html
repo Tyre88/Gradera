@@ -13,9 +13,9 @@
         <tr>
             <th class="image"></th>
             <th>Namn</th>
-            <th>Epost</th>
-            <th>Stad</th>
-            <th>Yrke</th>
+            <th class="hide-sm hide-md hide-xs">Epost</th>
+            <th class="hide-sm hide-md hide-xs">Stad</th>
+            <th class="hide-sm hide-md hide-xs">Yrke</th>
         </tr>
     </thead>
     <tbody>
@@ -24,9 +24,9 @@
                 <img alt="{{ user.FirstName }}" src="{{ user.Image }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
             </td>
             <td>{{user.FirstName}} {{user.LastName}}</td>
-            <td>{{user.UserInformation.Email}}</td>
-            <td>{{user.UserInformation.City.name}}</td>
-            <td>{{user.UserInformation.Occupation}}</td>
+            <td class="hide-sm hide-md hide-xs">{{user.UserInformation.Email}}</td>
+            <td class="hide-sm hide-md hide-xs">{{user.UserInformation.City.name}}</td>
+            <td class="hide-sm hide-md hide-xs">{{user.UserInformation.Occupation}}</td>
         </tr>
     </tbody>
 </table>

@@ -17,7 +17,7 @@
     <tbody>
         <tr ng-repeat="form in vm.Forms" ng-click="vm.EditForm(form.Id)">
             <td>{{form.Name}}</td>
-            <td class="hide-sm hide-md">{{form.StartDate | date:'yyyy-MM-dd HH:mm'}} - {{form.EndDate | date:'yyyy-MM-dd HH:mm'}}</td>
+            <td class="hide-sm hide-md hide-xs">{{form.StartDate | date:'yyyy-MM-dd HH:mm'}} - {{form.EndDate | date:'yyyy-MM-dd HH:mm'}}</td>
             <td>
                 <i ng-if="$root.HasAccess(6, 20);" ng-click="vm.FormAnswers(form); $event.stopPropagation();" class="fa fa-tachometer action-icon">
                     <md-tooltip>

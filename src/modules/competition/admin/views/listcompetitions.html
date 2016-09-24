@@ -18,7 +18,7 @@
     <tbody>
         <tr ng-repeat="competition in vm.Competitions" ng-click="vm.EditCompetition(competition.Id, $event)">
             <td>{{competition.Name}}</td>
-            <td class="hide-sm hide-md">
+            <td class="hide-sm hide-md hide-xs">
                 {{competition.StartDate | date:'yyyy-MM-dd HH:mm'}}
                 <span class="hide-sm hide-md hide-xs">- {{competition.EndDate | date:'yyyy-MM-dd HH:mm'}}</span>
             </td>

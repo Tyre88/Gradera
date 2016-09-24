@@ -2,6 +2,12 @@
     .newsletter-send-container {
         min-width: 700px;
     }
+
+    @media all and (max-width: 800px) {
+        .newsletter-send-container {
+            min-width: 300px;
+        }
+    }
 </style>
 
 <md-dialog>
@@ -68,11 +74,6 @@
                                     </md-option>
                                 </md-select>
                             </md-input-container>
-
-
-                            <pre>
-                                {{vm.SelectedForm | json}}
-                            </pre>
                         </div>
                     </md-content>
                 </md-tab>

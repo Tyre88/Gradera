@@ -10,16 +10,16 @@
     <thead>
         <tr>
             <th>Namn</th>
-            <th>Skapat av</th>
-            <th>Skapat</th>
+            <th class="hide-sm hide-md hide-xs">Skapat av</th>
+            <th class="hide-sm hide-md hide-xs">Skapat</th>
             <th>Mer</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="newsletter in vm.Newsletters" ng-click="vm.Edit(newsletter.Id)">
             <td>{{newsletter.Name}}</td>
-            <td>{{newsletter.CreatedByName}}</td>
-            <td>{{vm.GetDate(newsletter.CreatedDate)}}</td>
+            <td class="hide-sm hide-md hide-xs">{{newsletter.CreatedByName}}</td>
+            <td class="hide-sm hide-md hide-xs">{{vm.GetDate(newsletter.CreatedDate)}}</td>
             <td class="more">
                 <i class="fa fa-pencil-square-o action-icon" aria-hidden="true" ng-click="vm.Edit(newsletter.Id)">
                     <md-tooltip>
