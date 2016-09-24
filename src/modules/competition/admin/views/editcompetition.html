@@ -71,48 +71,77 @@
         </div>
     </div>
 
-    <md-list ng-cloak>
-        <md-subheader class="md-no-sticky">
+    <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools md-whiteframe-z1">
             Kategorier
-        </md-subheader>
+        </h1>
+    </md-toolbar>
 
-        <md-input-container md-no-float class="new-competition-category">
-            <input type="text" ng-model="vm.NewCategoryName" placeholder="Ny kategori namn" />
-        </md-input-container>
-        <md-button ng-disabled="vm.CompetitionId <= 0" class="md-button md-raised" ng-click="vm.AddCategory();"><i class="fa fa-plus-circle"></i> Lägg till kategori</md-button>
-        <i class="fa fa-question-circle">
-            <md-tooltip>
-                Ex: P13, P17, Herr, F13 etc...
-            </md-tooltip>
-        </i>
+    <md-input-container md-no-float class="new-competition-category">
+        <input type="text" ng-model="vm.NewCategoryName" placeholder="Ny kategori namn" />
+    </md-input-container>
+    <md-button ng-disabled="vm.CompetitionId <= 0" class="md-button md-raised" ng-click="vm.AddCategory();"><i class="fa fa-plus-circle"></i> Lägg till kategori</md-button>
+    <i class="fa fa-question-circle">
+        <md-tooltip>
+            Ex: P13, P17, Herr, F13 etc...
+        </md-tooltip>
+    </i>
 
-        <md-list-item ng-repeat="category in vm.Competition.Categories">
-            <p>
-                <i class="fa fa-trash" ng-click="vm.DeleteCategory(category);"></i>
-                {{category.Name}}
-            </p>
-        </md-list-item>
-    </md-list>
+    <table class="gradera-list" ng-cloak>
+        <thead>
+        <tr>
+            <th>Namn</th>
+            <th>Mer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="row" ng-repeat="category in vm.Competition.Categories">
+            <td>{{category.Name}}</td>
+            <td>
+                <i ng-click="vm.DeleteCategory(category);" class="fa fa-trash md-hue-3">
+                    <md-tooltip>
+                        Ta bort kategori
+                    </md-tooltip>
+                </i>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
-    <md-list>
-        <md-subheader class="md-no-sticky">
+    <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools md-whiteframe-z1">
             Deltagare
-        </md-subheader>
+        </h1>
+    </md-toolbar>
 
-        <md-list-item ng-repeat="compeditor in vm.Competition.Compeditors">
-            <img class="md-avatar" src="{{compeditor.Image}}" fallback-src="content/images/No_Image_Available.png" />
-            <p>{{compeditor.FirstName}} {{compeditor.LastName}}</p>
-            <p>{{compeditor.ClubName}}</p>
-            <p>{{compeditor.Category.Name}}</p>
-            <div class="more-icons md-secondary">
+    <table class="gradera-list" ng-cloak>
+        <thead>
+        <tr>
+            <th class="image"></th>
+            <th>Namn</th>
+            <th class="hide-sm hide-md hide-xs">Klubb</th>
+            <th class="hide-sm hide-md hide-xs">Kategori</th>
+            <th class="hide-sm hide-md hide-xs">Mer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="row" ng-repeat="compeditor in vm.Competition.Compeditors">
+            <td class="image">
+                <img class="md-avatar" src="{{compeditor.Image}}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
+            </td>
+            <td>{{compeditor.FirstName}} {{compeditor.LastName}}</td>
+            <td class="hide-sm hide-md hide-xs">{{compeditor.ClubName}}</td>
+            <td class="hide-sm hide-md hide-xs">{{compeditor.Category.Name}}</td>
+            <td>
                 <i ng-if="$root.HasAccess(5, 40);" ng-click="vm.RemoveCompeditor(compeditor); $event.stopPropagation();" class="fa fa-trash md-hue-3">
                     <md-tooltip>
                         Ta bort deltagare
                     </md-tooltip>
                 </i>
-            </div>
-        </md-list-item>
-    </md-list>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
     <div>
         <md-button class="md-raised md-primary" type="submit">Spara</md-button>
