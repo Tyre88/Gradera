@@ -1,0 +1,22 @@
+<md-subheader class="md-no-sticky kaushan-script big-header">
+    Anmälda deltagare för {{vm.CompetitionName}}
+</md-subheader>
+
+<table class="gradera-list" ng-cloak>
+    <thead>
+    <tr>
+        <th>Namn</th>
+        <th class="hide-sm hide-md hide-xs">Klubb</th>
+        <th class="hide-sm hide-md hide-xs">Kategori</th>
+        <th class="hide-sm hide-md hide-xs">Grad</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="participant in vm.Participants">
+        <td>{{participant.FirstName}} {{participant.LastName}}</td>
+        <td class="hide-sm hide-md hide-xs">{{participant.ClubName}}</td>
+        <td class="hide-sm hide-md hide-xs">{{participant.Category.Name}}</td>
+        <td class="hide-sm hide-md hide-xs">{{vm.GetGrade(participant.Grade)}}</td>
+    </tr>
+    </tbody>
+</table>

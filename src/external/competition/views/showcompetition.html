@@ -5,6 +5,10 @@
 
     <p>Sista anmälningstiden: {{vm.GetDate(vm.Competition.EndSignupDate);}}</p>
 
+    <div>
+        <a target="_blank" href="external.html#/show/competition/participants/{{vm.ClubShortName}}/{{vm.CompetitionName}}">Anmälda deltagare</a>
+    </div>
+
     <div ng-if="vm.Competition.IsActive">
         <div ng-if="!vm.Competition.IsClubCompetition">
             <md-input-container md-no-float class="form-field-fifty">

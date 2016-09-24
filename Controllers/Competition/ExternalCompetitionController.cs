@@ -24,6 +24,16 @@ namespace Gradera_Klubb.Controllers.Competition
             return response;
         }
 
+        [HttpGet]
+        public HttpResponseMessage GetCompetitionCompeditors(string clubShortName, string competitionName)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+
+            List<CompetitionCompeditorModel> compeditors = CompetitionCompeditorModel.MapExternalCompeditors(CompetitionBLL.GetExternalCompetitionCompeditors(clubShortName, competitionName));
+            response.Content = new ObjectContent<List<CompetitionCompeditorModel>>(compeditors, new JsonMediaTypeFormatter());
+            return response;
+        }
+
         [HttpPost, HttpOptions]
         public HttpResponseMessage Submit(CompetitionContactPersonModel contactPerson)
         {

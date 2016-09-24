@@ -19,6 +19,13 @@
                 controller: "showexternalcompetition",
                 controllerAs: "vm"
             })
+            .state('showexternalcompetitionparticipants',
+            {
+                url: "/show/competition/participants/:clubShortName/:competitionName",
+                templateUrl: "external/competition/views/showparticipants.html",
+                controller: "showexternalcompetitionparticipants",
+                controllerAs: "vm"
+            })
             .state('showexternalform',
             {
                 url: "/show/form/:clubShortName/:formName",

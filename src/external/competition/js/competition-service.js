@@ -10,6 +10,10 @@
             return $http.get('/api/ExternalCompetition/GetCompetition?' + $.param({clubShortName: clubShortName, competitionName: competitionName}));
         };
 
+        this.GetCompetitionCompeditors = function(clubShortName, competitionName) {
+            return $http.get('/api/ExternalCompetition/GetCompetitionCompeditors?' + $.param({clubShortName: clubShortName, competitionName: competitionName}));
+        };
+
         this.Submit = function(contactPerson) {
             return $http.post('/api/ExternalCompetition/Submit', contactPerson);
         };

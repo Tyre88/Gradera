@@ -83,4 +83,36 @@
 
         vm.GetCompetition();
     }
+
+    angular.module('graderaklubbexternal').controller('showexternalcompetitionparticipants', showexternalcompetitionparticipantsController);
+
+    showexternalcompetitionparticipantsController.$inject = ["$stateParams", "competition-external-service", "gradeEnum"];
+
+    function showexternalcompetitionparticipantsController($stateParams, competitionExternalService, gradeEnum) {
+        var vm = this;
+        vm.CompetitionName = $stateParams.competitionName;
+        vm.ClubShortName = $stateParams.clubShortName;
+
+        vm.Participants = [];
+
+        vm.GetParticipants = GetParticipants;
+        vm.GetGrade = GetGrade;
+
+        function GetParticipants() {
+            competitionExternalService.GetCompetitionCompeditors(vm.ClubShortName, vm.CompetitionName).success(GetCompetitionCompeditorsSuccess);
+
+            function GetCompetitionCompeditorsSuccess(response) {
+                vm.Participants = response;
+            }
+        }
+
+        function GetGrade(grade) {
+            if(gradeEnum.grades.GetItemByValue('Id', grade) != null)
+                return gradeEnum.grades.GetItemByValue('Id', grade).Name;
+            else
+                return "Ej tillgänglig";
+        }
+
+        vm.GetParticipants();
+    }
 }(window.angular));
