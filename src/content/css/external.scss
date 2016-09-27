@@ -28,6 +28,28 @@
   width: 960px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+
+  .external-image-container
+  {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    z-index: 9999;
+
+    > img
+    {
+      width: 100%;
+    }
+
+    > img[ng-src='']
+    {
+      display: none;
+    }
+  }
 
   @media all and(max-width: 960px) {
     width: 100%;
