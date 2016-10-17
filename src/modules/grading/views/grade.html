@@ -1,6 +1,11 @@
 <section>
     <md-toolbar class="md-theme-light">
         <h1 class="md-toolbar-tools md-whiteframe-z1">
+            <i class="fa fa-file-pdf-o" aria-hidden="true" ng-click="vm.ExportGrade();">
+                <md-tooltip>
+                    Exportera {{booklet.Name}} till pdf
+                </md-tooltip>
+            </i>
             Visar bältesgrad: {{vm.Grade.Name}}
         </h1>
     </md-toolbar>
@@ -14,7 +19,7 @@
             <div class="techniques">
                 <div class="technique md-whiteframe-z1" ng-repeat="technique in categoryLink.GradeCategoryLinkTechniques" ng-click="vm.ShowTechnique(technique.TechniqueId);">
                     <span fit-image style="display: inline-block;">
-                        <img src="{{technique.TechniqueImages[0] ? technique.TechniqueImages[0].Image : ''}}" alt=""
+                        <img ng-src="{{technique.TechniqueImages[0] ? technique.TechniqueImages[0].Image : ''}}" alt=""
                              fallback-src="content/images/No_Image_Available.png" />
                     </span>
 
@@ -23,26 +28,6 @@
                     </div>
                 </div>
             </div>
-
-            <!--<md-grid-list md-cols-sm="4" md-cols-md="4" md-cols-gt-md="6"
-                          md-row-height-gt-md="1:1" md-row-height="4:3"
-                          md-gutter="8px" md-gutter-gt-sm="4px">
-
-                <md-grid-tile ng-repeat="technique in categoryLink.GradeCategoryLinkTechniques"
-                              md-rowspan="2"
-                              md-colspan="2"
-                              md-colspan-sm="2">
-                <span fit-image style="display: inline-block;">
-                    <img src="{{technique.TechniqueImages[0] ? technique.TechniqueImages[0].Image : ''}}" alt=""
-                         fallback-src="content/images/No_Image_Available.png"
-                         ng-click="vm.ShowTechnique(technique.TechniqueId);" />
-                </span>
-                    <md-grid-tile-footer ng-click="vm.ShowTechnique(technique.TechniqueId);">
-                        <h3>{{technique.Name}}</h3>
-                    </md-grid-tile-footer>
-                </md-grid-tile>
-
-            </md-grid-list>-->
             <div btf-markdown="categoryLink.Text"></div>
         </md-card>
     </div>

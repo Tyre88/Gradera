@@ -14,6 +14,7 @@
         vm.GetGradingBooklets = GetGradingBooklets;
         vm.Show = Show;
         vm.ShowBooklet = ShowBooklet;
+        vm.ExportBooklet = ExportBooklet;
 
         function GetGradesWithoutBooklet() {
             gradingService.GetGradesWithoutBooklet().success(getGradesCallback);
@@ -39,6 +40,14 @@
             $state.go('showbooklet', {id: bookletId});
         }
 
+        function ExportBooklet(bookletId) {
+            gradingService.ExportBooklet(bookletId).success(exportBookletCallback);
+
+            function exportBookletCallback(response) {
+                console.log(response);
+            }
+        }
+
         vm.GetGradesWithoutBooklet();
         vm.GetGradingBooklets();
     }
@@ -54,7 +63,6 @@
 
         vm.GetGrade = GetGrade;
         vm.ShowTechnique = ShowTechnique;
-        vm.ExportGrade = ExportGrade;
 
         function GetGrade() {
             if(vm.GradeId > 0)
@@ -69,14 +77,6 @@
 
         function ShowTechnique(id) {
             $state.go('showtechnique', {id: id});
-        }
-
-        function ExportGrade() {
-            gradingService.ExportGrade(vm.GradeId).success(exportGradeCallback);
-
-            function exportGradeCallback(response) {
-                console.log(response);
-            }
         }
 
         vm.GetGrade();

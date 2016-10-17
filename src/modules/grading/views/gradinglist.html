@@ -8,11 +8,19 @@
     <thead>
         <tr>
             <th>Namn</th>
+            <th>Mer</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="booklet in vm.Booklets" ng-click="vm.ShowBooklet(booklet.Id)">
             <td>{{booklet.Name}}</td>
+            <td>
+                <i class="fa fa-file-pdf-o" aria-hidden="true" ng-click="vm.ExportBooklet(booklet.Id); $event.stopPropagation();">
+                    <md-tooltip>
+                        Exportera {{booklet.Name}} till pdf
+                    </md-tooltip>
+                </i>
+            </td>
         </tr>
     </tbody>
 </table>
