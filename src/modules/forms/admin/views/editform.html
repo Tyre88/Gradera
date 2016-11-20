@@ -25,15 +25,21 @@
         <md-tooltip>Slutdatum</md-tooltip>
     </md-datepicker>
 
-    <md-checkbox ng-model="vm.Form.IsExternal" aria-label="Externt formulär?">
-        Externt formulär?
-    </md-checkbox>
+    <div>
+        <md-checkbox ng-model="vm.Form.IsExternal" aria-label="Externt formulär?">
+            Externt formulär?
+        </md-checkbox>
 
-    <span ng-show="vm.Form.IsExternal">
-        <a href="external.html#/show/form/{{$root.UserService.User.Club.ShortName}}/{{vm.Form.Name}}" target="_blank">
-            Länk till formulär
-        </a>
-    </span>
+        <span ng-show="vm.Form.IsExternal">
+            <a href="external.html#/show/form/{{$root.UserService.User.Club.ShortName}}/{{vm.Form.Name}}" target="_blank">
+                Länk till formulär
+            </a>
+        </span>
+    </div>
+
+    <md-checkbox ng-model="vm.Form.MultipleSubmits" aria-label="Multipla submits?">
+        Multipla submits?
+    </md-checkbox>
 </div>
 
 <div class="divider"></div>
@@ -103,6 +109,10 @@
             </md-option>
         </md-select>
     </md-input-container>
+
+    <md-checkbox ng-model="vm.NewField.CanMultiply" aria-label="Multiplicerbar?">
+        Multiplicerbar?
+    </md-checkbox>
 </div>
 
 <md-button class="md-raised md-primary" ng-click="vm.AddFormField();">Lägg till</md-button>
@@ -150,6 +160,7 @@
         <th>Namn</th>
         <th class="hide-sm hide-md hide-xs">Typ</th>
         <th class="hide-sm hide-md hide-xs">Obligatorisk?</th>
+        <th ng-if="vm.Form.MultipleSubmits" class="hide-sm hide-md hide-xs">Multiplicerbar?</th>
         <th class="hide-sm hide-md hide-xs">Mer</th>
     </tr>
     </thead>
@@ -158,6 +169,7 @@
         <td>{{item.Label}}</td>
         <td class="hide-sm hide-md hide-xs">{{item.Type}}</td>
         <td class="hide-sm hide-md hide-xs">{{item.IsRequired ? 'Obligatorisk' : 'Ej obligatorisk'}}</td>
+        <td ng-if="vm.Form.MultipleSubmits" class="hide-sm hide-md hide-xs">{{item.CanMultiply ? 'Ja' : 'Nej'}}</td>
         <td>
             <i ng-click="vm.DeleteFormFieldItem(item); $event.stopPropagation();" class="fa fa-trash md-hue-3">
                 <md-tooltip>

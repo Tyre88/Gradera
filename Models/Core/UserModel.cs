@@ -106,7 +106,7 @@ namespace Gradera_Klubb.Models
                                 Street = information.Street,
                                 Zip = information.Zip,
                                 Birthday = information.Birthday,
-                                Grade = (Grade)information.Grade,
+                                Grade = (Gradera.Core.Enums.Grade)information.Grade,
                                 Weight = information.Weight,
                                 Theme = information.Theme
                             };
@@ -134,7 +134,7 @@ namespace Gradera_Klubb.Models
                             Street = information.Street,
                             Zip = information.Zip,
                             Birthday = information.Birthday,
-                            Grade = (Grade)information.Grade,
+                            Grade = (Gradera.Core.Enums.Grade)information.Grade,
                             Weight = information.Weight,
                             Theme = information.Theme
                         };

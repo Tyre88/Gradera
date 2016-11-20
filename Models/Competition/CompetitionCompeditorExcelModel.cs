@@ -23,7 +23,7 @@ namespace Gradera_Klubb.Models.Competition
         {
             string grade = string.Empty;
 
-            switch ((Grade)compeditor.Grade)
+            switch ((Gradera.Core.Enums.Grade)compeditor.Grade)
             {
                 case Gradera.Core.Enums.Grade.Kyu6:
                     grade = "6k";

@@ -6,12 +6,15 @@
     function showexternalformController($stateParams, $mdDialog, formService, form, clubService) {
         var vm = this;
         vm.Form = form.Form;
+        vm.OriginalForm = undefined;
         vm.ClubShortName = $stateParams.clubShortName;
         vm.FormName = $stateParams.formName;
         vm.ClubInformation = {};
+        vm.Forms = [];
 
         vm.GetForm = GetForm;
         vm.SubmitForm = SubmitForm;
+        vm.SubmitForms = SubmitForms;
         vm.GetClubInformation = GetClubInformation;
 
         function GetForm() {
@@ -19,26 +22,34 @@
 
             function getFormCallback(response) {
                 vm.Form.Initialize(response);
+                vm.OriginalForm = angular.copy(vm.Form);
+                vm.Forms.push(vm.Form);
             }
         }
 
-        function SubmitForm() {
+        function SubmitForm(form) {
             var formFields = [];
-            for(var i = 0; i < vm.Form.FormFields.length; i++)
+            for(var i = 0; i < form.FormFields.length; i++)
             {
-                formFields.push({Value: vm.Form.FormFields[i].formControl.$modelValue, FormId: vm.Form.Id, FormFieldId: vm.Form.FormFields[i].key});
+                formFields.push({Value: form.FormFields[i].formControl.$modelValue, FormId: form.Id, FormFieldId: form.FormFields[i].key});
             }
 
             formService.SubmitForm(formFields).success(submitFormCallback);
 
             function submitFormCallback() {
-                $mdDialog.show(
+                /*$mdDialog.show(
                     $mdDialog.alert()
                         .clickOutsideToClose(true)
                         .title('Tack för att du svarade på formuläret!')
                         .ariaLabel('Tack!')
                         .ok('Ok')
-                );
+                );*/
+            }
+        }
+
+        function SubmitForms() {
+            for(let i = 0; i < vm.Forms.length; i++) {
+                vm.SubmitForm(vm.Forms[i]);
             }
         }
 

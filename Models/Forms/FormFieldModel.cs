@@ -14,6 +14,7 @@ namespace Gradera_Klubb.Models.Forms
         public string Type { get; set; }
         public string Label { get; set; }
         public bool IsRequired { get; set; }
+        public bool CanMultiply { get; set; }
         public List<FormFieldOptionModel> Options { get; set; }
 
         public FormFieldModel()
@@ -30,7 +31,8 @@ namespace Gradera_Klubb.Models.Forms
                 Id = formField.Id,
                 IsRequired = formField.IsRequired,
                 Label = formField.Label,
-                Type = formField.Type
+                Type = formField.Type,
+                CanMultiply = formField.CanMultiply
             };
 
             formField.FormFieldsOptions.ToList().ForEach(f => model.Options.Add(FormFieldOptionModel.MapFormFieldOptionModel(f)));

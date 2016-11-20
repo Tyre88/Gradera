@@ -18,6 +18,7 @@ namespace Gradera_Klubb.Models.Forms
         public bool IsDeleted { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public bool MultipleSubmits { get; set; }
         public List<FormFieldModel> FormFields { get; set; }
         public List<FormEmailModel> Emails { get; set; }
 
@@ -40,7 +41,8 @@ namespace Gradera_Klubb.Models.Forms
                 IsExternal = form.IsExternal,
                 Name = form.Name,
                 StartDate = form.StartDate,
-                Description = form.Description
+                Description = form.Description,
+                MultipleSubmits = form.MultipleSubmits
             };
 
             if(deepLoad)
@@ -70,7 +72,8 @@ namespace Gradera_Klubb.Models.Forms
                 IsExternal = model.IsExternal,
                 Name = model.Name,
                 StartDate = model.StartDate.ToUniversalTime(),
-                Description = model.Description ?? string.Empty
+                Description = model.Description ?? string.Empty,
+                MultipleSubmits = model.MultipleSubmits
             };
 
             foreach (var item in model.FormFields)
@@ -82,7 +85,8 @@ namespace Gradera_Klubb.Models.Forms
                     Id = item.Id,
                     IsRequired = item.IsRequired,
                     Label = item.Label,
-                    Type = item.Type
+                    Type = item.Type,
+                    CanMultiply = item.CanMultiply
                 };
 
                 item.Options.ForEach(o => field.FormFieldsOptions.Add(new FormFieldsOptions()

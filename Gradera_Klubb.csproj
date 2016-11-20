@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gradera_Klubb</RootNamespace>
     <AssemblyName>Gradera_Klubb</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -27,6 +27,7 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>12.0</OldToolsVersion>
     <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,6 +70,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -76,11 +78,11 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
@@ -101,7 +103,6 @@
       <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
@@ -145,6 +146,7 @@
       <Private>True</Private>
       <HintPath>..\packages\System.Spatial.5.2.0\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
@@ -165,6 +167,8 @@
     <Compile Include="Controllers\Core\AuthenticateController.cs" />
     <Compile Include="Controllers\Core\BasicController.cs" />
     <Compile Include="Controllers\Core\ClubController.cs" />
+    <Compile Include="Controllers\Core\ClubExternalController.cs" />
+    <Compile Include="Controllers\Core\ContactController.cs" />
     <Compile Include="Controllers\Core\FileController.cs" />
     <Compile Include="Controllers\Core\UserController.cs" />
     <Compile Include="Controllers\Forms\ExternalFormsController.cs" />
@@ -172,7 +176,9 @@
     <Compile Include="Controllers\Forms\FormsController.cs" />
     <Compile Include="Controllers\Grading\GradingAdminController.cs" />
     <Compile Include="Controllers\Grading\GradingController.cs" />
+    <Compile Include="Controllers\Grading\GradingPublicController.cs" />
     <Compile Include="Controllers\Newsletter\NewsletterAdminController.cs" />
+    <Compile Include="Controllers\Newsletter\NewsletterController.cs" />
     <Compile Include="Controllers\Newsletter\NewsletterJobController.cs" />
     <Compile Include="Controllers\Techniques\TechniqueAdminController.cs" />
     <Compile Include="Controllers\Techniques\TechniqueController.cs" />
@@ -191,6 +197,7 @@
     <Compile Include="Models\Core\AccountInformationGeneric.cs" />
     <Compile Include="Models\Core\ClubSettingsModel.cs" />
     <Compile Include="Models\Core\ClubModel.cs" />
+    <Compile Include="Models\Core\ContactModel.cs" />
     <Compile Include="Models\Core\ModuleLinkModel.cs" />
     <Compile Include="Models\Core\ModuleModel.cs" />
     <Compile Include="Models\Core\UserInformationModel.cs" />

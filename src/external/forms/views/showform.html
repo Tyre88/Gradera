@@ -3,12 +3,12 @@
 </div>
 
 <md-subheader class="md-no-sticky kaushan-script big-header external-form-header">
-    <h2>{{vm.Form.Name}}</h2>
+    <h2>{{vm.OriginalForm.Name}}</h2>
 
     <div btf-markdown="vm.Form.Description"></div>
 </md-subheader>
 
-<form name="{{vm.Form.Id}}" novalidate>
-    <formly-form model="vm.model" fields="vm.Form.FormFields" options="vm.options" form="vm.form"></formly-form>
-    <md-button type="submit" class="md-raised md-primary" ng-disabled="vm.form.$invalid" ng-click="vm.SubmitForm()">Skicka</md-button>
+<form name="{{vm.OriginalForm.Id}}" novalidate>
+    <formly-form ng-repeat="form in vm.Forms" model="form.model" fields="form.FormFields" options="form.opt" form="form.form"></formly-form>
+    <md-button type="submit" class="md-raised md-primary" ng-disabled="vm.form.$invalid" ng-click="vm.SubmitForms()">Skicka</md-button>
 </form>
