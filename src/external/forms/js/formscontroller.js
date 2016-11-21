@@ -16,6 +16,7 @@
         vm.SubmitForm = SubmitForm;
         vm.SubmitForms = SubmitForms;
         vm.GetClubInformation = GetClubInformation;
+        vm.AddSubmit = AddSubmit;
 
         function GetForm() {
             formService.GetForm(vm.ClubShortName, vm.FormName).success(getFormCallback);
@@ -51,6 +52,22 @@
             for(let i = 0; i < vm.Forms.length; i++) {
                 vm.SubmitForm(vm.Forms[i]);
             }
+        }
+
+        function AddSubmit() {
+            let newForm = angular.copy(vm.OriginalForm);
+
+            for(let i = 0; i < newForm.FormFields.length; i++)
+            {
+                if(newForm.FormFields[i].data.CanMultiply == true) {
+                }
+                else {
+                    newForm.FormFields[i].defaultValue = vm.Forms[0].FormFields[i].value();
+                    newForm.FormFields[i].templateOptions.disabled = true;
+                }
+            }
+
+            vm.Forms.push(newForm);
         }
 
         function GetClubInformation() {

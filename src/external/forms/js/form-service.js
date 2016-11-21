@@ -17,6 +17,7 @@
             Name: "",
             FormFields: [],
             Description: "",
+            MultipleSubmits: false,
             Initialize: function (formModel) {
                 this.Id = formModel.Id;
                 this.CreatedByUserId = formModel.Id;
@@ -28,6 +29,7 @@
                 this.IsDeleted = formModel.IsDeleted;
                 this.Name = formModel.Name;
                 this.Description = formModel.Description;
+                this.MultipleSubmits = formModel.MultipleSubmits;
 
                 if (formModel.FormFields != undefined && formModel.FormFields.length > 0) {
                     this.FormFields = [];
@@ -39,6 +41,7 @@
                         field.key = formModel.FormFields[i].Id;
                         field.templateOptions.label = formModel.FormFields[i].Label;
                         field.templateOptions.required = formModel.FormFields[i].IsRequired;
+                        field.data.CanMultiply = formModel.FormFields[i].CanMultiply;
 
                         if(formModel.FormFields[i].Options != undefined && formModel.FormFields[i].Options.length > 0)
                         {
@@ -66,7 +69,8 @@
                     label: "",
                     required: false,
                     options: []
-                }
+                },
+                data: {}
             },
             FormFieldOption: {
                 name: "",
