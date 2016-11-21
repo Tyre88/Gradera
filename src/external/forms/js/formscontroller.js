@@ -38,32 +38,38 @@
             formService.SubmitForm(formFields).success(submitFormCallback);
 
             function submitFormCallback() {
-                /*$mdDialog.show(
-                    $mdDialog.alert()
-                        .clickOutsideToClose(true)
-                        .title('Tack för att du svarade på formuläret!')
-                        .ariaLabel('Tack!')
-                        .ok('Ok')
-                );*/
+                vm.Forms.splice(vm.Forms.indexOf(form), 1);
+
+                if(vm.Forms.length <= 0) {
+                    vm.Forms.push(vm.OriginalForm);
+
+                    $mdDialog.show(
+                     $mdDialog.alert()
+                     .clickOutsideToClose(true)
+                     .title('Tack för att du svarade på formuläret!')
+                     .ariaLabel('Tack!')
+                     .ok('Ok')
+                    );
+                }
             }
         }
 
         function SubmitForms() {
-            for(let i = 0; i < vm.Forms.length; i++) {
+            for(var i = 0; i < vm.Forms.length; i++) {
                 vm.SubmitForm(vm.Forms[i]);
             }
         }
 
         function AddSubmit() {
-            let newForm = angular.copy(vm.OriginalForm);
+            var newForm = angular.copy(vm.OriginalForm);
 
-            for(let i = 0; i < newForm.FormFields.length; i++)
+            for(var i = 0; i < newForm.FormFields.length; i++)
             {
                 if(newForm.FormFields[i].data.CanMultiply == true) {
                 }
                 else {
                     newForm.FormFields[i].defaultValue = vm.Forms[0].FormFields[i].value();
-                    newForm.FormFields[i].templateOptions.disabled = true;
+                    //newForm.FormFields[i].templateOptions.disabled = true;
                 }
             }
 

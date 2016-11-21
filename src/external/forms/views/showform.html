@@ -9,7 +9,10 @@
 </md-subheader>
 
 <form name="{{vm.OriginalForm.Id}}" novalidate>
-    <formly-form ng-repeat="form in vm.Forms" model="form.model" fields="form.FormFields" options="form.opt" form="form.form"></formly-form>
+    <div ng-repeat="form in vm.Forms">
+        <formly-form model="form.model" fields="form.FormFields" options="form.opt" form="form.form"></formly-form>
+        <hr ng-if="$index < vm.Forms.length - 1" />
+    </div>
     <md-button type="submit" class="md-raised md-primary" ng-disabled="vm.Forms[0].form.$invalid" ng-click="vm.SubmitForms()">Skicka</md-button>
     <md-button class="md-raised md-secondary" ng-if="vm.OriginalForm.MultipleSubmits" ng-click="vm.AddSubmit()">Lägg till deltagare</md-button>
 </form>
