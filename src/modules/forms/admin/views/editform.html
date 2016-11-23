@@ -148,6 +148,33 @@
 <md-button ng-show="vm.ShowSelectOptions" class="md-raised md-primary" ng-click="vm.AddFormFieldOption();">Lägg till</md-button>
 <div class="divider"></div>
 
+<md-subheader class="md-no-sticky">
+    Skicka "tack" mail till den som fyller i formuläret.
+</md-subheader>
+<div class="edit-container">
+    <md-checkbox ng-model="vm.Form.SendThanksMail">Skicka "tack" mail</md-checkbox>
+</div>
+
+<div class="edit-container" ng-if="vm.Form.SendThanksMail">
+    <md-input-container>
+        <label>E-post fält</label>
+        <md-select ng-model="vm.Form.EmailFieldName">
+            <md-option ng-repeat="item in vm.Form.FormFields" value="{{item.Label}}">
+                {{item.Label}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+    <div></div>
+    <md-input-container>
+        <textarea ng-model="vm.Form.EmailHtml" ck-editor></textarea>
+    </md-input-container>
+    <div>
+
+    </div>
+</div>
+
+<div class="divider"></div>
+
 <md-toolbar class="md-theme-light">
     <h1 class="md-toolbar-tools md-whiteframe-z1">
         Fält:

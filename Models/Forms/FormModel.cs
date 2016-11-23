@@ -21,6 +21,9 @@ namespace Gradera_Klubb.Models.Forms
         public bool MultipleSubmits { get; set; }
         public List<FormFieldModel> FormFields { get; set; }
         public List<FormEmailModel> Emails { get; set; }
+        public bool SendThanksMail { get; set; }
+        public string EmailFieldName { get; set; }
+        public string EmailHtml { get; set; }
 
         public FormModel()
         {
@@ -42,7 +45,10 @@ namespace Gradera_Klubb.Models.Forms
                 Name = form.Name,
                 StartDate = form.StartDate,
                 Description = form.Description,
-                MultipleSubmits = form.MultipleSubmits
+                MultipleSubmits = form.MultipleSubmits,
+                SendThanksMail = form.SendThanksMail,
+                EmailFieldName = form.EmailFieldName,
+                EmailHtml = form.EmailHtml
             };
 
             if(deepLoad)
@@ -73,7 +79,10 @@ namespace Gradera_Klubb.Models.Forms
                 Name = model.Name,
                 StartDate = model.StartDate.ToUniversalTime(),
                 Description = model.Description ?? string.Empty,
-                MultipleSubmits = model.MultipleSubmits
+                MultipleSubmits = model.MultipleSubmits,
+                SendThanksMail = model.SendThanksMail,
+                EmailFieldName = model.EmailFieldName,
+                EmailHtml = model.EmailHtml
             };
 
             foreach (var item in model.FormFields)
