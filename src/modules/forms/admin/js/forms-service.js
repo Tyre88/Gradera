@@ -28,6 +28,14 @@
 
         this.DeleteFormFieldItem = function(formFieldId) {
             return $http.delete('/api/formsadmin/DeleteFormFieldItem?' + $.param({formFieldId: formFieldId}));
-        }
+        };
+
+        this.ExportGetUserSubmitsToExcel = function(formId) {
+            return $http.get('/api/formsadmin/ExportGetUserSubmitsToExcel?' + $.param({formId: formId}));
+        };
+
+        this.ExportExternalAnswersToExcel = function(formId) {
+            return $http.get('/api/formsadmin/ExportExternalAnswersToExcel?' + $.param({formId: formId}));
+        };
     }
 }(window.angular));

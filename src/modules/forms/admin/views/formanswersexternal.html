@@ -1,18 +1,28 @@
 <md-toolbar class="md-theme-light">
     <h1 class="md-toolbar-tools md-whiteframe-z1">
+        <i class="fa fa-file-excel-o" aria-hidden="true" ng-click="vm.ExportToExcel();">
+            <md-tooltip>
+                Exportera till excel
+            </md-tooltip>
+        </i>
+
         Formulär svar
     </h1>
 </md-toolbar>
 
-<md-list ng-cloak>
-
-    <md-list-item ng-repeat="answer in vm.Answers" ng-click="answer.Show = !answer.Show">
-        <div class="md-list-item-text" layout="column">
-            <p ng-hide="answer.Show">Svar: {{$index + 1}}</p>
-            <md-subheader ng-show="answer.Show" class="md-no-sticky">
-                <p>Svar: {{$index + 1}}</p>
-            </md-subheader>
-            <p ng-show="answer.Show" ng-repeat="item in answer.FormSubmits">{{item.Name}}: {{item.Value}}</p>
-        </div>
-    </md-list-item>
-</md-list>
+<table class="gradera-list" ng-cloak>
+    <thead>
+        <tr>
+            <th ng-repeat="header in vm.Answers[0].FormSubmits">
+                {{header.Name}}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="answer in vm.Answers">
+            <td ng-repeat="item in answer.FormSubmits">
+                {{item.Value}}
+            </td>
+        </tr>
+    </tbody>
+</table>

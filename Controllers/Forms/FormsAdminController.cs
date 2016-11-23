@@ -1,6 +1,7 @@
 ﻿using Gradera.Core.Entities;
 using Gradera.Core.Enums;
 using Gradera.Core.Filters;
+using Gradera.Core.Helpers;
 using Gradera.Forms.BLL;
 using Gradera.ObjectChangeFilter;
 using Gradera_Klubb.Models;
@@ -8,6 +9,7 @@ using Gradera_Klubb.Models.Forms;
 using Gradera_Klubb.Models.Forms.Admin;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -85,6 +87,39 @@ namespace Gradera_Klubb.Controllers.Forms
 
         [HttpGet]
         [AuthorizeFilter(AccessType = AccessType.Forms, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage ExportGetUserSubmitsToExcel(int formId)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            List<UserFormSubmit> submits = UserFormSubmit.MapUserFormSubmits(
+                FormsAdminBLL.GetUserSubmits(formId, loggedInUser.AccountSession.ClubId), true);
+
+            DataTable dt = new DataTable();
+
+            foreach (var item in submits)
+            {
+                string[] values = new string[item.FormSubmits.Count];
+                int counter = 0;
+                foreach (var submit in item.FormSubmits)
+                {
+                    if(!dt.Columns.Contains(submit.Name))
+                    {
+                        dt.Columns.Add(new DataColumn(submit.Name, typeof(string)));
+                    }
+
+                    values[counter] = submit.Value;
+                    counter++;
+                }
+
+                dt.Rows.Add(values);
+            }
+            var form = FormsAdminBLL.GetForm(formId, loggedInUser.AccountSession.ClubId);
+            response.Content = new ObjectContent<string>(ExcelHelper.CreateExcelDocument(dt, form.Name, true, "Forms"), new JsonMediaTypeFormatter());
+            return response;
+        }
+
+        [HttpGet]
+        [AuthorizeFilter(AccessType = AccessType.Forms, AccessTypeRight = AccessTypeRight.Write)]
         public HttpResponseMessage GetExternalAnswers(int formId)
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
@@ -92,6 +127,39 @@ namespace Gradera_Klubb.Controllers.Forms
             response.Content = new ObjectContent<List<ExternalFormSubmit>>(ExternalFormSubmit.MapExternalFormSubmits(
                 FormsAdminBLL.GetExternalSubmits(formId, loggedInUser.AccountSession.ClubId)),
                 new JsonMediaTypeFormatter());
+            return response;
+        }
+
+        [HttpGet]
+        [AuthorizeFilter(AccessType = AccessType.Forms, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage ExportExternalAnswersToExcel(int formId)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            List<ExternalFormSubmit> submits = ExternalFormSubmit.MapExternalFormSubmits(
+                FormsAdminBLL.GetExternalSubmits(formId, loggedInUser.AccountSession.ClubId));
+
+            DataTable dt = new DataTable();
+
+            foreach (var item in submits)
+            {
+                string[] values = new string[item.FormSubmits.Count];
+                int counter = 0;
+                foreach (var submit in item.FormSubmits)
+                {
+                    if (!dt.Columns.Contains(submit.Name))
+                    {
+                        dt.Columns.Add(new DataColumn(submit.Name, typeof(string)));
+                    }
+
+                    values[counter] = submit.Value;
+                    counter++;
+                }
+
+                dt.Rows.Add(values);
+            }
+            var form = FormsAdminBLL.GetForm(formId, loggedInUser.AccountSession.ClubId);
+            response.Content = new ObjectContent<string>(ExcelHelper.CreateExcelDocument(dt, form.Name, true, "Forms"), new JsonMediaTypeFormatter());
             return response;
         }
 

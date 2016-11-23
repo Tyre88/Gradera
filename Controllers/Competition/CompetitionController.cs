@@ -49,7 +49,7 @@ namespace Gradera_Klubb.Controllers.Competition
             CompetitionModel competition = CompetitionModel.MapCompetitionDeep(CompetitionBLL.GetCompetitionDeep(id));
             DataTable dt = ExcelHelper.CreateDataTable<CompetitionCompeditorExcelModel>
                 (CompetitionCompeditorExcelModel.MapCompetitionCompeditors(competition.Compeditors));
-            response.Content = new ObjectContent<string>(ExcelHelper.CreateExcelDocument(dt, "compeditors", true), new JsonMediaTypeFormatter());
+            response.Content = new ObjectContent<string>(ExcelHelper.CreateExcelDocument(dt, "compeditors", true, "Competition"), new JsonMediaTypeFormatter());
             return response;
         }
 

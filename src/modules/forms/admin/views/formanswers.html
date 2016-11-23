@@ -1,16 +1,34 @@
 <md-toolbar class="md-theme-light">
     <h1 class="md-toolbar-tools md-whiteframe-z1">
+        <i class="fa fa-file-excel-o" aria-hidden="true" ng-click="vm.ExportToExcel();">
+            <md-tooltip>
+                Exportera till excel
+            </md-tooltip>
+        </i>
+
         Formulär svar
     </h1>
 </md-toolbar>
 
-<md-list ng-cloak>
-
-    <md-list-item ng-repeat="answer in vm.UserAnswers" ng-click="answer.Show = !answer.Show">
-        <img alt="{{ answer.FirstName }}" src="{{ answer.UserImage }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
-        <div class="md-list-item-text" layout="column">
-            <h4 ng-hide="answer.Show">{{answer.FirstName}} {{answer.LastName}}</h4>
-            <p ng-show="answer.Show" ng-repeat="item in answer.FormSubmits">{{item.Name}}: {{item.Value}}</p>
-        </div>
-    </md-list-item>
-</md-list>
+<table class="gradera-list" ng-cloak>
+    <thead>
+    <tr>
+        <th class="image"></th>
+        <th>Namn</th>
+        <th ng-repeat="header in vm.UserAnswers[0].FormSubmits">
+            {{header.Name}}
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="answer in vm.UserAnswers">
+        <td class="image">
+            <img alt="{{ answer.FirstName }}" ng-src="{{ answer.UserImage }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
+        </td>
+        <td>{{answer.FirstName}} {{answer.LastName}}</td>
+        <td ng-repeat="item in answer.FormSubmits">
+            {{item.Value}}
+        </td>
+    </tr>
+    </tbody>
+</table>

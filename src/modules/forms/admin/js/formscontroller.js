@@ -199,12 +199,24 @@
         vm.UserAnswers = [];
 
         vm.GetUserAnswers = GetUserAnswers;
+        vm.ExportToExcel = ExportToExcel;
 
         function GetUserAnswers() {
             formsAdminService.GetUserAnswers(vm.FormId).success(getUserAnswersCallback);
 
             function getUserAnswersCallback(response) {
                 vm.UserAnswers = response;
+            }
+        }
+
+        function ExportToExcel() {
+            formsAdminService.ExportGetUserSubmitsToExcel(vm.FormId).success(ExportGetUserSubmitsToExcelSuccess);
+
+            function ExportGetUserSubmitsToExcelSuccess(response) {
+                var newLink = angular.element("<a href='/Downloads/Forms/" + response + "' id='" + response + "'></a>");
+                newLink.appendTo("body");
+                newLink[0].click();
+                newLink[0].remove();
             }
         }
 
@@ -218,12 +230,24 @@
         vm.Answers = [];
 
         vm.GetAnswers = GetAnswers;
+        vm.ExportToExcel = ExportToExcel;
 
         function GetAnswers() {
             formsAdminService.GetExternalAnswers(vm.FormId).success(getExternalAnswersCallback);
 
             function getExternalAnswersCallback(response) {
                 vm.Answers = response;
+            }
+        }
+
+        function ExportToExcel() {
+            formsAdminService.ExportExternalAnswersToExcel(vm.FormId).success(ExportExternalAnswersToExcelSuccess);
+
+            function ExportExternalAnswersToExcelSuccess(response) {
+                var newLink = angular.element("<a href='/Downloads/Forms/" + response + "' id='" + response + "'></a>");
+                newLink.appendTo("body");
+                newLink[0].click();
+                newLink[0].remove();
             }
         }
 
