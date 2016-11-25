@@ -262,7 +262,7 @@
         }
 
         function DownloadFile(file) {
-            var newLink = angular.element("<a href='/Downloads/Public/" + file + "' id='" + file + "' download></a>");
+            var newLink = angular.element("<a href='/Uploads/Public/" + file + "' id='" + file + "' download></a>");
             newLink.appendTo("body");
             newLink[0].click();
             newLink[0].remove();
