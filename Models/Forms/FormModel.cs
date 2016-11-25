@@ -72,17 +72,17 @@ namespace Gradera_Klubb.Models.Forms
                 ClubId = model.ClubId,
                 CreatedByUserId = model.CreatedByUserId,
                 CreatedDate = model.CreatedDate,
-                EndDate = model.EndDate.ToUniversalTime(),
+                EndDate = model.EndDate.ToUniversalTime() <= DateTime.MinValue ? DateTime.Now.AddDays(-1) : model.EndDate.ToUniversalTime(),
                 Id = model.Id,
                 IsDeleted = model.IsDeleted,
                 IsExternal = model.IsExternal,
                 Name = model.Name,
-                StartDate = model.StartDate.ToUniversalTime(),
+                StartDate = model.StartDate.ToUniversalTime() <= DateTime.MinValue ? DateTime.Now.AddDays(-1) : model.StartDate.ToUniversalTime(),
                 Description = model.Description ?? string.Empty,
                 MultipleSubmits = model.MultipleSubmits,
                 SendThanksMail = model.SendThanksMail,
-                EmailFieldName = model.EmailFieldName,
-                EmailHtml = model.EmailHtml
+                EmailFieldName = model.EmailFieldName ?? string.Empty,
+                EmailHtml = model.EmailHtml ?? string.Empty
             };
 
             foreach (var item in model.FormFields)
