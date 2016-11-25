@@ -39,5 +39,42 @@ namespace Gradera_Klubb.Models.Forms
 
             return model;
         }
+
+        internal static FormFields MapFormFieldDbModel(FormFieldModel model)
+        {
+            FormFields formField = new FormFields()
+            {
+                ClassName = model.ClassName,
+                FormId = model.FormId,
+                Id = model.Id,
+                IsRequired = model.IsRequired,
+                Label = model.Label,
+                Type = model.Type,
+                CanMultiply = model.CanMultiply
+            };
+
+            if(model.Options.Count > 0)
+            {
+                formField.FormFieldsOptions = new List<FormFieldsOptions>();
+
+                foreach (var option in model.Options)
+                {
+                    formField.FormFieldsOptions.Add(MapFormFieldOption(option));
+                }
+            }
+
+            return formField;
+        }
+
+        private static FormFieldsOptions MapFormFieldOption(FormFieldOptionModel option)
+        {
+            return new FormFieldsOptions()
+            {
+                FormFieldId = option.FormFieldId,
+                GroupName = option.GroupName,
+                Id = option.Id,
+                Name = option.Name
+            };
+        }
     }
 }

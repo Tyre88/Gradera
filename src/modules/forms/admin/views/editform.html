@@ -203,6 +203,12 @@
         <td class="hide-sm hide-md hide-xs">{{item.IsRequired ? 'Obligatorisk' : 'Ej obligatorisk'}}</td>
         <td ng-if="vm.Form.MultipleSubmits" class="hide-sm hide-md hide-xs">{{item.CanMultiply ? 'Ja' : 'Nej'}}</td>
         <td>
+            <i ng-click="vm.EditFormFieldItem(item); $event.stopPropagation();" class="fa fa-pencil-square-o md-hue-3">
+                <md-tooltip>
+                    Redigera fält
+                </md-tooltip>
+            </i>
+
             <i ng-click="vm.DeleteFormFieldItem(item); $event.stopPropagation();" class="fa fa-trash md-hue-3">
                 <md-tooltip>
                     Ta bort fält

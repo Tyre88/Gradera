@@ -18,6 +18,10 @@
             return $http.post('/api/formsadmin/saveform', form);
         };
 
+        this.SaveFormFieldItem = function(formField) {
+            return $http.post('/api/formsadmin/SaveFormFieldItem', formField);
+        };
+
         this.GetUserAnswers = function(formId) {
             return $http.get('/api/formsadmin/GetUserSubmits?' + $.param({formId: formId}));
         };

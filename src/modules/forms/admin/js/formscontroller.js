@@ -86,6 +86,7 @@
         vm.ClosePreview = ClosePreview;
         vm.DeleteFormFieldItem = DeleteFormFieldItem;
         vm.AddEmail = AddEmail;
+        vm.EditFormFieldItem = EditFormFieldItem;
 
         function GetForm() {
             formsAdminService.GetForm(vm.FormId).success(getFormCallback);
@@ -176,6 +177,67 @@
         function AddEmail() {
             vm.Form.Emails.push({Email: vm.Email});
             vm.Email = "";
+        }
+
+        function EditFormFieldItem(item) {
+            $mdDialog.show({
+                controller: EditFormFieldController,
+                controllerAs: "vm",
+                bindToController: true,
+                locals: {
+                    item: item
+                },
+                templateUrl: 'modules/forms/admin/views/editformfield.html',
+                parent: angular.element(document.body),
+                clickOutsideToClose: false
+            });
+
+            EditFormFieldController.$inject = ["$mdDialog", "forms-admin-service"];
+
+            function EditFormFieldController($mdDialog, formsAdminService) {
+                var vm = this;
+                vm.copyOfItem = angular.copy(vm.item);
+
+                vm.Close = Close;
+                vm.Save = Save;
+                vm.AddOption = AddOption;
+                vm.DeleteOption = DeleteOption;
+
+                function Close() {
+                    vm.item.Label = vm.copyOfItem.Label;
+                    vm.item.IsRequired = vm.copyOfItem.IsRequired;
+                    vm.item.ClassName = vm.copyOfItem.ClassName;
+                    vm.item.CanMultiply = vm.copyOfItem.CanMultiply;
+                    vm.item.Options = vm.copyOfItem.Options;
+
+                    $mdDialog.hide();
+                }
+
+                function Save() {
+                    formsAdminService.SaveFormFieldItem(vm.item).success(SaveFormFieldItemSuccess);
+
+                    function SaveFormFieldItemSuccess() {
+                        $mdDialog.hide();
+                    }
+                }
+
+                function AddOption() {
+                    vm.item.Options.push({
+                        FormFieldId: vm.item.Id,
+                        Name: "",
+                        GroupName: ""
+                    })
+                }
+
+                function DeleteOption(option) {
+                    if(~~option.Id > 0) {
+
+                    }
+                    else {
+                        vm.item.Options.splice(vm.item.Options.indexOf(option), 1);
+                    }
+                }
+            }
         }
 
         if(vm.FormId > 0)
