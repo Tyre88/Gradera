@@ -32,7 +32,12 @@
             var formFields = [];
             for(var i = 0; i < form.FormFields.length; i++)
             {
-                formFields.push({Value: form.FormFields[i].formControl.$modelValue, FormId: form.Id, FormFieldId: form.FormFields[i].key});
+                if(form.FormFields[i].type == "upload") {
+                    formFields.push({Value: form.FormFields[i].formControl.$modelValue.newName, FormId: form.Id, FormFieldId: form.FormFields[i].key});
+                }
+                else {
+                    formFields.push({Value: form.FormFields[i].formControl.$modelValue, FormId: form.Id, FormFieldId: form.FormFields[i].key});
+                }
             }
 
             formService.SubmitForm(formFields).success(submitFormCallback);

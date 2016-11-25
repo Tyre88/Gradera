@@ -58,6 +58,10 @@ table {
       width: $image-width;
       height: $table-height;
     }
+
+    th {
+      white-space: nowrap;
+    }
   }
 
   tbody {

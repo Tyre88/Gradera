@@ -20,8 +20,9 @@
     </thead>
     <tbody>
         <tr ng-repeat="answer in vm.Answers">
-            <td ng-repeat="item in answer.FormSubmits">
-                {{item.Value}}
+            <td ng-repeat="item in answer.FormSubmits" ng-class="{'image': vm.IsImage(item.Value)}">
+                <img ng-if="vm.IsImage(item.Value)" src="/Uploads/Public/{{item.Value}}" class="md-avatar" ng-click="vm.DownloadFile(item.Value)" />
+                <span ng-if="!vm.IsImage(item.Value)">{{item.Value}}</span>
             </td>
         </tr>
     </tbody>

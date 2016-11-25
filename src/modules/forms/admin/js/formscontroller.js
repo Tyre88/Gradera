@@ -231,6 +231,8 @@
 
         vm.GetAnswers = GetAnswers;
         vm.ExportToExcel = ExportToExcel;
+        vm.IsImage = IsImage;
+        vm.DownloadFile = DownloadFile;
 
         function GetAnswers() {
             formsAdminService.GetExternalAnswers(vm.FormId).success(getExternalAnswersCallback);
@@ -249,6 +251,21 @@
                 newLink[0].click();
                 newLink[0].remove();
             }
+        }
+
+        function IsImage(val) {
+            if(val && val.length == 40 && (val.indexOf('.jpg' > 0 || val.indexOf('.png') > 0))) {
+                return true;
+            }
+
+            return false;
+        }
+
+        function DownloadFile(file) {
+            var newLink = angular.element("<a href='/Downloads/Public/" + file + "' id='" + file + "' download></a>");
+            newLink.appendTo("body");
+            newLink[0].click();
+            newLink[0].remove();
         }
 
         if(vm.FormId > 0)

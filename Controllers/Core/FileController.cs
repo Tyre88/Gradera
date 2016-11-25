@@ -88,5 +88,36 @@ namespace Gradera_Klubb.Controllers.Core
 
             return response;
         }
+
+        public async Task<HttpResponseMessage> UploadFilePublic()
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                response.StatusCode = HttpStatusCode.UnsupportedMediaType;
+            }
+            else
+            {
+                MultipartMemoryStreamProvider provider = new MultipartMemoryStreamProvider();
+                await Request.Content.ReadAsMultipartAsync(provider);
+                Task<byte[]> fileData = provider.Contents.First().ReadAsByteArrayAsync();
+                string fileName = string.Format("{0}.jpg", Guid.NewGuid().ToString());
+                string directory = string.Format(@"{0}Uploads\Public", AppDomain.CurrentDomain.BaseDirectory);
+
+                if (!Directory.Exists(directory))
+                    Directory.CreateDirectory(directory);
+
+                using (FileStream fs = new FileStream(string.Format(@"{0}\{1}", directory, fileName), FileMode.OpenOrCreate))
+                {
+                    await fs.WriteAsync(fileData.Result, 0, fileData.Result.Length);
+                    fs.Close();
+                }
+
+                response.Content = new ObjectContent<string>(fileName, new JsonMediaTypeFormatter());
+            }
+
+            return response;
+        }
     }
 }
