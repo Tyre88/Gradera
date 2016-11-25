@@ -34,6 +34,10 @@
             return $http.delete('/api/formsadmin/DeleteFormFieldItem?' + $.param({formFieldId: formFieldId}));
         };
 
+        this.DeleteFormFieldOption = function(optionId) {
+            return $http.delete('/api/formsadmin/DeleteFormFieldOption?' + $.param({optionId: optionId}));
+        };
+
         this.ExportGetUserSubmitsToExcel = function(formId) {
             return $http.get('/api/formsadmin/ExportGetUserSubmitsToExcel?' + $.param({formId: formId}));
         };

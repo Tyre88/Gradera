@@ -231,7 +231,11 @@
 
                 function DeleteOption(option) {
                     if(~~option.Id > 0) {
+                        formsAdminService.DeleteFormFieldOption(option.Id).success(DeleteFormFieldOptionSuccess);
 
+                        function DeleteFormFieldOptionSuccess() {
+                            vm.item.Options.splice(vm.item.Options.indexOf(option), 1);
+                        }
                     }
                     else {
                         vm.item.Options.splice(vm.item.Options.indexOf(option), 1);

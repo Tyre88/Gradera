@@ -173,6 +173,16 @@ namespace Gradera_Klubb.Controllers.Forms
             return response;
         }
 
+        [HttpDelete, HttpOptions]
+        [AuthorizeFilter(AccessType = AccessType.Forms, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage DeleteFormFieldOption(int optionId)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            FormsAdminBLL.DeleteFormFieldOption(optionId, loggedInUser.AccountSession.ClubId);
+            return response;
+        }
+
         [HttpPost, HttpOptions]
         [AuthorizeFilter(AccessType = AccessType.Forms, AccessTypeRight = AccessTypeRight.Write)]
         public HttpResponseMessage SaveFormFieldItem(FormFieldModel formField)
