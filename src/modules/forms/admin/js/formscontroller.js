@@ -87,6 +87,7 @@
         vm.DeleteFormFieldItem = DeleteFormFieldItem;
         vm.AddEmail = AddEmail;
         vm.EditFormFieldItem = EditFormFieldItem;
+        vm.DisableRequired = DisableRequired;
 
         function GetForm() {
             formsAdminService.GetForm(vm.FormId).success(getFormCallback);
@@ -242,6 +243,15 @@
                     }
                 }
             }
+        }
+
+        function DisableRequired(item) {
+            if(item.Type == 'checkbox') {
+                item.IsRequired = false;
+                return true;
+            }
+
+            return false;
         }
 
         if(vm.FormId > 0)

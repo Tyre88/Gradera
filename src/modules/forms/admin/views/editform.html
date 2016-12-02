@@ -73,8 +73,11 @@
         <input type="text" ng-model="vm.NewField.Label" placeholder="Namn" />
     </md-input-container>
 
-    <md-checkbox ng-model="vm.NewField.IsRequired" aria-label="Nödvändigt?">
+    <md-checkbox ng-model="vm.NewField.IsRequired" ng-disabled="vm.DisableRequired(vm.NewField);" aria-label="Nödvändigt?">
         Nödvändigt?
+        <md-tooltip ng-if="vm.DisableRequired(vm.NewField);">
+            Den valda typen kan inte vara nödvändig.
+        </md-tooltip>
     </md-checkbox>
 
     <md-input-container>
