@@ -10,11 +10,14 @@
     </h1>
 </md-toolbar>
 
-<table class="gradera-list" ng-cloak>
+<table class="gradera-list" ng-cloak ng-if="vm.Answers.length">
     <thead>
         <tr>
             <th ng-repeat="header in vm.Answers[0].FormSubmits">
                 {{header.Name}}
+            </th>
+            <th>
+                Mer
             </th>
         </tr>
     </thead>
@@ -23,6 +26,13 @@
             <td ng-repeat="item in answer.FormSubmits" ng-class="{'image': vm.IsImage(item.Value)}">
                 <img ng-if="vm.IsImage(item.Value)" src="/Uploads/Public/{{item.Value}}" class="md-avatar" ng-click="vm.DownloadFile(item.Value)" />
                 <span ng-if="!vm.IsImage(item.Value)">{{item.Value}}</span>
+            </td>
+            <td>
+                <i ng-if="$root.HasAccess(6, 40);" ng-click="vm.DeleteExternalFormAnswer(answer); $event.stopPropagation();" class="fa fa-trash action-icon">
+                    <md-tooltip>
+                        Ta bort svar
+                    </md-tooltip>
+                </i>
             </td>
         </tr>
     </tbody>

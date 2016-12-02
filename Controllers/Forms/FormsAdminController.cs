@@ -191,5 +191,15 @@ namespace Gradera_Klubb.Controllers.Forms
             FormsAdminBLL.SaveFormFieldItem(FormFieldModel.MapFormFieldDbModel(formField));
             return response;
         }
+
+        [HttpDelete, HttpOptions]
+        [AuthorizeFilter(AccessType = AccessType.Forms, AccessTypeRight = AccessTypeRight.Admin)]
+        public HttpResponseMessage DeleteExternalFormAnswer(string batch)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            FormsAdminBLL.DeleteExternalFormAnswer(batch, loggedInUser.AccountSession.ClubId);
+            return response;
+        }
     }
 }

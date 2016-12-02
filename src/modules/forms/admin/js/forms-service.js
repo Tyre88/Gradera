@@ -38,6 +38,10 @@
             return $http.delete('/api/formsadmin/DeleteFormFieldOption?' + $.param({optionId: optionId}));
         };
 
+        this.DeleteExternalFormAnswer = function(batch) {
+            return $http.delete('/api/formsadmin/DeleteExternalFormAnswer?' + $.param({batch: batch}));
+        };
+
         this.ExportGetUserSubmitsToExcel = function(formId) {
             return $http.get('/api/formsadmin/ExportGetUserSubmitsToExcel?' + $.param({formId: formId}));
         };

@@ -9,7 +9,7 @@
     formsadminlistController.$inject = ["$state", "forms-admin-service", "$mdDialog"];
     formsadmineditController.$inject = ["$scope", "$state", "$stateParams", "forms-admin-service", "form", "$mdDialog"];
     formanswersController.$inject = ["$state", "$stateParams", "forms-admin-service"];
-    formanswersexternalController.$inject = ["$state", "$stateParams", "forms-admin-service"];
+    formanswersexternalController.$inject = ["$state", "$stateParams", "forms-admin-service", "$mdDialog"];
 
     function formsadminlistController($state, formsAdminService, $mdDialog) {
         var vm = this;
@@ -290,7 +290,7 @@
             vm.GetUserAnswers();
     }
 
-    function formanswersexternalController($state, $stateParams, formsAdminService) {
+    function formanswersexternalController($state, $stateParams, formsAdminService, $mdDialog) {
         var vm = this;
         vm.FormId = ~~$stateParams.formId;
         vm.Answers = [];
@@ -299,6 +299,7 @@
         vm.ExportToExcel = ExportToExcel;
         vm.IsImage = IsImage;
         vm.DownloadFile = DownloadFile;
+        vm.DeleteExternalFormAnswer = DeleteExternalFormAnswer;
 
         function GetAnswers() {
             formsAdminService.GetExternalAnswers(vm.FormId).success(getExternalAnswersCallback);
@@ -332,6 +333,20 @@
             newLink.appendTo("body");
             newLink[0].click();
             newLink[0].remove();
+        }
+
+        function DeleteExternalFormAnswer(answer) {
+            var confirm = $mdDialog.confirm()
+                .title('Är du säker på att du vill ta bort detta svaret?')
+                .ariaLabel('Ta bort formulär svar?')
+                .ok('Ja')
+                .cancel('Nej');
+
+            $mdDialog.show(confirm).then(function() {
+                formsAdminService.DeleteExternalFormAnswer(answer.Batch).success(function() {
+                    vm.Answers.splice(vm.Answers.indexOf(answer), 1);
+                });
+            });
         }
 
         if(vm.FormId > 0)
