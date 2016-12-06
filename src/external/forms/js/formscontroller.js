@@ -11,6 +11,7 @@
         vm.FormName = $stateParams.formName;
         vm.ClubInformation = {};
         vm.Forms = [];
+        vm.HasExpired = false;
 
         vm.GetForm = GetForm;
         vm.SubmitForm = SubmitForm;
@@ -19,7 +20,9 @@
         vm.AddSubmit = AddSubmit;
 
         function GetForm() {
-            formService.GetForm(vm.ClubShortName, vm.FormName).success(getFormCallback);
+            formService.GetForm(vm.ClubShortName, vm.FormName).success(getFormCallback).error(function() {
+                vm.HasExpired = true;
+            });
 
             function getFormCallback(response) {
                 vm.Form.Initialize(response);

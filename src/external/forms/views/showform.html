@@ -3,12 +3,12 @@
 </div>
 
 <md-subheader class="md-no-sticky kaushan-script big-header external-form-header">
-    <h2>{{vm.OriginalForm.Name}}</h2>
+    <h2>{{vm.FormName}}</h2>
 
     <div btf-markdown="vm.Form.Description"></div>
 </md-subheader>
 
-<form name="{{vm.OriginalForm.Id}}">
+<form name="{{vm.OriginalForm.Id}}" ng-if="!vm.HasExpired">
     <div ng-repeat="form in vm.Forms">
         <formly-form model="form.model" fields="form.FormFields" options="form.opt" form="form.form"></formly-form>
         <hr ng-if="$index < vm.Forms.length - 1" />
@@ -21,3 +21,5 @@
     </md-button>
     <md-button class="md-raised md-secondary" ng-if="vm.OriginalForm.MultipleSubmits" ng-click="vm.AddSubmit()">Lägg till deltagare</md-button>
 </form>
+
+<p ng-if="vm.HasExpired">Formuläret är inte längre aktivt.</p>
