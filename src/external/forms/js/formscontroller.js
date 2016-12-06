@@ -44,7 +44,7 @@
 
                 var alert = $mdDialog.alert({
                     title: 'FEL!',
-                    htmlContent: 'Vänligen fyll i alla fält som är nödvändiga' + errorFields,
+                    htmlContent: 'Vänligen fyll i alla fält som är nödvändiga:' + errorFields,
                     ok: 'Stäng'
                 });
 
