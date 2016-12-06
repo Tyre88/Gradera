@@ -8,7 +8,7 @@
     <div btf-markdown="vm.Form.Description"></div>
 </md-subheader>
 
-<form name="{{vm.OriginalForm.Id}}" ng-if="!vm.HasExpired">
+<form name="{{vm.OriginalForm.Id}}" ng-if="!vm.HasExpired" novalidate>
     <div ng-repeat="form in vm.Forms">
         <formly-form model="form.model" fields="form.FormFields" options="form.opt" form="form.form"></formly-form>
         <hr ng-if="$index < vm.Forms.length - 1" />

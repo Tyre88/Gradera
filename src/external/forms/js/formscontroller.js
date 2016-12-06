@@ -32,8 +32,30 @@
         }
 
         function SubmitForm(form) {
-            if(vm.Forms[0].form.$invalid)
+            if(vm.Forms[0].form.$invalid) {
+
+                var errorFields = "<ul>";
+
+                for(var i = 0; i < vm.Forms[0].form.$error.required.length; i++) {
+                    errorFields += "<li>" + vm.Forms[0].form.$error.required[i].$name + "</li>";
+                }
+
+                errorFields += "</ul>";
+
+                var alert = $mdDialog.alert({
+                    title: 'FEL!',
+                    htmlContent: 'Vänligen fyll i alla fält som är nödvändiga' + errorFields,
+                    ok: 'Stäng'
+                });
+
+                $mdDialog
+                    .show( alert )
+                    .finally(function() {
+                        alert = undefined;
+                    });
+
                 return;
+            }
 
             var formFields = [];
             for(var i = 0; i < form.FormFields.length; i++)

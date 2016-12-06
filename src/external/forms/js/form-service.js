@@ -39,6 +39,7 @@
                         field.className = formModel.FormFields[i].ClassName;
                         field.type = formModel.FormFields[i].Type;
                         field.key = formModel.FormFields[i].Id;
+                        field.name = formModel.FormFields[i].Label;
                         field.templateOptions.label = formModel.FormFields[i].Label;
                         field.templateOptions.required = formModel.FormFields[i].IsRequired;
                         field.data.CanMultiply = formModel.FormFields[i].CanMultiply;
