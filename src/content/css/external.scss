@@ -174,3 +174,8 @@ form span,
 form input {
   color: rgba(0,0,0,0.54);
 }
+
+form.ng-submitted .ng-invalid.ng-invalid-required[formly-custom-validation]
+{
+  border: 1px red solid;
+}

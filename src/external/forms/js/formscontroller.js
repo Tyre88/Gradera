@@ -29,6 +29,9 @@
         }
 
         function SubmitForm(form) {
+            if(vm.Forms[0].form.$invalid)
+                return;
+
             var formFields = [];
             for(var i = 0; i < form.FormFields.length; i++)
             {
