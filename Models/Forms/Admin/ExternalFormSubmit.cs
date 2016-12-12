@@ -22,7 +22,7 @@ namespace Gradera_Klubb.Models.Forms.Admin
             try
             {
                 model.Batch = form.FormExternalSubmitValues.First().Batch;
-                foreach (var item in form.FormExternalSubmitValues)
+                foreach (var item in form.FormExternalSubmitValues.OrderBy(f => f.FormFields.Id))
                 {
                     model.FormSubmits.Add(new FormSubmitValuesModel()
                     {
