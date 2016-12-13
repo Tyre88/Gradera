@@ -24,6 +24,8 @@ namespace Gradera_Klubb.Models.Forms
         public bool SendThanksMail { get; set; }
         public string EmailFieldName { get; set; }
         public string EmailHtml { get; set; }
+        public bool EnableExcelImport { get; set; }
+        public string ExampleExcelPath { get; set; }
 
         public FormModel()
         {
@@ -48,7 +50,9 @@ namespace Gradera_Klubb.Models.Forms
                 MultipleSubmits = form.MultipleSubmits,
                 SendThanksMail = form.SendThanksMail,
                 EmailFieldName = form.EmailFieldName,
-                EmailHtml = form.EmailHtml
+                EmailHtml = form.EmailHtml,
+                EnableExcelImport = form.EnableExcelImport,
+                ExampleExcelPath = form.ExampleExcelPath
             };
 
             if(deepLoad)
@@ -82,7 +86,9 @@ namespace Gradera_Klubb.Models.Forms
                 MultipleSubmits = model.MultipleSubmits,
                 SendThanksMail = model.SendThanksMail,
                 EmailFieldName = model.EmailFieldName ?? string.Empty,
-                EmailHtml = model.EmailHtml ?? string.Empty
+                EmailHtml = model.EmailHtml ?? string.Empty,
+                EnableExcelImport = model.EnableExcelImport,
+                ExampleExcelPath = model.ExampleExcelPath ?? string.Empty
             };
 
             foreach (var item in model.FormFields)
