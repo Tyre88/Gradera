@@ -174,3 +174,14 @@ form span,
 form input {
   color: rgba(0,0,0,0.54);
 }
+
+.form-actions
+{
+  i {
+    margin: 0 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

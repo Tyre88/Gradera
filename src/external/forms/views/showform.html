@@ -2,6 +2,20 @@
     <img ng-src="{{vm.ClubInformation.Image}}" />
 </div>
 
+<div class="hide-sm hide-md hide-xs form-actions">
+    <i class="fa fa-2x fa-download" aria-hidden="true" ng-click="vm.DownloadExampleExcel()" ng-if="vm.OriginalForm.EnableExcelImport && vm.OriginalForm.ExampleExcelPath">
+        <md-tooltip>
+            Ladda hem excel mall för import av formulär svar.
+        </md-tooltip>
+    </i>
+
+    <i class="fa fa-2x fa-file-excel-o" aria-hidden="true" ng-click="vm.ImportExcelFile()" ng-if="vm.OriginalForm.EnableExcelImport && vm.OriginalForm.ExampleExcelPath">
+        <md-tooltip>
+            Importera excel svar.
+        </md-tooltip>
+    </i>
+</div>
+
 <md-subheader class="md-no-sticky kaushan-script big-header external-form-header">
     <h2>{{vm.FormName}}</h2>
 

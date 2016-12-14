@@ -2,7 +2,7 @@
     angular.module('graderaklubbexternal').service('form', form);
     angular.module('graderaklubbexternal').service('form-external-service', formService);
 
-    formService.$inject = ["$http"];
+    formService.$inject = ["$http", "Upload"];
 
     function form() {
         this.Form = {
@@ -18,6 +18,8 @@
             FormFields: [],
             Description: "",
             MultipleSubmits: false,
+            EnableExcelImport: false,
+            ExampleExcelPath: "",
             Initialize: function (formModel) {
                 this.Id = formModel.Id;
                 this.CreatedByUserId = formModel.Id;
@@ -30,6 +32,8 @@
                 this.Name = formModel.Name;
                 this.Description = formModel.Description;
                 this.MultipleSubmits = formModel.MultipleSubmits;
+                this.EnableExcelImport = formModel.EnableExcelImport;
+                this.ExampleExcelPath = formModel.ExampleExcelPath;
 
                 if (formModel.FormFields != undefined && formModel.FormFields.length > 0) {
                     this.FormFields = [];
@@ -81,7 +85,7 @@
         };
     }
 
-    function formService($http) {
+    function formService($http, Upload) {
         this.GetForm = function(clubShortName, formName) {
             return $http.get('/api/externalforms/getform?' + $.param({clubShortName: clubShortName, formName: formName}));
         };

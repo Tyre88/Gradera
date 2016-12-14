@@ -18,6 +18,8 @@
         vm.SubmitForms = SubmitForms;
         vm.GetClubInformation = GetClubInformation;
         vm.AddSubmit = AddSubmit;
+        vm.DownloadExampleExcel = DownloadExampleExcel;
+        vm.ImportExcelFile = ImportExcelFile;
 
         function GetForm() {
             formService.GetForm(vm.ClubShortName, vm.FormName).success(getFormCallback).error(function() {
@@ -114,6 +116,40 @@
 
             function GetClubInformationSuccess(response) {
                 vm.ClubInformation = response;
+            }
+        }
+
+        function DownloadExampleExcel() {
+            var link = document.createElement("a");
+            link.href = "/Downloads/Forms/" + vm.OriginalForm.ExampleExcelPath;
+            link.click();
+        }
+
+        function ImportExcelFile() {
+            $mdDialog.show({
+                parent: angular.element(document.body),
+                templateUrl: "external/forms/views/excelimport.html",
+                controller: ImportExcelController,
+                controllerAs: "vm",
+                bindToController: true
+            });
+
+            ImportExcelController.$inject= ["$mdDialog"];
+
+            function ImportExcelController($mdDialog) {
+                var vm = this;
+
+                vm.DoImport = DoImport;
+                vm.Close = Close;
+
+                function DoImport() {
+
+                    vm.Close();
+                }
+
+                function Close() {
+                    $mdDialog.hide();
+                }
             }
         }
 
