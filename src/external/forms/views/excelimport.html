@@ -1,7 +1,14 @@
 <md-dialog>
-    <md-dialog-content>
+    <md-dialog-content class="md-padding">
 
+        <div class="import-container" ngf-select ngf-drop ng-model="vm.file" name="file" ngf-pattern="'.xls,.xlsx'"
+             ngf-accept="'.xls,.xlsx'" ngf-max-size="20MB">
 
+            <span>
+                Klicka eller droppa för att ladda upp excel fil för import
+            </span>
+
+        </div>
 
         <md-dialog-actions>
             <md-button class="md-raised md-primary" ng-click="vm.DoImport()">Importera</md-button>

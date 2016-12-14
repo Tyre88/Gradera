@@ -134,16 +134,16 @@
                 bindToController: true
             });
 
-            ImportExcelController.$inject= ["$mdDialog"];
+            ImportExcelController.$inject= ["$mdDialog", "form-external-service"];
 
-            function ImportExcelController($mdDialog) {
+            function ImportExcelController($mdDialog, formService) {
                 var vm = this;
 
                 vm.DoImport = DoImport;
                 vm.Close = Close;
 
                 function DoImport() {
-
+                    debugger;
                     vm.Close();
                 }
 

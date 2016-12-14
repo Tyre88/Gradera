@@ -185,3 +185,19 @@ form input {
     }
   }
 }
+
+.import-container
+{
+  width: 250px;
+  height: 200px;
+  line-height: 200px;
+  border: 1px dotted #CECECE;
+  margin: auto;
+  text-align: center;
+
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+  }
+}
