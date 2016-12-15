@@ -1,4 +1,5 @@
 ﻿using Gradera.Forms.BLL;
+using Gradera.Forms.Entities;
 using Gradera_Klubb.Models.Forms;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Gradera_Klubb.Controllers.Forms
@@ -26,6 +28,29 @@ namespace Gradera_Klubb.Controllers.Forms
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             FormsBLL.SubmitExternalForm(SubmitFormFieldModel.MapModelToExternalFormSubmitValues(formFields));
+            return response;
+        }
+
+        [HttpPost, HttpOptions]
+        public async Task<HttpResponseMessage> ImportExcelFile()
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                response.StatusCode = HttpStatusCode.UnsupportedMediaType;
+            }
+            else
+            {
+                MultipartMemoryStreamProvider provider = new MultipartMemoryStreamProvider();
+                await Request.Content.ReadAsMultipartAsync(provider);
+                Task<byte[]> fileData = provider.Contents.First().ReadAsByteArrayAsync();
+                int formId = int.Parse(((System.Web.HttpContextWrapper)Request.Properties["MS_HttpContext"]).Request.Form["formId"]);
+
+                FormExcelImportResult result = FormsBLL.SubmitExternalFormFromExcel(fileData.Result, formId);
+
+                response.Content = new ObjectContent<FormExcelImportResult>(result, new JsonMediaTypeFormatter());
+            }
+
             return response;
         }
     }

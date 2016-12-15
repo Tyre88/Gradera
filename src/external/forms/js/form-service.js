@@ -93,5 +93,17 @@
         this.SubmitForm = function(formFields) {
             return $http.post('/api/externalforms/submitform', formFields);
         };
+
+        this.ImportExcelFile = function(file, formId, successCallback) {
+            Upload.upload({
+                url: "/api/externalforms/ImportExcelFile",
+                data: {file: file, formId: formId}
+            }).then(successCallback, function(err) {
+                console.error(err);
+            }, function(evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ');
+            });
+        };
     }
 }(window.angular));

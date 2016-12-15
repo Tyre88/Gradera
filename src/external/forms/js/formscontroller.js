@@ -131,20 +131,32 @@
                 templateUrl: "external/forms/views/excelimport.html",
                 controller: ImportExcelController,
                 controllerAs: "vm",
-                bindToController: true
+                bindToController: true,
+                locals: {
+                    formId: vm.OriginalForm.Id
+                }
             });
 
-            ImportExcelController.$inject= ["$mdDialog", "form-external-service"];
+            ImportExcelController.$inject= ["$mdDialog", "$mdToast", "form-external-service"];
 
-            function ImportExcelController($mdDialog, formService) {
+            function ImportExcelController($mdDialog, $mdToast, formService) {
                 var vm = this;
 
                 vm.DoImport = DoImport;
                 vm.Close = Close;
 
                 function DoImport() {
-                    debugger;
-                    vm.Close();
+                    if(vm.file) {
+
+                        formService.ImportExcelFile(vm.file, vm.formId, ImportExcelFileSuccess);
+
+                        function ImportExcelFileSuccess(result) {
+                            if(result.Success) {
+                                //MAKE TOAST
+                            }
+                            vm.Close();
+                        }
+                    }
                 }
 
                 function Close() {
