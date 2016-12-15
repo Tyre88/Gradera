@@ -151,7 +151,6 @@
                         formService.ImportExcelFile(vm.file, vm.formId, ImportExcelFileSuccess);
 
                         function ImportExcelFileSuccess(result) {
-                            debugger;
                             if(result.data.Success) {
                                 $mdToast.showSimple('Lyckades skicka in ' + result.data.Count + ' formulärsvar från excel filen.');
                             }
