@@ -11,6 +11,7 @@
         <tr>
             <th>Namn</th>
             <th class="hide-sm hide-md hide-xs">Aktiv mellan</th>
+            <th>Svar</th>
             <th>Mer</th>
         </tr>
     </thead>
@@ -18,6 +19,7 @@
         <tr ng-repeat="form in vm.Forms" ng-click="vm.EditForm(form.Id)">
             <td>{{form.Name}}</td>
             <td class="hide-sm hide-md hide-xs">{{form.StartDate | date:'yyyy-MM-dd HH:mm'}} - {{form.EndDate | date:'yyyy-MM-dd HH:mm'}}</td>
+            <td>{{form.AnswerCount}}</td>
             <td>
                 <i ng-if="$root.HasAccess(6, 20);" ng-click="vm.FormAnswers(form); $event.stopPropagation();" class="fa fa-tachometer action-icon">
                     <md-tooltip>

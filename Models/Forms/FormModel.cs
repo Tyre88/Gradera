@@ -27,6 +27,8 @@ namespace Gradera_Klubb.Models.Forms
         public bool EnableExcelImport { get; set; }
         public string ExampleExcelPath { get; set; }
 
+        public int AnswerCount { get; set; }
+
         public FormModel()
         {
             FormFields = new List<FormFieldModel>();

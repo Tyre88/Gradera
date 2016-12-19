@@ -28,6 +28,7 @@ namespace Gradera_Klubb.Controllers.Forms
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
             List<FormModel> forms = FormModel.MapFormModels(FormsAdminBLL.GetAllForms(loggedInUser.AccountSession.ClubId));
+            forms.ForEach(f => f.AnswerCount = FormsAdminBLL.GetFormAnswerCount(f.Id, f.IsExternal, loggedInUser.AccountSession.ClubId));
             response.Content = new ObjectContent<List<FormModel>>(forms, new JsonMediaTypeFormatter());
             return response;
         }
