@@ -130,6 +130,7 @@
         }
 
         function SaveForm() {
+            vm.Form.StartDate = moment(vm.Form.StartDate).format('YYYY-MM-DD');
             vm.Form.EndDate = moment(vm.Form.EndDate).format('YYYY-MM-DD 23:59:59');
             formsAdminService.SaveForm(vm.Form).success(saveFormcallback);
 
