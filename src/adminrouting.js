@@ -169,6 +169,12 @@
                 templateUrl: "modules/core/contact/admin/views/editcontact.html",
                 controller: "core.contact.admin.edit",
                 controllerAs: "vm"
+            }).state('mediabankadminlist',
+            {
+                url: "/admin/mediabank",
+                templateUrl: "modules/mediabank/admin/views/list.html",
+                controller: "mediabank.admin.list",
+                controllerAs: "vm"
             });
     }
 }(window.angular));
