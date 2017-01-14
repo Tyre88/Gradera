@@ -1,6 +1,7 @@
 ﻿using Gradera.Core.Entities;
 using Gradera.Core.Enums;
 using Gradera.Core.Filters;
+using Gradera.Entities.Mediabank;
 using Gradera.Mediabank.BLL;
 using Gradera.Mediabank.Interfaces;
 using System;
@@ -9,12 +10,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
 namespace Gradera_Klubb.Controllers.Mediabank
 {
-    [AuthorizeFilter]
     public class MediabankAdminController : ApiController
     {
         private IMediabank _mediabank;
@@ -25,16 +26,81 @@ namespace Gradera_Klubb.Controllers.Mediabank
         }
 
         [HttpGet]
-        [AuthorizeFilter(AccessType = AccessType.Mediabank, AccessTypeRight = AccessTypeRight.Write)]
+        [AuthorizeFilter(AccessType = AccessType.Mediabank, AccessTypeRight = AccessTypeRight.Read)]
         public HttpResponseMessage GetAllFiles()
         {
             UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
 
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            _mediabank.GetAllFiles(loggedInUser.AccountSession.ClubId);
-            //IList<FormModel> forms = FormModel.MapFormModels(FormsAdminBLL.GetAllForms(loggedInUser.AccountSession.ClubId));
-            //forms.ForEach(f => f.AnswerCount = FormsAdminBLL.GetFormAnswerCount(f.Id, f.IsExternal, loggedInUser.AccountSession.ClubId));
-            //response.Content = new ObjectContent<List<FormModel>>(forms, new JsonMediaTypeFormatter());
+            IList<MediabankEntity> mediabankFiles = _mediabank.GetAllFiles(loggedInUser.AccountSession.ClubId);
+            response.Content = new ObjectContent<IList<MediabankEntity>>(mediabankFiles, new JsonMediaTypeFormatter());
+            return response;
+        }
+
+        [HttpGet]
+        [AuthorizeFilter(AccessType = AccessType.Mediabank, AccessTypeRight = AccessTypeRight.Read)]
+        public HttpResponseMessage GetAllFilesWithType(string fileType)
+        {
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            IList<MediabankEntity> mediabankFiles = _mediabank.GetAllFilesWithType(loggedInUser.AccountSession.ClubId, fileType);
+            response.Content = new ObjectContent<IList<MediabankEntity>>(mediabankFiles, new JsonMediaTypeFormatter());
+            return response;
+        }
+
+        [HttpGet]
+        [AuthorizeFilter(AccessType = AccessType.Mediabank, AccessTypeRight = AccessTypeRight.Read)]
+        public HttpResponseMessage GetFile(int fileId)
+        {
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            MediabankEntity mediabankFile = _mediabank.GetFile(loggedInUser.AccountSession.ClubId, fileId);
+            response.Content = new ObjectContent<MediabankEntity>(mediabankFile, new JsonMediaTypeFormatter());
+            return response;
+        }
+
+        [AuthorizeFilter(AccessType = AccessType.Mediabank, AccessTypeRight = AccessTypeRight.Write)]
+        public async Task<HttpResponseMessage> UploadMediabankFile()
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                response.StatusCode = HttpStatusCode.UnsupportedMediaType;
+            }
+            else
+            {
+                MediabankEntity mediabankFile = new MediabankEntity();
+
+                UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+                mediabankFile.ClubId = loggedInUser.AccountSession.ClubId;
+                mediabankFile.CreatedById = loggedInUser.AccountSession.AccountId;
+
+                MultipartMemoryStreamProvider provider = new MultipartMemoryStreamProvider();
+                await Request.Content.ReadAsMultipartAsync(provider);
+
+                mediabankFile.Name = ((System.Web.HttpContextWrapper)Request.Properties["MS_HttpContext"]).Request.Form["fileName"].ToString();
+                mediabankFile.Description = ((System.Web.HttpContextWrapper)Request.Properties["MS_HttpContext"]).Request.Form["fileDescription"].ToString();
+
+                await Request.Content.ReadAsMultipartAsync(provider)
+                    .ContinueWith(async o =>
+                    {
+                        var fileContent = provider.Contents.FirstOrDefault();
+                        string name = string.Empty;
+
+                        if (fileContent != null)
+                        {
+                            name = fileContent.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
+                        }
+
+                        byte[] fileData = await provider.Contents.First().ReadAsByteArrayAsync();
+
+                        response.Content = new ObjectContent<MediabankEntity>(_mediabank.SaveFile(fileData, name, mediabankFile), new JsonMediaTypeFormatter());
+                    });
+            }
+
             return response;
         }
     }

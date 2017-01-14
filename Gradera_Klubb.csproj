@@ -283,6 +283,10 @@
       <Project>{2d03f748-00b1-4ece-98c7-61e274e5a29e}</Project>
       <Name>Gradera.Competition</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gradera.Entities\Gradera.Entities.csproj">
+      <Project>{b16aeae6-ae95-4565-ba68-521108361e87}</Project>
+      <Name>Gradera.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gradera.Forms\Gradera.Forms.csproj">
       <Project>{52c8fafd-92ad-47b8-8ba8-431f0539e1dd}</Project>
       <Name>Gradera.Forms</Name>
