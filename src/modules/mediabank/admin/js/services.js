@@ -1,7 +1,7 @@
 (function (angular) {
-    angular.module('graderaklubb').service('mediabank.admin.service', ["$http", "Upload", mediabankAdminService]);
+    angular.module('graderaklubb').service('mediabank.admin.service', ["$rootScope", "$http", "Upload", mediabankAdminService]);
 
-    function mediabankAdminService($http, Upload) {
+    function mediabankAdminService($rootScope, $http, Upload) {
         this.GetAllFiles = function() {
             return $http.get('/api/MediabankAdmin/GetAllFiles');
         };
@@ -23,6 +23,8 @@
             }, function(evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 console.log('progress: ' + progressPercentage + '% ');
+
+                $rootScope.LoadingProgress = progressPercentage;
             });
         }
     }

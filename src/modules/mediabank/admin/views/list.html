@@ -12,16 +12,18 @@
         <th class="image"></th>
         <th>Namn</th>
         <th>Beskrivning</th>
+        <th>Typ</th>
         <th>Mer</th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="item in vm.MediabankFiles" ng-click="vm.Show(item)">
         <td class="image">
-            <img alt="{{ item.Name }}" ng-src="{{ item.FileUrl }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
+            <img alt="{{ item.Name }}" ng-src="{{ item.Thumbnail }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
         </td>
         <td>{{item.Name}}</td>
         <td>{{item.Description}}</td>
+        <td>{{vm.GetTypeName(item.FileType)}}</td>
         <td>
             <i ng-if="$root.HasAccess(10, 40);" ng-click="vm.DeleteMediabankFile(item); $event.stopPropagation();" class="fa fa-trash md-secondary md-hue-3"></i>
         </td>

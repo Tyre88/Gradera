@@ -1,0 +1,27 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
+        Redigera: {{MediabankFile.Name}}
+    </h1>
+</md-toolbar>
+
+<form name="editMediabankFile" ng-submit="Save()">
+
+    <div>
+        <img ng-if="MediabankFile.FileType == 'IMAGE'" src="{{MediabankFile.FileUrl}}" fallback-src="content/images/No_Image_Available.png" />
+    </div>
+
+    <div class="edit-container">
+        <md-input-container>
+            <label>Namn</label>
+            <input type="text" ng-model="MediabankFile.Name" required name="name" />
+            <div ng-messages="editMediabankFile.name.$error">
+                <div ng-message="required">Du måste namnge filen</div>
+            </div>
+        </md-input-container>
+    </div>
+
+    <div>
+        <md-button class="md-raised md-primary" type="submit">Spara</md-button>
+        <md-button class="md-raised md-warn" ng-click="Back();">Avbryt</md-button>
+    </div>
+</form>

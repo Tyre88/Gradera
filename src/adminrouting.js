@@ -175,6 +175,12 @@
                 templateUrl: "modules/mediabank/admin/views/list.html",
                 controller: "mediabank.admin.list",
                 controllerAs: "vm"
+            }).state('mediabankadminedit',
+            {
+                url: "/admin/mediabank/edit/{id}",
+                templateUrl: "modules/mediabank/admin/views/edit.html",
+                controller: "mediabank.admin.edit",
+                controllerAs: "vm"
             });
     }
 }(window.angular));

@@ -27,6 +27,12 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                     $mdSidenav('leftNav').toggle();
                 };
 
+                $rootScope.GetProgressString = function() {
+                    if(~~$rootScope.LoadingProgress > -1) {
+                        return $rootScope.LoadingProgress + "%";
+                    }
+                };
+
                 $rootScope.HasSomeWriteAccess = function()
                 {
                     for(var i = 0; i < $scope.UserService.User.AccessRightsRight.length; i++)
@@ -125,6 +131,7 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
             return {
                 request: function(request)
                 {
+                    $rootScope.LoadingProgress = -1;
                     return request;
                 },
                 response: function(response) {
