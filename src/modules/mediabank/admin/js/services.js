@@ -18,6 +18,10 @@
             return $http.post('/api/MediabankAdmin/UpdateMediabankFile', file);
         };
 
+        this.DeleteMediabankFile = function(id) {
+            return $http.delete('/api/MediabankAdmin/DeleteMediabankFile?' + $.param({id: id}));
+        };
+
         this.UploadMediabankFile = function(file, fileName, fileDescription, successCallback) {
             Upload.upload({
                 url: "/api/MediabankAdmin/UploadMediabankFile",

@@ -2,16 +2,17 @@
     angular.module('graderaklubb').controller('mediabank.admin.list', mediabankadminlistController);
     angular.module('graderaklubb').controller('mediabank.admin.edit', mediabankadmineditController);
 
-    mediabankadminlistController.$inject = ["$state", "mediabank.admin.service"];
+    mediabankadminlistController.$inject = ["$state", "$mdDialog", "mediabank.admin.service"];
     mediabankadmineditController.$inject = ["$state", "$stateParams", "mediabank.admin.service"];
 
-    function mediabankadminlistController($state, mediabankAdminService) {
+    function mediabankadminlistController($state, $mdDialog, mediabankAdminService) {
         var vm = this;
         vm.MediabankFiles = [];
 
         vm.UploadFile = UploadFile;
         vm.GetTypeName = GetTypeName;
         vm.Show = Show;
+        vm.DeleteMediabankFile = DeleteMediabankFile;
 
         function UploadFile(file) {
             if(file) {
@@ -40,6 +41,24 @@
 
         function Show(file) {
             $state.go('mediabankadminedit', {id: file.Id});
+        }
+
+        function DeleteMediabankFile(file) {
+            var confirm = $mdDialog.confirm()
+                .title('Är du säker på att du vill ta bort ' + file.Name +  '?')
+                .ariaLabel('Ta bort mediabank fil?')
+                .ok('Ja')
+                .cancel('Nej');
+
+            $mdDialog.show(confirm).then(function() {
+                mediabankAdminService.DeleteMediabankFile(file.Id).success(DeleteMediabankFileSuccess);
+            });
+
+            function DeleteMediabankFileSuccess(response) {
+                if(response == true) {
+                    vm.MediabankFiles.splice(vm.MediabankFiles.indexOf(file), 1);
+                }
+            }
         }
 
         mediabankAdminService.GetAllFiles().success(function(response) {

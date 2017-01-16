@@ -71,6 +71,17 @@ namespace Gradera_Klubb.Controllers.Mediabank
             return response;
         }
 
+        [HttpDelete]
+        [AuthorizeFilter(AccessType = AccessType.Mediabank, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage DeleteMediabankFile(int id)
+        {
+            UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            bool success = _mediabank.DeleteMediabankFile(id, loggedInUser.AccountSession.ClubId);
+            response.Content = new ObjectContent<bool>(success, new JsonMediaTypeFormatter());
+            return response;
+        }
+
         [AuthorizeFilter(AccessType = AccessType.Mediabank, AccessTypeRight = AccessTypeRight.Write)]
         public async Task<HttpResponseMessage> UploadMediabankFile()
         {
