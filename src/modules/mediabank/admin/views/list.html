@@ -25,9 +25,12 @@
         <td>{{item.Description}}</td>
         <td>{{vm.GetTypeName(item.FileType)}}</td>
         <td>
-            <i ng-click="vm.DownloadMediabankFile(item); $event.stopPropagation();" class="fa fa-download md-secondary md-hue-3 action-icon">
-                <md-tooltip>Ladda ner mediabank fil</md-tooltip>
-            </i>
+            <a download="{{item.Name}}{{item.FileExtension}}" href="{{item.FileUrl}}" ng-click="$event.stopPropagation();" class="action-icon">
+                <i class="fa fa-download md-secondary md-hue-3">
+                    <md-tooltip>Ladda ner mediabank fil</md-tooltip>
+                </i>
+            </a>​​​​​​​​​​​​​​​​​​​​​​​​​​​
+
             <i ng-if="$root.HasAccess(10, 40);" ng-click="vm.DeleteMediabankFile(item); $event.stopPropagation();" class="fa fa-trash md-secondary md-hue-3 action-icon">
                 <md-tooltip>Ta bort mediabank fil</md-tooltip>
             </i>
