@@ -13,6 +13,7 @@
         vm.GetTypeName = GetTypeName;
         vm.Show = Show;
         vm.DeleteMediabankFile = DeleteMediabankFile;
+        vm.GetThumbnail = GetThumbnail;
 
         function UploadFile(file) {
             if(file) {
@@ -32,6 +33,15 @@
                 break;
                 case "VIDEO":
                     return "Video";
+                break;
+                case "EXCEL":
+                    return "Excel";
+                break;
+                case "WORD":
+                    return "Word";
+                break;
+                case "CSV":
+                    return "Csv";
                 break;
                 default:
                     return "-";
@@ -59,6 +69,23 @@
                     vm.MediabankFiles.splice(vm.MediabankFiles.indexOf(file), 1);
                 }
             }
+        }
+
+        function GetThumbnail(file) {
+            if(file.Thumbnail == null) {
+                switch(file.FileType) {
+                    case "EXCEL":
+                        return "content/images/excel.svg";
+                    break;
+                    case "CSV":
+                        return "content/images/csv.png";
+                    break;
+                    case "WORD":
+                        return "content/images/word.png";
+                    break;
+                }
+            }
+            else return file.Thumbnail;
         }
 
         mediabankAdminService.GetAllFiles().success(function(response) {
