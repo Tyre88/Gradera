@@ -6,9 +6,12 @@
 
 <form name="editMediabankFile" ng-submit="vm.Save()">
 
-    <div>
-        <img ng-if="vm.MediabankFile.FileType == 'IMAGE'" src="{{vm.MediabankFile.FileUrl}}" fallback-src="content/images/No_Image_Available.png" />
-        <video ng-if="vm.MediabankFile.FileType == 'VIDEO'" controls>
+    <div ng-if="vm.MediabankFile.FileType == 'IMAGE'" class="info-image" fit-image="150">
+        <img src="{{vm.MediabankFile.FileUrl}}" fallback-src="content/images/No_Image_Available.png" />
+    </div>
+
+    <div ng-if="vm.MediabankFile.FileType == 'VIDEO'" class="file-wrapper" poster="{{vm.MediabankFile.Thumbnail}}">
+        <video controls>
             <source src="{{vm.MediabankFile.FileUrl}}" type="video/mp4">
         </video>
     </div>
@@ -20,6 +23,11 @@
             <div ng-messages="editMediabankFile.name.$error">
                 <div ng-message="required">Du måste namnge filen</div>
             </div>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Besktivning</label>
+            <input type="text" ng-model="vm.MediabankFile.Description" name="description" />
         </md-input-container>
     </div>
 

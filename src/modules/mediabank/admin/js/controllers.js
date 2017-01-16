@@ -15,11 +15,12 @@
 
         function UploadFile(file) {
             if(file) {
-                mediabankAdminService.UploadMediabankFile(file, "Victor", "Detta är en bild på victor.", UploadMediabankFileSuccess);
+                mediabankAdminService.UploadMediabankFile(file, "", "", UploadMediabankFileSuccess);
             }
 
             function UploadMediabankFileSuccess(response) {
-                vm.MediabankFiles.push(response.data);
+                //vm.MediabankFiles.push(response.data);
+                vm.Show(response.data)
             }
         }
 
@@ -50,6 +51,23 @@
         var vm = this;
         vm.MediabankFileId = ~~$stateParams.id;
         vm.MediabankFile = {};
+
+        vm.Back = Back;
+        vm.Save = Save;
+
+        function Back() {
+            $state.go('mediabankadminlist');
+        }
+
+        function Save() {
+            mediabankAdminService.UpdateMediabankFile(vm.MediabankFile).success(UpdateMediabankFileSuccess);
+
+            function UpdateMediabankFileSuccess(response) {
+                if(response == true) {
+                    vm.Back();
+                }
+            }
+        }
 
         mediabankAdminService.GetFile(vm.MediabankFileId).success(GetFileSuccess);
 

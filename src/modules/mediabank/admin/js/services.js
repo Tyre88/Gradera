@@ -14,6 +14,10 @@
             return $http.get('/api/MediabankAdmin/GetFile?' + $.param({fileId: fileId}));
         };
 
+        this.UpdateMediabankFile = function(file) {
+            return $http.post('/api/MediabankAdmin/UpdateMediabankFile', file);
+        };
+
         this.UploadMediabankFile = function(file, fileName, fileDescription, successCallback) {
             Upload.upload({
                 url: "/api/MediabankAdmin/UploadMediabankFile",

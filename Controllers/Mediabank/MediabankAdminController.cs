@@ -61,6 +61,16 @@ namespace Gradera_Klubb.Controllers.Mediabank
             return response;
         }
 
+        [HttpPost]
+        [AuthorizeFilter(AccessType = AccessType.Mediabank, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage UpdateMediabankFile(MediabankEntity file)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            bool success = _mediabank.UpdateMediabankFile(file);
+            response.Content = new ObjectContent<bool>(success, new JsonMediaTypeFormatter());
+            return response;
+        }
+
         [AuthorizeFilter(AccessType = AccessType.Mediabank, AccessTypeRight = AccessTypeRight.Write)]
         public async Task<HttpResponseMessage> UploadMediabankFile()
         {

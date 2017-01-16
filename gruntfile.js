@@ -88,12 +88,12 @@ module.exports = function (grunt)
 			css:
 			{
 				files: ["<%= config.src %>/**/*.css"],
-				tasks: ["newer:copy:css"]
+				tasks: ["newer:copy:css", "newer:concat"]
 			},
 			sass:
 			{
 				files: ["<%= config.src %>/**/*.scss"],
-				tasks: ["newer:sass"]
+				tasks: ["newer:sass", "newer:copy:css", "newer:concat"]
 			},
 			images:
 			{
