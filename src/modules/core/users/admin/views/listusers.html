@@ -1,21 +1,21 @@
 <md-toolbar class="md-theme-light">
     <h1 class="md-toolbar-tools md-whiteframe-z1">
-        Medlemmar
+        {{'global.users' | translate}}
     </h1>
 </md-toolbar>
 
-<span class="md-button md-raised" ng-click="vm.EditUser(0, $event);"><i class="fa fa-plus-circle"></i> Lägg till användare</span>
-<span ng-if="$root.HasAccess(2, 40);" class="md-button md-raised" ng-click="vm.OpenImportDialog();"><i class="fa fa-users"></i> Importera från sportadmin</span>
+<span class="md-button md-raised" ng-click="vm.EditUser(0, $event);"><i class="fa fa-plus-circle"></i> {{'user.adduser' | translate}}</span>
+<span ng-if="$root.HasAccess(2, 40);" class="md-button md-raised" ng-click="vm.OpenImportDialog();"><i class="fa fa-users"></i> {{'user.import' | translate}}</span>
 
 <table class="gradera-list" ng-cloak="">
     <thead>
         <tr>
             <th class="image"></th>
-            <th>Namn</th>
-            <th class="hide-sm hide-md hide-xs">Epost</th>
-            <th class="hide-sm hide-md hide-xs">Stad</th>
-            <th class="hide-sm hide-md hide-xs">Yrke</th>
-            <th>Mer</th>
+            <th>{{'global.name' | translate}}</th>
+            <th class="hide-sm hide-md hide-xs">{{'global.email' | translate}}</th>
+            <th class="hide-sm hide-md hide-xs">{{'global.city' | translate}}</th>
+            <th class="hide-sm hide-md hide-xs">{{'global.trade' | translate}}</th>
+            <th>{{'global.more' | translate}}</th>
         </tr>
     </thead>
     <tbody>

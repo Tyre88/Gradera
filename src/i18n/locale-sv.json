@@ -6,6 +6,7 @@
   "global.trade": "Yrke",
   "global.filter": "Filter",
   "global.phone": "Telefonnummer",
+  "global.more": "Mer",
 
   "login.username": "Användarnamn (krävs)",
   "login.password": "Lösenord (krävs)",
@@ -20,8 +21,10 @@
   "home.unansweredforms": "Obesvarade formulär",
   "home.upcommingcompetitions": "Kommande tävlingar",
 
-  "user.showuser": "Visar användare",
+  "user.showuser": "Visar medlem",
   "user.weight": "Vikt",
   "user.birthday": "Födelsedag",
-  "user.belt": "Bälte"
+  "user.belt": "Bälte",
+  "user.adduser": "Lägg till användare",
+  "user.import": "Importera från sportadmin"
 }
