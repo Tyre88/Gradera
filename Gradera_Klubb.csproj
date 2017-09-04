@@ -187,6 +187,7 @@
     <Compile Include="Controllers\Core\ClubExternalController.cs" />
     <Compile Include="Controllers\Core\ContactController.cs" />
     <Compile Include="Controllers\Core\FileController.cs" />
+    <Compile Include="Controllers\Core\GenericItemPermissionController.cs" />
     <Compile Include="Controllers\Core\UserController.cs" />
     <Compile Include="Controllers\Forms\ExternalFormsController.cs" />
     <Compile Include="Controllers\Forms\FormsAdminController.cs" />

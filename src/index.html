@@ -28,7 +28,7 @@
 
                         <div ng-if="$root.HasSomeWriteAccess();">
                             <hr />
-                            <md-list-item class="nav-header">Klubb administration</md-list-item>
+                            <md-list-item class="nav-header">{{'menu.admin' | translate}}</md-list-item>
                             <md-list-item ng-repeat="link in $root.Links | filter:{IsAdminLink: true}:true" ng-show="$root.HasAccess(link.AccessType, link.AccessTypeRight)"
                                           ng-click="$root.NavigateTo(link.Sref); SetActiveNav($event)">
                                 <a class="md-{{$root.Theme}}-theme md-primary">{{link.Text}}</a>

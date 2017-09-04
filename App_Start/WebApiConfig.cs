@@ -34,6 +34,20 @@ namespace Gradera_Klubb
             );
 
             config.Routes.MapHttpRoute(
+                name: "SaveGenericItemPermissions",
+                routeTemplate: "api/GenericItemPermission/SaveGenericItemPermissions/{objectId}/{objectType}/{accessrightIds}/{userIds}",
+                defaults: new
+                {
+                    controller = "GenericItemPermission",
+                    action = "SaveGenericItemPermissions",
+                    objectId = RouteParameter.Optional,
+                    objectType = RouteParameter.Optional,
+                    accessrightIds = RouteParameter.Optional,
+                    userIds = RouteParameter.Optional
+                }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "ReadNewsletter",
                 routeTemplate: "api/NewsletterJob/ReadNewsletter/{newsletterSendItemGuid}",
                 defaults: new { controller = "NewsletterJob", action = "ReadNewsletter", newsletterSendItemGuid = RouteParameter.Optional }

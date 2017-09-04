@@ -1,0 +1,27 @@
+{
+  "global.users": "Medlemmar",
+  "global.name": "Namn",
+  "global.email": "Epost",
+  "global.city": "Stad",
+  "global.trade": "Yrke",
+  "global.filter": "Filter",
+  "global.phone": "Telefonnummer",
+
+  "login.username": "Användarnamn (krävs)",
+  "login.password": "Lösenord (krävs)",
+  "login.login": "Logga in",
+  "login.error.username": "Du måste fylla i ett användarnamn",
+  "login.error.password": "Du måste fylla i ett lösenord",
+
+  "menu.admin": "Klubb administration",
+
+  "home.welcome": "Välkommen till",
+  "home.nodescription": "[Ingen klubb beskrivning...]",
+  "home.unansweredforms": "Obesvarade formulär",
+  "home.upcommingcompetitions": "Kommande tävlingar",
+
+  "user.showuser": "Visar användare",
+  "user.weight": "Vikt",
+  "user.birthday": "Födelsedag",
+  "user.belt": "Bälte"
+}

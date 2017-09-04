@@ -3,20 +3,20 @@
         <ng-transclude></ng-transclude>
         <form name="loginForm" ng-submit="Login()">
             <md-input-container md-no-float>
-                <input name="username" type="text" ng-model="UserService.User.UserName" placeholder="Användarnamn (krävs)" required />
+                <input name="username" type="text" ng-model="UserService.User.UserName" placeholder="{{'login.username' | translate}}" required />
                 <div ng-messages="loginForm.username.$error">
-                    <div ng-message="required">Du måste fylla i ett användarnamn</div>
+                    <div ng-message="required">{{'login.error.username' | translate}}</div>
                 </div>
 
             </md-input-container>
             <md-input-container md-no-float>
-                <input name="password" type="password" ng-model="UserService.User.Password" placeholder="Lösenord (krävs)" required />
+                <input name="password" type="password" ng-model="UserService.User.Password" placeholder="{{'login.password' | translate}}" required />
                 <div ng-messages="loginForm.password.$error">
-                    <div ng-message="required">Du måste fylla i ett lösenord</div>
+                    <div ng-message="required">{{'login.error.password' | translate}}</div>
                 </div>
             </md-input-container>
 
-            <md-button md-no-ink class="md-raised md-primary" type="submit">Logga in</md-button>
+            <md-button md-no-ink class="md-raised md-primary" type="submit">{{'login.login' | translate}}</md-button>
             <!--<md-button md-no-ink class="md-raised register" ng-click="Register()">Registrera</md-button>-->
         </form>
     </div>

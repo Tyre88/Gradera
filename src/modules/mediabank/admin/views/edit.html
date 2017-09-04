@@ -30,15 +30,7 @@
             <input type="text" ng-model="vm.MediabankFile.Description" name="description" />
         </md-input-container>
 
-        <md-checkbox ng-model="vm.MediabankFile.LimitFileAccess" aria-label="Begränsa vem som kan se denna fil">
-            Begränsa vem som kan se denna fil
-        </md-checkbox>
-    </div>
-
-    <div ng-if="vm.MediabankFile.LimitFileAccess">
-        <md-subheader class="md-no-sticky">
-            Vem kan se detta?
-        </md-subheader>
+        <gk-permissions use-permissions="vm.MediabankFile.LimitFileAccess" object-type="1" object-id="vm.MediabankFile.Id" save="vm.Saved" save-callback="vm.PermissionSaveCallback"></gk-permissions>
     </div>
 
     <div>

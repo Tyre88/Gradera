@@ -1,6 +1,6 @@
 <md-toolbar class="md-theme-light">
     <h1 class="md-toolbar-tools md-whiteframe-z1">
-        Visar användare: {{vm.User.FirstName}} {{vm.User.LastName}}
+        {{'user.showuser' | translate}}: {{vm.User.FirstName}} {{vm.User.LastName}}
     </h1>
 </md-toolbar>
 
@@ -10,25 +10,25 @@
 
 <div class="info-container">
     <div>
-        <span>Namn:</span> {{vm.User.FirstName}} {{vm.User.LastName}}
+        <span>{{'global.name' | translate}}:</span> {{vm.User.FirstName}} {{vm.User.LastName}}
     </div>
     <div>
-        <span>Epost:</span> <a class="md-{{$root.Theme}}-theme md-primary" href="mailto:{{vm.User.UserInformation.Email}}">{{vm.User.UserInformation.Email}}</a>
+        <span>{{'global.email' | translate}}:</span> <a class="md-{{$root.Theme}}-theme md-primary" href="mailto:{{vm.User.UserInformation.Email}}">{{vm.User.UserInformation.Email}}</a>
     </div>
     <div>
-        <span>Telefonnummer:</span> <a class="md-{{$root.Theme}}-theme md-primary" href="tel:{{vm.User.UserInformation.Phone}}">{{vm.User.UserInformation.Phone}}</a>
+        <span>{{'global.phone' | translate}}:</span> <a class="md-{{$root.Theme}}-theme md-primary" href="tel:{{vm.User.UserInformation.Phone}}">{{vm.User.UserInformation.Phone}}</a>
     </div>
     <div>
-        <span>Arbete:</span> {{vm.User.UserInformation.Occupation}}
+        <span>{{'global.trade' | translate}}:</span> {{vm.User.UserInformation.Occupation}}
     </div>
     <div>
-        <span>Vikt:</span> {{vm.User.UserInformation.Weight}}
+        <span>{{'user.weight' | translate}}:</span> {{vm.User.UserInformation.Weight}}
     </div>
     <div>
-        <span>Födelsedag:</span> {{vm.User.UserInformation.Birthday | date:'yyyy-MM-dd'}}
+        <span>{{'user.birthday' | translate}}:</span> {{vm.User.UserInformation.Birthday | date:'yyyy-MM-dd'}}
     </div>
     <div>
-        <span>Bälte:</span> {{vm.GetGrade()}}
+        <span>{{'user.belt' | translate}}:</span> {{vm.GetGrade()}}
     </div>
 
     <div ng-repeat="genericValue in vm.User.GenericValues">

@@ -315,13 +315,16 @@ module.exports = function (grunt)
                         "src/dependencies/angular-markdown-directive/markdown.js",
                         "src/dependencies/angular-google-places-autocomplete/dist/autocomplete.min.js",
                         "src/dependencies/moment/min/moment.min.js",
-                        "src/dependencies/angular-data-table/release/dataTable.min.js"
+                        "src/dependencies/angular-data-table/release/dataTable.min.js",
+                        "src/dependencies/angular-translate/angular-translate.min.js",
+                        "src/dependencies/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"
                     ],
                     'dist/application.js': [
                         'src/app.js',
                         'src/filters.js',
                         'src/routing.js',
                         'src/adminrouting.js',
+                        'src/services/*.js',
                         'src/directives/*.js',
                         'src/modules/**/*.js'
                     ],

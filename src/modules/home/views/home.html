@@ -1,18 +1,18 @@
 <md-toolbar class="md-theme-light">
     <h1 class="md-toolbar-tools md-whiteframe-z1">
-        Välkommen till {{UserService.User.Club.Name}}
+        {{'home.welcome' | translate}} {{UserService.User.Club.Name}}
     </h1>
 </md-toolbar>
 
 <div class="home">
     <div class="club-information">
         <div btf-markdown="vm.Club.Description"></div>
-        <div ng-if="!vm.Club.Description">[Ingen klubb beskrivning...]</div>
+        <div ng-if="!vm.Club.Description">{{'home.nodescription' | translate}}</div>
     </div>
 
     <div class="home-widgets">
         <div class="widget blue md-whiteframe-z1" ng-if="$root.HasAccess(6, 10) && vm.UnansweredForms.length">
-            <div class="header blue">Obesvarade formulär</div>
+            <div class="header blue">{{'home.unansweredforms' | translate}}</div>
             <div class="widget-content">
                 <ul>
                     <li ng-repeat="form in vm.UnansweredForms" ng-click="vm.GoToUnansweredForm(form.Id)">{{form.Name}}</li>
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="widget pink md-whiteframe-z1" ng-if="$root.HasAccess(5, 10) && vm.UpcommingCompetitions.length">
-            <div class="header pink">Kommande tävlingar</div>
+            <div class="header pink">{{'home.upcommingcompetitions' | translate}}</div>
             <div class="widget-content">
                 <ul>
                     <li ng-repeat="competition in vm.UpcommingCompetitions" ng-click="vm.GoToCompetition(competition.Id);">{{competition.Name}}</li>

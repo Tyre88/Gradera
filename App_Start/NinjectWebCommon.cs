@@ -14,6 +14,8 @@ namespace Gradera_Klubb.App_Start
     using Ninject.Web.Common;
     using Gradera.Mediabank.Interfaces;
     using Gradera.Mediabank.BLL;
+    using Gradera.Core.Interfaces;
+    using Gradera.Core.BLL;
 
     public static class NinjectWebCommon 
     {
@@ -67,6 +69,7 @@ namespace Gradera_Klubb.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IMediabank>().To<MediabankBLL>();
+            kernel.Bind<IGenericItemPermissionsBLL>().To<GenericItemPermissionsBLL>();
         }        
     }
 }

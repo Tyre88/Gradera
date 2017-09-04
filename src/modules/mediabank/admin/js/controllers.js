@@ -30,22 +30,18 @@
             switch(type){
                 case "IMAGE":
                     return "Bild";
-                break;
                 case "VIDEO":
                     return "Video";
-                break;
                 case "EXCEL":
                     return "Excel";
-                break;
                 case "WORD":
                     return "Word";
-                break;
                 case "CSV":
                     return "Csv";
-                break;
+                case "PDF":
+                    return "Pdf";
                 default:
                     return "-";
-                break;
             }
         }
 
@@ -76,13 +72,12 @@
                 switch(file.FileType) {
                     case "EXCEL":
                         return "content/images/excel.svg";
-                    break;
                     case "CSV":
                         return "content/images/csv.png";
-                    break;
                     case "WORD":
                         return "content/images/word.png";
-                    break;
+                    default:
+                        return "content/images/No_Image_Available.png";
                 }
             }
             else return file.Thumbnail;
@@ -97,9 +92,12 @@
         var vm = this;
         vm.MediabankFileId = ~~$stateParams.id;
         vm.MediabankFile = {};
+        vm.Accessrights = [];
+        vm.Saved = false;
 
         vm.Back = Back;
         vm.Save = Save;
+        vm.PermissionSaveCallback = PermissionSaveCallback;
 
         function Back() {
             $state.go('mediabankadminlist');
@@ -110,7 +108,8 @@
 
             function UpdateMediabankFileSuccess(response) {
                 if(response == true) {
-                    vm.Back();
+                    //vm.Back();
+                    vm.Saved = true;
                 }
             }
         }
@@ -119,6 +118,16 @@
 
         function GetFileSuccess(response) {
             vm.MediabankFile = response;
+        }
+
+        function PermissionSaveCallback(success) {
+            console.log('permissions save callback', success);
+            if(success) {
+                vm.Back();
+            }
+            else {
+                console.log('Permissions save failed...');
+            }
         }
     }
 }(window.angular));

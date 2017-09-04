@@ -1,6 +1,7 @@
 ﻿using Gradera.Core.Entities;
 using Gradera.Core.Enums;
 using Gradera.Core.Filters;
+using Gradera.Core.Interfaces;
 using Gradera.Entities.Mediabank;
 using Gradera.Mediabank.BLL;
 using Gradera.Mediabank.Interfaces;
@@ -19,10 +20,12 @@ namespace Gradera_Klubb.Controllers.Mediabank
     public class MediabankAdminController : ApiController
     {
         private IMediabank _mediabank;
+        private IGenericItemPermissionsBLL _genericItemPermissionBLL;
 
-        public MediabankAdminController(IMediabank mediabank)
+        public MediabankAdminController(IMediabank mediabank, IGenericItemPermissionsBLL genericItemPermissionBLL)
         {
             _mediabank = mediabank;
+            _genericItemPermissionBLL = genericItemPermissionBLL;
         }
 
         [HttpGet]
