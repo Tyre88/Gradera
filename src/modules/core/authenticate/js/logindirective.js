@@ -37,6 +37,9 @@
                             if(userService.User.Club.Id == 11) {
                                 $translate.use('business-sv');
                             }
+                            else {
+                                $translate.use('sv');
+                            }
 
                             $state.go ('home');
                         });

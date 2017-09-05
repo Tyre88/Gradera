@@ -19,6 +19,9 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                 if(userService.User.Club.Id == 11) {
                     $translate.use('business-sv');
                 }
+                else {
+                    $translate.use('sv');
+                }
 
                 $scope.SetActiveNav = function(element)
                 {
