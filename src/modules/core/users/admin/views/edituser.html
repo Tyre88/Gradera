@@ -1,6 +1,6 @@
 <md-toolbar class="md-theme-light">
     <h1 class="md-toolbar-tools md-whiteframe-z1">
-        Redigera: {{User.FirstName}} {{User.LastName}}
+        {{'global.edit' | translate}}: {{User.FirstName}} {{User.LastName}}
     </h1>
 </md-toolbar>
 
@@ -12,7 +12,7 @@
 
     <div class="edit-container">
         <md-input-container>
-            <label>Förnamn</label>
+            <label>{{'global.firstname' | translate}}</label>
             <input type="text" ng-model="User.FirstName" required name="firstname" />
             <div ng-messages="editUser.firstname.$error">
                 <div ng-message="required">Du måste fylla i ett förnamn</div>
@@ -20,7 +20,7 @@
         </md-input-container>
 
         <md-input-container md-no-float>
-            <label>Efternamn</label>
+            <label>{{'global.lastname' | translate}}</label>
             <input type="text" ng-model="User.LastName" required name="lastname" />
             <div ng-messages="editUser.lastname.$error">
                 <div ng-message="required">Du måste fylla i ett efternamn</div>
@@ -28,7 +28,7 @@
         </md-input-container>
 
         <md-input-container md-no-float>
-            <label>Användarnamn</label>
+            <label>{{'global.username' | translate}}</label>
             <input type="text" ng-model="User.UserName" required name="username" />
             <div ng-messages="editUser.username.$error">
                 <div ng-message="required">Du måste fylla i ett användarnamn</div>
@@ -36,7 +36,7 @@
         </md-input-container>
 
         <md-input-container md-no-float>
-            <label>E-post</label>
+            <label>{{'global.email' | translate}}</label>
             <input type="email" ng-model="User.UserInformation.Email" required name="email" />
             <div ng-messages="editUser.email.$error">
                 <div ng-message="required">Du måste fylla i en e-post adress</div>
@@ -45,12 +45,12 @@
         </md-input-container>
 
         <md-input-container md-no-float ng-if="User.Id > 0">
-            <label>Lösenord</label>
+            <label>{{'global.password' | translate}}</label>
             <input type="password" ng-model="User.Password" />
         </md-input-container>
 
         <md-input-container md-no-float ng-if="User.Id <= 0">
-            <label>Lösenord</label>
+            <label>{{'global.password' | translate}}</label>
             <input type="password" ng-model="User.Password" required minlength="5" name="password" />
             <div ng-messages="editUser.password.$error">
                 <div ng-message="required">Du måste fylla i ett lösenord</div>
@@ -59,37 +59,37 @@
         </md-input-container>
 
         <md-input-container md-no-float>
-            <label>Telefonnummer</label>
+            <label>{{'global.phone' | translate}}</label>
             <input type="text" ng-model="User.UserInformation.Phone" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <label>Adress</label>
+            <label>{{'global.address' | translate}}</label>
             <input type="text" ng-model="User.UserInformation.Street" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <label>Postnummer</label>
+            <label>{{'global.zip' | translate}}</label>
             <input type="text" ng-model="User.UserInformation.Zip" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <label>Stad</label>
+            <label>{{'global.city' | translate}}</label>
             <input type="text" g-places-autocomplete force-selection="true" ng-model="UserCity" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <label>Arbete</label>
+            <label>{{'global.trade' | translate}}</label>
             <input type="text" ng-model="User.UserInformation.Occupation" />
         </md-input-container>
 
         <md-input-container md-no-float>
-            <label>Vikt</label>
+            <label>{{'global.weight' | translate}}</label>
             <input type="text" ng-model="User.UserInformation.Weight" name="weight" />
         </md-input-container>
 
         <md-input-container>
-            <label>Grad</label>
+            <label>{{'global.grade' | translate}}</label>
             <md-select ng-model="User.UserInformation.Grade" required name="grade">
                 <md-option ng-repeat="grade in Grades" value="{{grade.Id}}">
                     {{grade.Name}}
@@ -101,13 +101,13 @@
         </md-input-container>
 
         <md-input-container>
-            <label>Kön</label>
+            <label>{{'global.gender' | translate}}</label>
             <md-select ng-model="User.Gender" required name="gender">
                 <md-option value="0">
-                    Man
+                    {{'global.man' | translate}}
                 </md-option>
                 <md-option value="1">
-                    Kvinna
+                    {{'global.woman' | translate}}
                 </md-option>
             </md-select>
             <div ng-messages="editUser.gender.$error">
@@ -116,7 +116,7 @@
         </md-input-container>
 
         <div>
-            <span>Födelsedag</span>
+            <span>{{'global.birthday' | translate}}</span>
             <md-datepicker ng-model="User.UserInformation.Birthday" md-placeholder="Födelsedag"></md-datepicker>
         </div>
 
@@ -128,7 +128,7 @@
     </div>
 
     <md-subheader class="md-no-sticky">
-        Rättigheter
+        {{'global.rights' | translate}}
     </md-subheader>
 
     <div class="edit-accessrights">
@@ -139,7 +139,7 @@
     </div>
 
     <div>
-        <md-button class="md-raised md-primary" type="submit">Spara</md-button>
-        <md-button class="md-raised md-warn" ng-click="Back();">Avbryt</md-button>
+        <md-button class="md-raised md-primary" type="submit">{{'global.save' | translate}}</md-button>
+        <md-button class="md-raised md-warn" ng-click="Back();">{{'global.cancel' | translate}}</md-button>
     </div>
 </form>
