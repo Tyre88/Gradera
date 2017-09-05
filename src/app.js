@@ -4,8 +4,8 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
     angular.module('graderaklubb', ['ng', 'ngRoute', 'ngAnimate', 'ui.router', 'ngMaterial', "ngMessages",
         'webbdudes-image-helper', 'ngFileUpload', 'formly', 'angular-loading-bar', 'dndLists', 'ngSanitize', 'btford.markdown',
         'google.places', 'data-table', 'pascalprecht.translate']);
-    angular.module('graderaklubb').controller('index', ["$rootScope", "$scope", "$state", "user-service", "$mdSidenav", "Upload", "objectChange", "$mdToast",
-            function($rootScope, $scope, $state, userService, $mdSidenav, Upload, objectChange, $mdToast)
+    angular.module('graderaklubb').controller('index', ["$rootScope", "$scope", "$state", "user-service", "$mdSidenav", "Upload", "objectChange", "$mdToast", "$translate",
+            function($rootScope, $scope, $state, userService, $mdSidenav, Upload, objectChange, $mdToast, $translate)
             {
                 $scope.UserService = userService;
 
@@ -14,6 +14,11 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                     scrollbarV: false,
                     columnMode: 'force'
                 };
+
+                //CHANGE THIS TO CLUB SETTINGS
+                if(userService.User.Club.Id == 11) {
+                    $translate.use('business-sv');
+                }
 
                 $scope.SetActiveNav = function(element)
                 {
@@ -235,7 +240,7 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
         .run(["$rootScope", "api", "user-service", "formlyConfig", "$state", "club-service",
             function($rootScope, api, userService, formlyConfig, $state, clubService) {
 
-            $rootScope.Theme = "brown";
+            $rootScope.Theme = "blue";
 
             $rootScope.Themes = [{
                 Name: "Brunt",

@@ -1,8 +1,8 @@
 //LoadCss("content/css/login.css");
 
 (function(angular) {
-    angular.module('graderaklubb').directive('gkLogin', ["$rootScope", "login-service", "user-service", "api", "$state", "$mdDialog", 'club-service',
-        function($rootScope, loginService, userService, api, $state, $mdDialog, clubService)
+    angular.module('graderaklubb').directive('gkLogin', ["$rootScope", "login-service", "user-service", "api", "$state", "$mdDialog", 'club-service', '$translate',
+        function($rootScope, loginService, userService, api, $state, $mdDialog, clubService, $translate)
     {
         return {
             restrict: "E",
@@ -24,6 +24,18 @@
                             for(var i = 0; i < $rootScope.Links.length; i++) {
                                 if($rootScope.EnabledModules.indexOf($rootScope.Links[i].ModuleId) < 0)
                                     $rootScope.EnabledModules.push($rootScope.Links[i].ModuleId);
+                            }
+
+                            /*$translateProvider.useStaticFilesLoader({
+                                prefix: "i18n/locale-business-",
+                                suffix: ".json"
+                            });*/
+
+                            console.log('Club: ', userService.User.Club);
+
+                            //CHANGE THIS TO CLUB SETTINGS
+                            if(userService.User.Club.Id == 11) {
+                                $translate.use('business-sv');
                             }
 
                             $state.go ('home');
