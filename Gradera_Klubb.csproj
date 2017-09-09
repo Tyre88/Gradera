@@ -217,6 +217,7 @@
     <Compile Include="Models\Core\ClubSettingsModel.cs" />
     <Compile Include="Models\Core\ClubModel.cs" />
     <Compile Include="Models\Core\ContactModel.cs" />
+    <Compile Include="Models\Core\GenericItemPermissionsModel.cs" />
     <Compile Include="Models\Core\ModuleLinkModel.cs" />
     <Compile Include="Models\Core\ModuleModel.cs" />
     <Compile Include="Models\Core\UserInformationModel.cs" />

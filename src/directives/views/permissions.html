@@ -1,0 +1,13 @@
+<md-checkbox ng-model="vm.usePermissions">
+    Använd rättigheter
+</md-checkbox>
+
+<div ng-if="vm.usePermissions">
+    <md-subheader class="md-no-sticky">
+        Vem kan se detta?
+    </md-subheader>
+
+    <div>
+        <md-checkbox ng-repeat="accessright in vm.Accessrights" ng-model="accessright.Checked">{{accessright.Name}}</md-checkbox>
+    </div>
+</div>
