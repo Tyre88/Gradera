@@ -68,5 +68,14 @@ namespace Gradera_Klubb.Controllers
                 new JsonMediaTypeFormatter());
             return response;
         }
+
+        [HttpGet]
+        public HttpResponseMessage GetClubs()
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            response.Content = new ObjectContent<List<ClubModel>>(ClubModel.MapClubModels(ClubBLL.GetClubs()), new JsonMediaTypeFormatter());
+
+            return response;
+        }
     }
 }

@@ -11,5 +11,12 @@
         {
             return $http.post('/api/Authenticate/Logout');
         };
+
+        this.ForgotPassword = function(clubId, email) {
+            return $http.post('/api/Authenticate/ForgotPassword?' + $.param({
+                clubId: clubId,
+                email: email
+            }));
+        }
     }]);
 }(window.angular));

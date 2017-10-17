@@ -43,5 +43,17 @@ namespace Gradera_Klubb.Models
                 Settings = JsonConvert.SerializeObject(model.Settings)
             };
         }
+
+        internal static List<ClubModel> MapClubModels(List<Club> list)
+        {
+            List<ClubModel> models = new List<ClubModel>();
+
+            foreach (var c in list)
+            {
+                models.Add(MapClub(c));
+            }
+
+            return models;
+        }
     }
 }

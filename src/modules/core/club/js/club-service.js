@@ -15,5 +15,9 @@
         this.GetModuleLinks = function() {
             return $http.get('/api/club/GetModuleLinks');
         };
+
+        this.GetClubs = function() {
+            return $http.get('/api/club/GetClubs');
+        }
     }]);
 }(window.angular));

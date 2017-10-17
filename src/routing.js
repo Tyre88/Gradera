@@ -18,6 +18,13 @@
                 controller: "clublogin",
                 controllerAs: "vm"
             })
+            .state('forgotpassword',
+            {
+                url: "/forgotpassword",
+                templateUrl: "modules/core/authenticate/views/forgotpassword.html",
+                controller: "forgotpassword",
+                controllerAs: "vm"
+            })
             .state('logout',
             {
                 url: "/logout",

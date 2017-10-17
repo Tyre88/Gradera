@@ -24,12 +24,19 @@
   "global.save": "Spara",
   "global.cancel": "Avbryt",
   "global.theme": "Tema",
+  "global.back": "Tillbaka",
+  "global.send": "Skicka",
+  "global.chose": "Välj",
+  "global.club": "Klubb",
 
   "login.username": "Användarnamn (krävs)",
   "login.password": "Lösenord (krävs)",
   "login.login": "Logga in",
+  "login.forgotpassword": "Glömt lösenord?",
   "login.error.username": "Du måste fylla i ett användarnamn",
   "login.error.password": "Du måste fylla i ett lösenord",
+
+  "forgotpassword.error.email": "Du måste fylla i en e-post adress",
 
   "menu.admin": "Klubb administration",
 

@@ -22,6 +22,18 @@ namespace Gradera_Klubb
             );
 
             config.Routes.MapHttpRoute(
+                name: "ForgotPasswordApi",
+                routeTemplate: "api/Authenticate/ForgotPassword/{clubId}/{email}",
+                defaults: new
+                {
+                    controller = "Authenticate",
+                    action = "ForgotPassword",
+                    clubId = RouteParameter.Optional,
+                    email = RouteParameter.Optional
+                }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "CompetitionAddCategory",
                 routeTemplate: "api/Competition/AddCategory/{competitionId}/{categoryName}",
                 defaults: new

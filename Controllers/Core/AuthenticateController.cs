@@ -45,6 +45,15 @@ namespace Gradera_Klubb.Controllers
         }
 
         [HttpPost]
+        [HttpOptions]
+        public HttpResponseMessage ForgotPassword(int clubId, string email)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            response.Content = new ObjectContent<bool>(AuthenticateBLL.ForgotPassword(clubId, email), new JsonMediaTypeFormatter());
+            return response;
+        }
+
+        [HttpPost]
         public HttpResponseMessage Register()
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
