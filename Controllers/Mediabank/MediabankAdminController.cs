@@ -48,7 +48,8 @@ namespace Gradera_Klubb.Controllers.Mediabank
             UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
 
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            IList<MediabankEntity> mediabankFiles = _mediabank.GetAllFilesWithType(loggedInUser.AccountSession.ClubId, fileType);
+            IList<int> fileIdsWithAccess = _genericItemPermissionBLL.GetObjectIdsOfType(GenericItemPermissionObjectTypes.MediabankFile, loggedInUser.AccountSession.ClubId, loggedInUser.AccountSession.AccountId);
+            IList<MediabankEntity> mediabankFiles = _mediabank.GetAllFilesWithType(loggedInUser.AccountSession.ClubId, fileType, loggedInUser.AccountSession.AccountId, fileIdsWithAccess);
             response.Content = new ObjectContent<IList<MediabankEntity>>(mediabankFiles, new JsonMediaTypeFormatter());
             return response;
         }
