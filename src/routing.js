@@ -103,6 +103,16 @@
                 templateUrl: "modules/grading/views/showgrade.html",
                 controller: "showgrade",
                 controllerAs: "vm"
+            }).state('mediabanklist', {
+                url: "/mediabank",
+                templateUrl: "modules/mediabank/views/mediabanklist.html",
+                controller: "mediabanklist",
+                controllerAs: "vm"
+            }).state('mediabankshow', {
+                url: "/mediabank/show/:id",
+                templateUrl: "modules/mediabank/views/mediabankshow.html",
+                controller: "mediabankshow",
+                controllerAs: "vm"
             }).state('showtechnique',
             {
                 url: "/technique/show/:id",

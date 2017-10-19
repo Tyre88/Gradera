@@ -59,10 +59,12 @@ namespace Gradera_Klubb.Controllers.Mediabank
             UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
 
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            if (_genericItemPermissionBLL.HasAccessToItem(GenericItemPermissionObjectTypes.MediabankFile, fileId, loggedInUser.AccountSession.AccountId))
+            MediabankEntity mediabankFile = _mediabank.GetFile(loggedInUser.AccountSession.ClubId, fileId);
+            if (!mediabankFile.LimitFileAccess || mediabankFile.CreatedById == loggedInUser.AccountSession.AccountId 
+                || (mediabankFile.LimitFileAccess 
+                && _genericItemPermissionBLL.HasAccessToItem(GenericItemPermissionObjectTypes.MediabankFile, fileId, loggedInUser.AccountSession.AccountId)))
             {
-                MediabankEntity mediabankFile = _mediabank.GetFile(loggedInUser.AccountSession.ClubId, fileId);
-                response.Content = new ObjectContent<MediabankEntity>(mediabankFile, new JsonMediaTypeFormatter()); 
+                response.Content = new ObjectContent<MediabankEntity>(mediabankFile, new JsonMediaTypeFormatter());
             }
             else
             {

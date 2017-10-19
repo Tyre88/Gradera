@@ -1,0 +1,36 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
+        Mediabank filer
+    </h1>
+</md-toolbar>
+
+<!-- <span class="md-button md-raised" ngf-select="vm.UploadFile($file)"><i class="fa fa-upload"></i> Ladda upp fil</span> -->
+
+<table class="gradera-list" ng-cloak="">
+    <thead>
+    <tr>
+        <th class="image"></th>
+        <th>Namn</th>
+        <th>Beskrivning</th>
+        <th>Typ</th>
+        <th>Mer</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in vm.MediabankFiles" ng-click="vm.Show(item)">
+        <td class="image">
+            <img alt="{{ item.Name }}" ng-src="{{ vm.GetThumbnail(item) }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
+        </td>
+        <td>{{item.Name}}</td>
+        <td>{{item.Description}}</td>
+        <td>{{vm.GetTypeName(item.FileType)}}</td>
+        <td>
+            <a download="{{item.Name}}{{item.FileExtension}}" href="{{item.FileUrl}}" ng-click="$event.stopPropagation();" class="action-icon">
+                <i class="fa fa-download md-secondary md-hue-3">
+                    <md-tooltip>Ladda ner mediabank fil</md-tooltip>
+                </i>
+            </a>​​​​​​​​​​​​​​​​​​​​​​​​​​​
+        </td>
+    </tr>
+    </tbody>
+</table>

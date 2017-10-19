@@ -1,0 +1,28 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools md-whiteframe-z1">
+        Visar fil: {{::vm.MediabankFile.Name}}
+    </h1>
+</md-toolbar>
+
+<div ng-if="vm.MediabankFile.FileType == 'IMAGE'" class="info-image" fit-image="150">
+    <img src="{{vm.MediabankFile.FileUrl}}" fallback-src="content/images/No_Image_Available.png" />
+</div>
+
+<div ng-if="vm.MediabankFile.FileType == 'VIDEO'" class="file-wrapper" poster="{{vm.MediabankFile.Thumbnail}}">
+    <video controls>
+        <source src="{{vm.MediabankFile.FileUrl}}" type="video/mp4">
+    </video>
+</div>
+
+<div class="info-container">
+    <div>
+        <span>{{'global.name' | translate}}:</span> {{::vm.MediabankFile.Name}}
+    </div>
+    <div>
+        <span>{{'global.description' | translate}}:</span> {{::vm.MediabankFile.Description}}
+    </div>
+</div>
+
+<div>
+    <md-button class="md-raised md-primary" ng-click="vm.Back();">{{'global.back' | translate}}</md-button>
+</div>

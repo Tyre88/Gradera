@@ -28,6 +28,7 @@
   "global.send": "Skicka",
   "global.chose": "Välj",
   "global.club": "Klubb",
+  "global.description": "Beskrivning",
 
   "login.username": "Användarnamn (krävs)",
   "login.password": "Lösenord (krävs)",

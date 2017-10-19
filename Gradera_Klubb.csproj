@@ -196,6 +196,7 @@
     <Compile Include="Controllers\Grading\GradingController.cs" />
     <Compile Include="Controllers\Grading\GradingPublicController.cs" />
     <Compile Include="Controllers\Mediabank\MediabankAdminController.cs" />
+    <Compile Include="Controllers\Mediabank\MediabankController.cs" />
     <Compile Include="Controllers\Newsletter\NewsletterAdminController.cs" />
     <Compile Include="Controllers\Newsletter\NewsletterController.cs" />
     <Compile Include="Controllers\Newsletter\NewsletterJobController.cs" />
