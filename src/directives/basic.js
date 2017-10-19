@@ -21,6 +21,7 @@
         vm.Accessrights = [];
 
         vm.Save = Save;
+        vm.GetItemPermission = GetItemPermission;
 
         function Save() {
             let accessrightIds = [];
@@ -54,6 +55,25 @@
 
         function GetAccessRightsSuccess(response) {
             vm.Accessrights = response;
+
+            vm.GetItemPermission();
+        }
+
+        function GetItemPermission() {
+            genericItemPermissionsService.GetItemPermission(vm.objectType, vm.objectId).success(GetItemPermissionSuccess);
+
+            function GetItemPermissionSuccess(response) {
+                var accessrightIds = response.AccessrightIds;
+                var userIds = response.UserIds;
+
+                for(var i = 0; i < accessrightIds.length; i++) {
+                    for(var y = 0; y < vm.Accessrights.length; y++) {
+                        if(accessrightIds[i] == vm.Accessrights[y].Id) {
+                            vm.Accessrights[y].Checked = true;
+                        }
+                    }
+                }
+            }
         }
 
         $scope.$watch('vm.save', function(newVal, oldVal) {

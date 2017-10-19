@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
 
@@ -29,6 +30,18 @@ namespace Gradera_Klubb.Controllers.Core
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             UserPrincipal loggedInUser = (UserPrincipal)HttpContext.Current.User;
             _genericItemPermissionBLL.SaveGenericItemPermissions(permissions.ObjectId, permissions.ObjectType, permissions.AccessrightIds, permissions.UserIds, loggedInUser.AccountSession.ClubId);
+
+            return response;
+        }
+
+        [HttpGet]
+        [AuthorizeFilter]
+        public HttpResponseMessage GetItemPermission(GenericItemPermissionObjectTypes objectType, int objectId)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+
+            GenericItemPermissionsModel genericItemPermission = new GenericItemPermissionsModel(_genericItemPermissionBLL.GetItemPermissions(objectType, objectId));
+            response.Content = new ObjectContent<GenericItemPermissionsModel>(genericItemPermission, new JsonMediaTypeFormatter());
 
             return response;
         }
