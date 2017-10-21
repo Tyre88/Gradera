@@ -97,7 +97,9 @@
 
         vm.Back = Back;
         vm.Save = Save;
+        vm.UpdateMediabankFileExternalGUID = UpdateMediabankFileExternalGUID;
         vm.PermissionSaveCallback = PermissionSaveCallback;
+        vm.ExternalChange = ExternalChange;
 
         function Back() {
             $state.go('mediabankadminlist');
@@ -114,6 +116,16 @@
             }
         }
 
+        function UpdateMediabankFileExternalGUID() {
+            vm.DisableExternalCheck = true;
+            mediabankAdminService.UpdateMediabankFileExternalGUID(vm.MediabankFile).success(UpdateMediabankFileExternalGUIDSuccess);
+
+            function UpdateMediabankFileExternalGUIDSuccess(response) {
+                vm.MediabankFile.ExternalGUID = response;
+                vm.DisableExternalCheck = false;
+            }
+        }
+
         mediabankAdminService.GetFile(vm.MediabankFileId).success(GetFileSuccess);
 
         function GetFileSuccess(response) {
@@ -127,6 +139,12 @@
             }
             else {
                 console.log('Permissions save failed...');
+            }
+        }
+
+        function ExternalChange() {
+            if(vm.MediabankFile.IsExternal && (!vm.MediabankFile.ExternalGUID || vm.MediabankFile.ExternalGUID == "")) {
+                vm.UpdateMediabankFileExternalGUID();
             }
         }
     }

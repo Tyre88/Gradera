@@ -83,4 +83,4 @@
 
         vm.GetFile();
     }
-}(window.angular))
+}(window.angular));

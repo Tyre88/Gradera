@@ -30,6 +30,15 @@
             <input type="text" ng-model="vm.MediabankFile.Description" name="description" />
         </md-input-container>
 
+        <md-checkbox ng-disabled="vm.DisableExternalCheck" ng-change="vm.ExternalChange()" ng-model="vm.MediabankFile.IsExternal">{{'global.alloqexternal' | translate}}</md-checkbox>
+
+        <div>
+            <a href="external.html#/show/mediabankfile/{{vm.MediabankFile.ExternalGUID}}" target="_blank" ng-show="vm.MediabankFile.IsExternal && !vm.DisableExternalCheck">
+                {{'mediabank.linkexternal' | translate}}
+            </a>
+            <span ng-show="vm.DisableExternalCheck">{{'mediabank.loadingGUID' | translate}}</span>
+        </div>
+
         <gk-permissions use-permissions="vm.MediabankFile.LimitFileAccess" object-type="1" object-id="vm.MediabankFileId" save="vm.Saved" save-callback="vm.PermissionSaveCallback"></gk-permissions>
     </div>
 

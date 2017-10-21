@@ -29,6 +29,7 @@
   "global.chose": "Välj",
   "global.club": "Klubb",
   "global.description": "Beskrivning",
+  "global.alloqexternal": "Tillåt extern visning",
 
   "login.username": "Användarnamn (krävs)",
   "login.password": "Lösenord (krävs)",
@@ -51,5 +52,8 @@
   "user.birthday": "Födelsedag",
   "user.belt": "Bälte",
   "user.adduser": "Lägg till användare",
-  "user.import": "Importera från sportadmin"
+  "user.import": "Importera från sportadmin",
+
+  "mediabank.linkexternal": "Länk till fil",
+  "mediabank.loadingGUID": "Laddar länk..."
 }

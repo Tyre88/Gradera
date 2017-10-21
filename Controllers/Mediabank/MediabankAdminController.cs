@@ -76,6 +76,16 @@ namespace Gradera_Klubb.Controllers.Mediabank
             return response;
         }
 
+        [HttpPost]
+        [AuthorizeFilter(AccessType = AccessType.Mediabank, AccessTypeRight = AccessTypeRight.Write)]
+        public HttpResponseMessage UpdateMediabankFileExternalGUID(MediabankEntity file)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            string GUID = _mediabank.UpdateMediabankFileExternalGUID(file);
+            response.Content = new ObjectContent<string>(GUID, new JsonMediaTypeFormatter());
+            return response;
+        }
+
         [HttpDelete]
         [AuthorizeFilter(AccessType = AccessType.Mediabank, AccessTypeRight = AccessTypeRight.Write)]
         public HttpResponseMessage DeleteMediabankFile(int id)

@@ -18,6 +18,10 @@
             return $http.post('/api/MediabankAdmin/UpdateMediabankFile', file);
         };
 
+        this.UpdateMediabankFileExternalGUID = function(file) {
+            return $http.post('/api/MediabankAdmin/UpdateMediabankFileExternalGUID', file);
+        };
+
         this.DeleteMediabankFile = function(id) {
             return $http.delete('/api/MediabankAdmin/DeleteMediabankFile?' + $.param({id: id}));
         };
