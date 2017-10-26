@@ -39,6 +39,13 @@
                 templateUrl: "external/newsletter/views/unsubscribe.html",
                 controller: "external.newsletter.unsubscribe",
                 controllerAs: "vm"
+            })
+            .state('mediabankfile', 
+            {
+                url: "/file/:guid",
+                templateUrl: "external/mediabank/views/file.html",
+                controller: "external.mediabank.file",
+                controllerAs: "vm"
             });
 
         $urlRouterProvider.otherwise('/');

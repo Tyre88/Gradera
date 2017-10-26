@@ -33,9 +33,10 @@
         <md-checkbox ng-disabled="vm.DisableExternalCheck" ng-change="vm.ExternalChange()" ng-model="vm.MediabankFile.IsExternal">{{'global.alloqexternal' | translate}}</md-checkbox>
 
         <div>
-            <a href="external.html#/show/mediabankfile/{{vm.MediabankFile.ExternalGUID}}" target="_blank" ng-show="vm.MediabankFile.IsExternal && !vm.DisableExternalCheck">
+            <!-- <a href="external.html#/show/mediabankfile/{{vm.MediabankFile.ExternalGUID}}" target="_blank" ng-show="vm.MediabankFile.IsExternal && !vm.DisableExternalCheck">
                 {{'mediabank.linkexternal' | translate}}
-            </a>
+            </a> -->
+            <span ng-show="vm.MediabankFile.IsExternal && !vm.DisableExternalCheck">GUID: {{vm.MediabankFile.ExternalGUID}}</span>
             <span ng-show="vm.DisableExternalCheck">{{'mediabank.loadingGUID' | translate}}</span>
         </div>
 

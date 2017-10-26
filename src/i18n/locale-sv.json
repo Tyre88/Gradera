@@ -55,5 +55,5 @@
   "user.import": "Importera från sportadmin",
 
   "mediabank.linkexternal": "Länk till fil",
-  "mediabank.loadingGUID": "Laddar länk..."
+  "mediabank.loadingGUID": "Genererar GUID..."
 }
