@@ -77,6 +77,7 @@
         vm.EditorOptions = {
             language: "sv"
         };
+        vm.Initialized = false;
 
         vm.GetNewsletter = GetNewsletter;
         vm.Save = Save;
@@ -87,6 +88,7 @@
 
             function GetNewsletterCallback(response) {
                 vm.Newsletter = response;
+                vm.Initialized = true;
             }
         }
 
@@ -102,8 +104,12 @@
             $state.go('newsletteradminlist');
         }
 
-        if(~~vm.NewsletterId > 0)
+        if(~~vm.NewsletterId > 0) {
             vm.GetNewsletter();
+        }
+        else {
+            vm.Initialized = true;
+        }
     }
 
     angular.module('graderaklubb').controller('newsletter.admin.send', sendController);
