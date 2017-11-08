@@ -3,9 +3,11 @@
 
     angular.module('graderaklubb').controller('mediabanklist', mediabanklistController);
     angular.module('graderaklubb').controller('mediabankshow', mediabankshowController);
+    angular.module('graderaklubb').controller('mediabankdialog', mediabankdialogController);
 
     mediabanklistController.$inject = ["$state", "mediabank.service"];
     mediabankshowController.$inject = ["$state", "$stateParams", "mediabank.service"];
+    mediabankdialogController.$inject = ["$mdDialog", "mediabank.service"];
 
     function mediabanklistController($state, mediabankService) {
         var vm = this;
@@ -82,5 +84,36 @@
         }
 
         vm.GetFile();
+    }
+
+    function mediabankdialogController($mdDialog, mediabankService) {
+        var vm = this;
+
+        vm.MediabankFiles = [];
+        vm.SelectedFile;
+        vm.Settings = {};
+
+        vm.GetAllFilesWithType = GetAllFilesWithType;
+        vm.Ok = Ok;
+        vm.Close = Close;
+
+        function GetAllFilesWithType() {
+            mediabankService.GetAllFilesWithType("IMAGE").success(GetAllFilesWithTypeSuccess);
+
+            function GetAllFilesWithTypeSuccess(data) {
+                vm.MediabankFiles = data;
+                console.log(vm.MediabankFiles);
+            }
+        }
+
+        function Ok() {
+            $mdDialog.hide({file: vm.SelectedFile, settings: vm.Settings});
+        }
+
+        function Close() {
+            $mdDialog.cancel();
+        }
+
+        vm.GetAllFilesWithType();
     }
 }(window.angular));

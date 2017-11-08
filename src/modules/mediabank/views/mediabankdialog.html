@@ -1,0 +1,60 @@
+<style>
+    .mb-dialog-images {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .mb-dialog-image {
+        width: calc(25% - 10px);
+        margin: 5px;
+    }
+
+    .mb-dialog-image > img {
+        width: 100%;
+    }
+
+    .mb-dialog-img {
+        border: 1px solid transparent;
+        box-sizing: border-box;
+    }
+
+    .selected {
+        border: 1px solid black;
+    }
+</style>
+
+<md-dialog style="width: 400px;">
+        <md-dialog-content>
+            <md-subheader class="md-no-sticky">
+                Välj bild
+            </md-subheader>
+            <div class="mb-dialog-images">
+                <div ng-repeat="file in vm.MediabankFiles" ng-click="vm.SelectedFile = file;" class="mb-dialog-image">
+                    <img ng-src="{{file.Thumbnail}}" alt="{{file.Name}}" class="mb-dialog-img" ng-class="{'selected': file == vm.SelectedFile}">
+                </div>
+            </div>
+
+            <md-subheader class="md-no-sticky" ng-click="vm.ShowSettings = !vm.ShowSettings">
+                Inställningar
+                <i style="float: right;" class="fa" ng-class="{'fa-sort-desc': !vm.ShowSettings, 'fa-sort-asc': vm.ShowSettings}"></i>
+            </md-subheader>
+            <div class="mb-dialog-settings" ng-show="vm.ShowSettings">
+                <md-input-container md-no-float>
+                    <input type="text" ng-model="vm.Settings.Width" placeholder="Bredd (px)"/>
+                </md-input-container>
+
+                <md-input-container md-no-float>
+                    <input type="text" ng-model="vm.Settings.Height" placeholder="Höjd (px)"/>
+                </md-input-container>
+                <br />
+                <md-input-container md-no-float>
+                    <md-checkbox ng-model="vm.Settings.Center" class="md-{{$root.Theme}}-theme">Centrera bild</md-checkbox>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span class="md-button md-primary md-raised md-{{$root.Theme}}-theme" ng-click="vm.Ok();">Ok</span>
+            <span class="md-button" ng-click="vm.Close();">Stäng</span>
+        </md-dialog-actions>
+    </md-dialog>

@@ -513,11 +513,59 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
             "PageSize": 25
         });
 
-    function ckEditorDirective() {
+        ckEditorDirective.$inject = ["$mdDialog"];
+
+    function ckEditorDirective($mdDialog) {
         return {
             require: '?ngModel',
             link: function ($scope, elm, attr, ngModel) {
                 var ck = CKEDITOR.replace(elm[0]);
+
+                CKEDITOR.plugins.add('mediabankImage', {
+                    icons: 'http://cdn.ckeditor.com/4.5.6/standard/plugins/icons.png',
+                    init: function(editor) {
+                        editor.addCommand('insertMediabankImage', {
+                                exec: function(editor) {
+                                    $mdDialog.show({
+                                        templateUrl: 'modules/mediabank/views/mediabankdialog.html',
+                                        controller: 'mediabankdialog',
+                                        controllerAs: 'vm'
+                                    }).then(function(data) {
+                                        var divStyle = "";
+                                        var imgStyle = "";
+
+                                        if(data.settings.Center) {
+                                            divStyle += "text-align: center;";
+                                        }
+
+                                        if(data.settings.Width) {
+                                            var ending = data.settings.Width.endsWith("px") ? ";" : "px;";
+                                            imgStyle += "max-width: " + data.settings.Width + ending;
+                                        }
+
+                                        if(data.settings.Height) {
+                                            var ending = data.settings.Height.endsWith("px") ? ";" : "px;";
+                                            imgStyle += "max-height: " + data.settings.Height + ending;
+                                        }
+
+                                        editor.insertHtml('<div style="' + divStyle + '"><img src="' + data.file.FileUrl + '" style="' + imgStyle + '" /><div>');
+                                    }, function(err) {
+                                        
+                                    });
+                                }
+                            }
+                        );
+
+                        editor.ui.addButton( 'Bild', {
+                            label: 'Infoga bild',
+                            command: 'insertMediabankImage',
+                            toolbar: 'insert'
+                        });
+                    }
+                });
+
+                CKEDITOR.config.allowedContent = true;
+                CKEDITOR.config.extraPlugins = 'mediabankImage';
 
                 ck.on('pasteState', function () {
                     $scope.$apply(function () {

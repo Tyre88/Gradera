@@ -8,6 +8,10 @@
 
         this.GetFile = function(fileId) {
             return $http.get('/api/Mediabank/GetFile?' + $.param({ fileId: fileId }));
-        }
+        };
+
+        this.GetAllFilesWithType = function(fileType) {
+            return $http.get('/api/Mediabank/GetAllFilesWithType?' + $.param({ fileType: fileType }));
+        };
     }
 }(window.angular));
