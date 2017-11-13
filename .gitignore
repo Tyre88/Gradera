@@ -6,6 +6,7 @@ refs
 objects
 .idea
 bower_components
+Web.config.bak
 Web.config
 Web.Debug.config
 Web.Release.config
@@ -15,3 +16,6 @@ Properties/PublishProfiles
 *.csproj
 *.user
 *.log
+Downloads/
+Uploads/
+src/dependencies/
