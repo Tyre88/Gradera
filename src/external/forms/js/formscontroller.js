@@ -33,9 +33,8 @@
             }
         }
 
-        function SubmitForm(form) {
+        function ValidForm() {
             if(vm.Forms[0].form.$invalid) {
-
                 var errorFields = "<ul>";
 
                 for(var i = 0; i < vm.Forms[0].form.$error.required.length; i++) {
@@ -55,9 +54,13 @@
                     .finally(function() {
                         alert = undefined;
                     });
-
-                return;
             }
+
+            return !vm.Forms[0].form.$invalid;
+        }
+
+        function SubmitForm(form) {
+            if(!ValidForm()) return;
 
             var formFields = [];
             for(var i = 0; i < form.FormFields.length; i++)
@@ -73,6 +76,7 @@
             formService.SubmitForm(formFields).success(submitFormCallback);
 
             function submitFormCallback() {
+                vm.SubmittedForms++;
                 vm.Forms.splice(vm.Forms.indexOf(form), 1);
 
                 if(vm.Forms.length <= 0) {
@@ -90,9 +94,39 @@
         }
 
         function SubmitForms() {
+            if(!ValidForm()) return;
+            var submitForms = [];
             for(var i = 0; i < vm.Forms.length; i++) {
-                vm.SubmitForm(vm.Forms[i]);
+                //vm.SubmitForm(vm.Forms[i]);
+                submitForms.push(GenerateForm(vm.Forms[i]));
             }
+
+            formService.SubmitForms(submitForms).then(function() {
+                vm.Forms.push(vm.OriginalForm);
+                
+                $mdDialog.show(
+                    $mdDialog.alert()
+                    .clickOutsideToClose(true)
+                    .title('Tack för att du svarade på formuläret!')
+                    .ariaLabel('Tack!')
+                    .ok('Ok')
+                );
+            });
+        }
+
+        function GenerateForm(form) {
+            var formFields = [];
+            for(var i = 0; i < form.FormFields.length; i++)
+            {
+                if(form.FormFields[i].type == "upload") {
+                    formFields.push({Value: form.FormFields[i].formControl.$modelValue.newName, FormId: form.Id, FormFieldId: form.FormFields[i].key});
+                }
+                else {
+                    formFields.push({Value: form.FormFields[i].formControl.$modelValue, FormId: form.Id, FormFieldId: form.FormFields[i].key});
+                }
+            }
+
+            return { FormFields: formFields };
         }
 
         function AddSubmit() {

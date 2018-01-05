@@ -28,6 +28,7 @@
     <OldToolsVersion>12.0</OldToolsVersion>
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -232,6 +233,7 @@
     <Compile Include="Models\Forms\FormFieldOptionModel.cs" />
     <Compile Include="Models\Forms\FormModel.cs" />
     <Compile Include="Models\Forms\SubmitFormFieldModel.cs" />
+    <Compile Include="Models\Forms\SubmitFormModel.cs" />
     <Compile Include="Models\Grading\GradeCategoryLinkModel.cs" />
     <Compile Include="Models\Grading\GradeCategoryLinkTechniqueModel.cs" />
     <Compile Include="Models\Grading\GradeModel.cs" />

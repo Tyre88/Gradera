@@ -94,6 +94,10 @@
             return $http.post('/api/externalforms/submitform', formFields);
         };
 
+        this.SubmitForms = function(forms) {
+            return $http.post('/api/externalforms/submitforms', forms);
+        };
+
         this.ImportExcelFile = function(file, formId, successCallback) {
             Upload.upload({
                 url: "/api/externalforms/ImportExcelFile",

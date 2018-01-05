@@ -32,6 +32,17 @@ namespace Gradera_Klubb.Controllers.Forms
         }
 
         [HttpPost, HttpOptions]
+        public HttpResponseMessage SubmitForms(List<SubmitFormModel> forms)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            foreach (var form in forms)
+            {
+                SubmitForm(form.FormFields);
+            }
+            return response;
+        }
+
+        [HttpPost, HttpOptions]
         public async Task<HttpResponseMessage> ImportExcelFile()
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
