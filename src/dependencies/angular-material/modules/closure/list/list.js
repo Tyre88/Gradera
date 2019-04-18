@@ -1,8 +1,8 @@
 /*!
- * Angular Material Design
+ * AngularJS Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.1.1-master-72d0685
+ * v1.1.18
  */
 goog.provide('ngmaterial.components.list');
 goog.require('ngmaterial.core');
@@ -12,9 +12,9 @@ goog.require('ngmaterial.core');
  * @description
  * List module
  */
-MdListController.$inject = ["$scope", "$element", "$mdListInkRipple"];
-mdListDirective.$inject = ["$mdTheming"];
-mdListItemDirective.$inject = ["$mdAria", "$mdConstant", "$mdUtil", "$timeout"];
+MdListController['$inject'] = ["$scope", "$element", "$mdListInkRipple"];
+mdListDirective['$inject'] = ["$mdTheming"];
+mdListItemDirective['$inject'] = ["$mdAria", "$mdConstant", "$mdUtil", "$timeout"];
 angular.module('material.components.list', [
   'material.core'
 ])
@@ -206,7 +206,7 @@ function mdListDirective($mdTheming) {
  * When using `<md-icon>` for an avatar, you have to use the `.md-avatar-icon` class.
  * <hljs lang="html">
  *   <md-list-item>
- *     <md-icon class="md-avatar-icon" md-svg-icon="avatars:timothy"></md-icon>
+ *     <md-icon class="md-avatar-icon" md-svg-icon="social:person"></md-icon>
  *     <span>Timothy Kopra</span>
  *   </md-list-item>
  * </hljs>
@@ -306,7 +306,7 @@ function mdListItemDirective($mdAria, $mdConstant, $mdUtil, $timeout) {
           // When the proxy item is aligned at the end of the list, we have to set the origin to the end.
           xAxisPosition = 'right';
         }
-        
+
         // Set the position mode / origin of the proxied menu.
         if (!menuEl.attr('md-position-mode')) {
           menuEl.attr('md-position-mode', xAxisPosition + ' target');
@@ -315,7 +315,7 @@ function mdListItemDirective($mdAria, $mdConstant, $mdUtil, $timeout) {
         // Apply menu open binding to menu button
         var menuOpenButton = menuEl.children().eq(0);
         if (!hasClickEvent(menuOpenButton[0])) {
-          menuOpenButton.attr('ng-click', '$mdOpenMenu($event)');
+          menuOpenButton.attr('ng-click', '$mdMenu.open($event)');
         }
 
         if (!menuOpenButton.attr('aria-label')) {
@@ -341,9 +341,13 @@ function mdListItemDirective($mdAria, $mdConstant, $mdUtil, $timeout) {
             '<md-button class="md-no-style"></md-button>'
           );
 
-          buttonWrap[0].setAttribute('aria-label', tEl[0].textContent);
-
           copyAttributes(tEl[0], buttonWrap[0]);
+
+          // If there is no aria-label set on the button (previously copied over if present)
+          // we determine the label from the content and copy it to the button.
+          if (!buttonWrap.attr('aria-label')) {
+            buttonWrap.attr('aria-label', $mdAria.getText(tEl));
+          }
 
           // We allow developers to specify the `md-no-focus` class, to disable the focus style
           // on the button executor. Once more classes should be forwarded, we should probably make the
@@ -413,7 +417,7 @@ function mdListItemDirective($mdAria, $mdConstant, $mdUtil, $timeout) {
       function copyAttributes(source, destination, extraAttrs) {
         var copiedAttrs = $mdUtil.prefixer([
           'ng-if', 'ng-click', 'ng-dblclick', 'aria-label', 'ng-disabled', 'ui-sref',
-          'href', 'ng-href', 'target', 'ng-attr-ui-sref', 'ui-sref-opts'
+          'href', 'ng-href', 'rel', 'target', 'ng-attr-ui-sref', 'ui-sref-opts', 'download'
         ]);
 
         if (extraAttrs) {

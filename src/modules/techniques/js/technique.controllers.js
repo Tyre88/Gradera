@@ -15,10 +15,10 @@
         function GetTechnique() {
             if(vm.TechniqueId > 0)
             {
-                techniqueService.GetTechnique(vm.TechniqueId).success(getTechniqueCallback);
+                techniqueService.GetTechnique(vm.TechniqueId).then(getTechniqueCallback);
 
                 function getTechniqueCallback(response) {
-                    vm.Technique = response;
+                    vm.Technique = response.data;
                 }
             }
         }

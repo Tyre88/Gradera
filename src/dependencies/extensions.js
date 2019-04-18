@@ -143,7 +143,7 @@ function LoadCss(url)
 					var link = document.createElement("link");
 					link.type = "text/css";
 					link.rel = "stylesheet";
-					link.href = String.format("{0}", url[i]);
+					link.href = String.format("{1}/{0}", url[i], window.location.pathname.replace('/index.html', ''));
 
 					document.getElementsByTagName("head")[0].appendChild(link);
 					loadedCSS.push(url[i].toLowerCase());
@@ -159,7 +159,7 @@ function LoadCss(url)
 					var link = document.createElement("link");
 					link.type = "text/css";
 					link.rel = "stylesheet";
-					link.href = String.format("{0}", url[i]);
+					link.href = String.format("{1}/{0}", url[i], window.location.pathname.replace('/index.html', ''));
 
 					document.getElementsByTagName("head")[0].appendChild(link);
 					loadedCSS.push(url[i].toLowerCase());
@@ -174,7 +174,7 @@ function LoadCss(url)
 			var link = document.createElement("link");
 			link.type = "text/css";
 			link.rel = "stylesheet";
-			link.href = String.format("{0}", url);
+			link.href = String.format("{1}/{0}", url, window.location.pathname.replace('/index.html', ''));
 
 			var raf = requestAnimationFrame || mozRequestAnimationFrame ||
 				webkitRequestAnimationFrame || msRequestAnimationFrame;

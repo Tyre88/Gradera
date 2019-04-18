@@ -199,8 +199,12 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
             "$mdThemingProvider",
             "cfpLoadingBarProvider",
             "$translateProvider",
-            function($compileProvider, $httpProvider, $mdThemingProvider, cfpLoadingBarProvider, $translateProvider)
+            "$locationProvider",
+            function($compileProvider, $httpProvider, $mdThemingProvider, cfpLoadingBarProvider, $translateProvider, $locationProvider)
             {
+                $locationProvider.html5Mode(false);
+                $locationProvider.hashPrefix('!');
+
                 $compileProvider.debugInfoEnabled(false);
                 $httpProvider.useApplyAsync(true);
                 $httpProvider.defaults.withCredentials = true;
@@ -233,7 +237,7 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                 cfpLoadingBarProvider.spinnerTemplate = '<div class="loader md-whiteframe-z1">Laddar...</div>';
 
                 $translateProvider.useStaticFilesLoader({
-                    prefix: "i18n/locale-",
+                    prefix: window.location.pathname.replace('/index.html', '') + "/i18n/locale-",
                     suffix: ".json"
                 });
 
@@ -273,8 +277,8 @@ LoadCss(["content/css/stylesheet.css", "content/css/directives.css", "content/cs
                     $rootScope.Theme = userService.User.UserInformation.Theme;
                     api.init(userService.User.Token);
 
-                    clubService.GetModuleLinks().success(function(response) {
-                        $rootScope.Links = response;
+                    clubService.GetModuleLinks().then(function(response) {
+                        $rootScope.Links = response.data;
                     });
                 }
                 else

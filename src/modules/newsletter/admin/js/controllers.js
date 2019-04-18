@@ -16,10 +16,10 @@
         vm.ShowStats = ShowStats;
 
         function GetNewsletters() {
-            newsletterAdminService.GetNewsletters().success(GetNewslettersCallback);
+            newsletterAdminService.GetNewsletters().then(GetNewslettersCallback);
 
             function GetNewslettersCallback(response) {
-                vm.Newsletters = response;
+                vm.Newsletters = response.data;
             }
         }
 
@@ -39,7 +39,7 @@
                 .cancel('Nej');
 
             $mdDialog.show(confirm).then(function() {
-                newsletterAdminService.Delete(newsletter.Id).success(DeleteSuccess);
+                newsletterAdminService.Delete(newsletter.Id).then(DeleteSuccess);
             });
 
             function DeleteSuccess() {
@@ -84,16 +84,16 @@
         vm.Back = Back;
 
         function GetNewsletter() {
-            newsletterAdminService.GetNewsletter(vm.NewsletterId).success(GetNewsletterCallback);
+            newsletterAdminService.GetNewsletter(vm.NewsletterId).then(GetNewsletterCallback);
 
             function GetNewsletterCallback(response) {
-                vm.Newsletter = response;
+                vm.Newsletter = response.data;
                 vm.Initialized = true;
             }
         }
 
         function Save() {
-            newsletterAdminService.SaveNewsletter(vm.Newsletter).success(SaveNewsletterCallback);
+            newsletterAdminService.SaveNewsletter(vm.Newsletter).then(SaveNewsletterCallback);
 
             function SaveNewsletterCallback() {
                 vm.Back();
@@ -146,18 +146,18 @@
         vm.FormsEnabled = $rootScope.HasAccess(6, 2);
 
         function GetAccessRights() {
-            accessrightsService.GetAccessRights().success(GetAccessRightsCallback);
+            accessrightsService.GetAccessRights().then(GetAccessRightsCallback);
 
             function GetAccessRightsCallback(response) {
-                vm.Accessrights = response;
+                vm.Accessrights = response.data;
             }
         }
 
         function GetContacts() {
-            contactAdminService.GetAllContacts().success(GetContactsSuccess);
+            contactAdminService.GetAllContacts().then(GetContactsSuccess);
 
             function GetContactsSuccess(response) {
-                vm.Contacts = response;
+                vm.Contacts = response.data;
             }
         }
 
@@ -187,7 +187,7 @@
 
             var sendNewsletterModel = { NewsletterId: vm.Newsletter.Id, AccessrightIds: accessrightIds, ContactIds: contactIds, FormFieldId: formFieldId };
 
-            newsletterAdminService.SendNewsletter(sendNewsletterModel).success(SendNewsletterCallback);
+            newsletterAdminService.SendNewsletter(sendNewsletterModel).then(SendNewsletterCallback);
 
             function SendNewsletterCallback() {
                 vm.Close();
@@ -221,10 +221,10 @@
         }
 
         function GetForms() {
-            formsAdminService.GetForms().success(GetFormsSuccess);
+            formsAdminService.GetForms().then(GetFormsSuccess);
 
             function GetFormsSuccess(response) {
-                vm.Forms = response;
+                vm.Forms = response.data;
             }
         }
 
@@ -233,10 +233,10 @@
         }
 
         function GetForm(formId) {
-            formsAdminService.GetForm(formId).success(GetFormSuccess);
+            formsAdminService.GetForm(formId).then(GetFormSuccess);
 
             function GetFormSuccess(response) {
-                vm.SelectedForm = response;
+                vm.SelectedForm = response.data;
             }
         }
 
@@ -262,10 +262,10 @@
         vm.GetDate = GetDate;
 
         function GetNewsletterStatsByNewsletterId() {
-            newsletterAdminService.GetNewsletterStatsByNewsletterId(vm.NewsletterId).success(GetNewsletterStatsByNewsletterIdCallback);
+            newsletterAdminService.GetNewsletterStatsByNewsletterId(vm.NewsletterId).then(GetNewsletterStatsByNewsletterIdCallback);
 
             function GetNewsletterStatsByNewsletterIdCallback(response) {
-                vm.Stats = response;
+                vm.Stats = response.data;
             }
         }
 

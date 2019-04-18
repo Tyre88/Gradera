@@ -13,10 +13,10 @@
         vm.ShowCompetition = ShowCompetition;
 
         function GetCompeitions() {
-            competitionService.GetCompetitions().success(getCompetitionsCallback);
+            competitionService.GetCompetitions().then(getCompetitionsCallback);
 
             function getCompetitionsCallback(response) {
-                vm.Competitions = response;
+                vm.Competitions = response.data;
 
                 for(var i = 0; i < vm.Competitions.length; i++)
                 {
@@ -45,10 +45,10 @@
         vm.IsActive = IsActive;
 
         function GetCompetition() {
-            competitionService.GetCompetition(vm.CompetitionId).success(getCompetitionCallback);
+            competitionService.GetCompetition(vm.CompetitionId).then(getCompetitionCallback);
 
             function getCompetitionCallback(response) {
-                vm.Competition = response;
+                vm.Competition = response.data;
                 vm.Competition.Location = JSON.parse(vm.Competition.Location);
                 vm.Competition.StartDate = new Date(vm.Competition.StartDate);
                 vm.Competition.EndDate = new Date(vm.Competition.EndDate);
@@ -62,7 +62,7 @@
         }
 
         function Signup() {
-            competitionService.SubscribeToCompetition(vm.CompetitionId, vm.SelectedCategory).success(signupCallback);
+            competitionService.SubscribeToCompetition(vm.CompetitionId, vm.SelectedCategory).then(signupCallback);
 
             function signupCallback(response) {
                 vm.Competition.Compeditors.push({Id: -1, FirstName: userService.User.FirstName, LastName: userService.User.LastName,

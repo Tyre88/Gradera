@@ -19,11 +19,11 @@
         vm.CsvImport = CsvImport;
 
         function GetContacts() {
-            contactAdminService.GetAllContacts().success(GetAllContactsSuccess);
+            contactAdminService.GetAllContacts().then(GetAllContactsSuccess);
 
             function GetAllContactsSuccess(response) {
                 vm.Contacts = [];
-                vm.Contacts = response;
+                vm.Contacts = response.data;
             }
         }
 
@@ -40,7 +40,7 @@
                 .cancel('Nej');
 
             $mdDialog.show(confirm).then(function() {
-                contactAdminService.Delete(contact.Id).success(DeleteSuccess);
+                contactAdminService.Delete(contact.Id).then(DeleteSuccess);
             });
 
             function DeleteSuccess() {
@@ -75,11 +75,11 @@
 
         function GetContact() {
             if(vm.ContactId > 0) {
-                contactAdminService.GetContact(vm.ContactId).success(GetContactSuccess);
+                contactAdminService.GetContact(vm.ContactId).then(GetContactSuccess);
             }
 
             function GetContactSuccess(response) {
-                vm.Contact = response;
+                vm.Contact = response.data;
             }
         }
 
@@ -88,7 +88,7 @@
         }
 
         function Save() {
-            contactAdminService.Save(vm.Contact).success(vm.Back);
+            contactAdminService.Save(vm.Contact).then(vm.Back);
         }
 
         vm.GetContact();

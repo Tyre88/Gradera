@@ -13,10 +13,10 @@
         vm.Edit = Edit;
 
         function GetGrades() {
-            gradingAdminService.GetGrades().success(getGradesCallback);
+            gradingAdminService.GetGrades().then(getGradesCallback);
 
             function getGradesCallback(response) {
-                vm.Grades = response;
+                vm.Grades = response.data;
             }
         }
 
@@ -55,10 +55,10 @@
         function GetGrade() {
             if(vm.GradeId <= 0) return;
 
-            gradingAdminService.GetGrade(vm.GradeId).success(getGradeCallback);
+            gradingAdminService.GetGrade(vm.GradeId).then(getGradeCallback);
 
             function getGradeCallback(response) {
-                vm.Grade = response;
+                vm.Grade = response.data;
             }
         }
 
@@ -67,10 +67,10 @@
         }
 
         function Save() {
-            gradingAdminService.SaveGrade(vm.Grade).success(saveGradeCallback);
+            gradingAdminService.SaveGrade(vm.Grade).then(saveGradeCallback);
 
             function saveGradeCallback(response) {
-                vm.Grade = response;
+                vm.Grade = response.data;
 
                 $mdToast.show(
                     $mdToast.simple()
@@ -81,10 +81,10 @@
         }
 
         function GetCategories() {
-            gradingAdminService.GetCategories().success(getCategoriesCallback);
+            gradingAdminService.GetCategories().then(getCategoriesCallback);
 
             function getCategoriesCallback(response) {
-                vm.Categories = response;
+                vm.Categories = response.data;
             }
         }
 
@@ -103,10 +103,10 @@
         }
 
         function GetTechniques() {
-            techniqueService.GetTechniques().success(getTechniquesCallback);
+            techniqueService.GetTechniques().then(getTechniquesCallback);
 
             function getTechniquesCallback(response) {
-                vm.Techniques = response;
+                vm.Techniques = response.data;
             }
         }
 
@@ -115,10 +115,10 @@
         }
 
         function GetGradingBooklets() {
-            gradingService.GetGradingBooklets().success(GetGradingBookletsCallback);
+            gradingService.GetGradingBooklets().then(GetGradingBookletsCallback);
 
             function GetGradingBookletsCallback(response) {
-                vm.Booklets = response;
+                vm.Booklets = response.data;
             }
         }
 
@@ -200,10 +200,10 @@
         vm.Edit = Edit;
 
         function GetCategories() {
-            gradingAdminService.GetCategories().success(getCategoriesCallback);
+            gradingAdminService.GetCategories().then(getCategoriesCallback);
 
             function getCategoriesCallback(response) {
-                vm.Categories = response;
+                vm.Categories = response.data;
             }
         }
 
@@ -231,10 +231,10 @@
             if(vm.CategoryId <= 0)
                 return;
 
-            gradingAdminService.GetCategory(vm.CategoryId).success(getCategoryCallback);
+            gradingAdminService.GetCategory(vm.CategoryId).then(getCategoryCallback);
 
             function getCategoryCallback(response) {
-                vm.Category = response;
+                vm.Category = response.data;
             }
         }
 
@@ -243,7 +243,7 @@
         }
 
         function Save() {
-            gradingAdminService.SaveGradingCategory(vm.Category).success(saveGradingCategoryCallback);
+            gradingAdminService.SaveGradingCategory(vm.Category).then(saveGradingCategoryCallback);
 
             function saveGradingCategoryCallback() {
                 vm.Back();
@@ -269,16 +269,16 @@
         function GetGradingBooklet() {
             if(vm.BookletId > 0)
             {
-                gradingAdminService.GetGradingBooklet(vm.BookletId).success(GetGradingBookletCallback);
+                gradingAdminService.GetGradingBooklet(vm.BookletId).then(GetGradingBookletCallback);
             }
 
             function GetGradingBookletCallback(response) {
-                vm.Booklet = response;
+                vm.Booklet = response.data;
             }
         }
 
         function Save() {
-            gradingAdminService.SaveBooklet(vm.Booklet).success(SaveBookletCallback);
+            gradingAdminService.SaveBooklet(vm.Booklet).then(SaveBookletCallback);
 
             function SaveBookletCallback() {
                 vm.Back();

@@ -35,8 +35,7 @@
 
             if(~~vm.objectType > 0 && ~~vm.objectId > 0) {
                 genericItemPermissionsService.SaveGenericItemPermissions(vm.objectId, vm.objectType, accessrightIds, userIds)
-                    .success(SaveGenericItemPermissionsSuccess)
-                    .error(SaveGenericItemPermissionsError);
+                    .then(SaveGenericItemPermissionsSuccess, SaveGenericItemPermissionsError);
             }
             else {
                 SaveGenericItemPermissionsError();
@@ -51,20 +50,20 @@
             }
         }
 
-        accessrightsService.GetAccessRights().success(GetAccessRightsSuccess);
+        accessrightsService.GetAccessRights().then(GetAccessRightsSuccess);
 
         function GetAccessRightsSuccess(response) {
-            vm.Accessrights = response;
+            vm.Accessrights = response.data;
 
             vm.GetItemPermission();
         }
 
         function GetItemPermission() {
-            genericItemPermissionsService.GetItemPermission(vm.objectType, vm.objectId).success(GetItemPermissionSuccess);
+            genericItemPermissionsService.GetItemPermission(vm.objectType, vm.objectId).then(GetItemPermissionSuccess);
 
             function GetItemPermissionSuccess(response) {
-                var accessrightIds = response.AccessrightIds;
-                var userIds = response.UserIds;
+                var accessrightIds = response.data.AccessrightIds;
+                var userIds = response.data.UserIds;
 
                 for(var i = 0; i < accessrightIds.length; i++) {
                     for(var y = 0; y < vm.Accessrights.length; y++) {

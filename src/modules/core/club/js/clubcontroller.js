@@ -12,15 +12,15 @@
         vm.OnUploadSuccess = OnUploadSuccess;
 
         function GetClub() {
-            clubService.GetClub().success(getClubCallback);
+            clubService.GetClub().then(getClubCallback);
 
             function getClubCallback(response) {
-                vm.Club = response;
+                vm.Club = response.data;
             }
         }
 
         function Save() {
-            clubService.SaveClub(vm.Club).success(saveClubCallback);
+            clubService.SaveClub(vm.Club).then(saveClubCallback);
 
             function saveClubCallback() {
                 $mdToast.show(

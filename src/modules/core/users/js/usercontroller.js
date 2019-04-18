@@ -13,12 +13,12 @@
         vm.ShowUser = ShowUser;
 
         function GetUsers() {
-            userService.GetAllUsers().success(getUsersCallback);
+            userService.GetAllUsers().then(getUsersCallback);
 
             function getUsersCallback(response) {
-                for(var i = 0; i < response.length; i++)
+                for(var i = 0; i < response.data.length; i++)
                 {
-                    vm.Users.push(new userService.UserModel(userService.User.Club, response[i]));
+                    vm.Users.push(new userService.UserModel(userService.User.Club, response.data[i]));
                 }
             }
         }
@@ -39,10 +39,10 @@
         vm.GetGrade = GetGrade;
 
         function GetUser() {
-            userService.GetUser(vm.UserId).success(getUserCallback);
+            userService.GetUser(vm.UserId).then(getUserCallback);
 
             function getUserCallback(response) {
-                vm.User = new userService.UserModel(userService.User.Club, response);
+                vm.User = new userService.UserModel(userService.User.Club, response.data);
             }
         }
 

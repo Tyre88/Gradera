@@ -21,10 +21,10 @@
         vm.FormAnswers = FormAnswers;
 
         function GetForms() {
-            formsAdminService.GetForms().success(getFormsCallback);
+            formsAdminService.GetForms().then(getFormsCallback);
 
             function getFormsCallback(response) {
-                vm.Forms = response;
+                vm.Forms = response.data;
             }
         }
 
@@ -40,7 +40,7 @@
                 .cancel('Nej');
 
             $mdDialog.show(confirm).then(function() {
-                formsAdminService.DeleteForm(form.Id).success(function() {
+                formsAdminService.DeleteForm(form.Id).then(function() {
                     vm.Forms.splice(vm.Forms.indexOf(form), 1);
                 });
             });
@@ -90,10 +90,10 @@
         vm.DisableRequired = DisableRequired;
 
         function GetForm() {
-            formsAdminService.GetForm(vm.FormId).success(getFormCallback);
+            formsAdminService.GetForm(vm.FormId).then(getFormCallback);
 
             function getFormCallback(response) {
-                vm.Form = response;
+                vm.Form = response.data;
                 vm.Form.StartDate = new Date(vm.Form.StartDate);
                 vm.Form.EndDate = new Date(vm.Form.EndDate);
 
@@ -132,7 +132,7 @@
         function SaveForm() {
             vm.Form.StartDate = moment(vm.Form.StartDate).format('YYYY-MM-DD');
             vm.Form.EndDate = moment(vm.Form.EndDate).format('YYYY-MM-DD 23:59:59');
-            formsAdminService.SaveForm(vm.Form).success(saveFormcallback);
+            formsAdminService.SaveForm(vm.Form).then(saveFormcallback);
 
             function saveFormcallback() {
                 vm.Back()
@@ -217,7 +217,7 @@
                 }
 
                 function Save() {
-                    formsAdminService.SaveFormFieldItem(vm.item).success(SaveFormFieldItemSuccess);
+                    formsAdminService.SaveFormFieldItem(vm.item).then(SaveFormFieldItemSuccess);
 
                     function SaveFormFieldItemSuccess() {
                         $mdDialog.hide();
@@ -234,7 +234,7 @@
 
                 function DeleteOption(option) {
                     if(~~option.Id > 0) {
-                        formsAdminService.DeleteFormFieldOption(option.Id).success(DeleteFormFieldOptionSuccess);
+                        formsAdminService.DeleteFormFieldOption(option.Id).then(DeleteFormFieldOptionSuccess);
 
                         function DeleteFormFieldOptionSuccess() {
                             vm.item.Options.splice(vm.item.Options.indexOf(option), 1);
@@ -280,15 +280,15 @@
         vm.ExportToExcel = ExportToExcel;
 
         function GetUserAnswers() {
-            formsAdminService.GetUserAnswers(vm.FormId).success(getUserAnswersCallback);
+            formsAdminService.GetUserAnswers(vm.FormId).then(getUserAnswersCallback);
 
             function getUserAnswersCallback(response) {
-                vm.UserAnswers = response;
+                vm.UserAnswers = response.data;
             }
         }
 
         function ExportToExcel() {
-            formsAdminService.ExportGetUserSubmitsToExcel(vm.FormId).success(ExportGetUserSubmitsToExcelSuccess);
+            formsAdminService.ExportGetUserSubmitsToExcel(vm.FormId).then(ExportGetUserSubmitsToExcelSuccess);
 
             function ExportGetUserSubmitsToExcelSuccess(response) {
                 var newLink = angular.element("<a href='/Downloads/Forms/" + response + "' id='" + response + "'></a>");
@@ -314,15 +314,15 @@
         vm.DeleteExternalFormAnswer = DeleteExternalFormAnswer;
 
         function GetAnswers() {
-            formsAdminService.GetExternalAnswers(vm.FormId).success(getExternalAnswersCallback);
+            formsAdminService.GetExternalAnswers(vm.FormId).then(getExternalAnswersCallback);
 
             function getExternalAnswersCallback(response) {
-                vm.Answers = response;
+                vm.Answers = response.data;
             }
         }
 
         function ExportToExcel() {
-            formsAdminService.ExportExternalAnswersToExcel(vm.FormId).success(ExportExternalAnswersToExcelSuccess);
+            formsAdminService.ExportExternalAnswersToExcel(vm.FormId).then(ExportExternalAnswersToExcelSuccess);
 
             function ExportExternalAnswersToExcelSuccess(response) {
                 var newLink = angular.element("<a href='/Downloads/Forms/" + response + "' id='" + response + "'></a>");
@@ -355,7 +355,7 @@
                 .cancel('Nej');
 
             $mdDialog.show(confirm).then(function() {
-                formsAdminService.DeleteExternalFormAnswer(answer.Batch).success(function() {
+                formsAdminService.DeleteExternalFormAnswer(answer.Batch).then(function() {
                     vm.Answers.splice(vm.Answers.indexOf(answer), 1);
                 });
             });

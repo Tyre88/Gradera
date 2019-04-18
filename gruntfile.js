@@ -25,7 +25,8 @@ module.exports = function (grunt)
         "clean:all",
         "copy",
         "sass",
-        "concat"
+        "concat",
+        "ngtemplates"
         //"htmlmin",
         //"uglify"
 	]);
@@ -46,7 +47,14 @@ module.exports = function (grunt)
 		{
 			src: "src",
 			dist: "dist"
-		},
+        },
+        ngtemplates: {
+            graderaklubb: {
+                cwd: "<%= config.src %>/",
+                src: '**/*.html',
+                dest: '<%= config.dist %>/templates.js'
+            }
+        },
 		open:
 		{
 			chrome:

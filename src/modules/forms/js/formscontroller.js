@@ -12,10 +12,10 @@
         vm.SubmitForm = SubmitForm;
 
         function GetForm() {
-            formService.GetForm(vm.FormId).success(getFormCallback);
+            formService.GetForm(vm.FormId).then(getFormCallback);
 
             function getFormCallback(response) {
-                vm.Form.Initialize(response);
+                vm.Form.Initialize(response.data);
             }
         }
 
@@ -26,7 +26,7 @@
             {
                 formFields.push({Value: vm.Form.FormFields[i].formControl.$modelValue, FormId: vm.FormId, FormFieldId: vm.Form.FormFields[i].key});
             }
-            formService.SubmitForm(formFields).success(submitFormCallback);
+            formService.SubmitForm(formFields).then(submitFormCallback);
 
             function submitFormCallback() {
                 var confirm = $mdDialog.confirm()

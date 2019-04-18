@@ -13,10 +13,10 @@
         vm.GetClubByShortName = GetClubByShortName;
 
         function GetClubByShortName() {
-            clubService.GetClubByShortName(vm.ClubShortName).success(getClubByShortNameCallback);
+            clubService.GetClubByShortName(vm.ClubShortName).then(getClubByShortNameCallback);
 
             function getClubByShortNameCallback(response) {
-                vm.Club = response;
+                vm.Club = response.data;
             }
         }
 
@@ -33,10 +33,10 @@
         vm.ForgotPassword = ForgotPassword;
 
         function GetClubs() {
-            clubService.GetClubs().success(getClubsSuccess);
+            clubService.GetClubs().then(getClubsSuccess);
 
             function getClubsSuccess(response) {
-                vm.Clubs = response;
+                vm.Clubs = response.data;
                 vm.Clubs.splice(0, 1);
                 vm.Clubs.splice(0, 1);
 
@@ -46,7 +46,7 @@
 
         function ForgotPassword() {
             if(vm.SelectedClubId > 0 && vm.Email != "") {
-                loginService.ForgotPassword(vm.SelectedClubId, vm.Email).success(forgotPasswordSuccess);
+                loginService.ForgotPassword(vm.SelectedClubId, vm.Email).then(forgotPasswordSuccess);
             }
             console.log(vm.SelectedClubId);
             console.log(vm.Email);

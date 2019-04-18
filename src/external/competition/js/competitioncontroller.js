@@ -24,10 +24,10 @@
         vm.GetDate = GetDate;
 
         function GetCompetition() {
-            competitionExternalService.GetCompetition(vm.ClubShortName, vm.CompetitionName).success(getCompetitionCallback);
+            competitionExternalService.GetCompetition(vm.ClubShortName, vm.CompetitionName).then(getCompetitionCallback);
 
             function getCompetitionCallback(response) {
-                vm.Competition = response;
+                vm.Competition = response.data;
 
                 if(vm.Competition.IsClubCompetition)
                     vm.AddCompeditor();
@@ -46,7 +46,7 @@
 
         function Submit() {
             vm.ContactPerson.CompetitionId = vm.Competition.Id;
-            competitionExternalService.Submit(vm.ContactPerson).success(submitCallback).error(submitError);
+            competitionExternalService.Submit(vm.ContactPerson).then(submitCallback, submitError);
 
             function submitCallback() {
                 $mdDialog.show(
@@ -99,10 +99,10 @@
         vm.GetGrade = GetGrade;
 
         function GetParticipants() {
-            competitionExternalService.GetCompetitionCompeditors(vm.ClubShortName, vm.CompetitionName).success(GetCompetitionCompeditorsSuccess);
+            competitionExternalService.GetCompetitionCompeditors(vm.ClubShortName, vm.CompetitionName).then(GetCompetitionCompeditorsSuccess);
 
             function GetCompetitionCompeditorsSuccess(response) {
-                vm.Participants = response;
+                vm.Participants = response.data;
             }
         }
 

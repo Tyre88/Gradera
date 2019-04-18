@@ -17,18 +17,18 @@
         vm.ExportBooklet = ExportBooklet;
 
         function GetGradesWithoutBooklet() {
-            gradingService.GetGradesWithoutBooklet().success(getGradesCallback);
+            gradingService.GetGradesWithoutBooklet().then(getGradesCallback);
 
             function getGradesCallback(response) {
-                vm.Grades = response;
+                vm.Grades = response.data;
             }
         }
 
         function GetGradingBooklets() {
-            gradingService.GetGradingBooklets().success(GetGradingBookletsCallback);
+            gradingService.GetGradingBooklets().then(GetGradingBookletsCallback);
 
             function GetGradingBookletsCallback(response) {
-                vm.Booklets = response;
+                vm.Booklets = response.data;
             }
         }
 
@@ -41,7 +41,7 @@
         }
 
         function ExportBooklet(bookletId) {
-            gradingService.ExportBooklet(bookletId).success(exportBookletCallback);
+            gradingService.ExportBooklet(bookletId).then(exportBookletCallback);
 
             function exportBookletCallback(response) {
                 console.log(response);
@@ -67,11 +67,11 @@
         function GetGrade() {
             if(vm.GradeId > 0)
             {
-                gradingService.GetGrade(vm.GradeId).success(getGradeCallback);
+                gradingService.GetGrade(vm.GradeId).then(getGradeCallback);
             }
 
             function getGradeCallback(response) {
-                vm.Grade = response;
+                vm.Grade = response.data;
             }
         }
 
@@ -96,11 +96,11 @@
         function GetGradingBooklet() {
             if(vm.BookletId > 0)
             {
-                gradingService.GetGradingBooklet(vm.BookletId).success(GetGradingBookletCallback);
+                gradingService.GetGradingBooklet(vm.BookletId).then(GetGradingBookletCallback);
             }
 
             function GetGradingBookletCallback(response) {
-                vm.Booklet = response;
+                vm.Booklet = response.data;
             }
         }
 
@@ -120,10 +120,10 @@
         vm.Delete = Delete;
 
         function GetBooklets() {
-            gradingService.GetGradingBooklets().success(GetGradingBookletsCallback);
+            gradingService.GetGradingBooklets().then(GetGradingBookletsCallback);
 
             function GetGradingBookletsCallback(response) {
-                vm.Booklets = response;
+                vm.Booklets = response.data;
             }
         }
 
@@ -140,7 +140,7 @@
                 .cancel('Nej');
 
             $mdDialog.show(confirm).then(function() {
-                gradingAdminService.DeleteBooklet(booklet.Id).success(DeleteBookletCallback);
+                gradingAdminService.DeleteBooklet(booklet.Id).then(DeleteBookletCallback);
             });
 
 

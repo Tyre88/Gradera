@@ -18,7 +18,7 @@
                 .cancel('Nej');
 
             $mdDialog.show(confirm).then(function() {
-                userService.DeleteUser(user.Id).success(function(response) {
+                userService.DeleteUser(user.Id).then(function(response) {
                     vm.Users.splice(vm.Users.indexOf(user), 1);
                 });
             });
@@ -76,29 +76,29 @@
             }
 
             function GetAccessrights() {
-                accessrightsService.GetAccessRights().success(GetAccessRightsCallback);
+                accessrightsService.GetAccessRights().then(GetAccessRightsCallback);
 
                 function GetAccessRightsCallback(response) {
-                    vm.Accessrights = response;
+                    vm.Accessrights = response.data;
                 }
             }
 
             vm.GetAccessrights();
         }
 
-        userService.GetAllUsers().success(function(response) {
-            for(var i = 0; i < response.length; i++)
+        userService.GetAllUsers().then(function(response) {
+            for(var i = 0; i < response.data.length; i++)
             {
-                vm.Users.push(new userService.UserModel(userService.User.Club, response[i]));
+                vm.Users.push(new userService.UserModel(userService.User.Club, response.data[i]));
             }
         });
 
         $rootScope.$on('users.update', function() {
-            userService.GetAllUsers().success(function(response) {
+            userService.GetAllUsers().then(function(response) {
                 vm.Users = [];
-                for(var i = 0; i < response.length; i++)
+                for(var i = 0; i < response.data.length; i++)
                 {
-                    vm.Users.push(new userService.UserModel(userService.User.Club, response[i]));
+                    vm.Users.push(new userService.UserModel(userService.User.Club, response.data[i]));
                 }
             });
         });
@@ -128,9 +128,9 @@
 
                 $scope.User.UserInformation.City = JSON.stringify($scope.UserCity);
 
-                userService.SaveUser($scope.User).success(function(response) {
+                userService.SaveUser($scope.User).then(function(response) {
                     $state.go ('listusers');
-                }).error(function(err) {
+                }, function(err) {
                     $mdDialog.show($mdDialog.alert({
                         textContent: err,
                         ok: 'Ok',
@@ -157,13 +157,13 @@
                 $scope.User.Image = "/Uploads/" + userService.User.Club.Id + "/" + response.data;
             };
 
-            accessrightsService.GetAccessRights().success(function(response) {
-                $scope.AccessRights = response;
+            accessrightsService.GetAccessRights().then(function(response) {
+                $scope.AccessRights = response.data;
 
                 if($scope.UserId > 0)
                 {
-                    userService.GetUser($scope.UserId).success(function(response) {
-                        $scope.User = new userService.UserModel(userService.User.Club, response);
+                    userService.GetUser($scope.UserId).then(function(response) {
+                        $scope.User = new userService.UserModel(userService.User.Club, response.data);
                         try{
                             $scope.UserCity = $scope.User.UserInformation.City;
                         } catch(ex) {
@@ -177,8 +177,8 @@
                 {
                     $scope.User = new userService.UserModel(userService.User.Club);
                     $scope.User.UserInformation.Grade = $scope.Grades[0].Id;
-                    userService.GetUser($scope.UserId).success(function(response) {
-                        $scope.User.GenericValues = response.GenericValues;
+                    userService.GetUser($scope.UserId).then(function(response) {
+                        $scope.User.GenericValues = response.data.GenericValues;
                     });
                 }
             });
@@ -200,13 +200,13 @@
             vm.OnUploadSuccess = OnUploadSuccess;
 
             function GetAccessRightsCallback(response) {
-                vm.AccessRights = response;
+                vm.AccessRights = response.data;
 
-                userService.GetMe(vm.UserId).success(GetMeCallback);
+                userService.GetMe(vm.UserId).then(GetMeCallback);
             }
 
             function GetMeCallback(response) {
-                vm.User = new userService.UserModel(userService.User.Club, response);
+                vm.User = new userService.UserModel(userService.User.Club, response.data);
                 try{
                     vm.UserCity = vm.User.UserInformation.City;
                 } catch(ex) {
@@ -241,7 +241,7 @@
                 vm.User.UserInformation.City = JSON.stringify(vm.User.UserInformation.City);
                 vm.User.UserInformation.Theme = $rootScope.Theme;
 
-                userService.SaveMe(vm.User).success(function() {
+                userService.SaveMe(vm.User).then(function() {
                     vm.User.UserInformation.City = JSON.parse(vm.User.UserInformation.City);
 
                     $mdToast.show(
@@ -250,7 +250,7 @@
                     );
 
                     userService.User.Update(vm.User);
-                }).error(function(err) {
+                }, function(err) {
                     vm.User.UserInformation.City = JSON.parse(vm.User.UserInformation.City);
                     $mdDialog.show($mdDialog.alert({
                         textContent: err,
@@ -264,6 +264,6 @@
                 vm.User.Image = "/Uploads/" + userService.User.Club.Id + "/" + response.data;
             }
 
-            accessrightsService.GetAccessRights().success(GetAccessRightsCallback);
+            accessrightsService.GetAccessRights().then(GetAccessRightsCallback);
         }
 }(window.angular));

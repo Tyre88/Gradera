@@ -20,10 +20,10 @@
         vm.GetClub = GetClub;
 
         function GetUpcommingCompetitions() {
-            competitionService.GetUpcommingCompetitions(3).success(getUpcommingCompetitionsCallback);
+            competitionService.GetUpcommingCompetitions(3).then(getUpcommingCompetitionsCallback);
 
             function getUpcommingCompetitionsCallback(response) {
-                vm.UpcommingCompetitions = response;
+                vm.UpcommingCompetitions = response.data;
             }
         }
 
@@ -32,10 +32,10 @@
         }
 
         function GetUnansweredForms() {
-            formService.GetUnansweredForms(3).success(getUnansweredFormsCallback);
+            formService.GetUnansweredForms(3).then(getUnansweredFormsCallback);
 
             function getUnansweredFormsCallback(response) {
-                vm.UnansweredForms = response;
+                vm.UnansweredForms = response.data;
             }
         }
 
@@ -44,10 +44,10 @@
         }
 
         function GetClub() {
-            clubService.GetClub().success(GetClubCallback);
+            clubService.GetClub().then(GetClubCallback);
 
             function GetClubCallback(response) {
-                vm.Club = response;
+                vm.Club = response.data;
             }
         }
 

@@ -12,12 +12,12 @@
 
         function GetFile() {
             if(vm.Guid && vm.Guid != "") {
-                mediabankService.GetFile(vm.Guid).success(GetFileSuccess).error(GetFileError);
+                mediabankService.GetFile(vm.Guid).then(GetFileSuccess, GetFileError);
             }
 
             function GetFileSuccess(response) {
                 console.log(response);
-                vm.MediabankFile = response;
+                vm.MediabankFile = response.data;
             }
 
             function GetFileError() {

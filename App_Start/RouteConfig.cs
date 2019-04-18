@@ -18,6 +18,12 @@ namespace Gradera_Klubb
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                "CATCHALL",
+                "{*.}",
+                 new { controller = "Home", action = "Index" }
+            );
         }
     }
 }

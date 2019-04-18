@@ -1,8 +1,8 @@
 /*!
- * Angular Material Design
+ * AngularJS Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.1.1-master-72d0685
+ * v1.1.18
  */
 goog.provide('ngmaterial.components.fabActions');
 goog.require('ngmaterial.core');
@@ -13,7 +13,7 @@ goog.require('ngmaterial.core');
    * @ngdoc module
    * @name material.components.fabActions
    */
-  MdFabActionsDirective.$inject = ["$mdUtil"];
+  MdFabActionsDirective['$inject'] = ["$mdUtil"];
   angular
     .module('material.components.fabActions', ['material.core'])
     .directive('mdFabActions', MdFabActionsDirective);

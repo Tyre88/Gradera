@@ -19,10 +19,10 @@
         vm.GetTypeName = GetTypeName;
 
         function GetAllFiles() {
-            mediabankService.GetAllFiles().success(GetAllFilesSuccess);
+            mediabankService.GetAllFiles().then(GetAllFilesSuccess);
 
             function GetAllFilesSuccess(response) {
-                vm.MediabankFiles = response;
+                vm.MediabankFiles = response.data;
             }
         }
 
@@ -76,10 +76,10 @@
         vm.GetFile = GetFile;
 
         function GetFile() {
-            mediabankService.GetFile(vm.MediabankFileId).success(GetFileSuccess);
+            mediabankService.GetFile(vm.MediabankFileId).then(GetFileSuccess);
 
             function GetFileSuccess(response) {
-                vm.MediabankFile = response;
+                vm.MediabankFile = response.data;
             }
         }
 
@@ -98,7 +98,7 @@
         vm.Close = Close;
 
         function GetAllFilesWithType() {
-            mediabankService.GetAllFilesWithType("IMAGE").success(GetAllFilesWithTypeSuccess);
+            mediabankService.GetAllFilesWithType("IMAGE").then(GetAllFilesWithTypeSuccess);
 
             function GetAllFilesWithTypeSuccess(data) {
                 vm.MediabankFiles = data;

@@ -22,12 +22,12 @@
         vm.ImportExcelFile = ImportExcelFile;
 
         function GetForm() {
-            formService.GetForm(vm.ClubShortName, vm.FormName).success(getFormCallback).error(function() {
+            formService.GetForm(vm.ClubShortName, vm.FormName).then(getFormCallback, function() {
                 vm.HasExpired = true;
             });
 
             function getFormCallback(response) {
-                vm.Form.Initialize(response);
+                vm.Form.Initialize(response.data);
                 vm.OriginalForm = angular.copy(vm.Form);
                 vm.Forms.push(vm.Form);
             }
@@ -73,7 +73,7 @@
                 }
             }
 
-            formService.SubmitForm(formFields).success(submitFormCallback);
+            formService.SubmitForm(formFields).then(submitFormCallback);
 
             function submitFormCallback() {
                 vm.SubmittedForms++;
@@ -146,10 +146,10 @@
         }
 
         function GetClubInformation() {
-            clubService.GetClubInformation(vm.ClubShortName).success(GetClubInformationSuccess);
+            clubService.GetClubInformation(vm.ClubShortName).then(GetClubInformationSuccess);
 
             function GetClubInformationSuccess(response) {
-                vm.ClubInformation = response;
+                vm.ClubInformation = response.data;
             }
         }
 

@@ -15,10 +15,10 @@
         }
 
         function GetTechniques() {
-            techniqueService.GetTechniques().success(getTechniquesCallback);
+            techniqueService.GetTechniques().then(getTechniquesCallback);
 
             function getTechniquesCallback(response) {
-                vm.Techniques = response;
+                vm.Techniques = response.data;
             }
         }
 
@@ -45,10 +45,10 @@
             if(vm.TechniqueId <= 0)
                 return;
 
-            techniqueService.GetTechnique(vm.TechniqueId).success(getTechniqueCallback);
+            techniqueService.GetTechnique(vm.TechniqueId).then(getTechniqueCallback);
 
             function getTechniqueCallback(response) {
-                vm.Technique = response;
+                vm.Technique = response.data;
             }
         }
 
@@ -57,7 +57,7 @@
         }
 
         function Save() {
-            techniqueService.SaveTechnique(vm.Technique).success(saveTechniqueCallback);
+            techniqueService.SaveTechnique(vm.Technique).then(saveTechniqueCallback);
 
             function saveTechniqueCallback() {
                 vm.Back();
@@ -65,10 +65,10 @@
         }
 
         function GetTechniqueTypes() {
-            techniqueService.GetTechniqueTypes().success(getTechniqueTypesCallback);
+            techniqueService.GetTechniqueTypes().then(getTechniqueTypesCallback);
 
             function getTechniqueTypesCallback(response) {
-                vm.TechniqueTypes = response;
+                vm.TechniqueTypes = response.data;
             }
         }
 
@@ -96,10 +96,10 @@
         }
 
         function GetTypes() {
-            techniqueService.GetTechniqueTypes().success(getTechniqueTypesCallback);
+            techniqueService.GetTechniqueTypes().then(getTechniqueTypesCallback);
 
             function getTechniqueTypesCallback(response) {
-                vm.TechniqueTypes = response;
+                vm.TechniqueTypes = response.data;
             }
         }
 
@@ -120,7 +120,7 @@
         vm.GetType = GetType;
 
         function Save(){
-            techniqueService.SaveTechniqueType(vm.TechniqueType).success(saveCallback);
+            techniqueService.SaveTechniqueType(vm.TechniqueType).then(saveCallback);
 
             function saveCallback() {
                 vm.Back();
@@ -134,10 +134,10 @@
         function GetType() {
             if(vm.TechniqueTypeId > 0)
             {
-                techniqueService.GetTechniqueType(vm.TechniqueTypeId).success(getTypeCallback);
+                techniqueService.GetTechniqueType(vm.TechniqueTypeId).then(getTypeCallback);
 
                 function getTypeCallback(response) {
-                    vm.TechniqueType = response;
+                    vm.TechniqueType = response.data;
                 }
             }
         }

@@ -12,13 +12,13 @@
             {
                 scope.Login = function()
                 {
-                    loginService.Login(scope.UserService.User.UserName, scope.UserService.User.Password).success(function(response) {
-                        userService.User.InitializeLogin(response);
+                    loginService.Login(scope.UserService.User.UserName, scope.UserService.User.Password).then(function(response) {
+                        userService.User.InitializeLogin(response.data);
                         api.init(userService.User.Token);
                         $rootScope.Theme = userService.User.UserInformation.Theme;
 
-                        clubService.GetModuleLinks().success(function(response) {
-                            $rootScope.Links = response;
+                        clubService.GetModuleLinks().then(function(response) {
+                            $rootScope.Links = response.data;
                             $rootScope.EnabledModules = [];
 
                             for(var i = 0; i < $rootScope.Links.length; i++) {
@@ -43,7 +43,7 @@
 
                             $state.go ('home');
                         });
-                    }).error(function() {
+                    }, function() {
                         $mdDialog.show(
                             $mdDialog.alert()
                                 .clickOutsideToClose(false)
@@ -75,7 +75,7 @@
 
                 scope.Logout = function()
                 {
-                    loginService.LogOut().success(function(response) {
+                    loginService.LogOut().then(function(response) {
                         var clubName = angular.copy(userService.User.Club.ShortName);
                         userService.User.Logout();
                         $state.go('clublogin', {clubShortName: clubName});

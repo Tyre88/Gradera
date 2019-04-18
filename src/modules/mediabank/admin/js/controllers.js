@@ -60,7 +60,7 @@
                 .cancel('Nej');
 
             $mdDialog.show(confirm).then(function() {
-                mediabankAdminService.DeleteMediabankFile(file.Id).success(DeleteMediabankFileSuccess);
+                mediabankAdminService.DeleteMediabankFile(file.Id).then(DeleteMediabankFileSuccess);
             });
 
             function DeleteMediabankFileSuccess(response) {
@@ -121,8 +121,8 @@
             }
         }
 
-        mediabankAdminService.GetAllFiles().success(function(response) {
-            vm.MediabankFiles = response;
+        mediabankAdminService.GetAllFiles().then(function(response) {
+            vm.MediabankFiles = response.data;
         });
     }
 
@@ -144,7 +144,7 @@
         }
 
         function Save() {
-            mediabankAdminService.UpdateMediabankFile(vm.MediabankFile).success(UpdateMediabankFileSuccess);
+            mediabankAdminService.UpdateMediabankFile(vm.MediabankFile).then(UpdateMediabankFileSuccess);
 
             function UpdateMediabankFileSuccess(response) {
                 if(response == true) {
@@ -156,18 +156,18 @@
 
         function UpdateMediabankFileExternalGUID() {
             vm.DisableExternalCheck = true;
-            mediabankAdminService.UpdateMediabankFileExternalGUID(vm.MediabankFile).success(UpdateMediabankFileExternalGUIDSuccess);
+            mediabankAdminService.UpdateMediabankFileExternalGUID(vm.MediabankFile).then(UpdateMediabankFileExternalGUIDSuccess);
 
             function UpdateMediabankFileExternalGUIDSuccess(response) {
-                vm.MediabankFile.ExternalGUID = response;
+                vm.MediabankFile.ExternalGUID = response.data;
                 vm.DisableExternalCheck = false;
             }
         }
 
-        mediabankAdminService.GetFile(vm.MediabankFileId).success(GetFileSuccess);
+        mediabankAdminService.GetFile(vm.MediabankFileId).then(GetFileSuccess);
 
         function GetFileSuccess(response) {
-            vm.MediabankFile = response;
+            vm.MediabankFile = response.data;
         }
 
         function PermissionSaveCallback(success) {

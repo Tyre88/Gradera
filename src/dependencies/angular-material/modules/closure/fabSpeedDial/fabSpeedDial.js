@@ -1,20 +1,21 @@
 /*!
- * Angular Material Design
+ * AngularJS Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.1.1-master-72d0685
+ * v1.1.18
  */
 goog.provide('ngmaterial.components.fabShared');
 goog.require('ngmaterial.core');
 (function() {
   'use strict';
 
-  MdFabController.$inject = ["$scope", "$element", "$animate", "$mdUtil", "$mdConstant", "$timeout"];
+  MdFabController['$inject'] = ["$scope", "$element", "$animate", "$mdUtil", "$mdConstant", "$timeout"];
   angular.module('material.components.fabShared', ['material.core'])
     .controller('MdFabController', MdFabController);
 
   function MdFabController($scope, $element, $animate, $mdUtil, $mdConstant, $timeout) {
     var vm = this;
+    var initialAnimationAttempts = 0;
 
     // NOTE: We use async eval(s) below to avoid conflicts with any existing digest loops
 
@@ -35,12 +36,23 @@ goog.require('ngmaterial.core');
       $scope.$evalAsync("vm.isOpen = !vm.isOpen");
     };
 
-    setupDefaults();
-    setupListeners();
-    setupWatchers();
+    /*
+     * AngularJS Lifecycle hook for newer AngularJS versions.
+     * Bindings are not guaranteed to have been assigned in the controller, but they are in the $onInit hook.
+     */
+    vm.$onInit = function() {
+      setupDefaults();
+      setupListeners();
+      setupWatchers();
 
-    var initialAnimationAttempts = 0;
-    fireInitialAnimations();
+      fireInitialAnimations();
+    };
+
+    // For AngularJS 1.4 and older, where there are no lifecycle hooks but bindings are pre-assigned,
+    // manually call the $onInit hook.
+    if (angular.version.major === 1 && angular.version.minor <= 4) {
+      this.$onInit();
+    }
 
     function setupDefaults() {
       // Set the default direction to 'down' if none is specified
@@ -177,7 +189,7 @@ goog.require('ngmaterial.core');
 
       // TODO: On desktop, we should be able to reset the indexes so you cannot tab through, but
       // this breaks accessibility, especially on mobile, since you have no arrow keys to press
-      //resetActionTabIndexes();
+      // resetActionTabIndexes();
     }
 
     function disableKeyboard() {
@@ -312,8 +324,8 @@ goog.require('ngmaterial.core');
    *
    * @type {number}
    */
-  MdFabSpeedDialFlingAnimation.$inject = ["$timeout"];
-  MdFabSpeedDialScaleAnimation.$inject = ["$timeout"];
+  MdFabSpeedDialFlingAnimation['$inject'] = ["$timeout"];
+  MdFabSpeedDialScaleAnimation['$inject'] = ["$timeout"];
   var cssAnimationDuration = 300;
 
   /**

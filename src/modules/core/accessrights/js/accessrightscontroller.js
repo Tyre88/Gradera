@@ -18,11 +18,11 @@
 
         function GetAccessRights()
         {
-            accessrightsService.GetAccessRights().success(getAccessrightsCallback);
+            accessrightsService.GetAccessRights().then(getAccessrightsCallback);
 
             function getAccessrightsCallback(response)
             {
-                vm.Accessrights = response;
+                vm.Accessrights = response.data;
             }
         }
 
@@ -50,10 +50,10 @@
         vm.Back = Back;
 
         function GetAccessright(id) {
-            accessrightsService.GetAccessRight(id).success(getAccessrightCallback);
+            accessrightsService.GetAccessRight(id).then(getAccessrightCallback);
 
             function getAccessrightCallback(response) {
-                vm.Accessright = response;
+                vm.Accessright = response.data;
 
                 for(var i = 0; i < vm.Accessright.Accessright_Rights.length; i++)
                 {
@@ -89,26 +89,26 @@
         }
 
         function GetAccessTypes() {
-            accessrightsService.GetAccessTypes().success(getAccessTypesCallback);
+            accessrightsService.GetAccessTypes().then(getAccessTypesCallback);
 
             function getAccessTypesCallback(response) {
-                vm.AccessTypes = response;
+                vm.AccessTypes = response.data;
             }
         }
 
         function GetAccessTypeRights() {
-            accessrightsService.GetAccessTypeRights().success(getAccessTypeRigtsCallback);
+            accessrightsService.GetAccessTypeRights().then(getAccessTypeRigtsCallback);
 
             function getAccessTypeRigtsCallback(response) {
-                vm.AccessTypeRights = response;
+                vm.AccessTypeRights = response.data;
             }
         }
 
         function GetModules() {
-            accessrightsService.GetModules().success(GetModulesCallback);
+            accessrightsService.GetModules().then(GetModulesCallback);
 
             function GetModulesCallback(response) {
-                vm.Modules = response;
+                vm.Modules = response.data;
             }
         }
 

@@ -28,14 +28,14 @@
             }
 
             function ExportGrade() {
-                gradingService.ExportGrade(vm.Grade.Id).success(exportGradeCallback);
+                gradingService.ExportGrade(vm.Grade.Id).then(exportGradeCallback);
 
                 function exportGradeCallback(response) {
                     console.log(response);
 
                     var link = document.createElement("a");
                     link.download = name;
-                    link.href = response;
+                    link.href = response.data;
                     link.click();
                 }
             }

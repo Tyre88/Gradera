@@ -9,11 +9,11 @@
         vm.UnsubscribeEmail = "";
 
         if(vm.Guid !== undefined && vm.Guid != "") {
-            newsletterService.Unsubscribe(vm.Guid).success(UnsubscribeSuccess);
+            newsletterService.Unsubscribe(vm.Guid).then(UnsubscribeSuccess);
         }
 
         function UnsubscribeSuccess(response) {
-            vm.UnsubscribeEmail = response;
+            vm.UnsubscribeEmail = response.data;
         }
     }
 }(window.angular));

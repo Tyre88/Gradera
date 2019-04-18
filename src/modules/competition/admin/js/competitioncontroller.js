@@ -17,10 +17,10 @@
         vm.DeleteCompetition = DeleteCompetition;
 
         function GetCompetitions() {
-            competitionService.GetCompetitions().success(getCompetitionsCallback);
+            competitionService.GetCompetitions().then(getCompetitionsCallback);
 
             function getCompetitionsCallback(response) {
-                vm.Competitions = response;
+                vm.Competitions = response.data;
 
                 for(var i = 0; i < vm.Competitions.length; i++)
                 {
@@ -34,7 +34,7 @@
         }
 
         function ExportCompetition(competition) {
-            competitionAdminService.ExportCompetition(competition.Id).success(exportCompetitionCallback);
+            competitionAdminService.ExportCompetition(competition.Id).then(exportCompetitionCallback);
 
             function exportCompetitionCallback(response) {
                 var newLink = angular.element("<a href='/Downloads/Competition/" + response + "' id='" + response + "'></a>");
@@ -53,7 +53,7 @@
                 .cancel('Nej');
 
             $mdDialog.show(confirm).then(function() {
-                competitionAdminService.DeleteCompetition(competition.Id).success(function() {
+                competitionAdminService.DeleteCompetition(competition.Id).then(function() {
                     vm.Competitions.splice(vm.Competitions.indexOf(competition), 1);
                 });
             });
@@ -75,10 +75,10 @@
         vm.RemoveCompeditor = RemoveCompeditor;
 
         function GetCompetition() {
-            competitionService.GetCompetition(vm.CompetitionId).success(getCompetitionCallback);
+            competitionService.GetCompetition(vm.CompetitionId).then(getCompetitionCallback);
 
             function getCompetitionCallback(response) {
-                vm.Competition = response;
+                vm.Competition = response.data;
                 vm.Competition.Location = JSON.parse(vm.Competition.Location);
                 vm.Competition.StartDate = new Date(vm.Competition.StartDate);
                 vm.Competition.EndDate = new Date(vm.Competition.EndDate);
@@ -94,7 +94,7 @@
         function SaveCompetition() {
             vm.Competition.Location = JSON.stringify(vm.Competition.Location);
 
-            competitionAdminService.SaveCompetition(vm.Competition).success(saveCompetitionCallback).error(saveCompetitionError);
+            competitionAdminService.SaveCompetition(vm.Competition).then(saveCompetitionCallback, saveCompetitionError);
 
             function saveCompetitionCallback() {
                 vm.Back();
@@ -106,7 +106,7 @@
         }
 
         function AddCategory() {
-            competitionAdminService.AddCategory(vm.CompetitionId, vm.NewCategoryName).success(addCategoryCallback);
+            competitionAdminService.AddCategory(vm.CompetitionId, vm.NewCategoryName).then(addCategoryCallback);
 
             function addCategoryCallback(response) {
                 vm.Competition.Categories.push({ Id: response.Id, Name: response.Name });
@@ -115,7 +115,7 @@
         }
 
         function DeleteCategory(category) {
-            competitionAdminService.DeleteCategory(category.Id).success(deleteCategoryCallback);
+            competitionAdminService.DeleteCategory(category.Id).then(deleteCategoryCallback);
 
             function deleteCategoryCallback() {
                 vm.Competition.Categories.splice(vm.Competition.Categories.indexOf(category), 1);
@@ -124,9 +124,9 @@
 
         function RemoveCompeditor(compeditor) {
             if(compeditor.IsExternal === false)
-                competitionAdminService.RemoveInternalCompeditor(compeditor.Id).success(RemoveCompeditorCallback);
+                competitionAdminService.RemoveInternalCompeditor(compeditor.Id).then(RemoveCompeditorCallback);
             else
-                competitionAdminService.RemoveExternalCompeditor(compeditor.Id).success(RemoveCompeditorCallback);
+                competitionAdminService.RemoveExternalCompeditor(compeditor.Id).then(RemoveCompeditorCallback);
 
             function RemoveCompeditorCallback() {
                 vm.Competition.Compeditors.splice(vm.Competition.Compeditors.indexOf(compeditor), 1);
