@@ -14,6 +14,9 @@
         vm.Show = Show;
         vm.DeleteMediabankFile = DeleteMediabankFile;
         vm.GetThumbnail = GetThumbnail;
+        vm.CheckAll = CheckAll;
+        vm.IsAllChecked = IsAllChecked;
+        vm.IsIndeterminate = IsIndeterminate;
 
         function UploadFile(file) {
             if(file) {
@@ -81,6 +84,41 @@
                 }
             }
             else return file.Thumbnail;
+        }
+
+        function CheckAll() {
+            if(!IsAllChecked() || IsIndeterminate()) {
+                ToggleCheckAll(true);
+            }
+            else {
+                ToggleCheckAll(false);
+            }
+        }
+
+        function IsAllChecked() {
+            return GetCheckedCount() == vm.MediabankFiles.length;
+        }
+
+        function IsIndeterminate() {
+            var count = GetCheckedCount();
+
+            return count > 0 && count < vm.MediabankFiles.length;
+        }
+
+        function GetCheckedCount() {
+            var count = 0;
+            for(var i = 0; i < vm.MediabankFiles.length; i++) {
+                if(vm.MediabankFiles[i].Checked == true)
+                    count++;
+            }
+
+            return count;
+        }
+
+        function ToggleCheckAll(val) {
+            for(var i = 0; i < vm.MediabankFiles.length; i++) {
+                vm.MediabankFiles[i].Checked = val;
+            }
         }
 
         mediabankAdminService.GetAllFiles().success(function(response) {

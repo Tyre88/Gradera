@@ -9,6 +9,7 @@
 <table class="gradera-list" ng-cloak="">
     <thead>
     <tr>
+        <th><md-checkbox ng-checked="vm.IsAllChecked()" md-indeterminate="vm.IsIndeterminate()" ng-click="vm.CheckAll(); $event.stopPropagation();"></md-checkbox></th>
         <th class="image"></th>
         <th>Namn</th>
         <th>Beskrivning</th>
@@ -18,6 +19,7 @@
     </thead>
     <tbody>
     <tr ng-repeat="item in vm.MediabankFiles" ng-click="vm.Show(item)">
+        <td><md-checkbox ng-model="item.Checked" ng-click="$event.stopPropagation();"></md-checkbox></td>
         <td class="image">
             <img alt="{{ item.Name }}" ng-src="{{ vm.GetThumbnail(item) }}" class="md-avatar" fallback-src="content/images/No_Image_Available.png" />
         </td>
